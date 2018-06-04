@@ -8,12 +8,29 @@
 
 /* Begin PBXBuildFile section */
 		C9713E8920C596680074F232 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9713E8820C596680074F232 /* AppDelegate.swift */; };
-		C9713E8B20C596680074F232 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9713E8A20C596680074F232 /* ViewController.swift */; };
 		C9713E8E20C596680074F232 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9713E8C20C596680074F232 /* Main.storyboard */; };
 		C9713E9020C596690074F232 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9713E8F20C596690074F232 /* Assets.xcassets */; };
 		C9713E9320C596690074F232 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9713E9120C596690074F232 /* LaunchScreen.storyboard */; };
 		C9713E9E20C596690074F232 /* OrgaNiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9713E9D20C596690074F232 /* OrgaNiceTests.swift */; };
 		C9713EA920C596690074F232 /* OrgaNiceUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9713EA820C596690074F232 /* OrgaNiceUITests.swift */; };
+		C9713EF520C597810074F232 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9713EDF20C597810074F232 /* Utils.swift */; };
+		C9713EF620C597810074F232 /* TaskList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9713EE120C597810074F232 /* TaskList.swift */; };
+		C9713EF720C597810074F232 /* TaskListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9713EE220C597810074F232 /* TaskListManager.swift */; };
+		C9713EF820C597810074F232 /* CheckListTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9713EE320C597810074F232 /* CheckListTask.swift */; };
+		C9713EF920C597810074F232 /* BasicTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9713EE420C597810074F232 /* BasicTask.swift */; };
+		C9713EFA20C597810074F232 /* TaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9713EE520C597810074F232 /* TaskManager.swift */; };
+		C9713EFB20C597810074F232 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9713EE620C597810074F232 /* Task.swift */; };
+		C9713EFC20C597810074F232 /* ParentTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9713EE720C597810074F232 /* ParentTask.swift */; };
+		C9713EFD20C597810074F232 /* TaskArchive.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9713EE920C597810074F232 /* TaskArchive.swift */; };
+		C9713EFE20C597810074F232 /* BasicTaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9713EEC20C597810074F232 /* BasicTaskTableViewCell.swift */; };
+		C9713EFF20C597810074F232 /* ParentTaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9713EED20C597810074F232 /* ParentTaskTableViewCell.swift */; };
+		C9713F0020C597810074F232 /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9713EEE20C597810074F232 /* TaskTableViewCell.swift */; };
+		C9713F0120C597810074F232 /* CheckListTaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9713EEF20C597810074F232 /* CheckListTaskTableViewCell.swift */; };
+		C9713F0220C597810074F232 /* TaskListSelectorCollectionViewLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9713EF120C597810074F232 /* TaskListSelectorCollectionViewLayoutAttributes.swift */; };
+		C9713F0320C597810074F232 /* TaskListSelectorCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9713EF220C597810074F232 /* TaskListSelectorCollectionViewLayout.swift */; };
+		C9713F0420C597810074F232 /* TaskListSelectorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9713EF320C597810074F232 /* TaskListSelectorCollectionViewCell.swift */; };
+		C9713F0520C597810074F232 /* TaskTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9713EF420C597810074F232 /* TaskTableViewController.swift */; };
+		C9713F0720C5CEE30074F232 /* TaskTableNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9713F0620C5CEE30074F232 /* TaskTableNavigationController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +53,6 @@
 /* Begin PBXFileReference section */
 		C9713E8520C596680074F232 /* OrgaNice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OrgaNice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9713E8820C596680074F232 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C9713E8A20C596680074F232 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C9713E8D20C596680074F232 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C9713E8F20C596690074F232 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C9713E9220C596690074F232 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +63,24 @@
 		C9713EA420C596690074F232 /* OrgaNiceUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OrgaNiceUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9713EA820C596690074F232 /* OrgaNiceUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrgaNiceUITests.swift; sourceTree = "<group>"; };
 		C9713EAA20C596690074F232 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C9713EDF20C597810074F232 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		C9713EE120C597810074F232 /* TaskList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskList.swift; sourceTree = "<group>"; };
+		C9713EE220C597810074F232 /* TaskListManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskListManager.swift; sourceTree = "<group>"; };
+		C9713EE320C597810074F232 /* CheckListTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckListTask.swift; sourceTree = "<group>"; };
+		C9713EE420C597810074F232 /* BasicTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicTask.swift; sourceTree = "<group>"; };
+		C9713EE520C597810074F232 /* TaskManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskManager.swift; sourceTree = "<group>"; };
+		C9713EE620C597810074F232 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		C9713EE720C597810074F232 /* ParentTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParentTask.swift; sourceTree = "<group>"; };
+		C9713EE920C597810074F232 /* TaskArchive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskArchive.swift; sourceTree = "<group>"; };
+		C9713EEC20C597810074F232 /* BasicTaskTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicTaskTableViewCell.swift; sourceTree = "<group>"; };
+		C9713EED20C597810074F232 /* ParentTaskTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParentTaskTableViewCell.swift; sourceTree = "<group>"; };
+		C9713EEE20C597810074F232 /* TaskTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
+		C9713EEF20C597810074F232 /* CheckListTaskTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckListTaskTableViewCell.swift; sourceTree = "<group>"; };
+		C9713EF120C597810074F232 /* TaskListSelectorCollectionViewLayoutAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskListSelectorCollectionViewLayoutAttributes.swift; sourceTree = "<group>"; };
+		C9713EF220C597810074F232 /* TaskListSelectorCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskListSelectorCollectionViewLayout.swift; sourceTree = "<group>"; };
+		C9713EF320C597810074F232 /* TaskListSelectorCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskListSelectorCollectionViewCell.swift; sourceTree = "<group>"; };
+		C9713EF420C597810074F232 /* TaskTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskTableViewController.swift; sourceTree = "<group>"; };
+		C9713F0620C5CEE30074F232 /* TaskTableNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableNavigationController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,10 +131,13 @@
 		C9713E8720C596680074F232 /* OrgaNice */ = {
 			isa = PBXGroup;
 			children = (
+				C9713EE020C597810074F232 /* Model */,
+				C9713EDE20C597810074F232 /* Other */,
+				C9713EE820C597810074F232 /* Storage */,
+				C9713EEA20C597810074F232 /* UI */,
 				C9713E8820C596680074F232 /* AppDelegate.swift */,
-				C9713E8A20C596680074F232 /* ViewController.swift */,
-				C9713E8C20C596680074F232 /* Main.storyboard */,
 				C9713E8F20C596690074F232 /* Assets.xcassets */,
+				C9713E8C20C596680074F232 /* Main.storyboard */,
 				C9713E9120C596690074F232 /* LaunchScreen.storyboard */,
 				C9713E9420C596690074F232 /* Info.plist */,
 			);
@@ -123,6 +160,68 @@
 				C9713EAA20C596690074F232 /* Info.plist */,
 			);
 			path = OrgaNiceUITests;
+			sourceTree = "<group>";
+		};
+		C9713EDE20C597810074F232 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				C9713EDF20C597810074F232 /* Utils.swift */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		C9713EE020C597810074F232 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C9713EE120C597810074F232 /* TaskList.swift */,
+				C9713EE320C597810074F232 /* CheckListTask.swift */,
+				C9713EE420C597810074F232 /* BasicTask.swift */,
+				C9713EE620C597810074F232 /* Task.swift */,
+				C9713EE720C597810074F232 /* ParentTask.swift */,
+				C9713EE520C597810074F232 /* TaskManager.swift */,
+				C9713EE220C597810074F232 /* TaskListManager.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C9713EE820C597810074F232 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				C9713EE920C597810074F232 /* TaskArchive.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		C9713EEA20C597810074F232 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				C9713EF420C597810074F232 /* TaskTableViewController.swift */,
+				C9713F0620C5CEE30074F232 /* TaskTableNavigationController.swift */,
+				C9713EEB20C597810074F232 /* TaskTable */,
+				C9713EF020C597810074F232 /* TaskListSelector */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		C9713EEB20C597810074F232 /* TaskTable */ = {
+			isa = PBXGroup;
+			children = (
+				C9713EEC20C597810074F232 /* BasicTaskTableViewCell.swift */,
+				C9713EED20C597810074F232 /* ParentTaskTableViewCell.swift */,
+				C9713EEE20C597810074F232 /* TaskTableViewCell.swift */,
+				C9713EEF20C597810074F232 /* CheckListTaskTableViewCell.swift */,
+			);
+			path = TaskTable;
+			sourceTree = "<group>";
+		};
+		C9713EF020C597810074F232 /* TaskListSelector */ = {
+			isa = PBXGroup;
+			children = (
+				C9713EF120C597810074F232 /* TaskListSelectorCollectionViewLayoutAttributes.swift */,
+				C9713EF220C597810074F232 /* TaskListSelectorCollectionViewLayout.swift */,
+				C9713EF320C597810074F232 /* TaskListSelectorCollectionViewCell.swift */,
+			);
+			path = TaskListSelector;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -256,8 +355,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C9713E8B20C596680074F232 /* ViewController.swift in Sources */,
+				C9713F0120C597810074F232 /* CheckListTaskTableViewCell.swift in Sources */,
+				C9713F0020C597810074F232 /* TaskTableViewCell.swift in Sources */,
+				C9713EF920C597810074F232 /* BasicTask.swift in Sources */,
+				C9713EF620C597810074F232 /* TaskList.swift in Sources */,
+				C9713EFF20C597810074F232 /* ParentTaskTableViewCell.swift in Sources */,
+				C9713EFA20C597810074F232 /* TaskManager.swift in Sources */,
+				C9713F0520C597810074F232 /* TaskTableViewController.swift in Sources */,
 				C9713E8920C596680074F232 /* AppDelegate.swift in Sources */,
+				C9713EFD20C597810074F232 /* TaskArchive.swift in Sources */,
+				C9713EF720C597810074F232 /* TaskListManager.swift in Sources */,
+				C9713F0720C5CEE30074F232 /* TaskTableNavigationController.swift in Sources */,
+				C9713F0420C597810074F232 /* TaskListSelectorCollectionViewCell.swift in Sources */,
+				C9713EFE20C597810074F232 /* BasicTaskTableViewCell.swift in Sources */,
+				C9713F0220C597810074F232 /* TaskListSelectorCollectionViewLayoutAttributes.swift in Sources */,
+				C9713EF520C597810074F232 /* Utils.swift in Sources */,
+				C9713EFB20C597810074F232 /* Task.swift in Sources */,
+				C9713F0320C597810074F232 /* TaskListSelectorCollectionViewLayout.swift in Sources */,
+				C9713EFC20C597810074F232 /* ParentTask.swift in Sources */,
+				C9713EF820C597810074F232 /* CheckListTask.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
