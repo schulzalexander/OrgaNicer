@@ -1,5 +1,5 @@
 //
-//  TaskCategorySelectorCollectionViewLayoutAttributes.swift
+//  SelectorCollectionViewLayoutAttributes.swift
 //  TaskMaster
 //
 //  Created by Alexander Schulz on 02.06.18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TaskCategorySelectorCollectionViewLayoutAttributes: UICollectionViewLayoutAttributes {
+class SelectorCollectionViewLayoutAttributes: UICollectionViewLayoutAttributes {
 
 	var anchorPoint = CGPoint(x: 0.5, y: 0.5)
 	var angle: CGFloat = 0 {
@@ -19,8 +19,8 @@ class TaskCategorySelectorCollectionViewLayoutAttributes: UICollectionViewLayout
 	}
 
 	override func copy(with zone: NSZone? = nil) -> Any {
-		let copiedAttributes: TaskCategorySelectorCollectionViewLayoutAttributes =
-			super.copy(with: zone) as! TaskCategorySelectorCollectionViewLayoutAttributes
+		let copiedAttributes: SelectorCollectionViewLayoutAttributes =
+			super.copy(with: zone) as! SelectorCollectionViewLayoutAttributes
 		copiedAttributes.anchorPoint = self.anchorPoint
 		copiedAttributes.angle = self.angle
 		return copiedAttributes

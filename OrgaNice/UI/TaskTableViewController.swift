@@ -52,10 +52,14 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UICollecti
 	}
 	
 	@objc func didTapOnTaskCategory(_ sender: UITapGestureRecognizer) {
-		guard let cell = sender.view as? TaskCategorySelectorCollectionViewCell else {
-			fatalError("Error while retreiving TaskCategorySelectorCollectionViewCell from TapGestureRecognizer!")
+		guard let cell = sender.view as? SelectorCollectionViewCell else {
+			fatalError("Error while retreiving SelectorCollectionViewCell from TapGestureRecognizer!")
 		}
 		self.setTaskCategory(category: cell.category)
+	}
+	
+	@objc func didTapOnAddCategory(_ sender: UITapGestureRecognizer) {
+		
 	}
 }
 

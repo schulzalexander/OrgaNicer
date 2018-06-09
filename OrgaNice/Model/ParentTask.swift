@@ -10,7 +10,7 @@ import Foundation
 
 class ParentTask: Task {
 	//MARK: Properties
-	var subtasks: TaskList
+	var subtasks: TaskList!
 	
 	struct PropertyKeys {
 		static let subtasks = "subtasks"

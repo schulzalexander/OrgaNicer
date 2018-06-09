@@ -1,43 +1,35 @@
 //
-//  TaskCategorySelectorCollectionViewCell.swift
-//  TaskMaster
+//  SelectorCollectionViewCellAdd.swift
+//  OrgaNice
 //
-//  Created by Alexander Schulz on 03.06.18.
+//  Created by Alexander Schulz on 09.06.18.
 //  Copyright © 2018 Alexander Schulz. All rights reserved.
 //
 
 import UIKit
 
-class TaskCategorySelectorCollectionViewCell: UICollectionViewCell {
-	
-	//MARK: Properties
-	var category: TaskCategory! {
-		didSet {
-			self.titleLabel.text = category.title
-			self.taskCountLabel.text = "ToDo: \(category.countUndone())"
-		}
-	}
+class SelectorCollectionViewCellAdd: UICollectionViewCell {
 	
 	//MARK: Outlets
-	@IBOutlet weak var titleLabel: UILabel!
-	@IBOutlet weak var taskCountLabel: UILabel!
+	@IBOutlet weak var addLabel: UILabel!
 	
 	
 	override func awakeFromNib() {
 		super.awakeFromNib()
 		
-		self.backgroundColor = UIColor.lightGray
-		self.layer.borderColor = UIColor.black.cgColor
+		self.layer.borderColor = UIColor.lightGray.cgColor
 		self.layer.borderWidth = 1.0
 		self.layer.cornerRadius = 15
+
+		//TODO: make border dashed
+		// https://stackoverflow.com/questions/13679923/dashed-line-border-around-uiview
 		
-		
-		self.createGradientLayer(view: self)
+		//self.createGradientLayer(view: self)
 	}
 	
 	override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
 		super.apply(layoutAttributes)
-		let customLayoutAttributes = layoutAttributes as! TaskCategorySelectorCollectionViewLayoutAttributes
+		let customLayoutAttributes = layoutAttributes as! SelectorCollectionViewLayoutAttributes
 		self.layer.anchorPoint = customLayoutAttributes.anchorPoint
 		self.center.y += (customLayoutAttributes.anchorPoint.y - 0.5) * self.bounds.height
 		self.layer.sublayers![0].frame = self.layer.bounds // Scale gradient to cell size
@@ -51,5 +43,4 @@ class TaskCategorySelectorCollectionViewCell: UICollectionViewCell {
 		view.layer.sublayers!.insert(gradientLayer, at: 0)
 		//view.layer.sublayers![1].zPosition = 0
 	}
-	
 }

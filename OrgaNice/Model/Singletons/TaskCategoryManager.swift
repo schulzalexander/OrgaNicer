@@ -82,19 +82,30 @@ class TaskCategoryManager: NSObject, NSCoding {
 
 extension TaskCategoryManager: UICollectionViewDataSource {
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return self.count()
+		return self.count() + 1
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TaskCategorySelectorCollectionViewCell", for: indexPath) as? TaskCategorySelectorCollectionViewCell,
-			let currView = collectionView.delegate as? TaskTableViewController else {
-			fatalError("Error dequeuing cell of type TaskCategorySelectorCollectionViewCell!")
+		//TODO: make this nicer, no duplicated code
+		if indexPath.row == self.count() {
+			guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SelectorCollectionViewCellAdd", for: indexPath) as? SelectorCollectionViewCellAdd,
+				let currView = collectionView.delegate as? TaskTableViewController else {
+					fatalError("Error dequeuing cell of type SelectorCollectionViewCellAdd!")
+			}
+			let recognizer = UITapGestureRecognizer(target: currView, action: #selector(TaskTableViewController.didTapOnAddCategory(_:)))
+			cell.addGestureRecognizer(recognizer)
+			return cell
+		} else {
+			guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SelectorCollectionViewCell", for: indexPath) as? SelectorCollectionViewCell,
+				let currView = collectionView.delegate as? TaskTableViewController else {
+					fatalError("Error dequeuing cell of type SelectorCollectionViewCell!")
+			}
+			let recognizer = UITapGestureRecognizer(target: currView, action: #selector(TaskTableViewController.didTapOnTaskCategory(_:)))
+			cell.addGestureRecognizer(recognizer)
+			cell.category = self.getTaskCategory(id: self.categoryTitlesSorted[indexPath.row].id)
+			currView.currList = cell.category
+			return cell
 		}
-		let recognizer = UITapGestureRecognizer(target: currView, action: #selector(TaskTableViewController.didTapOnTaskCategory(_:)))
-		cell.addGestureRecognizer(recognizer)
-		cell.category = self.getTaskCategory(id: self.categoryTitlesSorted[indexPath.row].id)
-		currView.currList = cell.category
-		return cell
 	}
 }
 
