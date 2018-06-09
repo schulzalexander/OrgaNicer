@@ -1,5 +1,5 @@
 //
-//  TaskListSelectorCollectionViewCell.swift
+//  TaskCategorySelectorCollectionViewCell.swift
 //  TaskMaster
 //
 //  Created by Alexander Schulz on 03.06.18.
@@ -8,13 +8,13 @@
 
 import UIKit
 
-class TaskListSelectorCollectionViewCell: UICollectionViewCell {
+class TaskCategorySelectorCollectionViewCell: UICollectionViewCell {
 	
 	//MARK: Properties
-	var taskList: TaskList! {
+	var category: TaskCategory! {
 		didSet {
-			self.titleLabel.text = taskList.title
-			self.taskCountLabel.text = "ToDo: \(taskList.countUndone())"
+			self.titleLabel.text = category.title
+			self.taskCountLabel.text = "ToDo: \(category.countUndone())"
 		}
 	}
 	
@@ -37,7 +37,7 @@ class TaskListSelectorCollectionViewCell: UICollectionViewCell {
 	
 	override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
 		super.apply(layoutAttributes)
-		let customLayoutAttributes = layoutAttributes as! TaskListSelectorCollectionViewLayoutAttributes
+		let customLayoutAttributes = layoutAttributes as! TaskCategorySelectorCollectionViewLayoutAttributes
 		self.layer.anchorPoint = customLayoutAttributes.anchorPoint
 		self.center.y += (customLayoutAttributes.anchorPoint.y - 0.5) * self.bounds.height
 		self.layer.sublayers![0].frame = self.layer.bounds // Scale gradient to cell size

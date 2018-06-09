@@ -10,45 +10,37 @@ import Foundation
 
 class ParentTask: Task {
 	//MARK: Properties
-	var subtasks: [BasicTask]?
-	var checked: [String: Bool]?
+	var subtasks: TaskList
 	
 	struct PropertyKeys {
 		static let subtasks = "subtasks"
-		static let checked = "checked"
 	}
 	
-	func addSubTask(task: BasicTask) {
-		if self.subtasks == nil {
-			self.subtasks = [task]
-		} else {
-			self.subtasks!.append(task)
-		}
+	override init(title: String) {
+		super.init(title: title)
+		self.subtasks = TaskList(parentID: self.id)
+	}
+	
+	func addSubTask(task: Task) {
+		subtasks.addSubTask(task: task)
 	}
 	
 	func deleteSubTask(id: String) {
-		guard self.subtasks != nil else {
-			return
-		}
-		for i in 0..<self.subtasks!.count {
-			if self.subtasks![i].id == id {
-				self.subtasks!.remove(at: i)
-				return
-			}
-		}
+		subtasks.deleteSubTask(id: id)
 	}
 	
 	//MARK: NSCoding
 	
 	override func encode(with aCoder: NSCoder) {
 		aCoder.encode(subtasks, forKey: PropertyKeys.subtasks)
-		aCoder.encode(checked, forKey: PropertyKeys.checked)
 		super.encode(with: aCoder)
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
-		self.subtasks = aDecoder.decodeObject(forKey: PropertyKeys.subtasks) as? [BasicTask]
-		self.checked = aDecoder.decodeObject(forKey: PropertyKeys.checked) as? [String: Bool]
+		guard let subtasks = aDecoder.decodeObject(forKey: PropertyKeys.subtasks) as? TaskList else {
+			fatalError("Error while decoding ParentTask object!")
+		}
+		self.subtasks = subtasks
 		super.init(coder: aDecoder)
 	}
 }

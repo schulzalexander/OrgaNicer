@@ -11,8 +11,8 @@ import Foundation
 class TaskArchive {
 	static let TASKDIR = "Tasks"
 	static let TASKMANAGERDIR = "TaskManager"
-	static let TASKLISTDIR = "TaskList"
-	static let TASKLISTMANAGERDIR = "TaskListManager"
+	static let TASKLISTDIR = "TaskCategory"
+	static let TASKLISTMANAGERDIR = "TaskCategoryManager"
 	
 	static func taskDir(taskID: String) -> URL {
 		guard let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
@@ -59,50 +59,50 @@ class TaskArchive {
 		return NSKeyedUnarchiver.unarchiveObject(withFile: taskManagerDir().path) as? TaskManager
 	}
 	
-	//MARK: TaskList
-	static func taskListDir(id: String) -> URL {
+	//MARK: TaskCategory
+	static func categoryDir(id: String) -> URL {
 		guard let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
 			fatalError("Failed to retrieve task archive URL!")
 		}
 		return url.appendingPathComponent(TASKLISTDIR).appendingPathExtension(id)
 	}
 	
-	static func saveTaskList(list: TaskList) {
-		let success = NSKeyedArchiver.archiveRootObject(list, toFile: taskListDir(id: list.id).path)
+	static func saveTaskCategory(list: TaskCategory) {
+		let success = NSKeyedArchiver.archiveRootObject(list, toFile: categoryDir(id: list.id).path)
 		if !success {
 			fatalError("Error while saving task list \(list.id)!")
 		}
 	}
 	
-	static func loadTaskList(id: String) -> TaskList? {
-		return NSKeyedUnarchiver.unarchiveObject(withFile: taskListDir(id: id).path) as? TaskList
+	static func loadTaskCategory(id: String) -> TaskCategory? {
+		return NSKeyedUnarchiver.unarchiveObject(withFile: categoryDir(id: id).path) as? TaskCategory
 	}
 	
-	static func deleteTaskList(id: String) {
+	static func deleteTaskCategory(id: String) {
 		do {
-			try FileManager.default.removeItem(at: taskListDir(id: id))
+			try FileManager.default.removeItem(at: categoryDir(id: id))
 		} catch let error as NSError {
 			fatalError("Error while deleting task list \(id): \(error.localizedDescription)")
 		}
 	}
 	
 	//MARK: TaskManager
-	static func taskListManagerDir() -> URL {
+	static func categoryManagerDir() -> URL {
 		guard let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
 			fatalError("Failed to retrieve task list manager archive URL!")
 		}
 		return url.appendingPathExtension(TASKLISTMANAGERDIR)
 	}
 	
-	static func saveTaskListManager() {
-		let success = NSKeyedArchiver.archiveRootObject(TaskListManager.shared, toFile: taskListManagerDir().path)
+	static func saveTaskCategoryManager() {
+		let success = NSKeyedArchiver.archiveRootObject(TaskCategoryManager.shared, toFile: categoryManagerDir().path)
 		if !success {
 			fatalError("Error while saving task list manager!")
 		}
 	}
 	
-	static func loadTaskListManager() -> TaskListManager? {
-		return NSKeyedUnarchiver.unarchiveObject(withFile: taskListManagerDir().path) as? TaskListManager
+	static func loadTaskCategoryManager() -> TaskCategoryManager? {
+		return NSKeyedUnarchiver.unarchiveObject(withFile: categoryManagerDir().path) as? TaskCategoryManager
 	}
 	
 }

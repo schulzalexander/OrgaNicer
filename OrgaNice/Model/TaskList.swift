@@ -1,8 +1,8 @@
 //
 //  TaskList.swift
-//  TaskMaster
+//  OrgaNice
 //
-//  Created by Alexander Schulz on 31.05.18.
+//  Created by Alexander Schulz on 08.06.18.
 //  Copyright © 2018 Alexander Schulz. All rights reserved.
 //
 
@@ -11,123 +11,57 @@ import Foundation
 class TaskList: NSObject, NSCoding {
 	
 	//MARK: Properties
-	var tasks: [String]?
-	var id: String
-	var title: String
+	var parentID: String
+	var subtasks: [String]
+	var checked: [String: Bool]
 	
 	struct PropertyKeys {
-		static let taskIDs = "taskIDs"
-		static let id = "id"
-		static let title = "title"
+		static let parentID = "parentID"
+		static let subtasks = "subtasks"
+		static let checked = "checked"
 	}
 	
-	//MARK: Methods
-	
-	init(title: String) {
-		self.id = Utils.generateID()
-		self.title = title
+	init(parentID: String) {
+		self.parentID = parentID
+		self.subtasks = [String]()
+		self.checked = [String: Bool]()
 	}
 	
-	func count() -> Int {
-		return (tasks ?? []).count
-	}
-	
-	func countDone() -> Int {
-		var count = 0
-		for id in tasks ?? [] {
-			guard let task = TaskManager.shared.getTask(id: id) else {
-				continue
-			}
-			if task.done != nil {
-				count += 1
-			}
-		}
-		return count
-	}
-	
-	func countUndone() -> Int {
-		var count = 0
-		for id in tasks ?? [] {
-			guard let task = TaskManager.shared.getTask(id: id) else {
-				continue
-			}
-			if task.done == nil {
-				count += 1
-			}
-		}
-		return count
-	}
-	
-	func getTasksDueInTimeframe(from: Date, to: Date) -> [Task] {
-		var res = [Task]()
-		for id in tasks ?? [] {
-			guard let task = TaskManager.shared.getTask(id: id),
-				task.deadline != nil else {
-				continue
-			}
-			if task.deadline! >= from && task.deadline! <= to {
-				res.append(task)
-			}
-		}
-		return res
-	}
-	
-	func deleteTask(id: String) {
-		for i in 0..<(tasks ?? []).count - 1 {
-			if tasks![i] == id {
-				tasks!.remove(at: i)
-				TaskManager.shared.deleteTask(id: id)
-			}
-		}
-		TaskArchive.saveTaskList(list: self)
-	}
-	
-	func addTask(task: Task) {
-		if tasks != nil {
-			tasks!.append(task.id)
-		} else {
-			tasks = [task.id]
-		}
+	func addSubTask(task: Task) {
+		self.subtasks.append(task.id)
 		TaskManager.shared.addTask(task: task)
-		TaskArchive.saveTaskList(list: self)
+		if let parentTask = TaskManager.shared.getTask(id: self.parentID) {
+			TaskArchive.saveTask(task: parentTask)
+		}
+	}
+	
+	func deleteSubTask(id: String) {
+		for i in 0..<self.subtasks.count {
+			if self.subtasks[i] == id {
+				self.subtasks.remove(at: i)
+				return
+			}
+		}
 	}
 	
 	//MARK: NSCoding
 	
 	func encode(with aCoder: NSCoder) {
-		aCoder.encode(tasks, forKey: PropertyKeys.taskIDs)
-		aCoder.encode(id, forKey: PropertyKeys.id)
-		aCoder.encode(title, forKey: PropertyKeys.title)
+		aCoder.encode(parentID, forKey: PropertyKeys.parentID)
+		aCoder.encode(subtasks, forKey: PropertyKeys.subtasks)
+		aCoder.encode(checked, forKey: PropertyKeys.checked)
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
-		guard let id = aDecoder.decodeObject(forKey: PropertyKeys.id) as? String,
-			let title = aDecoder.decodeObject(forKey: PropertyKeys.title) as? String else {
-			fatalError("Error while loading task list from storage!")
+		guard let parentID = aDecoder.decodeObject(forKey: PropertyKeys.parentID) as? String,
+			let subtasks = aDecoder.decodeObject(forKey: PropertyKeys.subtasks) as? [String],
+			let checked = aDecoder.decodeObject(forKey: PropertyKeys.checked) as? [String: Bool] else {
+			fatalError("Error while decoding TaskList object!")
 		}
-		self.id = id
-		self.title = title
-		self.tasks = aDecoder.decodeObject(forKey: PropertyKeys.taskIDs) as? [String]
+		self.parentID = parentID
+		self.subtasks = subtasks
+		self.checked = checked
 	}
 	
+	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -21,9 +21,9 @@ class OrgaNiceTests: XCTestCase {
         super.tearDown()
     }
     
-	//MARK: TaskList
-	func testTaskListAdding() {
-		let list = TaskList(title: "")
+	//MARK: TaskCategory
+	func testTaskCategoryAdding() {
+		let list = TaskCategory(title: "")
 		let task1 = Task(title: "")
 		let task2 = Task(title: "")
 		let task3 = Task(title: "")
@@ -36,8 +36,8 @@ class OrgaNiceTests: XCTestCase {
 		list.deleteTask(id: task3.id)
 	}
 	
-	func testTaskListRemoving() {
-		let list = TaskList(title: "")
+	func testTaskCategoryRemoving() {
+		let list = TaskCategory(title: "")
 		let task1 = Task(title: "")
 		let task2 = Task(title: "")
 		list.addTask(task: task1)
@@ -47,8 +47,8 @@ class OrgaNiceTests: XCTestCase {
 		list.deleteTask(id: task2.id)
 	}
 	
-	func testTaskListCountDone() {
-		let list = TaskList(title: "")
+	func testTaskCategoryCountDone() {
+		let list = TaskCategory(title: "")
 		let task1 = Task(title: "")
 		let task2 = Task(title: "")
 		let task3 = Task(title: "")

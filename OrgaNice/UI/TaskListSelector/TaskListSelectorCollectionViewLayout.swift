@@ -1,5 +1,5 @@
 //
-//  TaskListSelectorCollectionViewLayout.swift
+//  TaskCategorySelectorCollectionViewLayout.swift
 //  TaskMaster
 //
 //  Created by Alexander Schulz on 02.06.18.
@@ -9,7 +9,7 @@
 
 import UIKit
 
-class TaskListSelectorCollectionViewLayout: UICollectionViewLayout {
+class TaskCategorySelectorCollectionViewLayout: UICollectionViewLayout {
 
 	//MARK: Properties
 	let itemSize = CGSize(width: 180, height: 150)
@@ -29,7 +29,7 @@ class TaskListSelectorCollectionViewLayout: UICollectionViewLayout {
 	var anglePerItem: CGFloat {
 		return atan(itemSize.width / radius)
 	}
-	var attributesList = [TaskListSelectorCollectionViewLayoutAttributes]()
+	var attributesList = [TaskCategorySelectorCollectionViewLayoutAttributes]()
 	
 	override var collectionViewContentSize: CGSize {
 		return CGSize(width: CGFloat(self.collectionView!.numberOfItems(inSection: 0)) * itemSize.width,
@@ -37,7 +37,7 @@ class TaskListSelectorCollectionViewLayout: UICollectionViewLayout {
 	}
 	
 	override class var layoutAttributesClass: AnyClass {
-		return TaskListSelectorCollectionViewLayoutAttributes.self
+		return TaskCategorySelectorCollectionViewLayoutAttributes.self
 	}
 	
 	override func prepare() {
@@ -54,8 +54,8 @@ class TaskListSelectorCollectionViewLayout: UICollectionViewLayout {
 		if (endIndex < startIndex) {
 			attributesList = []
 		} else {
-			attributesList = (startIndex...endIndex).map { (i) -> TaskListSelectorCollectionViewLayoutAttributes in
-				let attributes = TaskListSelectorCollectionViewLayoutAttributes(forCellWith: IndexPath(item: i, section: 0))
+			attributesList = (startIndex...endIndex).map { (i) -> TaskCategorySelectorCollectionViewLayoutAttributes in
+				let attributes = TaskCategorySelectorCollectionViewLayoutAttributes(forCellWith: IndexPath(item: i, section: 0))
 				attributes.size = self.itemSize
 				attributes.center = CGPoint(x: centerX, y: self.collectionView!.bounds.midY)
 				attributes.angle = self.angle + (self.anglePerItem * CGFloat(i))

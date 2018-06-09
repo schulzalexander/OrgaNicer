@@ -12,6 +12,7 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 
 	//MARK: Properties
 	var task: Task!
+	var content: TaskTableViewCellContent?
 	
 	//MARK: Outlets
 	@IBOutlet weak var titleTextEdit: UITextField!

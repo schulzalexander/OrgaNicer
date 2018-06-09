@@ -15,9 +15,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-		// Load TaskList Manager if saved
-		if let savedTaskListManager = TaskArchive.loadTaskListManager() {
-			TaskListManager.shared = savedTaskListManager
+		// Load TaskCategory Manager if saved
+		if let savedTaskCategoryManager = TaskArchive.loadTaskCategoryManager() {
+			TaskCategoryManager.shared = savedTaskCategoryManager
 		}
 		// Load Task Manager if saved
 		if let savedTaskManager = TaskArchive.loadTaskManager() {

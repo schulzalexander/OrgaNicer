@@ -10,14 +10,12 @@ import UIKit
 
 class TaskTableViewController: UIViewController, UITableViewDelegate, UICollectionViewDelegate {
 	
-	
-	
 	//MARK: Properties
-	var currList: TaskList?
+	var currList: TaskCategory?
 	
 	//MARK: Outlets
 	@IBOutlet weak var tableView: UITableView!
-	@IBOutlet weak var taskListSelector: UICollectionView!
+	@IBOutlet weak var categorySelector: UICollectionView!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -27,11 +25,11 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UICollecti
 		tableView.delegate = self
 		tableView.dataSource = self
 		
-		//TaskListManager.shared.addTaskList(list: TaskList(title: "FirstList"))
+		//TaskCategoryManager.shared.addTaskCategory(list: TaskCategory(title: "FirstList"))
 		
-		taskListSelector.delegate = self
-		taskListSelector.dataSource = TaskListManager.shared
-		taskListSelector.decelerationRate = 0.1
+		categorySelector.delegate = self
+		categorySelector.dataSource = TaskCategoryManager.shared
+		categorySelector.decelerationRate = 0.1
 	}
 	
 	func newTask() {
@@ -47,17 +45,17 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UICollecti
 		newTaskCell.titleTextEdit.becomeFirstResponder()
 	}
 	
-	func setTaskList(taskList: TaskList) {
-		self.currList = taskList
-		self.navigationItem.title = taskList.title
+	func setTaskCategory(category: TaskCategory) {
+		self.currList = category
+		self.navigationItem.title = category.title
 		self.tableView.reloadData()
 	}
 	
-	@objc func didTapOnTaskList(_ sender: UITapGestureRecognizer) {
-		guard let cell = sender.view as? TaskListSelectorCollectionViewCell else {
-			fatalError("Error while retreiving TaskListSelectorCollectionViewCell from TapGestureRecognizer!")
+	@objc func didTapOnTaskCategory(_ sender: UITapGestureRecognizer) {
+		guard let cell = sender.view as? TaskCategorySelectorCollectionViewCell else {
+			fatalError("Error while retreiving TaskCategorySelectorCollectionViewCell from TapGestureRecognizer!")
 		}
-		self.setTaskList(taskList: cell.taskList)
+		self.setTaskCategory(category: cell.category)
 	}
 }
 
