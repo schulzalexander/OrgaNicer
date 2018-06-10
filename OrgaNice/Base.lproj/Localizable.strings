@@ -6,10 +6,9 @@
 //  Copyright © 2018 Alexander Schulz. All rights reserved.
 //
 
-
 // Categories
-"NewCategoryAlertControllerTitle" = "Neue Liste";
-"NewCategoryAlertControllerMessage" = "Bitte gib der neuen Liste einen Namen:";
+"NewCategoryAlertControllerTitle" = "New List";
+"NewCategoryAlertControllerMessage" = "Please provide a name for the new list:";
 
 // General
 "Cancel" = "Abbrechen";

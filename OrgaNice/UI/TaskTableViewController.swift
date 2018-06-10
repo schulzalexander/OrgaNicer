@@ -59,7 +59,26 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UICollecti
 	}
 	
 	@objc func didTapOnAddCategory(_ sender: UITapGestureRecognizer) {
-		
+		let alertController = UIAlertController(title: NSLocalizedString("NewCategoryAlertControllerTitle", comment: ""), message: NSLocalizedString("NewCategoryAlertControllerMessage", comment: ""), preferredStyle: .alert)
+		let create = UIAlertAction(title: NSLocalizedString("Send", comment: ""), style: .default, handler: { (action) in
+			let name = alertController.textFields![0].text ?? ""
+			if name.count == 0 {
+				return
+			}
+			let category = TaskCategory(title: name)
+			TaskCategoryManager.shared.addTaskCategory(list: category)
+			self.categorySelector.reloadData()
+			self.setTaskCategory(category: category)
+		})
+		let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
+		alertController.addAction(create)
+		alertController.addAction(cancel)
+		alertController.addTextField { (textField) in
+			textField.placeholder = NSLocalizedString("Name", comment: "")
+		}
+		DispatchQueue.main.async {
+			self.present(alertController, animated: true, completion: nil)
+		}
 	}
 }
 
@@ -85,6 +104,26 @@ extension TaskTableViewController: UITableViewDataSource {
 		}
 		cell.task = TaskManager.shared.getTask(id: currList!.tasks![indexPath.row])
 		return cell
+	}
+	
+	func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+		return true
+	}
+	
+	func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+		
+		let deleteAction = UITableViewRowAction(style: .default, title: "Delete") { (rowAction, indexPath) in
+			guard let cell = tableView.cellForRow(at: indexPath) as? TaskTableViewCell else {
+				fatalError("Error while retrieving TaskTableViewCell from tableView!")
+			}
+			self.currList!.deleteTask(id: cell.task.id)
+		}
+		
+		return [deleteAction]
+	}
+	
+	func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+		return UITableViewCellEditingStyle.delete
 	}
 	
 }

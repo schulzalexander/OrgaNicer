@@ -38,8 +38,16 @@ class Task: NSObject, NSCoding {
 		return ""
 	}
 	
+	func isDone() -> Bool {
+		return done != nil
+	}
+	
 	func setDone() {
 		self.done = Date()
+	}
+	
+	func setUndone() {
+		self.done = nil
 	}
 	
 	//MARK: NSCoding

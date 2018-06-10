@@ -103,7 +103,6 @@ extension TaskCategoryManager: UICollectionViewDataSource {
 			let recognizer = UITapGestureRecognizer(target: currView, action: #selector(TaskTableViewController.didTapOnTaskCategory(_:)))
 			cell.addGestureRecognizer(recognizer)
 			cell.category = self.getTaskCategory(id: self.categoryTitlesSorted[indexPath.row].id)
-			currView.currList = cell.category
 			return cell
 		}
 	}
