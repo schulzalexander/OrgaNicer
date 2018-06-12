@@ -24,12 +24,15 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UICollecti
 		
 		tableView.delegate = self
 		tableView.dataSource = self
+		let pinchRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(TaskTableViewController.handlePinch))
+		tableView.addGestureRecognizer(pinchRecognizer)
 		
 		//TaskCategoryManager.shared.addTaskCategory(list: TaskCategory(title: "FirstList"))
 		
 		categorySelector.delegate = self
 		categorySelector.dataSource = TaskCategoryManager.shared
 		categorySelector.decelerationRate = 0.1
+		
 	}
 	
 	func newTask() {
@@ -49,6 +52,15 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UICollecti
 		self.currList = category
 		self.navigationItem.title = category.title
 		self.tableView.reloadData()
+	}
+	
+	@objc func handlePinch(_ sender: UIPinchGestureRecognizer) {
+		guard let cell = tableView.visibleCells[0] as? TaskTableViewCell else {
+			return
+		}
+		cell.task.cellHeight = 62 * sender.scale		
+		tableView.beginUpdates()
+		tableView.endUpdates()
 	}
 	
 	@objc func didTapOnTaskCategory(_ sender: UITapGestureRecognizer) {
@@ -86,7 +98,7 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UICollecti
 extension TaskTableViewController: UITableViewDataSource {
 
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		return 62
+		return TaskManager.shared.getTask(id: currList!.tasks![indexPath.row])?.cellHeight ?? 62
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -103,6 +115,7 @@ extension TaskTableViewController: UITableViewDataSource {
 			fatalError("Dequeued cell is not an instance of TaskTableViewCell!")
 		}
 		cell.task = TaskManager.shared.getTask(id: currList!.tasks![indexPath.row])
+		
 		return cell
 	}
 	

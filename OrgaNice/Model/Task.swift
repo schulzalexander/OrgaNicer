@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class Task: NSObject, NSCoding {
 	
@@ -17,6 +18,7 @@ class Task: NSObject, NSCoding {
 	var alarm: Date?
 	var done: Date?
 	var title: String
+	var cellHeight: CGFloat?
 	
 	struct PropertyKeys {
 		static let created = "created"
@@ -25,6 +27,7 @@ class Task: NSObject, NSCoding {
 		static let alarm = "alarm"
 		static let done = "done"
 		static let title = "title"
+		static let cellHeight = "cellHeight"
 	}
 	
 	init(title: String) {
@@ -59,6 +62,7 @@ class Task: NSObject, NSCoding {
 		aCoder.encode(alarm, forKey: PropertyKeys.alarm)
 		aCoder.encode(done, forKey: PropertyKeys.done)
 		aCoder.encode(title, forKey: PropertyKeys.title)
+		aCoder.encode(cellHeight, forKey: PropertyKeys.cellHeight)
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
@@ -70,6 +74,7 @@ class Task: NSObject, NSCoding {
 		self.created = created
 		self.id = id
 		self.title = title
+		self.cellHeight = aDecoder.decodeObject(forKey: PropertyKeys.cellHeight) as? CGFloat
 		self.deadline = aDecoder.decodeObject(forKey: PropertyKeys.deadline) as? Date
 		self.alarm = aDecoder.decodeObject(forKey: PropertyKeys.alarm) as? Date
 		self.done = aDecoder.decodeObject(forKey: PropertyKeys.done) as? Date

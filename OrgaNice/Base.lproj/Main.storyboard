@@ -52,6 +52,7 @@
                                         <connections>
                                             <outlet property="checkButton" destination="dGI-S9-WKt" id="Zqe-0Z-vsh"/>
                                             <outlet property="titleTextEdit" destination="27g-4j-aUx" id="0np-UJ-8Gl"/>
+                                            <segue destination="uUL-zZ-hs8" kind="show" id="218-4n-pRM"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -158,6 +159,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MZ3-Ih-fXI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2012" y="33"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="1q8-fh-RoL">
+            <objects>
+                <viewController id="uUL-zZ-hs8" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="c8u-mr-9yX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="JMK-KZ-9uB"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZXi-SE-8qC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2012" y="748"/>
         </scene>
         <!--Task Table Navigation Controller-->
         <scene sceneID="DCl-ze-mlr">
