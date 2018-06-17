@@ -11,6 +11,9 @@ import UIKit
 
 class Task: NSObject, NSCoding {
 	
+	static let PRIORITY_MAX: CGFloat = 150
+	static let PRIORITY_MIN: CGFloat = 60
+	
 	//MARK: Properties
 	var created: Date
 	var id: String
@@ -38,7 +41,7 @@ class Task: NSObject, NSCoding {
 	
 	//TODO
 	func getDueString() -> String {
-		return ""
+		return "Due in 1 week."
 	}
 	
 	func isDone() -> Bool {
@@ -79,4 +82,52 @@ class Task: NSObject, NSCoding {
 		self.alarm = aDecoder.decodeObject(forKey: PropertyKeys.alarm) as? Date
 		self.done = aDecoder.decodeObject(forKey: PropertyKeys.done) as? Date
 	}
+	
+	//MARK: Static functions returning cell attributes depending on current priority
+	static func getPriorityCellHeight(priority: CGFloat) -> CGFloat {
+		return min(Task.PRIORITY_MAX, max(priority, Task.PRIORITY_MIN))
+	}
+	
+	static func getPriorityColor(priority: CGFloat) -> UIColor {
+		var percentage = (priority - Task.PRIORITY_MIN) / (Task.PRIORITY_MAX - Task.PRIORITY_MIN)
+		var resColor: UIColor
+		
+		if percentage > 0.5 {
+			percentage = (percentage - 0.5) * 2
+			let revPercentage = 1.0 - percentage
+			let newR = (percentage * 219 + revPercentage * 255) / 255
+			let newG = (percentage * 19 + revPercentage * 255) / 255
+			let newB = (percentage * 19 + revPercentage * 255) / 255
+			resColor = UIColor(red: newR, green: newG, blue: newB, alpha: 1.0)
+		} else {
+			percentage *= 2
+			let revPercentage = 1.0 - percentage
+			let newR = (revPercentage * 55 + percentage * 255) / 255
+			let newG = (revPercentage * 165 + percentage * 255) / 255
+			let newB = (revPercentage * 48 + percentage * 255) / 255
+			resColor = UIColor(red: newR, green: newG, blue: newB, alpha: 1.0)
+		}
+		
+		return resColor
+	}
+	
+	static func getPriorityTextSize(priority: CGFloat) -> Int {
+		return 10
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

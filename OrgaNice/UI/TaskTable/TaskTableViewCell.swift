@@ -17,6 +17,7 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 		didSet {
 			self.titleTextEdit.text = task.title
 			self.reloadCheckBoxContent()
+			self.backgroundView!.backgroundColor = Task.getPriorityColor(priority: self.task.cellHeight ?? TaskTableViewController.DEFAULT_CELL_SIZE)
 		}
 	}
 	var content: TaskTableViewCellContent?
@@ -64,6 +65,11 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 		return true
 	}
 	
+	func updateAppearance(newHeight: CGFloat) {
+		let scaledHeight = Task.getPriorityCellHeight(priority: newHeight)
+		self.task.cellHeight = scaledHeight
+		self.backgroundView!.backgroundColor = Task.getPriorityColor(priority: scaledHeight)
+	}
 	
 	//MARK: Private Methods
 	
@@ -75,7 +81,6 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 	
 	private func setupBackgroundView() {
 		let view = UIView(frame: self.frame)
-		view.backgroundColor = UIColor.yellow
 		view.layer.cornerRadius = 20
 		view.layer.borderColor = UIColor.lightGray.cgColor
 		view.layer.borderWidth = 1.0
@@ -84,9 +89,9 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 	
 	private func reloadCheckBoxContent() {
 		if task.isDone() {
-			checkButton.setTitle(nil, for: .normal)
-		} else {
 			checkButton.setTitle("✔️", for: .normal)
+		} else {
+			checkButton.setTitle(nil, for: .normal)
 		}
 	}
 }

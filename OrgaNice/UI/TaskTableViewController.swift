@@ -12,6 +12,10 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UICollecti
 	
 	//MARK: Properties
 	var currList: TaskCategory?
+	var pinchCellSizeBuffer: CGFloat!
+	var pinchCellBuffer: TaskTableViewCell!
+	
+	static let DEFAULT_CELL_SIZE: CGFloat = 62
 	
 	//MARK: Outlets
 	@IBOutlet weak var tableView: UITableView!
@@ -55,12 +59,34 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UICollecti
 	}
 	
 	@objc func handlePinch(_ sender: UIPinchGestureRecognizer) {
-		guard let cell = tableView.visibleCells[0] as? TaskTableViewCell else {
+		if sender.state == .began {
+			let touchCenter = CGPoint(x: abs(sender.location(ofTouch: 0, in: tableView).x
+										- sender.location(ofTouch: 1, in: tableView).x),
+									  y: abs(sender.location(ofTouch: 0, in: tableView).y
+										- sender.location(ofTouch: 1, in: tableView).y))
+			guard let indexPath = tableView.indexPathForRow(at: touchCenter),
+				let cell = tableView.visibleCells[indexPath.row] as? TaskTableViewCell else {
+				return
+			}
+			print(indexPath)
+			
+			pinchCellSizeBuffer = cell.task.cellHeight ?? TaskTableViewController.DEFAULT_CELL_SIZE
+			pinchCellBuffer = cell
+		}
+		guard pinchCellBuffer != nil,
+			pinchCellSizeBuffer != nil else {
 			return
 		}
-		cell.task.cellHeight = 62 * sender.scale		
+		
+		let newHeight = pinchCellSizeBuffer * sender.scale
+		pinchCellBuffer.updateAppearance(newHeight: newHeight)
+		
 		tableView.beginUpdates()
 		tableView.endUpdates()
+		
+		if sender.state == .ended {
+			TaskArchive.saveTask(task: pinchCellBuffer.task)
+		}
 	}
 	
 	@objc func didTapOnTaskCategory(_ sender: UITapGestureRecognizer) {
@@ -98,7 +124,7 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UICollecti
 extension TaskTableViewController: UITableViewDataSource {
 
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		return TaskManager.shared.getTask(id: currList!.tasks![indexPath.row])?.cellHeight ?? 62
+		return TaskManager.shared.getTask(id: currList!.tasks![indexPath.row])?.cellHeight ?? TaskTableViewController.DEFAULT_CELL_SIZE
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
