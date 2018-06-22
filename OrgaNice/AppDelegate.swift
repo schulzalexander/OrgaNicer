@@ -15,6 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+		TaskArchive.createArchiveBaseDirectories()
+		
 		// Load TaskCategory Manager if saved
 		if let savedTaskCategoryManager = TaskArchive.loadTaskCategoryManager() {
 			TaskCategoryManager.shared = savedTaskCategoryManager

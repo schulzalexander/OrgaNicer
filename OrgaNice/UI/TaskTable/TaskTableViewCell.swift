@@ -17,7 +17,7 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 		didSet {
 			self.titleTextEdit.text = task.title
 			self.reloadCheckBoxContent()
-			self.backgroundView!.backgroundColor = Task.getPriorityColor(priority: self.task.cellHeight ?? TaskTableViewController.DEFAULT_CELL_SIZE)
+			self.contentView.backgroundColor = Task.getPriorityColor(priority: self.task.cellHeight ?? TaskTableViewController.DEFAULT_CELL_SIZE)
 		}
 	}
 	var content: TaskTableViewCellContent?
@@ -26,6 +26,8 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 	@IBOutlet weak var titleTextEdit: UITextField!
 	@IBOutlet weak var checkButton: UIButton!
 	
+	static let PADDING_X: CGFloat = 5
+	static let PADDING_Y: CGFloat = 5
 	
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -68,7 +70,7 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 	func updateAppearance(newHeight: CGFloat) {
 		let scaledHeight = Task.getPriorityCellHeight(priority: newHeight)
 		self.task.cellHeight = scaledHeight
-		self.backgroundView!.backgroundColor = Task.getPriorityColor(priority: scaledHeight)
+		self.contentView.backgroundColor = Task.getPriorityColor(priority: scaledHeight)
 	}
 	
 	//MARK: Private Methods
@@ -80,11 +82,22 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 	}
 	
 	private func setupBackgroundView() {
-		let view = UIView(frame: self.frame)
-		view.layer.cornerRadius = 20
-		view.layer.borderColor = UIColor.lightGray.cgColor
-		view.layer.borderWidth = 1.0
-		self.backgroundView = view
+		self.contentView.layer.cornerRadius = 20
+		self.contentView.layer.borderColor = UIColor.lightGray.cgColor
+		self.contentView.layer.borderWidth = 1.0
+		
+		self.contentView.layer.masksToBounds = false
+		self.contentView.layer.shadowColor = UIColor.black.cgColor
+		self.contentView.layer.shadowRadius = 1.0
+		self.contentView.layer.shadowOffset = CGSize(width: 0, height: 1)
+		self.contentView.layer.shadowOpacity = 1.0
+		
+		self.contentView.translatesAutoresizingMaskIntoConstraints = false
+		
+		self.contentView.topAnchor.constraint(equalTo: self.topAnchor, constant: TaskTableViewCell.PADDING_Y).isActive = true
+		self.contentView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -1 * TaskTableViewCell.PADDING_Y).isActive = true
+		self.contentView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: TaskTableViewCell.PADDING_X).isActive = true
+		self.contentView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -1 * TaskTableViewCell.PADDING_X).isActive = true
 	}
 	
 	private func reloadCheckBoxContent() {

@@ -12,7 +12,7 @@ import UIKit
 class Task: NSObject, NSCoding {
 	
 	static let PRIORITY_MAX: CGFloat = 150
-	static let PRIORITY_MIN: CGFloat = 60
+	static let PRIORITY_MIN: CGFloat = 70
 	
 	//MARK: Properties
 	var created: Date

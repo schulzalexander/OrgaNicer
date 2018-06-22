@@ -15,7 +15,7 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UICollecti
 	var pinchCellSizeBuffer: CGFloat!
 	var pinchCellBuffer: TaskTableViewCell!
 	
-	static let DEFAULT_CELL_SIZE: CGFloat = 62
+	static let DEFAULT_CELL_SIZE: CGFloat = 70
 	
 	//MARK: Outlets
 	@IBOutlet weak var tableView: UITableView!
@@ -25,6 +25,7 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UICollecti
 		super.viewDidLoad()
 		
 		self.navigationController?.navigationBar.prefersLargeTitles = true
+		//self.tableView.contentInset = UIEdgeInsetsMake(TaskTableViewCell.PADDING_Y, TaskTableViewCell.PADDING_X, TaskTableViewCell.PADDING_Y, TaskTableViewCell.PADDING_X)
 		
 		tableView.delegate = self
 		tableView.dataSource = self
@@ -60,16 +61,14 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UICollecti
 	
 	@objc func handlePinch(_ sender: UIPinchGestureRecognizer) {
 		if sender.state == .began {
-			let touchCenter = CGPoint(x: abs(sender.location(ofTouch: 0, in: tableView).x
-										- sender.location(ofTouch: 1, in: tableView).x),
-									  y: abs(sender.location(ofTouch: 0, in: tableView).y
-										- sender.location(ofTouch: 1, in: tableView).y))
+			let touchCenter = CGPoint(x: (sender.location(ofTouch: 0, in: tableView).x
+										+ sender.location(ofTouch: 1, in: tableView).x) / 2,
+									  y: (sender.location(ofTouch: 0, in: tableView).y
+										+ sender.location(ofTouch: 1, in: tableView).y) / 2)
 			guard let indexPath = tableView.indexPathForRow(at: touchCenter),
 				let cell = tableView.visibleCells[indexPath.row] as? TaskTableViewCell else {
 				return
 			}
-			print(indexPath)
-			
 			pinchCellSizeBuffer = cell.task.cellHeight ?? TaskTableViewController.DEFAULT_CELL_SIZE
 			pinchCellBuffer = cell
 		}

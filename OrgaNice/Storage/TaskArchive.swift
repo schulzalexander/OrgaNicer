@@ -9,16 +9,16 @@
 import Foundation
 
 class TaskArchive {
-	static let TASKDIR = "Tasks"
-	static let TASKMANAGERDIR = "TaskManager"
-	static let TASKLISTDIR = "TaskCategory"
-	static let TASKLISTMANAGERDIR = "TaskCategoryManager"
+	static let TASKDIR: String = "Tasks"
+	static let TASKMANAGERDIR: String = "TaskManager"
+	static let TASKLISTDIR: String = "TaskCategory"
+	static let TASKLISTMANAGERDIR: String = "TaskCategoryManager"
 	
 	static func taskDir(taskID: String) -> URL {
 		guard let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
 			fatalError("Failed to retrieve task archive URL!")
 		}
-		return url.appendingPathComponent(TASKDIR).appendingPathExtension(taskID)
+		return url.appendingPathComponent(TASKDIR).appendingPathComponent(taskID)
 	}
 	
 	static func saveTask(task: Task) {
@@ -45,7 +45,7 @@ class TaskArchive {
 		guard let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
 			fatalError("Failed to retrieve task manager archive URL!")
 		}
-		return url.appendingPathExtension(TASKMANAGERDIR)
+		return url.appendingPathComponent(TASKMANAGERDIR)
 	}
 	
 	static func saveTaskManager() {
@@ -64,7 +64,7 @@ class TaskArchive {
 		guard let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
 			fatalError("Failed to retrieve task archive URL!")
 		}
-		return url.appendingPathComponent(TASKLISTDIR).appendingPathExtension(id)
+		return url.appendingPathComponent(TASKLISTDIR).appendingPathComponent(id)
 	}
 	
 	static func saveTaskCategory(list: TaskCategory) {
@@ -91,7 +91,7 @@ class TaskArchive {
 		guard let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
 			fatalError("Failed to retrieve task list manager archive URL!")
 		}
-		return url.appendingPathExtension(TASKLISTMANAGERDIR)
+		return url.appendingPathComponent(TASKLISTMANAGERDIR)
 	}
 	
 	static func saveTaskCategoryManager() {
@@ -103,6 +103,21 @@ class TaskArchive {
 	
 	static func loadTaskCategoryManager() -> TaskCategoryManager? {
 		return NSKeyedUnarchiver.unarchiveObject(withFile: categoryManagerDir().path) as? TaskCategoryManager
+	}
+	
+	static func createArchiveBaseDirectories() {
+		let catDir = categoryDir(id: "")
+		let tskDir = taskDir(taskID: "")
+		do {
+			if !FileManager.default.fileExists(atPath: catDir.path) {
+				try FileManager.default.createDirectory(at: catDir, withIntermediateDirectories: false, attributes: nil)
+			}
+			if !FileManager.default.fileExists(atPath: tskDir.path) {
+				try FileManager.default.createDirectory(at: tskDir, withIntermediateDirectories: false, attributes: nil)
+			}
+		} catch let error as NSError {
+			print("Error: \(error.localizedDescription)")
+		}
 	}
 	
 }
