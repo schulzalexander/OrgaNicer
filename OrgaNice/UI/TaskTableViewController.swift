@@ -35,12 +35,20 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UICollecti
 		let pinchRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(TaskTableViewController.handlePinch))
 		tableView.addGestureRecognizer(pinchRecognizer)
 		
-		//TaskCategoryManager.shared.addTaskCategory(list: TaskCategory(title: "FirstList"))
-		
+		// Catgory Selector
 		categorySelector.delegate = self
 		categorySelector.dataSource = TaskCategoryManager.shared
 		categorySelector.decelerationRate = 0.1
 		setupTransparentGradientBackground()
+		
+		// Load first list if existing
+		if TaskCategoryManager.shared.categoryTitlesSorted.count > 0 {
+			let id = TaskCategoryManager.shared.categoryTitlesSorted[0].id
+			if let category = TaskCategoryManager.shared.getTaskCategory(id: id) {
+				self.setTaskCategory(category: category)
+			}
+		}
+		
 	}
 	
 	func newTask() {
@@ -155,7 +163,6 @@ extension TaskTableViewController: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		// TableViewReorder
 		if let spacer = tableView.reorder.spacerCell(for: indexPath) {
-			spacer.frame.size.height = 20
 			return spacer
 		}
 		
@@ -182,8 +189,6 @@ extension TaskTableViewController: UITableViewDataSource {
 }
 
 extension TaskTableViewController: TableViewReorderDelegate {
-	
-	
 	
 	func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
 		return .none

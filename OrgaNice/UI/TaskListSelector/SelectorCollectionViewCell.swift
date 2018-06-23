@@ -26,13 +26,19 @@ class SelectorCollectionViewCell: UICollectionViewCell {
 	override func awakeFromNib() {
 		super.awakeFromNib()
 		
+		//self.createGradientLayer(view: self)
+		
 		self.backgroundColor = UIColor.lightGray
-		self.layer.borderColor = UIColor.black.cgColor
-		self.layer.borderWidth = 1.0
+		//self.layer.borderColor = UIColor.black.cgColor
+		//self.layer.borderWidth = 1.0
+		self.layer.masksToBounds = false
 		self.layer.cornerRadius = 15
+		self.layer.shadowColor = UIColor.gray.cgColor
+		self.layer.shadowRadius = 5.0
+		self.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
+		self.layer.shadowOpacity = 1.0
 		
 		
-		self.createGradientLayer(view: self)
 	}
 	
 	override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {

@@ -13,18 +13,12 @@ class SelectorCollectionViewCellAdd: UICollectionViewCell {
 	//MARK: Outlets
 	@IBOutlet weak var addLabel: UILabel!
 	
-	
 	override func awakeFromNib() {
 		super.awakeFromNib()
-		
-		self.layer.borderColor = UIColor.lightGray.cgColor
-		self.layer.borderWidth = 1.0
-		self.layer.cornerRadius = 15
 
 		//TODO: make border dashed
 		// https://stackoverflow.com/questions/13679923/dashed-line-border-around-uiview
 		
-		//self.createGradientLayer(view: self)
 	}
 	
 	override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
@@ -32,15 +26,23 @@ class SelectorCollectionViewCellAdd: UICollectionViewCell {
 		let customLayoutAttributes = layoutAttributes as! SelectorCollectionViewLayoutAttributes
 		self.layer.anchorPoint = customLayoutAttributes.anchorPoint
 		self.center.y += (customLayoutAttributes.anchorPoint.y - 0.5) * self.bounds.height
-		self.layer.sublayers![0].frame = self.layer.bounds // Scale gradient to cell size
+		
+		setupLabel()
 	}
 	
-	func createGradientLayer(view: UIView) {
-		let gradientLayer = CAGradientLayer()
-		gradientLayer.frame = view.bounds
-		gradientLayer.colors = [UIColor.red.cgColor, UIColor.yellow.cgColor]
-		gradientLayer.locations = [0, 1]
-		view.layer.sublayers!.insert(gradientLayer, at: 0)
-		//view.layer.sublayers![1].zPosition = 0
+	private func setupLabel() {
+		self.addLabel.text = NSLocalizedString("CategorySelectorAddList", comment: "")
+		self.addLabel.sizeToFit()
+		
+		self.addLabel.frame.size.width += 40
+		self.addLabel.frame.size.height = self.addLabel.frame.size.width
+		self.addLabel.center.x = self.contentView.center.x
+		self.addLabel.center.y = self.addLabel.frame.height / 2
+		
+		self.addLabel.layer.shadowColor = UIColor.gray.cgColor
+		self.addLabel.layer.shadowRadius = 5.0
+		self.addLabel.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
+		self.addLabel.layer.shadowOpacity = 1.0
 	}
+	
 }
