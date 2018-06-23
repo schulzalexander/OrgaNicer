@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		157B407E9B19BA77B9E2FA9A /* Pods_OrgaNice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B56AE89F2D68003A2E6F87 /* Pods_OrgaNice.framework */; };
 		27AA6EF6D4F3CCD5B662CDEF /* Pods_OrgaNiceUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C80FEEB1B598671A03AA506 /* Pods_OrgaNiceUITests.framework */; };
+		C91043FA20DED6CF005096F5 /* FilterBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C91043F920DED6CF005096F5 /* FilterBar.swift */; };
 		C938A99E20CB1920006E76E7 /* TaskCheckList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C938A99D20CB1920006E76E7 /* TaskCheckList.swift */; };
 		C938A9A020CB193B006E76E7 /* TaskConsecutiveList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C938A99F20CB193B006E76E7 /* TaskConsecutiveList.swift */; };
 		C938A9A320CB1CAB006E76E7 /* CheckListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C938A9A220CB1CAB006E76E7 /* CheckListView.swift */; };
@@ -65,6 +66,7 @@
 		927A8678B707D6F89A73E978 /* Pods_OrgaNiceTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OrgaNiceTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		92C8D8F1905646583D332CE7 /* Pods-OrgaNiceTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OrgaNiceTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OrgaNiceTests/Pods-OrgaNiceTests.release.xcconfig"; sourceTree = "<group>"; };
 		B37BB9A62CE0649A9C0F0D56 /* Pods-OrgaNice.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OrgaNice.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OrgaNice/Pods-OrgaNice.debug.xcconfig"; sourceTree = "<group>"; };
+		C91043F920DED6CF005096F5 /* FilterBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterBar.swift; sourceTree = "<group>"; };
 		C9192A4B20CD8F2200526CB5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C938A99D20CB1920006E76E7 /* TaskCheckList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCheckList.swift; sourceTree = "<group>"; };
 		C938A99F20CB193B006E76E7 /* TaskConsecutiveList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskConsecutiveList.swift; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 				C97D0BBD20CB0F3C00991895 /* TaskTableViewCellContent.swift */,
 				C938A9A220CB1CAB006E76E7 /* CheckListView.swift */,
 				C938A9A420CB1CC9006E76E7 /* ConsecutiveListView.swift */,
+				C91043F920DED6CF005096F5 /* FilterBar.swift */,
 			);
 			path = TaskTable;
 			sourceTree = "<group>";
@@ -507,6 +510,7 @@
 				C938A9A320CB1CAB006E76E7 /* CheckListView.swift in Sources */,
 				C9713EF720C597810074F232 /* TaskCategoryManager.swift in Sources */,
 				C97D0BC020CB133000991895 /* TaskList.swift in Sources */,
+				C91043FA20DED6CF005096F5 /* FilterBar.swift in Sources */,
 				C938A9A020CB193B006E76E7 /* TaskConsecutiveList.swift in Sources */,
 				C938A9A520CB1CC9006E76E7 /* ConsecutiveListView.swift in Sources */,
 				C9713F0720C5CEE30074F232 /* TaskTableNavigationController.swift in Sources */,

@@ -31,6 +31,9 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UICollecti
 		tableView.dataSource = self
 		tableView.reorder.delegate = self
 		tableView.reorder.cellScale = 1.05
+		
+		setupFilterBar()
+		
 		let pinchRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(TaskTableViewController.handlePinch))
 		tableView.addGestureRecognizer(pinchRecognizer)
 		
@@ -48,6 +51,12 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UICollecti
 			}
 		}
 		
+	}
+	
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		
+		tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
 	}
 	
 	func newTask() {
@@ -145,6 +154,11 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UICollecti
 		backgrdView.layer.addSublayer(gradientLayer)
 		self.categorySelector.backgroundView = backgrdView
 	}
+	
+	private func setupFilterBar() {
+		let filterBar = FilterBar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 30))
+		tableView.tableHeaderView = filterBar
+	}
 }
 
 //TODO: Move to TaskManager, assign task to cell
@@ -186,6 +200,15 @@ extension TaskTableViewController: UITableViewDataSource {
 			self.currList!.deleteTask(id: cell.task.id)
 		}
 		return [deleteAction]
+	}
+	
+	func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+		let footer = UIView(frame: categorySelector.bounds)
+		return footer
+	}
+	
+	func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+		return categorySelector.bounds.height
 	}
 	
 }
