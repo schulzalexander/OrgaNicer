@@ -26,7 +26,6 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UICollecti
 		super.viewDidLoad()
 		
 		self.navigationController?.navigationBar.prefersLargeTitles = true
-		//self.tableView.contentInset = UIEdgeInsetsMake(TaskTableViewCell.PADDING_Y, TaskTableViewCell.PADDING_X, TaskTableViewCell.PADDING_Y, TaskTableViewCell.PADDING_X)
 		
 		tableView.delegate = self
 		tableView.dataSource = self
@@ -82,7 +81,9 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UICollecti
 			}
 			pinchCellSizeBuffer = cell.task.cellHeight ?? TaskTableViewController.DEFAULT_CELL_SIZE
 			pinchCellBuffer = cell
+			pinchCellBuffer.startPinchMode()
 		}
+		
 		guard pinchCellBuffer != nil,
 			pinchCellSizeBuffer != nil else {
 			return
@@ -96,6 +97,7 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UICollecti
 		
 		if sender.state == .ended {
 			TaskArchive.saveTask(task: pinchCellBuffer.task)
+			pinchCellBuffer.endPinchMode()
 		}
 	}
 	
@@ -132,7 +134,7 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UICollecti
 	private func setupTransparentGradientBackground() {
 		let colour:UIColor = .white
 		let colours:[CGColor] = [colour.withAlphaComponent(0.0).cgColor,colour.cgColor]
-		let locations:[NSNumber] = [0, 0.4]
+		let locations:[NSNumber] = [0, 0.2]
 		
 		let backgrdView = UIView(frame: self.categorySelector.frame)
 		let gradientLayer = CAGradientLayer()

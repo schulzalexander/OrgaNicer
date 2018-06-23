@@ -38,12 +38,6 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 		self.setupBackgroundView()
     }
 	
-	override func layoutSubviews() {
-		super.layoutSubviews()
-		
-		self.adjustTitleFontSize()
-	}
-	
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
@@ -80,6 +74,23 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 		self.contentView.backgroundColor = Task.getPriorityColor(priority: scaledHeight)
 	}
 	
+	func adjustTitleFontSize() {
+		guard task != nil, task.cellHeight != nil else {
+			return
+		}
+		self.titleTextEdit.font = self.titleTextEdit.font!.withSize(18 + (task.cellHeight! - Task.PRIORITY_MIN) / (Task.PRIORITY_MAX - Task.PRIORITY_MIN) * 30)
+		self.titleTextEdit.sizeToFit()
+	}
+	
+	func startPinchMode() {
+		self.titleTextEdit.text = ""
+	}
+	
+	func endPinchMode() {
+		self.titleTextEdit.text = task.title
+		adjustTitleFontSize()
+	}
+	
 	//MARK: Private Methods
 	
 	private func setupCheckButton() {
@@ -90,13 +101,13 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 	
 	private func setupBackgroundView() {
 		self.contentView.layer.cornerRadius = 20
-		self.contentView.layer.borderColor = UIColor.lightGray.cgColor
-		self.contentView.layer.borderWidth = 1.0
+		//self.contentView.layer.borderColor = UIColor.lightGray.cgColor
+		//self.contentView.layer.borderWidth = 1.0
 		
 		self.contentView.layer.masksToBounds = false
-		self.contentView.layer.shadowColor = UIColor.black.cgColor
-		self.contentView.layer.shadowRadius = 1.0
-		self.contentView.layer.shadowOffset = CGSize(width: 0, height: 1)
+		self.contentView.layer.shadowColor = UIColor.gray.cgColor
+		self.contentView.layer.shadowRadius = 3.0
+		self.contentView.layer.shadowOffset = CGSize(width: 0, height: 2)
 		self.contentView.layer.shadowOpacity = 1.0
 		
 		self.contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -115,12 +126,4 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 		}
 	}
 	
-	private func adjustTitleFontSize() {
-		guard task != nil, task.cellHeight != nil else {
-			return
-		}
-		self.titleTextEdit.font = self.titleTextEdit.font!.withSize(18 + (task.cellHeight! - Task.PRIORITY_MIN) / (Task.PRIORITY_MAX - Task.PRIORITY_MIN) * 30)
-		self.titleTextEdit.sizeToFit()
-		//self.titleTextEdit.font = self.titleTextEdit.font!.withSize(self.titleTextEdit.bounds.height * 0.8)
-	}
 }

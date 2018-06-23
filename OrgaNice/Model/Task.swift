@@ -92,19 +92,29 @@ class Task: NSObject, NSCoding {
 		var percentage = (priority - Task.PRIORITY_MIN) / (Task.PRIORITY_MAX - Task.PRIORITY_MIN)
 		var resColor: UIColor
 		
+		let lowColor = CIColor(red: 1, green: 0.9098, blue: 0.1098, alpha: 1.0)
+		let middleColor = CIColor(red: 1, green: 0.1098, blue: 0.1098, alpha: 1.0)
+		let highColor = CIColor(red: 0.6078, green: 0, blue: 0, alpha: 1.0)
+		
 		if percentage > 0.5 {
 			percentage = (percentage - 0.5) * 2
 			let revPercentage = 1.0 - percentage
-			let newR = (percentage * 219 + revPercentage * 255) / 255
-			let newG = (percentage * 19 + revPercentage * 255) / 255
-			let newB = (percentage * 19 + revPercentage * 255) / 255
+			let newR = (percentage * highColor.red
+				+ revPercentage * middleColor.red)
+			let newG = (percentage * highColor.green
+				+ revPercentage * middleColor.green)
+			let newB = (percentage * highColor.blue
+				+ revPercentage * middleColor.blue)
 			resColor = UIColor(red: newR, green: newG, blue: newB, alpha: 1.0)
 		} else {
 			percentage *= 2
 			let revPercentage = 1.0 - percentage
-			let newR = (revPercentage * 55 + percentage * 255) / 255
-			let newG = (revPercentage * 165 + percentage * 255) / 255
-			let newB = (revPercentage * 48 + percentage * 255) / 255
+			let newR = (revPercentage * lowColor.red
+				+ percentage * middleColor.red)
+			let newG = (revPercentage * lowColor.green
+				+ percentage * middleColor.green)
+			let newB = (revPercentage * lowColor.blue
+				+ percentage * middleColor.blue)
 			resColor = UIColor(red: newR, green: newG, blue: newB, alpha: 1.0)
 		}
 		
