@@ -18,6 +18,7 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 			self.titleTextEdit.text = task.title
 			self.reloadCheckBoxContent()
 			self.contentView.backgroundColor = Task.getPriorityColor(priority: self.task.cellHeight ?? TaskTableViewController.DEFAULT_CELL_SIZE)
+			self.adjustTitleFontSize()
 		}
 	}
 	var content: TaskTableViewCellContent?
@@ -36,7 +37,13 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 		self.setupCheckButton()
 		self.setupBackgroundView()
     }
-
+	
+	override func layoutSubviews() {
+		super.layoutSubviews()
+		
+		self.adjustTitleFontSize()
+	}
+	
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
@@ -106,5 +113,14 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 		} else {
 			checkButton.setTitle(nil, for: .normal)
 		}
+	}
+	
+	private func adjustTitleFontSize() {
+		guard task != nil, task.cellHeight != nil else {
+			return
+		}
+		self.titleTextEdit.font = self.titleTextEdit.font!.withSize(18 + (task.cellHeight! - Task.PRIORITY_MIN) / (Task.PRIORITY_MAX - Task.PRIORITY_MIN) * 30)
+		self.titleTextEdit.sizeToFit()
+		//self.titleTextEdit.font = self.titleTextEdit.font!.withSize(self.titleTextEdit.bounds.height * 0.8)
 	}
 }

@@ -112,6 +112,7 @@ class Task: NSObject, NSCoding {
 	}
 	
 	static func getPriorityTextSize(priority: CGFloat) -> Int {
+		print(priority)
 		return 10
 	}
 }

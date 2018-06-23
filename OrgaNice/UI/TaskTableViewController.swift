@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftReorder
 
 class TaskTableViewController: UIViewController, UITableViewDelegate, UICollectionViewDelegate {
 	
@@ -29,6 +30,8 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UICollecti
 		
 		tableView.delegate = self
 		tableView.dataSource = self
+		tableView.reorder.delegate = self
+		tableView.reorder.cellScale = 1.05
 		let pinchRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(TaskTableViewController.handlePinch))
 		tableView.addGestureRecognizer(pinchRecognizer)
 		
@@ -37,7 +40,7 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UICollecti
 		categorySelector.delegate = self
 		categorySelector.dataSource = TaskCategoryManager.shared
 		categorySelector.decelerationRate = 0.1
-		
+		setupTransparentGradientBackground()
 	}
 	
 	func newTask() {
@@ -117,6 +120,21 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UICollecti
 			self.present(alertController, animated: true, completion: nil)
 		}
 	}
+	
+	private func setupTransparentGradientBackground() {
+		let colour:UIColor = .white
+		let colours:[CGColor] = [colour.withAlphaComponent(0.0).cgColor,colour.cgColor]
+		let locations:[NSNumber] = [0, 0.4]
+		
+		let backgrdView = UIView(frame: self.categorySelector.frame)
+		let gradientLayer = CAGradientLayer()
+		gradientLayer.colors = colours
+		gradientLayer.locations = locations
+		gradientLayer.frame = self.categorySelector.bounds
+		
+		backgrdView.layer.addSublayer(gradientLayer)
+		self.categorySelector.backgroundView = backgrdView
+	}
 }
 
 //TODO: Move to TaskManager, assign task to cell
@@ -135,6 +153,13 @@ extension TaskTableViewController: UITableViewDataSource {
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		// TableViewReorder
+		if let spacer = tableView.reorder.spacerCell(for: indexPath) {
+			spacer.frame.size.height = 20
+			return spacer
+		}
+		
+		// Setup normal task cell
 		let cellIdentifier = "TaskTableViewCell"
 		guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? TaskTableViewCell else {
 			fatalError("Dequeued cell is not an instance of TaskTableViewCell!")
@@ -144,28 +169,36 @@ extension TaskTableViewController: UITableViewDataSource {
 		return cell
 	}
 	
-	func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-		return true
-	}
-	
 	func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
-		
 		let deleteAction = UITableViewRowAction(style: .default, title: "Delete") { (rowAction, indexPath) in
 			guard let cell = tableView.cellForRow(at: indexPath) as? TaskTableViewCell else {
 				fatalError("Error while retrieving TaskTableViewCell from tableView!")
 			}
 			self.currList!.deleteTask(id: cell.task.id)
 		}
-		
 		return [deleteAction]
-	}
-	
-	func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
-		return UITableViewCellEditingStyle.delete
 	}
 	
 }
 
+extension TaskTableViewController: TableViewReorderDelegate {
+	
+	
+	
+	func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+		return .none
+	}
+	
+	func tableView(_ tableView: UITableView, reorderRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+		guard self.currList != nil, self.currList!.tasks != nil else {
+			return
+		}
+		let task = self.currList!.tasks!.remove(at: sourceIndexPath.row)
+		self.currList!.tasks!.insert(task, at: destinationIndexPath.row)
+		TaskArchive.saveTaskCategory(list: self.currList!)
+	}
+	
+}
 
 
 
