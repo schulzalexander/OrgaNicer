@@ -57,7 +57,7 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 	//MARK: TextFieldDelegate
 	
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-		let newTitle = textField.text ?? ""
+		let newTitle = textField.text!
 		if Utils.isValidTextInput(text: newTitle) {
 			if newTitle != task.title {
 				task.title = newTitle
@@ -66,6 +66,19 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 			textField.resignFirstResponder()
 		}
 		return true
+	}
+	
+	func textFieldDidEndEditing(_ textField: UITextField) {
+		guard textField.text != nil, textField.text!.count > 0 else {
+			guard let tableView = superview as? UITableView,
+				let viewController = tableView.delegate as? TaskTableViewController else {
+					fatalError("Could not retrieve tableView as superview of tableViewCell!")
+			}
+			viewController.currList!.deleteTask(id: task.id)
+			tableView.reloadData()
+			return
+		}
+		textField.text = task.title
 	}
 	
 	func updateAppearance(newHeight: CGFloat) {

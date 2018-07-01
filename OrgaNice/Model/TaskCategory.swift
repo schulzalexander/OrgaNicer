@@ -73,10 +73,11 @@ class TaskCategory: NSObject, NSCoding {
 	}
 	
 	func deleteTask(id: String) {
-		for i in 0..<(tasks ?? []).count - 1 {
+		for i in 0..<(tasks ?? []).count {
 			if tasks![i] == id {
 				tasks!.remove(at: i)
 				TaskManager.shared.deleteTask(id: id)
+				break
 			}
 		}
 		TaskArchive.saveTaskCategory(list: self)

@@ -28,7 +28,7 @@ class SelectorCollectionViewCell: UICollectionViewCell {
 		
 		//self.createGradientLayer(view: self)
 		
-		self.backgroundColor = UIColor.lightGray
+		self.backgroundColor = UIColor.white
 		//self.layer.borderColor = UIColor.black.cgColor
 		//self.layer.borderWidth = 1.0
 		self.layer.masksToBounds = false

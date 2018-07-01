@@ -32,8 +32,6 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UICollecti
 		tableView.reorder.delegate = self
 		tableView.reorder.cellScale = 1.05
 		
-		setupFilterBar()
-		
 		let pinchRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(TaskTableViewController.handlePinch))
 		tableView.addGestureRecognizer(pinchRecognizer)
 		
@@ -55,8 +53,9 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UICollecti
 	
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
-		
-		tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+		if currList != nil && currList!.count() > 0 {
+			tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+		}
 	}
 	
 	func newTask() {
@@ -66,9 +65,11 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UICollecti
 		let newTask = Task(title: "")
 		currList!.addTask(task: newTask)
 		tableView.reloadData()
-		guard let newTaskCell = tableView.cellForRow(at: IndexPath(row: currList!.count() - 1, section: 0)) as? TaskTableViewCell else {
+		let newIndexPath = IndexPath(row: currList!.count() - 1, section: 0)
+		guard let newTaskCell = tableView.cellForRow(at: newIndexPath) as? TaskTableViewCell else {
 			return
 		}
+		tableView.scrollToRow(at: newIndexPath, at: .bottom, animated: true)
 		newTaskCell.titleTextEdit.becomeFirstResponder()
 	}
 	
@@ -85,7 +86,7 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UICollecti
 									  y: (sender.location(ofTouch: 0, in: tableView).y
 										+ sender.location(ofTouch: 1, in: tableView).y) / 2)
 			guard let indexPath = tableView.indexPathForRow(at: touchCenter),
-				let cell = tableView.visibleCells[indexPath.row] as? TaskTableViewCell else {
+				let cell = tableView.cellForRow(at: indexPath) as? TaskTableViewCell else {
 				return
 			}
 			pinchCellSizeBuffer = cell.task.cellHeight ?? TaskTableViewController.DEFAULT_CELL_SIZE
@@ -156,8 +157,8 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UICollecti
 	}
 	
 	private func setupFilterBar() {
-		let filterBar = FilterBar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 30))
-		tableView.tableHeaderView = filterBar
+		let nibName = UINib(nibName: "CustomHeaderView", bundle: nil)
+		self.tableView.register(nibName, forHeaderFooterViewReuseIdentifier: "CustomHeaderView")
 	}
 }
 
