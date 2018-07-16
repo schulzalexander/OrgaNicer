@@ -14,7 +14,7 @@ class SelectorCollectionViewCell: UICollectionViewCell {
 	var category: TaskCategory! {
 		didSet {
 			self.titleLabel.text = category.title
-			self.taskCountLabel.text = "ToDo: \(category.countUndone())"
+			self.updateTodoCounter()
 		}
 	}
 	
@@ -56,6 +56,10 @@ class SelectorCollectionViewCell: UICollectionViewCell {
 		gradientLayer.locations = [0, 1]
 		view.layer.sublayers!.insert(gradientLayer, at: 0)
 		//view.layer.sublayers![1].zPosition = 0
+	}
+	
+	func updateTodoCounter() {
+		self.taskCountLabel.text = "ToDo: \(category.countUndone())"
 	}
 	
 }

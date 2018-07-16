@@ -31,6 +31,8 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UICollecti
 		tableView.dataSource = self
 		tableView.reorder.delegate = self
 		tableView.reorder.cellScale = 1.05
+		tableView.rowHeight = UITableViewAutomaticDimension
+		tableView.estimatedRowHeight = 70
 		
 		let pinchRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(TaskTableViewController.handlePinch))
 		tableView.addGestureRecognizer(pinchRecognizer)
@@ -164,12 +166,23 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UICollecti
 
 //TODO: Move to TaskManager, assign task to cell
 extension TaskTableViewController: UITableViewDataSource {
-
+	
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		return TaskManager.shared.getTask(id: currList!.tasks![indexPath.row])?.cellHeight ?? TaskTableViewController.DEFAULT_CELL_SIZE
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		if self.currList != nil {
+			for cell in categorySelector.visibleCells {
+				guard let taskListCell = cell as? SelectorCollectionViewCell else {
+					continue
+				}
+				if taskListCell.category.id == self.currList!.id {
+					taskListCell.updateTodoCounter()
+					break
+				}
+			}
+		}
 		return currList != nil ? currList!.count() : 0
 	}
 	
