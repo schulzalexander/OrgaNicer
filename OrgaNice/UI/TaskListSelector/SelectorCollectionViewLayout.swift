@@ -10,25 +10,29 @@
 import UIKit
 
 class SelectorCollectionViewLayout: UICollectionViewLayout {
-
+	
 	//MARK: Properties
-	let itemSize = CGSize(width: UIScreen.main.bounds.width * 0.6, height: 100)
+	let itemSize = CGSize(width: UIScreen.main.bounds.width * 0.6, height: 200)
 	var angleAtExtreme: CGFloat {
 		return collectionView!.numberOfItems(inSection: 0) > 0 ?
 			-CGFloat(collectionView!.numberOfItems(inSection: 0) - 1) * anglePerItem : 0
 	}
+	
 	var angle: CGFloat {
 		return angleAtExtreme * collectionView!.contentOffset.x / (collectionViewContentSize.width -
 			self.collectionView!.bounds.width)
 	}
+	
 	var radius: CGFloat = 500 {
 		didSet {
 			invalidateLayout()
 		}
 	}
+	
 	var anglePerItem: CGFloat {
 		return atan(itemSize.width / radius)
 	}
+	
 	var attributesList = [SelectorCollectionViewLayoutAttributes]()
 	
 	override var collectionViewContentSize: CGSize {

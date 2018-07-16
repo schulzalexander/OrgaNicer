@@ -52,6 +52,11 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 		}
 		TaskArchive.saveTask(task: task)
 		reloadCheckBoxContent()
+		guard let tableView = self.superview as? UITableView,
+			let viewController = tableView.delegate as? TaskTableViewController else {
+				return
+		}
+		viewController.updateTodoCounter()
 	}
 	
 	//MARK: TextFieldDelegate

@@ -14,6 +14,7 @@
 		C938A9A020CB193B006E76E7 /* TaskConsecutiveList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C938A99F20CB193B006E76E7 /* TaskConsecutiveList.swift */; };
 		C938A9A320CB1CAB006E76E7 /* CheckListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C938A9A220CB1CAB006E76E7 /* CheckListView.swift */; };
 		C938A9A520CB1CC9006E76E7 /* ConsecutiveListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C938A9A420CB1CC9006E76E7 /* ConsecutiveListView.swift */; };
+		C958386F20FCED0F00E355C7 /* SelectorCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C958386E20FCED0F00E355C7 /* SelectorCollectionView.swift */; };
 		C9713E8920C596680074F232 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9713E8820C596680074F232 /* AppDelegate.swift */; };
 		C9713E8E20C596680074F232 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9713E8C20C596680074F232 /* Main.storyboard */; };
 		C9713E9020C596690074F232 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9713E8F20C596690074F232 /* Assets.xcassets */; };
@@ -72,6 +73,7 @@
 		C938A99F20CB193B006E76E7 /* TaskConsecutiveList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskConsecutiveList.swift; sourceTree = "<group>"; };
 		C938A9A220CB1CAB006E76E7 /* CheckListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckListView.swift; sourceTree = "<group>"; };
 		C938A9A420CB1CC9006E76E7 /* ConsecutiveListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsecutiveListView.swift; sourceTree = "<group>"; };
+		C958386E20FCED0F00E355C7 /* SelectorCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectorCollectionView.swift; sourceTree = "<group>"; };
 		C9713E8520C596680074F232 /* OrgaNice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OrgaNice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9713E8820C596680074F232 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C9713E8D20C596680074F232 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -279,6 +281,7 @@
 		C9713EF020C597810074F232 /* TaskListSelector */ = {
 			isa = PBXGroup;
 			children = (
+				C958386E20FCED0F00E355C7 /* SelectorCollectionView.swift */,
 				C9713EF120C597810074F232 /* SelectorCollectionViewLayoutAttributes.swift */,
 				C9713EF220C597810074F232 /* SelectorCollectionViewLayout.swift */,
 				C9713EF320C597810074F232 /* SelectorCollectionViewCell.swift */,
@@ -501,6 +504,7 @@
 			files = (
 				C9713F0020C597810074F232 /* TaskTableViewCell.swift in Sources */,
 				C97D0BBE20CB0F3C00991895 /* TaskTableViewCellContent.swift in Sources */,
+				C958386F20FCED0F00E355C7 /* SelectorCollectionView.swift in Sources */,
 				C9713EF620C597810074F232 /* TaskCategory.swift in Sources */,
 				C9713EFA20C597810074F232 /* TaskManager.swift in Sources */,
 				C9713F0520C597810074F232 /* TaskTableViewController.swift in Sources */,

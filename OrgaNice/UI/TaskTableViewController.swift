@@ -20,7 +20,7 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UICollecti
 	
 	//MARK: Outlets
 	@IBOutlet weak var tableView: UITableView!
-	@IBOutlet weak var categorySelector: UICollectionView!
+	@IBOutlet weak var categorySelector: SelectorCollectionView!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -41,7 +41,6 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UICollecti
 		categorySelector.delegate = self
 		categorySelector.dataSource = TaskCategoryManager.shared
 		categorySelector.decelerationRate = 0.1
-		setupTransparentGradientBackground()
 		
 		// Load first list if existing
 		if TaskCategoryManager.shared.categoryTitlesSorted.count > 0 {
@@ -50,7 +49,6 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UICollecti
 				self.setTaskCategory(category: category)
 			}
 		}
-		
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
@@ -84,12 +82,12 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UICollecti
 	@objc func handlePinch(_ sender: UIPinchGestureRecognizer) {
 		if sender.state == .began {
 			let touchCenter = CGPoint(x: (sender.location(ofTouch: 0, in: tableView).x
-										+ sender.location(ofTouch: 1, in: tableView).x) / 2,
+				+ sender.location(ofTouch: 1, in: tableView).x) / 2,
 									  y: (sender.location(ofTouch: 0, in: tableView).y
 										+ sender.location(ofTouch: 1, in: tableView).y) / 2)
 			guard let indexPath = tableView.indexPathForRow(at: touchCenter),
 				let cell = tableView.cellForRow(at: indexPath) as? TaskTableViewCell else {
-				return
+					return
 			}
 			pinchCellSizeBuffer = cell.task.cellHeight ?? TaskTableViewController.DEFAULT_CELL_SIZE
 			pinchCellBuffer = cell
@@ -98,7 +96,7 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UICollecti
 		
 		guard pinchCellBuffer != nil,
 			pinchCellSizeBuffer != nil else {
-			return
+				return
 		}
 		
 		let newHeight = pinchCellSizeBuffer * sender.scale
@@ -143,19 +141,18 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UICollecti
 		}
 	}
 	
-	private func setupTransparentGradientBackground() {
-		let colour:UIColor = .white
-		let colours:[CGColor] = [colour.withAlphaComponent(0.0).cgColor,colour.cgColor]
-		let locations:[NSNumber] = [0, 0.2]
-		
-		let backgrdView = UIView(frame: self.categorySelector.frame)
-		let gradientLayer = CAGradientLayer()
-		gradientLayer.colors = colours
-		gradientLayer.locations = locations
-		gradientLayer.frame = self.categorySelector.bounds
-		
-		backgrdView.layer.addSublayer(gradientLayer)
-		self.categorySelector.backgroundView = backgrdView
+	func updateTodoCounter() {
+		if self.currList != nil {
+			for cell in categorySelector.visibleCells {
+				guard let taskListCell = cell as? SelectorCollectionViewCell else {
+					continue
+				}
+				if taskListCell.category.id == self.currList!.id {
+					taskListCell.updateTodoCounter()
+					break
+				}
+			}
+		}
 	}
 	
 	private func setupFilterBar() {
@@ -172,17 +169,7 @@ extension TaskTableViewController: UITableViewDataSource {
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		if self.currList != nil {
-			for cell in categorySelector.visibleCells {
-				guard let taskListCell = cell as? SelectorCollectionViewCell else {
-					continue
-				}
-				if taskListCell.category.id == self.currList!.id {
-					taskListCell.updateTodoCounter()
-					break
-				}
-			}
-		}
+		updateTodoCounter()
 		return currList != nil ? currList!.count() : 0
 	}
 	
