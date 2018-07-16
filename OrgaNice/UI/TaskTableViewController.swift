@@ -9,7 +9,7 @@
 import UIKit
 import SwiftReorder
 
-class TaskTableViewController: UIViewController, UITableViewDelegate, UICollectionViewDelegate {
+class TaskTableViewController: UIViewController, UITableViewDelegate, UICollectionViewDelegate, UIScrollViewDelegate {
 	
 	//MARK: Properties
 	var currList: TaskCategory?
@@ -41,7 +41,7 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UICollecti
 		categorySelector.delegate = self
 		categorySelector.dataSource = TaskCategoryManager.shared
 		categorySelector.decelerationRate = 0.1
-		
+
 		// Load first list if existing
 		if TaskCategoryManager.shared.categoryTitlesSorted.count > 0 {
 			let id = TaskCategoryManager.shared.categoryTitlesSorted[0].id
@@ -138,6 +138,12 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UICollecti
 		}
 		DispatchQueue.main.async {
 			self.present(alertController, animated: true, completion: nil)
+		}
+	}
+	
+	func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+		if let collectionView = scrollView as? SelectorCollectionView {
+			collectionView.scrollToIndex(index: collectionView.getNearestIndex())
 		}
 	}
 	
