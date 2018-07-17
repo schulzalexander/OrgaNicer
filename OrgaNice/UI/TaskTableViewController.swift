@@ -9,7 +9,7 @@
 import UIKit
 import SwiftReorder
 
-class TaskTableViewController: UIViewController, UITableViewDelegate, UICollectionViewDelegate, UIScrollViewDelegate {
+class TaskTableViewController: UIViewController {
 	
 	//MARK: Properties
 	var currList: TaskCategory?
@@ -92,6 +92,8 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UICollecti
 			pinchCellSizeBuffer = cell.task.cellHeight ?? TaskTableViewController.DEFAULT_CELL_SIZE
 			pinchCellBuffer = cell
 			pinchCellBuffer.startPinchMode()
+			// Set animations disabled because resizing of certain cells would cause stuttering in tableview
+			UIView.setAnimationsEnabled(false)
 		}
 		
 		guard pinchCellBuffer != nil,
@@ -108,42 +110,7 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UICollecti
 		if sender.state == .ended {
 			TaskArchive.saveTask(task: pinchCellBuffer.task)
 			pinchCellBuffer.endPinchMode()
-		}
-	}
-	
-	@objc func didTapOnTaskCategory(_ sender: UITapGestureRecognizer) {
-		guard let cell = sender.view as? SelectorCollectionViewCell else {
-			fatalError("Error while retreiving SelectorCollectionViewCell from TapGestureRecognizer!")
-		}
-		self.setTaskCategory(category: cell.category)
-	}
-	
-	@objc func didTapOnAddCategory(_ sender: UITapGestureRecognizer) {
-		let alertController = UIAlertController(title: NSLocalizedString("NewCategoryAlertControllerTitle", comment: ""), message: NSLocalizedString("NewCategoryAlertControllerMessage", comment: ""), preferredStyle: .alert)
-		let create = UIAlertAction(title: NSLocalizedString("Send", comment: ""), style: .default, handler: { (action) in
-			let name = alertController.textFields![0].text ?? ""
-			if name.count == 0 {
-				return
-			}
-			let category = TaskCategory(title: name)
-			TaskCategoryManager.shared.addTaskCategory(list: category)
-			self.categorySelector.reloadData()
-			self.setTaskCategory(category: category)
-		})
-		let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
-		alertController.addAction(create)
-		alertController.addAction(cancel)
-		alertController.addTextField { (textField) in
-			textField.placeholder = NSLocalizedString("Name", comment: "")
-		}
-		DispatchQueue.main.async {
-			self.present(alertController, animated: true, completion: nil)
-		}
-	}
-	
-	func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-		if let collectionView = scrollView as? SelectorCollectionView {
-			collectionView.scrollToIndex(index: collectionView.getNearestIndex())
+			UIView.setAnimationsEnabled(true)
 		}
 	}
 	
@@ -168,7 +135,7 @@ class TaskTableViewController: UIViewController, UITableViewDelegate, UICollecti
 }
 
 //TODO: Move to TaskManager, assign task to cell
-extension TaskTableViewController: UITableViewDataSource {
+extension TaskTableViewController: UITableViewDelegate, UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		return TaskManager.shared.getTask(id: currList!.tasks![indexPath.row])?.cellHeight ?? TaskTableViewController.DEFAULT_CELL_SIZE
@@ -237,7 +204,54 @@ extension TaskTableViewController: TableViewReorderDelegate {
 	
 }
 
-
+extension TaskTableViewController: UICollectionViewDelegate, UIScrollViewDelegate {
+	
+	@objc func didTapOnTaskCategory(_ sender: UITapGestureRecognizer) {
+		guard let cell = sender.view as? SelectorCollectionViewCell else {
+			fatalError("Error while retreiving SelectorCollectionViewCell from TapGestureRecognizer!")
+		}
+		self.setTaskCategory(category: cell.category)
+		let index = TaskCategoryManager.shared.getTaskCategoryIndex(id: cell.category.id)
+		if index >= 0 {
+			self.categorySelector.scrollToIndex(index: index)
+		}
+	}
+	
+	@objc func didTapOnAddCategory(_ sender: UITapGestureRecognizer) {
+		let alertController = UIAlertController(title: NSLocalizedString("NewCategoryAlertControllerTitle", comment: ""), message: NSLocalizedString("NewCategoryAlertControllerMessage", comment: ""), preferredStyle: .alert)
+		let create = UIAlertAction(title: NSLocalizedString("Send", comment: ""), style: .default, handler: { (action) in
+			let name = alertController.textFields![0].text ?? ""
+			if name.count == 0 {
+				return
+			}
+			let category = TaskCategory(title: name)
+			TaskCategoryManager.shared.addTaskCategory(list: category)
+			self.categorySelector.reloadData()
+			self.setTaskCategory(category: category)
+		})
+		let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
+		alertController.addAction(create)
+		alertController.addAction(cancel)
+		alertController.addTextField { (textField) in
+			textField.placeholder = NSLocalizedString("Name", comment: "")
+		}
+		DispatchQueue.main.async {
+			self.present(alertController, animated: true, completion: nil)
+		}
+	}
+	
+	func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+		if let collectionView = scrollView as? SelectorCollectionView {
+			collectionView.scrollToIndex(index: collectionView.getNearestIndex())
+		}
+	}
+	
+	func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+		if let collectionView = scrollView as? SelectorCollectionView {
+			collectionView.scrollToIndex(index: collectionView.getNearestIndex())
+		}
+	}
+}
 
 
 

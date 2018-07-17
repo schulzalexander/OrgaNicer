@@ -52,6 +52,15 @@ class TaskCategoryManager: NSObject, NSCoding {
 		return categories.count
 	}
 	
+	func getTaskCategoryIndex(id: String) -> Int {
+		for i in 0..<categoryTitlesSorted.count {
+			if categoryTitlesSorted[i].id == id {
+				return i
+			}
+		}
+		return -1
+	}
+	
 	func getTaskCategory(id: String) -> TaskCategory? {
 		return categories[id]
 	}

@@ -32,7 +32,7 @@ class SelectorCollectionViewCell: UICollectionViewCell {
 		//self.layer.borderColor = UIColor.black.cgColor
 		//self.layer.borderWidth = 1.0
 		self.layer.masksToBounds = false
-		self.layer.cornerRadius = 15
+		//self.layer.cornerRadius = 15
 		self.layer.shadowColor = UIColor.gray.cgColor
 		self.layer.shadowRadius = 5.0
 		self.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
@@ -59,7 +59,7 @@ class SelectorCollectionViewCell: UICollectionViewCell {
 	}
 	
 	func updateTodoCounter() {
-		self.taskCountLabel.text = "ToDo: \(category.countUndone())"
+		self.taskCountLabel.text = "ToDo: \(category.countUndone()) / \(category.count())"
 	}
 	
 }
