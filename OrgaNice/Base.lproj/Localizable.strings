@@ -16,3 +16,8 @@
 // General
 "Cancel" = "Abbrechen";
 "Name" = "Name";
+
+// TableTabBar
+"TableTabBarCustomOrder" = "Custom Order";
+"TableTabBarDueDateOrder" = "Upcoming";
+

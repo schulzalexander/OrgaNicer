@@ -17,3 +17,9 @@
 // General
 "Cancel" = "Abbrechen";
 "Name" = "Name";
+
+
+// TableTabBar
+"TableTabBarCustomOrder" = "Eigene Reihenfolge";
+"TableTabBarDueDateOrder" = "Anstehend";
+

@@ -38,6 +38,7 @@
 		C97D0BC020CB133000991895 /* TaskList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97D0BBF20CB133000991895 /* TaskList.swift */; };
 		C9C3D71820CC66C900C881D3 /* SelectorCollectionViewCellAdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C3D71720CC66C900C881D3 /* SelectorCollectionViewCellAdd.swift */; };
 		C9C3D71D20CC6BCE00C881D3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C9C3D71F20CC6BCE00C881D3 /* Localizable.strings */; };
+		C9D5C28B2103400A00AAE177 /* TableTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D5C28A2103400A00AAE177 /* TableTabBar.swift */; };
 		FF26720C1F82A0B3F4883512 /* Pods_OrgaNiceTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 927A8678B707D6F89A73E978 /* Pods_OrgaNiceTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -105,6 +106,7 @@
 		C9C3D72020CC6CDE00C881D3 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
 		C9C3D72120CC6CDE00C881D3 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		C9C3D72220CC6CDE00C881D3 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C9D5C28A2103400A00AAE177 /* TableTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableTabBar.swift; sourceTree = "<group>"; };
 		E6DFACDED0EA87C8AAC1F278 /* Pods-OrgaNiceUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OrgaNiceUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OrgaNiceUITests/Pods-OrgaNiceUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -258,6 +260,7 @@
 		C9713EEA20C597810074F232 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				C9D5C28921033FE200AAE177 /* TableTabBar */,
 				C9713EF420C597810074F232 /* TaskTableViewController.swift */,
 				C9713F0620C5CEE30074F232 /* TaskTableNavigationController.swift */,
 				C9713EEB20C597810074F232 /* TaskTable */,
@@ -288,6 +291,14 @@
 				C9C3D71720CC66C900C881D3 /* SelectorCollectionViewCellAdd.swift */,
 			);
 			path = TaskListSelector;
+			sourceTree = "<group>";
+		};
+		C9D5C28921033FE200AAE177 /* TableTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				C9D5C28A2103400A00AAE177 /* TableTabBar.swift */,
+			);
+			path = TableTabBar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -502,6 +513,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9D5C28B2103400A00AAE177 /* TableTabBar.swift in Sources */,
 				C9713F0020C597810074F232 /* TaskTableViewCell.swift in Sources */,
 				C97D0BBE20CB0F3C00991895 /* TaskTableViewCellContent.swift in Sources */,
 				C958386F20FCED0F00E355C7 /* SelectorCollectionView.swift in Sources */,

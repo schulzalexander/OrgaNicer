@@ -15,12 +15,15 @@ class TaskTableViewController: UIViewController {
 	var currList: TaskCategory?
 	var pinchCellSizeBuffer: CGFloat!
 	var pinchCellBuffer: TaskTableViewCell!
+	var tableTabBar: TableTabBar!
+	var tableViewScrollCompletionBlock: (()->())?
 	
 	static let DEFAULT_CELL_SIZE: CGFloat = 70
 	
 	//MARK: Outlets
 	@IBOutlet weak var tableView: UITableView!
 	@IBOutlet weak var categorySelector: SelectorCollectionView!
+	
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -36,6 +39,8 @@ class TaskTableViewController: UIViewController {
 		
 		let pinchRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(TaskTableViewController.handlePinch))
 		tableView.addGestureRecognizer(pinchRecognizer)
+
+		setupTableTabBar()
 		
 		// Catgory Selector
 		categorySelector.delegate = self
@@ -66,11 +71,13 @@ class TaskTableViewController: UIViewController {
 		currList!.addTask(task: newTask)
 		tableView.reloadData()
 		let newIndexPath = IndexPath(row: currList!.count() - 1, section: 0)
-		guard let newTaskCell = tableView.cellForRow(at: newIndexPath) as? TaskTableViewCell else {
-			return
+		tableViewScrollCompletionBlock = {
+			guard let newTaskCell = self.tableView.cellForRow(at: newIndexPath) as? TaskTableViewCell else {
+				return
+			}
+			newTaskCell.titleTextEdit.becomeFirstResponder()
 		}
 		tableView.scrollToRow(at: newIndexPath, at: .bottom, animated: true)
-		newTaskCell.titleTextEdit.becomeFirstResponder()
 	}
 	
 	func setTaskCategory(category: TaskCategory) {
@@ -132,6 +139,18 @@ class TaskTableViewController: UIViewController {
 		let nibName = UINib(nibName: "CustomHeaderView", bundle: nil)
 		self.tableView.register(nibName, forHeaderFooterViewReuseIdentifier: "CustomHeaderView")
 	}
+	
+	private func setupTableTabBar() {
+		let rect = CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 30)
+		tableTabBar = TableTabBar(frame: rect)
+		
+		tableTabBar.addTab(title: NSLocalizedString("TableTabBarCustomOrder", comment: ""), action: {
+			print("test1")
+		})
+		tableTabBar.addTab(title: NSLocalizedString("TableTabBarDueDateOrder", comment: ""), action: {
+			print("test2")
+		})
+	}
 }
 
 //TODO: Move to TaskManager, assign task to cell
@@ -177,12 +196,19 @@ extension TaskTableViewController: UITableViewDelegate, UITableViewDataSource {
 	}
 	
 	func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-		let footer = UIView(frame: categorySelector.bounds)
-		return footer
+		return UIView(frame: categorySelector.bounds)
 	}
 	
 	func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
 		return categorySelector.bounds.height
+	}
+	
+	func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+		return tableTabBar
+	}
+	
+	func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+		return tableTabBar.bounds.height
 	}
 	
 }
@@ -243,6 +269,16 @@ extension TaskTableViewController: UICollectionViewDelegate, UIScrollViewDelegat
 	func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
 		if let collectionView = scrollView as? SelectorCollectionView {
 			collectionView.scrollToIndex(index: collectionView.getNearestIndex())
+		}
+	}
+	
+	func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+		if ((scrollView as? UITableView) != nil) {
+			guard tableViewScrollCompletionBlock != nil else {
+				return
+			}
+			tableViewScrollCompletionBlock!()
+			tableViewScrollCompletionBlock = nil
 		}
 	}
 	
