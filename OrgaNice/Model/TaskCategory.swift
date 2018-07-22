@@ -10,15 +10,22 @@ import Foundation
 
 class TaskCategory: NSObject, NSCoding {
 	
+	struct FilterTab {
+		static let CUSTOM = 0
+		static let DUEDATE = 1
+	}
+	
 	//MARK: Properties
 	var tasks: [String]?
 	var id: String
 	var title: String
+	var filterTab: Int
 	
 	struct PropertyKeys {
 		static let taskIDs = "taskIDs"
 		static let id = "id"
 		static let title = "title"
+		static let filterTab = "filterTab"
 	}
 	
 	//MARK: Methods
@@ -26,6 +33,7 @@ class TaskCategory: NSObject, NSCoding {
 	init(title: String) {
 		self.id = Utils.generateID()
 		self.title = title
+		self.filterTab = FilterTab.CUSTOM
 	}
 	
 	func count() -> Int {
@@ -93,12 +101,46 @@ class TaskCategory: NSObject, NSCoding {
 		TaskArchive.saveTaskCategory(list: self)
 	}
 	
+	func getOrderByDueDate() -> [Int] {
+		guard tasks != nil else {
+			return [Int]()
+		}
+		var sortedTasks = Array(Zip2Sequence(_sequence1: 0..<tasks!.count, _sequence2: getTasks()))
+		sortedTasks.sort { (a, b) -> Bool in
+			// either only b or both a and b have no deadline
+			if b.1.deadline == nil {
+				return true
+			} else if a.1.deadline == nil {
+				return false
+			} else {
+				return a.1.deadline! < b.1.deadline!
+			}
+		}
+		return sortedTasks.map { tuple in
+			tuple.0
+		}
+	}
+	
+	func getTasks() -> [Task] {
+		var ret = [Task]()
+		guard tasks != nil else {
+			return ret
+		}
+		for id in tasks! {
+			if let newTask = TaskManager.shared.getTask(id: id) {
+				ret.append(newTask)
+			}
+		}
+		return ret
+	}
+	
 	//MARK: NSCoding
 	
 	func encode(with aCoder: NSCoder) {
 		aCoder.encode(tasks, forKey: PropertyKeys.taskIDs)
 		aCoder.encode(id, forKey: PropertyKeys.id)
 		aCoder.encode(title, forKey: PropertyKeys.title)
+		aCoder.encode(filterTab, forKey: PropertyKeys.filterTab)
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
@@ -106,8 +148,10 @@ class TaskCategory: NSObject, NSCoding {
 			let title = aDecoder.decodeObject(forKey: PropertyKeys.title) as? String else {
 			fatalError("Error while loading task list from storage!")
 		}
+		let filterTab = aDecoder.decodeInteger(forKey: PropertyKeys.filterTab)
 		self.id = id
 		self.title = title
+		self.filterTab = filterTab
 		self.tasks = aDecoder.decodeObject(forKey: PropertyKeys.taskIDs) as? [String]
 	}
 	

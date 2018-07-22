@@ -13,12 +13,15 @@ class TaskTableViewController: UIViewController {
 	
 	//MARK: Properties
 	var currList: TaskCategory?
+	var taskOrdering: [Int]?
+	
 	var pinchCellSizeBuffer: CGFloat!
 	var pinchCellBuffer: TaskTableViewCell!
 	var tableTabBar: TableTabBar!
+	// Will be set when tableview scrolls to bottom after adding new task
+	// in order to set focus on the textView of the last cell
 	var tableViewScrollCompletionBlock: (()->())?
 	
-	static let DEFAULT_CELL_SIZE: CGFloat = 70
 	
 	//MARK: Outlets
 	@IBOutlet weak var tableView: UITableView!
@@ -64,29 +67,41 @@ class TaskTableViewController: UIViewController {
 	}
 	
 	func newTask() {
-		if currList == nil {
+		guard currList != nil else {
 			return
 		}
 		let newTask = Task(title: "")
 		currList!.addTask(task: newTask)
+		updateTaskOrdering()
 		tableView.reloadData()
 		let newIndexPath = IndexPath(row: currList!.count() - 1, section: 0)
-		tableViewScrollCompletionBlock = {
-			guard let newTaskCell = self.tableView.cellForRow(at: newIndexPath) as? TaskTableViewCell else {
-				return
-			}
+		if let newTaskCell = self.tableView.cellForRow(at: newIndexPath) as? TaskTableViewCell {
 			newTaskCell.titleTextEdit.becomeFirstResponder()
+		} else {
+			tableViewScrollCompletionBlock = {
+				guard let newTaskCell = self.tableView.cellForRow(at: newIndexPath) as? TaskTableViewCell else {
+					return
+				}
+				newTaskCell.titleTextEdit.becomeFirstResponder()
+			}
 		}
 		tableView.scrollToRow(at: newIndexPath, at: .bottom, animated: true)
 	}
 	
 	func setTaskCategory(category: TaskCategory) {
 		self.currList = category
+		self.tableTabBar.switchToTab(index: category.filterTab)
+		self.updateTaskOrdering()
 		self.navigationItem.title = category.title
 		self.tableView.reloadData()
 	}
 	
 	@objc func handlePinch(_ sender: UIPinchGestureRecognizer) {
+		// We don't allow hanging the order when tasks are sorted by deadline etc.
+		guard currList!.filterTab == TaskCategory.FilterTab.CUSTOM else {
+			return
+		}
+		
 		if sender.state == .began {
 			let touchCenter = CGPoint(x: (sender.location(ofTouch: 0, in: tableView).x
 				+ sender.location(ofTouch: 1, in: tableView).x) / 2,
@@ -96,7 +111,7 @@ class TaskTableViewController: UIViewController {
 				let cell = tableView.cellForRow(at: indexPath) as? TaskTableViewCell else {
 					return
 			}
-			pinchCellSizeBuffer = cell.task.cellHeight ?? TaskTableViewController.DEFAULT_CELL_SIZE
+			pinchCellSizeBuffer = cell.task.cellHeight
 			pinchCellBuffer = cell
 			pinchCellBuffer.startPinchMode()
 			// Set animations disabled because resizing of certain cells would cause stuttering in tableview
@@ -145,11 +160,30 @@ class TaskTableViewController: UIViewController {
 		tableTabBar = TableTabBar(frame: rect)
 		
 		tableTabBar.addTab(title: NSLocalizedString("TableTabBarCustomOrder", comment: ""), action: {
-			print("test1")
+			guard self.currList != nil else {
+				return
+			}
+			self.currList!.filterTab = TaskCategory.FilterTab.CUSTOM
+			self.updateTaskOrdering()
+			self.tableView.reloadData()
 		})
 		tableTabBar.addTab(title: NSLocalizedString("TableTabBarDueDateOrder", comment: ""), action: {
-			print("test2")
+			guard self.currList != nil else {
+				return
+			}
+			self.currList!.filterTab = TaskCategory.FilterTab.DUEDATE
+			self.updateTaskOrdering()
+			self.tableView.reloadData()
 		})
+	}
+	
+	private func updateTaskOrdering() {
+		guard currList != nil else {
+			return
+		}
+		self.taskOrdering = currList!.filterTab == TaskCategory.FilterTab.CUSTOM
+			? Array(0..<(currList!.tasks?.count ?? 0))
+			: currList!.getOrderByDueDate()
 	}
 }
 
@@ -157,7 +191,7 @@ class TaskTableViewController: UIViewController {
 extension TaskTableViewController: UITableViewDelegate, UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		return TaskManager.shared.getTask(id: currList!.tasks![indexPath.row])?.cellHeight ?? TaskTableViewController.DEFAULT_CELL_SIZE
+		return TaskManager.shared.getTask(id: currList!.tasks![taskOrdering![indexPath.row]])?.cellHeight ?? Task.DEFAULT_CELL_HEIGHT
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -180,7 +214,8 @@ extension TaskTableViewController: UITableViewDelegate, UITableViewDataSource {
 		guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? TaskTableViewCell else {
 			fatalError("Dequeued cell is not an instance of TaskTableViewCell!")
 		}
-		cell.task = TaskManager.shared.getTask(id: currList!.tasks![indexPath.row])
+		cell.task = TaskManager.shared.getTask(id: currList!.tasks![taskOrdering![indexPath.row]])
+		cell.adjustTitleFontSize()
 		
 		return cell
 	}

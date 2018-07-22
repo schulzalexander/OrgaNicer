@@ -60,18 +60,17 @@ class TableTabBar: UIView {
 	}
 	
 	@objc func onTabPressed(_ sender: UIButton) {
-		guard sender.tag < closures.count else {
-			return
-		}
-		currTab = sender.tag
 		switchToTab(index: sender.tag)
-		closures[sender.tag]()
-		
-		updateHighlighter()
 	}
 	
 	func switchToTab(index: Int) {
+		guard index < closures.count else {
+			return
+		}
+		currTab = index
+		closures[index]()
 		
+		updateHighlighter()
 	}
 	
 	//MARK: Private Methods

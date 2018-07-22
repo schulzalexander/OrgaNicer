@@ -13,6 +13,7 @@ class Task: NSObject, NSCoding {
 	
 	static let PRIORITY_MAX: CGFloat = 150
 	static let PRIORITY_MIN: CGFloat = 70
+	static let DEFAULT_CELL_HEIGHT: CGFloat = 70
 	
 	//MARK: Properties
 	var created: Date
@@ -21,7 +22,7 @@ class Task: NSObject, NSCoding {
 	var alarm: Date?
 	var done: Date?
 	var title: String
-	var cellHeight: CGFloat?
+	var cellHeight: CGFloat
 	
 	struct PropertyKeys {
 		static let created = "created"
@@ -37,6 +38,7 @@ class Task: NSObject, NSCoding {
 		self.created = Date()
 		self.title = title
 		self.id = Utils.generateID()
+		self.cellHeight = Task.DEFAULT_CELL_HEIGHT
 	}
 	
 	//TODO
@@ -71,13 +73,14 @@ class Task: NSObject, NSCoding {
 	required init?(coder aDecoder: NSCoder) {
 		guard let created = aDecoder.decodeObject(forKey: PropertyKeys.created) as? Date,
 			let id = aDecoder.decodeObject(forKey: PropertyKeys.id) as? String,
-			let title = aDecoder.decodeObject(forKey: PropertyKeys.title) as? String else {
+			let title = aDecoder.decodeObject(forKey: PropertyKeys.title) as? String,
+			let cellHeight = aDecoder.decodeObject(forKey: PropertyKeys.cellHeight) as? CGFloat else {
 				fatalError("Error loading Task from storage!")
 		}
 		self.created = created
 		self.id = id
 		self.title = title
-		self.cellHeight = aDecoder.decodeObject(forKey: PropertyKeys.cellHeight) as? CGFloat
+		self.cellHeight = cellHeight
 		self.deadline = aDecoder.decodeObject(forKey: PropertyKeys.deadline) as? Date
 		self.alarm = aDecoder.decodeObject(forKey: PropertyKeys.alarm) as? Date
 		self.done = aDecoder.decodeObject(forKey: PropertyKeys.done) as? Date
