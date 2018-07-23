@@ -9,7 +9,7 @@
 import UIKit
 import SwiftReorder
 
-class TaskTableViewController: UIViewController {
+class TaskTableViewController: UIViewController, UIPopoverPresentationControllerDelegate {
 	
 	//MARK: Properties
 	var currList: TaskCategory?
@@ -17,6 +17,9 @@ class TaskTableViewController: UIViewController {
 	
 	var pinchCellSizeBuffer: CGFloat!
 	var pinchCellBuffer: TaskTableViewCell!
+	
+	var swipeCategoryCenterPoint: CGPoint!
+	
 	var tableTabBar: TableTabBar!
 	// Will be set when tableview scrolls to bottom after adding new task
 	// in order to set focus on the textView of the last cell
@@ -97,11 +100,6 @@ class TaskTableViewController: UIViewController {
 	}
 	
 	@objc func handlePinch(_ sender: UIPinchGestureRecognizer) {
-		// We don't allow hanging the order when tasks are sorted by deadline etc.
-		guard currList!.filterTab == TaskCategory.FilterTab.CUSTOM else {
-			return
-		}
-		
 		if sender.state == .began {
 			let touchCenter = CGPoint(x: (sender.location(ofTouch: 0, in: tableView).x
 				+ sender.location(ofTouch: 1, in: tableView).x) / 2,
@@ -150,6 +148,29 @@ class TaskTableViewController: UIViewController {
 		}
 	}
 	
+	@objc func didTapOnTaskCell(_ sender: UITapGestureRecognizer) {
+		guard let cell = sender.view as? TaskTableViewCell,
+			let viewController = storyboard?.instantiateViewController(withIdentifier: "TaskSettingsViewController") as? TaskSettingsViewController else {
+			return
+		}
+		viewController.preferredContentSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.7)
+		viewController.modalPresentationStyle = UIModalPresentationStyle.popover
+		viewController.task = cell.task
+		
+		let popover = viewController.popoverPresentationController
+		popover?.delegate = self
+		popover?.sourceView = cell
+		popover?.sourceRect = cell.bounds
+		
+		self.present(viewController, animated: true, completion: nil)
+	}
+	
+	func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+		return .none
+	}
+	
+	//MARK: Private Methods
+	
 	private func setupFilterBar() {
 		let nibName = UINib(nibName: "CustomHeaderView", bundle: nil)
 		self.tableView.register(nibName, forHeaderFooterViewReuseIdentifier: "CustomHeaderView")
@@ -165,6 +186,7 @@ class TaskTableViewController: UIViewController {
 			}
 			self.currList!.filterTab = TaskCategory.FilterTab.CUSTOM
 			self.updateTaskOrdering()
+			self.tableView.reorder.isEnabled = true
 			self.tableView.reloadData()
 		})
 		tableTabBar.addTab(title: NSLocalizedString("TableTabBarDueDateOrder", comment: ""), action: {
@@ -173,6 +195,7 @@ class TaskTableViewController: UIViewController {
 			}
 			self.currList!.filterTab = TaskCategory.FilterTab.DUEDATE
 			self.updateTaskOrdering()
+			self.tableView.reorder.isEnabled = false
 			self.tableView.reloadData()
 		})
 	}
@@ -185,6 +208,24 @@ class TaskTableViewController: UIViewController {
 			? Array(0..<(currList!.tasks?.count ?? 0))
 			: currList!.getOrderByDueDate()
 	}
+	
+	private func presentCategorySettingsView(category: TaskCategory) {
+		guard self.presentedViewController == nil,
+			let viewController = storyboard?.instantiateViewController(withIdentifier: "TaskCategorySettingsViewController") as? TaskCategorySettingsViewController else {
+			return
+		}
+		viewController.preferredContentSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.7)
+		viewController.modalPresentationStyle = UIModalPresentationStyle.popover
+		viewController.category = category
+		
+		let popover = viewController.popoverPresentationController
+		popover?.delegate = self
+		popover?.sourceView = categorySelector
+		popover?.sourceRect = categorySelector.bounds
+		
+		self.present(viewController, animated: true, completion: nil)
+	}
+	
 }
 
 //TODO: Move to TaskManager, assign task to cell
@@ -216,6 +257,9 @@ extension TaskTableViewController: UITableViewDelegate, UITableViewDataSource {
 		}
 		cell.task = TaskManager.shared.getTask(id: currList!.tasks![taskOrdering![indexPath.row]])
 		cell.adjustTitleFontSize()
+		
+		let recognizer = UITapGestureRecognizer(target: self, action: #selector(TaskTableViewController.didTapOnTaskCell(_:)))
+		cell.addGestureRecognizer(recognizer)
 		
 		return cell
 	}
@@ -278,29 +322,6 @@ extension TaskTableViewController: UICollectionViewDelegate, UIScrollViewDelegat
 		}
 	}
 	
-	@objc func didTapOnAddCategory(_ sender: UITapGestureRecognizer) {
-		let alertController = UIAlertController(title: NSLocalizedString("NewCategoryAlertControllerTitle", comment: ""), message: NSLocalizedString("NewCategoryAlertControllerMessage", comment: ""), preferredStyle: .alert)
-		let create = UIAlertAction(title: NSLocalizedString("Send", comment: ""), style: .default, handler: { (action) in
-			let name = alertController.textFields![0].text ?? ""
-			if name.count == 0 {
-				return
-			}
-			let category = TaskCategory(title: name)
-			TaskCategoryManager.shared.addTaskCategory(list: category)
-			self.categorySelector.reloadData()
-			self.setTaskCategory(category: category)
-		})
-		let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
-		alertController.addAction(create)
-		alertController.addAction(cancel)
-		alertController.addTextField { (textField) in
-			textField.placeholder = NSLocalizedString("Name", comment: "")
-		}
-		DispatchQueue.main.async {
-			self.present(alertController, animated: true, completion: nil)
-		}
-	}
-	
 	func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
 		if let collectionView = scrollView as? SelectorCollectionView {
 			collectionView.scrollToIndex(index: collectionView.getNearestIndex())
@@ -324,6 +345,67 @@ extension TaskTableViewController: UICollectionViewDelegate, UIScrollViewDelegat
 	}
 }
 
+extension TaskTableViewController: UIGestureRecognizerDelegate {
+	
+	func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+		return true
+	}
+	
+	//TODO: Doesn't look too nice
+	@objc func didSwipeTaskCategory(_ sender: UIPanGestureRecognizer) {
+		
+		guard let cell = sender.view as? SelectorCollectionViewCell else {
+			return
+		}
+		
+		if sender.state == .began {
+			self.swipeCategoryCenterPoint = cell.center
+		}
+		
+		cell.center.y = min(max(self.swipeCategoryCenterPoint.y + sender.translation(in: self.view).y,
+								self.swipeCategoryCenterPoint.y - 20),
+							self.swipeCategoryCenterPoint.y)
+		
+		if cell.center.y <= self.swipeCategoryCenterPoint.y - 20 {
+			self.presentCategorySettingsView(category: cell.category)
+			
+			sender.isEnabled = false
+			sender.isEnabled = true
+			UIView.animate(withDuration: 0.2) {
+				cell.center.y = self.swipeCategoryCenterPoint.y
+			}
+		}
+		
+		if sender.state == .ended {
+			UIView.animate(withDuration: 0.2) {
+				cell.center.y = self.swipeCategoryCenterPoint.y
+			}
+		}
+	}
+	
+	@objc func didTapOnAddCategory(_ sender: UITapGestureRecognizer) {
+		let alertController = UIAlertController(title: NSLocalizedString("NewCategoryAlertControllerTitle", comment: ""), message: NSLocalizedString("NewCategoryAlertControllerMessage", comment: ""), preferredStyle: .alert)
+		let create = UIAlertAction(title: NSLocalizedString("Send", comment: ""), style: .default, handler: { (action) in
+			let name = alertController.textFields![0].text ?? ""
+			if name.count == 0 {
+				return
+			}
+			let category = TaskCategory(title: name)
+			TaskCategoryManager.shared.addTaskCategory(list: category)
+			self.categorySelector.reloadData()
+			self.setTaskCategory(category: category)
+		})
+		let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
+		alertController.addAction(create)
+		alertController.addAction(cancel)
+		alertController.addTextField { (textField) in
+			textField.placeholder = NSLocalizedString("Name", comment: "")
+		}
+		DispatchQueue.main.async {
+			self.present(alertController, animated: true, completion: nil)
+		}
+	}
+}
 
 
 

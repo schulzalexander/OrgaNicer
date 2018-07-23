@@ -16,6 +16,9 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 	var task: Task! {
 		didSet {
 			self.titleTextEdit.text = task.title
+			if task.title.count != 0 {
+				self.titleTextEdit.isEnabled = false
+			}
 			self.reloadCheckBoxContent()
 			self.contentView.backgroundColor = Task.getPriorityColor(priority: self.task.cellHeight)
 			self.adjustTitleFontSize()
@@ -84,6 +87,9 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 			return
 		}
 		textField.text = task.title
+		// Disable textfield once the title was inserted to make for a bigger surface for tap gesture
+		// Title can be changed in the Task Settings afterwards
+		textField.isEnabled = false
 	}
 	
 	func updateAppearance(newHeight: CGFloat) {

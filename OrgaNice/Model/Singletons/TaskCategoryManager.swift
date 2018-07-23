@@ -101,16 +101,21 @@ extension TaskCategoryManager: UICollectionViewDataSource {
 				let currView = collectionView.delegate as? TaskTableViewController else {
 					fatalError("Error dequeuing cell of type SelectorCollectionViewCellAdd!")
 			}
-			let recognizer = UITapGestureRecognizer(target: currView, action: #selector(TaskTableViewController.didTapOnAddCategory(_:)))
-			cell.addGestureRecognizer(recognizer)
+			let tapRecognizer = UITapGestureRecognizer(target: currView, action: #selector(TaskTableViewController.didTapOnAddCategory(_:)))
+			cell.addGestureRecognizer(tapRecognizer)
 			return cell
 		} else {
 			guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SelectorCollectionViewCell", for: indexPath) as? SelectorCollectionViewCell,
 				let currView = collectionView.delegate as? TaskTableViewController else {
 					fatalError("Error dequeuing cell of type SelectorCollectionViewCell!")
 			}
-			let recognizer = UITapGestureRecognizer(target: currView, action: #selector(TaskTableViewController.didTapOnTaskCategory(_:)))
-			cell.addGestureRecognizer(recognizer)
+			let tapRecognizer = UITapGestureRecognizer(target: currView, action: #selector(TaskTableViewController.didTapOnTaskCategory(_:)))
+			let panRecognizer = UIPanGestureRecognizer(target: currView, action: #selector(TaskTableViewController.didSwipeTaskCategory(_:)))
+			tapRecognizer.delegate = currView
+			panRecognizer.delegate = currView
+			
+			cell.addGestureRecognizer(tapRecognizer)
+			cell.addGestureRecognizer(panRecognizer)
 			cell.category = self.getTaskCategory(id: self.categoryTitlesSorted[indexPath.row].id)
 			return cell
 		}

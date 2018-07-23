@@ -10,3 +10,6 @@
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "dGI-S9-WKt"; */
 "dGI-S9-WKt.normalTitle" = "Button";
+
+/* Settings heading in category settings */
+"glE-E4-Doa.text" = "Einstellungen"
