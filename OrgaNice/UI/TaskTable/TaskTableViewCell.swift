@@ -23,9 +23,11 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 			self.reloadCheckBoxContent()
 			self.contentView.backgroundColor = Task.getPriorityColor(priority: self.task.cellHeight)
 			self.adjustTitleFont()
+			self.seperator.frame = getSeperatorFrame()
 		}
 	}
 	var content: TaskTableViewCellContent?
+	var seperator: UIView!
 	
 	//MARK: Outlets
 	@IBOutlet weak var titleTextEdit: UITextField!
@@ -41,6 +43,7 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 		titleTextEdit.delegate = self
 		self.setupCheckButton()
 		self.setupBackgroundView()
+		self.addSeperator()
     }
 	
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -119,12 +122,15 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 	func startPinchMode() {
 		self.titleTextEdit.isHidden = true
 		self.deadlineLabel.isHidden = true
+		self.seperator.isHidden = true
 	}
 	
 	func endPinchMode() {
 		self.titleTextEdit.isHidden = false
 		self.deadlineLabel.isHidden = false
 		adjustTitleFont()
+		self.seperator.frame = getSeperatorFrame()
+		self.seperator.isHidden = false
 	}
 	
 	//MARK: Private Methods
@@ -160,6 +166,21 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 		} else {
 			checkButton.setTitle(nil, for: .normal)
 		}
+	}
+	
+	private func getSeperatorFrame() -> CGRect {
+		return CGRect(x: self.titleTextEdit.frame.minX,
+					  y: self.titleTextEdit.frame.maxY + 5,
+					  width: self.checkButton.frame.minX - self.titleTextEdit.frame.minX - 20,
+					  height: 1)
+	}
+	
+	private func addSeperator() {
+		let rect = getSeperatorFrame()
+		let view = UIView(frame: rect)
+		view.backgroundColor = UIColor.white
+		self.addSubview(view)
+		self.seperator = view
 	}
 	
 }
