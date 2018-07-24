@@ -16,6 +16,8 @@
 // General
 "Cancel" = "Abbrechen";
 "Name" = "Name";
+"Set" = "Set";
+"None" = "None";
 
 // TableTabBar
 "TableTabBarCustomOrder" = "Custom Order";

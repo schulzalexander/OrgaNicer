@@ -17,7 +17,8 @@
 // General
 "Cancel" = "Abbrechen";
 "Name" = "Name";
-
+"Set" = "Setzen";
+"None" = "Keine";
 
 // TableTabBar
 "TableTabBarCustomOrder" = "Eigene Reihenfolge";

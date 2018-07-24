@@ -8,40 +8,42 @@
 
 import UIKit
 
-class TaskCategorySettingsViewController: UIViewController {
+class TaskCategorySettingsTableViewController: UITableViewController {
 
 	//MARK: Properties
 	var category: TaskCategory!
 	
 	//MARK: Outlets
-	@IBOutlet weak var categoryHeaderLabel: UILabel!
+	@IBOutlet weak var categoryHeaderTextField: UITextField!
 	
 	
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.categoryHeaderLabel.text = category.title
+        self.categoryHeaderTextField.text = category.title
+		self.categoryHeaderTextField.delegate = self
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-	@IBAction func cancel(_ sender: UIBarButtonItem) {
-		self.dismiss(animated: true, completion: nil)
+	
+	private func updateTaskTable() {
+		guard let viewController = self.popoverPresentationController?.delegate as? TaskTableViewController else {
+			return
+		}
+		viewController.title = category.title
+		viewController.categorySelector.reloadData()
 	}
 	
-	
-	
-    /*
-    // MARK: - Navigation
+}
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+extension TaskCategorySettingsTableViewController: UITextFieldDelegate {
+	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+		textField.resignFirstResponder()
+		if textField.text != nil && textField.text?.count == 0 {
+			textField.text = category.title
+		} else {
+			category.title = textField.text!
+			TaskArchive.saveTaskCategory(list: category)
+			updateTaskTable()
+		}
+		return true
+	}
 }

@@ -150,7 +150,7 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 	
 	@objc func didTapOnTaskCell(_ sender: UITapGestureRecognizer) {
 		guard let cell = sender.view as? TaskTableViewCell,
-			let viewController = storyboard?.instantiateViewController(withIdentifier: "TaskSettingsViewController") as? TaskSettingsViewController else {
+			let viewController = storyboard?.instantiateViewController(withIdentifier: "TaskSettingsTableViewController") as? TaskSettingsTableViewController else {
 			return
 		}
 		viewController.preferredContentSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.7)
@@ -169,6 +169,15 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 		return .none
 	}
 	
+	func updateTaskOrdering() {
+		guard currList != nil else {
+			return
+		}
+		self.taskOrdering = currList!.filterTab == TaskCategory.FilterTab.CUSTOM
+			? Array(0..<(currList!.tasks?.count ?? 0))
+			: currList!.getOrderByDueDate()
+	}
+	
 	//MARK: Private Methods
 	
 	private func setupFilterBar() {
@@ -185,6 +194,7 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 				return
 			}
 			self.currList!.filterTab = TaskCategory.FilterTab.CUSTOM
+			TaskArchive.saveTaskCategory(list: self.currList!)
 			self.updateTaskOrdering()
 			self.tableView.reorder.isEnabled = true
 			self.tableView.reloadData()
@@ -194,24 +204,16 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 				return
 			}
 			self.currList!.filterTab = TaskCategory.FilterTab.DUEDATE
+			TaskArchive.saveTaskCategory(list: self.currList!)
 			self.updateTaskOrdering()
 			self.tableView.reorder.isEnabled = false
 			self.tableView.reloadData()
 		})
 	}
 	
-	private func updateTaskOrdering() {
-		guard currList != nil else {
-			return
-		}
-		self.taskOrdering = currList!.filterTab == TaskCategory.FilterTab.CUSTOM
-			? Array(0..<(currList!.tasks?.count ?? 0))
-			: currList!.getOrderByDueDate()
-	}
-	
 	private func presentCategorySettingsView(category: TaskCategory) {
 		guard self.presentedViewController == nil,
-			let viewController = storyboard?.instantiateViewController(withIdentifier: "TaskCategorySettingsViewController") as? TaskCategorySettingsViewController else {
+			let viewController = storyboard?.instantiateViewController(withIdentifier: "TaskCategorySettingsTableViewController") as? TaskCategorySettingsTableViewController else {
 			return
 		}
 		viewController.preferredContentSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.7)

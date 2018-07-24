@@ -148,10 +148,9 @@ class TaskCategory: NSObject, NSCoding {
 			let title = aDecoder.decodeObject(forKey: PropertyKeys.title) as? String else {
 			fatalError("Error while loading task list from storage!")
 		}
-		let filterTab = aDecoder.decodeInteger(forKey: PropertyKeys.filterTab)
 		self.id = id
 		self.title = title
-		self.filterTab = filterTab
+		self.filterTab = aDecoder.decodeInteger(forKey: PropertyKeys.filterTab)
 		self.tasks = aDecoder.decodeObject(forKey: PropertyKeys.taskIDs) as? [String]
 	}
 	

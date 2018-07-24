@@ -12,4 +12,10 @@
 "dGI-S9-WKt.normalTitle" = "Button";
 
 /* Settings heading in category settings */
-"glE-E4-Doa.text" = "Einstellungen"
+"glE-E4-Doa.text" = "ToDo-Liste Einstellungen"
+
+/* Settings heading in task settings */
+"LDc-I4-GZj.text" = "Task Einstellungen"
+
+/* Remind me button for deadline */
+"T3I-bc-hph.normalTitle" = "Erinnern"
