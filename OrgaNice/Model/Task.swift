@@ -41,9 +41,45 @@ class Task: NSObject, NSCoding {
 		self.cellHeight = Task.DEFAULT_CELL_HEIGHT
 	}
 	
-	//TODO
 	func getDueString() -> String {
-		return "Due in 1 week."
+		guard self.deadline != nil else {
+			return ""
+		}
+		
+		let formatter = DateComponentsFormatter()
+		formatter.unitsStyle = .full
+		formatter.allowedUnits = [.month, .day, .hour, .minute, .second]
+		formatter.maximumUnitCount = 2
+		
+		/*
+		let diff = self.deadline!.timeIntervalSinceNow
+		let minutes = Int(diff / 60)
+		let hours = Int(diff / 3600)
+		let days = Int(diff / (3600 * 24))
+		let weeks = Int(days / 7)
+		
+		if weeks >= 4 {
+			formatter.maximumUnitCount = 2
+		} else if days >= 2 {
+			formatter.maximumUnitCount = 1
+		} else if hours >= 1 {
+			formatter.maximumUnitCount = 2
+		} else if minutes >= 1 {
+			formatter.maximumUnitCount = 1
+		} else {
+			formatter.maximumUnitCount = 1
+		}
+		*/
+		
+		let now = Date()
+		let timeString = formatter.string(from: now, to: self.deadline!)
+		var res = ""
+		if timeString != nil {
+			res = self.deadline! < now
+				? String(format: NSLocalizedString("DeadlinePast", comment: ""), timeString!.suffix(timeString!.count-1) as CVarArg)
+				: String(format: NSLocalizedString("DeadlineFuture", comment: ""), timeString!)
+		}
+		return res
 	}
 	
 	func isDone() -> Bool {
@@ -91,6 +127,20 @@ class Task: NSObject, NSCoding {
 		return min(Task.PRIORITY_MAX, max(priority, Task.PRIORITY_MIN))
 	}
 	
+	static func getPriorityFontColor(priority: CGFloat) -> UIColor {
+		let percentage = (priority - Task.PRIORITY_MIN) / (Task.PRIORITY_MAX - Task.PRIORITY_MIN)
+		let revPercentage = 1.0 - percentage
+		let startColor = CIColor.black
+		let endColor = CIColor.white
+		let newR = (percentage * endColor.red
+			+ revPercentage * startColor.red)
+		let newG = (percentage * endColor.green
+			+ revPercentage * startColor.green)
+		let newB = (percentage * endColor.blue
+			+ revPercentage * startColor.blue)
+		return UIColor(red: newR, green: newG, blue: newB, alpha: 1.0)
+	}
+	
 	static func getPriorityColor(priority: CGFloat) -> UIColor {
 		var percentage = (priority - Task.PRIORITY_MIN) / (Task.PRIORITY_MAX - Task.PRIORITY_MIN)
 		var resColor: UIColor
@@ -124,9 +174,8 @@ class Task: NSObject, NSCoding {
 		return resColor
 	}
 	
-	static func getPriorityTextSize(priority: CGFloat) -> Int {
-		print(priority)
-		return 10
+	static func getPriorityTextSize(priority: CGFloat) -> CGFloat {
+		return 18 + (priority - Task.PRIORITY_MIN) / (Task.PRIORITY_MAX - Task.PRIORITY_MIN) * 30
 	}
 }
 

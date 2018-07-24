@@ -23,6 +23,7 @@ class TaskSettingsTableViewController: UITableViewController {
         super.viewDidLoad()
 
         self.taskHeaderTextField.text = task.title
+		self.taskHeaderTextField.sizeToFit()
 		self.taskHeaderTextField.delegate = self
 		
 		self.updateDeadlineState()
@@ -42,6 +43,10 @@ class TaskSettingsTableViewController: UITableViewController {
 		default:
 			return
 		}
+	}
+	
+	@IBAction func startEditingTitle(_ sender: UIButton) {
+		self.taskHeaderTextField.becomeFirstResponder()
 	}
 	
 	@IBAction func didPickDeadline(_ sender: UIDatePicker) {

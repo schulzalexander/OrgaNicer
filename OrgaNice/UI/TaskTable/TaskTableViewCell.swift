@@ -6,8 +6,6 @@
 //  Copyright © 2018 Alexander Schulz. All rights reserved.
 //
 
-//TODO: make cell zoomable
-
 import UIKit
 
 class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
@@ -19,9 +17,12 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 			if task.title.count != 0 {
 				self.titleTextEdit.isEnabled = false
 			}
+			self.deadlineLabel.text = task.isDone()
+				? NSLocalizedString("Done", comment: "").uppercased()
+				: task.getDueString()
 			self.reloadCheckBoxContent()
 			self.contentView.backgroundColor = Task.getPriorityColor(priority: self.task.cellHeight)
-			self.adjustTitleFontSize()
+			self.adjustTitleFont()
 		}
 	}
 	var content: TaskTableViewCellContent?
@@ -29,6 +30,7 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 	//MARK: Outlets
 	@IBOutlet weak var titleTextEdit: UITextField!
 	@IBOutlet weak var checkButton: UIButton!
+	@IBOutlet weak var deadlineLabel: UILabel!
 	
 	static let PADDING_X: CGFloat = 5
 	static let PADDING_Y: CGFloat = 5
@@ -55,6 +57,9 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 		}
 		TaskArchive.saveTask(task: task)
 		reloadCheckBoxContent()
+		self.deadlineLabel.text = task.isDone()
+			? NSLocalizedString("Done", comment: "").uppercased()
+			: task.getDueString()
 		guard let tableView = self.superview as? UITableView,
 			let viewController = tableView.delegate as? TaskTableViewController else {
 				return
@@ -98,21 +103,28 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 		self.contentView.backgroundColor = Task.getPriorityColor(priority: scaledHeight)
 	}
 	
-	func adjustTitleFontSize() {
+	func adjustTitleFont() {
 		guard task != nil else {
 			return
 		}
-		self.titleTextEdit.font = self.titleTextEdit.font!.withSize(18 + (task.cellHeight - Task.PRIORITY_MIN) / (Task.PRIORITY_MAX - Task.PRIORITY_MIN) * 30)
+		let fontSize = Task.getPriorityTextSize(priority: task.cellHeight)
+		self.titleTextEdit.font = self.titleTextEdit.font!.withSize(fontSize)
+		self.deadlineLabel.font = self.deadlineLabel.font.withSize(min(fontSize - 5, 20))
+		let fontColor = Task.getPriorityFontColor(priority: task.cellHeight)
+		self.titleTextEdit.textColor = fontColor
+		self.deadlineLabel.textColor = fontColor
 		self.titleTextEdit.sizeToFit()
 	}
 	
 	func startPinchMode() {
-		self.titleTextEdit.text = ""
+		self.titleTextEdit.isHidden = true
+		self.deadlineLabel.isHidden = true
 	}
 	
 	func endPinchMode() {
-		self.titleTextEdit.text = task.title
-		adjustTitleFontSize()
+		self.titleTextEdit.isHidden = false
+		self.deadlineLabel.isHidden = false
+		adjustTitleFont()
 	}
 	
 	//MARK: Private Methods

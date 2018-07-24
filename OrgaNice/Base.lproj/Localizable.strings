@@ -14,12 +14,17 @@
 "CategorySelectorAddList" = "➕\nAdd\nList";
 
 // General
-"Cancel" = "Abbrechen";
+"Cancel" = "Cancel";
 "Name" = "Name";
 "Set" = "Set";
 "None" = "None";
+"Done" = "Done";
 
 // TableTabBar
 "TableTabBarCustomOrder" = "Custom Order";
 "TableTabBarDueDateOrder" = "Upcoming";
+
+// TaskTableViewCell
+"DeadlinePast" = "due in %@";
+"DeadlineFuture" = "due for %@";
 

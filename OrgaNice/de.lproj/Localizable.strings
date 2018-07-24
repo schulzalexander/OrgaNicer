@@ -19,8 +19,13 @@
 "Name" = "Name";
 "Set" = "Setzen";
 "None" = "Keine";
+"Done" = "Erledigt";
 
 // TableTabBar
 "TableTabBarCustomOrder" = "Eigene Reihenfolge";
 "TableTabBarDueDateOrder" = "Anstehend";
+
+// TaskTableViewCell
+"DeadlinePast" = "fällig vor %@";
+"DeadlineFuture" = "fällig in %@";
 

@@ -258,7 +258,7 @@ extension TaskTableViewController: UITableViewDelegate, UITableViewDataSource {
 			fatalError("Dequeued cell is not an instance of TaskTableViewCell!")
 		}
 		cell.task = TaskManager.shared.getTask(id: currList!.tasks![taskOrdering![indexPath.row]])
-		cell.adjustTitleFontSize()
+		cell.adjustTitleFont()
 		
 		let recognizer = UITapGestureRecognizer(target: self, action: #selector(TaskTableViewController.didTapOnTaskCell(_:)))
 		cell.addGestureRecognizer(recognizer)

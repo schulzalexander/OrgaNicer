@@ -36,14 +36,29 @@
                                                     <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Task Name" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UUz-o4-M96">
-                                                    <rect key="frame" x="16" y="11" width="343" height="36"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Task Name" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UUz-o4-M96">
+                                                    <rect key="frame" x="16" y="11" width="153" height="36"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3DZ-0S-cUd">
+                                                    <rect key="frame" x="172" y="14" width="30" height="30"/>
+                                                    <state key="normal" title="Edit"/>
+                                                    <connections>
+                                                        <action selector="startEditingTitle:" destination="5G5-sk-Q8t" eventType="touchUpInside" id="883-oB-QBc"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="UUz-o4-M96" firstAttribute="centerY" secondItem="3DZ-0S-cUd" secondAttribute="centerY" id="3N3-u1-fiE"/>
+                                                <constraint firstItem="3DZ-0S-cUd" firstAttribute="leading" secondItem="UUz-o4-M96" secondAttribute="trailing" constant="3" id="4ja-SW-Sjd"/>
+                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="3DZ-0S-cUd" secondAttribute="trailing" id="B9f-gA-OKZ"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="UUz-o4-M96" secondAttribute="bottom" constant="19" id="NiY-K2-YV6"/>
+                                                <constraint firstItem="UUz-o4-M96" firstAttribute="top" secondItem="wEn-hd-gEg" secondAttribute="topMargin" id="Vd4-k4-Pce"/>
+                                                <constraint firstItem="3DZ-0S-cUd" firstAttribute="top" secondItem="wEn-hd-gEg" secondAttribute="topMargin" constant="3" id="lRV-ri-Dhq"/>
+                                                <constraint firstItem="UUz-o4-M96" firstAttribute="leading" secondItem="wEn-hd-gEg" secondAttribute="leadingMargin" id="qXq-gE-mhy"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="66" id="Vhu-SN-Fj5">
@@ -156,7 +171,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5og-WS-3MS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-26" y="-701"/>
+            <point key="canvasLocation" x="-26.399999999999999" y="-701.19940029985014"/>
         </scene>
         <!--Task Category Settings Table View Controller-->
         <scene sceneID="OEd-os-hOz">
@@ -249,17 +264,27 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="in 2 weeks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zB3-uC-x8Z">
+                                                    <rect key="frame" x="55" y="35" width="80" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="27g-4j-aUx" firstAttribute="top" secondItem="PzB-m4-GWD" secondAttribute="top" constant="8" id="3RE-pu-l5g"/>
                                                 <constraint firstItem="dGI-S9-WKt" firstAttribute="leading" secondItem="27g-4j-aUx" secondAttribute="trailing" constant="13" id="9of-rg-dRw"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="dGI-S9-WKt" secondAttribute="trailing" constant="11" id="APL-3S-nM4"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="zB3-uC-x8Z" secondAttribute="trailingMargin" id="OxB-m4-c2d"/>
+                                                <constraint firstItem="zB3-uC-x8Z" firstAttribute="leading" secondItem="PzB-m4-GWD" secondAttribute="leadingMargin" constant="40" id="QBL-3c-I8N"/>
                                                 <constraint firstItem="dGI-S9-WKt" firstAttribute="top" secondItem="PzB-m4-GWD" secondAttribute="topMargin" id="SPq-Hi-7fK"/>
                                                 <constraint firstItem="27g-4j-aUx" firstAttribute="leading" secondItem="PzB-m4-GWD" secondAttribute="leading" constant="15" id="sQl-dc-9em"/>
+                                                <constraint firstItem="zB3-uC-x8Z" firstAttribute="top" secondItem="27g-4j-aUx" secondAttribute="bottom" constant="5" id="x2v-Lx-xXZ"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="checkButton" destination="dGI-S9-WKt" id="Zqe-0Z-vsh"/>
+                                            <outlet property="deadlineLabel" destination="zB3-uC-x8Z" id="9sx-ki-ayY"/>
                                             <outlet property="titleTextEdit" destination="27g-4j-aUx" id="0np-UJ-8Gl"/>
                                             <segue destination="uUL-zZ-hs8" kind="show" id="218-4n-pRM"/>
                                         </connections>
