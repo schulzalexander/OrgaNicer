@@ -22,3 +22,7 @@
 
 /* Edit button in task settings, next to header textEdit */
 "3DZ-0S-cUd.normalTitle" = "Ändern";
+
+/* Delete button in task settings */
+"bGO-dB-RqC.normalTitle" = "Löschen";
+

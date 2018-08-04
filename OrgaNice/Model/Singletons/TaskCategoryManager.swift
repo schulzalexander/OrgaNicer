@@ -65,6 +65,17 @@ class TaskCategoryManager: NSObject, NSCoding {
 		return categories[id]
 	}
 	
+	func deleteTask(id: String) {
+		for category in categories {
+			let index = category.value.tasks?.index(of: id) ?? -1
+			if index >= 0 {
+				category.value.tasks!.remove(at: index)
+				TaskArchive.saveTaskCategory(list: category.value)
+				break
+			}
+		}
+	}
+	
 	//MARK: NSCoding
 	func encode(with aCoder: NSCoder) {
 		aCoder.encode(Array(categories.keys), forKey: PropertyKeys.categoryIDs)

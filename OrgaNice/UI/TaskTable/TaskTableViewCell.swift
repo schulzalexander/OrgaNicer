@@ -44,7 +44,7 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 		self.setupCheckButton()
 		self.setupBackgroundView()
 		self.addSeperator()
-    }
+	}
 	
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

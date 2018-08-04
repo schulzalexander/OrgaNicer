@@ -19,12 +19,24 @@
 "Set" = "Set";
 "None" = "None";
 "Done" = "Done";
+"Delete" = "Delete";
 
 // TableTabBar
 "TableTabBarCustomOrder" = "Custom Order";
 "TableTabBarDueDateOrder" = "Upcoming";
 
 // TaskTableViewCell
-"DeadlinePast" = "due in %@";
-"DeadlineFuture" = "due for %@";
+"DeadlinePast" = "due for %@";
+"DeadlineFuture" = "due in %@";
 
+// Weekdays, used in WeekDay Picker
+"Monday" = "Monday";
+"Tuesday" = "Tuesday";
+"Wednesday" = "Wednesday";
+"Thursday" = "Thursday";
+"Friday" = "Friday";
+"Saturday" = "Saturday";
+"Sunday" = "Sunday";
+
+// Task Settings
+"TaskDeletionTitle" = "Delete Task?";
