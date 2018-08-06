@@ -45,14 +45,14 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 		
 		let pinchRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(TaskTableViewController.handlePinch))
 		tableView.addGestureRecognizer(pinchRecognizer)
-
+		
 		setupTableTabBar()
 		
 		// Catgory Selector
 		categorySelector.delegate = self
 		categorySelector.dataSource = TaskCategoryManager.shared
 		categorySelector.decelerationRate = 0.1
-
+		
 		// Load first list if existing
 		if TaskCategoryManager.shared.categoryTitlesSorted.count > 0 {
 			let id = TaskCategoryManager.shared.categoryTitlesSorted[0].id
@@ -151,7 +151,7 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 	@objc func didTapOnTaskCell(_ sender: UITapGestureRecognizer) {
 		guard let cell = sender.view as? TaskTableViewCell,
 			let viewController = storyboard?.instantiateViewController(withIdentifier: "TaskSettingsTableViewController") as? TaskSettingsTableViewController else {
-			return
+				return
 		}
 		viewController.preferredContentSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.7)
 		viewController.modalPresentationStyle = UIModalPresentationStyle.popover
@@ -214,7 +214,7 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 	private func presentCategorySettingsView(category: TaskCategory) {
 		guard self.presentedViewController == nil,
 			let viewController = storyboard?.instantiateViewController(withIdentifier: "TaskCategorySettingsTableViewController") as? TaskCategorySettingsTableViewController else {
-			return
+				return
 		}
 		viewController.preferredContentSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.7)
 		viewController.modalPresentationStyle = UIModalPresentationStyle.popover

@@ -111,8 +111,16 @@
                                                         <action selector="didPickDeadline:" destination="5G5-sk-Q8t" eventType="valueChanged" id="y1N-4N-Vq8"/>
                                                     </connections>
                                                 </datePicker>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Igb-Ch-B4L">
+                                                    <rect key="frame" x="149" y="152" width="77" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Remind Me"/>
+                                                    <connections>
+                                                        <action selector="didPressDeadlineRemindButton:" destination="5G5-sk-Q8t" eventType="touchUpInside" id="0JG-Om-eXq"/>
+                                                    </connections>
+                                                </button>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i5L-Ve-yvI">
-                                                    <rect key="frame" x="189" y="6" width="68" height="30"/>
+                                                    <rect key="frame" x="245" y="11" width="68" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <state key="normal" title="None"/>
@@ -120,16 +128,13 @@
                                                         <action selector="switchDeadlineEnabled:" destination="5G5-sk-Q8t" eventType="touchUpInside" id="VRq-fi-mtc"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Igb-Ch-B4L">
-                                                    <rect key="frame" x="149" y="152" width="77" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="Remind Me"/>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iAb-b2-QuQ">
-                                                    <rect key="frame" x="302" y="6" width="30" height="30"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="▼" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dq9-Wz-nkC">
+                                                    <rect key="frame" x="317" y="16" width="19" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="▼"/>
-                                                </button>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -180,8 +185,9 @@
                     </tableView>
                     <connections>
                         <outlet property="deadlineDatePicker" destination="myh-fo-Ham" id="ZlA-Ab-pol"/>
-                        <outlet property="deadlineDropdownArrowButton" destination="iAb-b2-QuQ" id="AMD-ao-D0v"/>
+                        <outlet property="deadlineDropdownArrow" destination="Dq9-Wz-nkC" id="RJO-9y-2Jx"/>
                         <outlet property="deadlineEnabledButton" destination="i5L-Ve-yvI" id="LuW-k1-sXI"/>
+                        <outlet property="deadlineRemindButton" destination="Igb-Ch-B4L" id="otx-sV-9Zd"/>
                         <outlet property="deleteButton" destination="bGO-dB-RqC" id="rRI-GG-u32"/>
                         <outlet property="frequencyPicker" destination="vxw-75-dno" id="0Hp-lq-GFA"/>
                         <outlet property="taskHeaderTextField" destination="UUz-o4-M96" id="ida-D9-8ca"/>

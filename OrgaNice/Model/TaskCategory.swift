@@ -73,7 +73,7 @@ class TaskCategory: NSObject, NSCoding {
 				task.deadline != nil else {
 				continue
 			}
-			if task.deadline! >= from && task.deadline! <= to {
+			if task.deadline!.date >= from && task.deadline!.date <= to {
 				res.append(task)
 			}
 		}
@@ -113,7 +113,7 @@ class TaskCategory: NSObject, NSCoding {
 			} else if a.1.deadline == nil {
 				return false
 			} else {
-				return a.1.deadline! < b.1.deadline!
+				return a.1.deadline!.date < b.1.deadline!.date
 			}
 		}
 		return sortedTasks.map { tuple in

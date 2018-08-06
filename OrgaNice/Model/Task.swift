@@ -18,7 +18,7 @@ class Task: NSObject, NSCoding {
 	//MARK: Properties
 	var created: Date
 	var id: String
-	var deadline: Date?
+	var deadline: Deadline?
 	var alarm: Date?
 	var done: Date?
 	var title: String
@@ -39,47 +39,6 @@ class Task: NSObject, NSCoding {
 		self.title = title
 		self.id = Utils.generateID()
 		self.cellHeight = Task.DEFAULT_CELL_HEIGHT
-	}
-	
-	func getDueString() -> String {
-		guard self.deadline != nil else {
-			return ""
-		}
-		
-		let formatter = DateComponentsFormatter()
-		formatter.unitsStyle = .full
-		formatter.allowedUnits = [.month, .day, .hour, .minute, .second]
-		formatter.maximumUnitCount = 2
-		
-		/*
-		let diff = self.deadline!.timeIntervalSinceNow
-		let minutes = Int(diff / 60)
-		let hours = Int(diff / 3600)
-		let days = Int(diff / (3600 * 24))
-		let weeks = Int(days / 7)
-		
-		if weeks >= 4 {
-			formatter.maximumUnitCount = 2
-		} else if days >= 2 {
-			formatter.maximumUnitCount = 1
-		} else if hours >= 1 {
-			formatter.maximumUnitCount = 2
-		} else if minutes >= 1 {
-			formatter.maximumUnitCount = 1
-		} else {
-			formatter.maximumUnitCount = 1
-		}
-		*/
-		
-		let now = Date()
-		let timeString = formatter.string(from: now, to: self.deadline!)
-		var res = ""
-		if timeString != nil {
-			res = self.deadline! < now
-				? String(format: NSLocalizedString("DeadlinePast", comment: ""), timeString!.suffix(timeString!.count-1) as CVarArg)
-				: String(format: NSLocalizedString("DeadlineFuture", comment: ""), timeString!)
-		}
-		return res
 	}
 	
 	func isDone() -> Bool {
@@ -117,7 +76,7 @@ class Task: NSObject, NSCoding {
 		self.id = id
 		self.title = title
 		self.cellHeight = cellHeight
-		self.deadline = aDecoder.decodeObject(forKey: PropertyKeys.deadline) as? Date
+		self.deadline = aDecoder.decodeObject(forKey: PropertyKeys.deadline) as? Deadline
 		self.alarm = aDecoder.decodeObject(forKey: PropertyKeys.alarm) as? Date
 		self.done = aDecoder.decodeObject(forKey: PropertyKeys.done) as? Date
 	}

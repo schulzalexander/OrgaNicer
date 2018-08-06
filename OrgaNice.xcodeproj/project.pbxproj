@@ -11,6 +11,7 @@
 		27AA6EF6D4F3CCD5B662CDEF /* Pods_OrgaNiceUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C80FEEB1B598671A03AA506 /* Pods_OrgaNiceUITests.framework */; };
 		C90F49DA210615E7006DA22A /* TaskSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90F49D9210615E7006DA22A /* TaskSettingsViewController.swift */; };
 		C91043FA20DED6CF005096F5 /* FilterBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C91043F920DED6CF005096F5 /* FilterBar.swift */; };
+		C937589F211832B200B986D3 /* Deadline.swift in Sources */ = {isa = PBXBuildFile; fileRef = C937589E211832B200B986D3 /* Deadline.swift */; };
 		C938A99E20CB1920006E76E7 /* TaskCheckList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C938A99D20CB1920006E76E7 /* TaskCheckList.swift */; };
 		C938A9A020CB193B006E76E7 /* TaskConsecutiveList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C938A99F20CB193B006E76E7 /* TaskConsecutiveList.swift */; };
 		C938A9A320CB1CAB006E76E7 /* CheckListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C938A9A220CB1CAB006E76E7 /* CheckListView.swift */; };
@@ -74,6 +75,7 @@
 		C90F49D9210615E7006DA22A /* TaskSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskSettingsViewController.swift; sourceTree = "<group>"; };
 		C91043F920DED6CF005096F5 /* FilterBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterBar.swift; sourceTree = "<group>"; };
 		C9192A4B20CD8F2200526CB5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C937589E211832B200B986D3 /* Deadline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deadline.swift; sourceTree = "<group>"; };
 		C938A99D20CB1920006E76E7 /* TaskCheckList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCheckList.swift; sourceTree = "<group>"; };
 		C938A99F20CB193B006E76E7 /* TaskConsecutiveList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskConsecutiveList.swift; sourceTree = "<group>"; };
 		C938A9A220CB1CAB006E76E7 /* CheckListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckListView.swift; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 				C97D0BBF20CB133000991895 /* TaskList.swift */,
 				C938A99D20CB1920006E76E7 /* TaskCheckList.swift */,
 				C938A99F20CB193B006E76E7 /* TaskConsecutiveList.swift */,
+				C937589E211832B200B986D3 /* Deadline.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -557,6 +560,7 @@
 				C90F49DA210615E7006DA22A /* TaskSettingsViewController.swift in Sources */,
 				C9699318210503AA00922177 /* TaskCategorySettingsViewController.swift in Sources */,
 				C938A99E20CB1920006E76E7 /* TaskCheckList.swift in Sources */,
+				C937589F211832B200B986D3 /* Deadline.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

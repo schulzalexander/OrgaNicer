@@ -19,7 +19,7 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 			}
 			self.deadlineLabel.text = task.isDone()
 				? NSLocalizedString("Done", comment: "").uppercased()
-				: task.getDueString()
+				: task.deadline?.getDueString()
 			self.reloadCheckBoxContent()
 			self.contentView.backgroundColor = Task.getPriorityColor(priority: self.task.cellHeight)
 			self.adjustTitleFont()
@@ -62,7 +62,7 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 		reloadCheckBoxContent()
 		self.deadlineLabel.text = task.isDone()
 			? NSLocalizedString("Done", comment: "").uppercased()
-			: task.getDueString()
+			: task.deadline?.getDueString() ?? ""
 		guard let tableView = self.superview as? UITableView,
 			let viewController = tableView.delegate as? TaskTableViewController else {
 				return

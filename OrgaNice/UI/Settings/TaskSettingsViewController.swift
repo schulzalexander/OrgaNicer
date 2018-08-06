@@ -27,7 +27,8 @@ class TaskSettingsTableViewController: UITableViewController {
 	@IBOutlet weak var deadlineEnabledButton: UIButton!
 	@IBOutlet weak var weekdayPicker: UIPickerView!
 	@IBOutlet weak var deleteButton: UIButton!
-	@IBOutlet weak var deadlineDropdownArrowButton: UIButton!
+	@IBOutlet weak var deadlineDropdownArrow: UILabel!
+	@IBOutlet weak var deadlineRemindButton: UIButton!
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +40,9 @@ class TaskSettingsTableViewController: UITableViewController {
 		self.weekdayPicker.dataSource = self
 		self.weekdayPicker.delegate = self
 		
-		self.tableView.tableFooterView = UIView()
+		self.tableView.estimatedRowHeight = 0 // Without this, tableviews content size will be off
+		self.tableView.sizeToFit()
+		self.updatePopoverSize()
 		
 		self.setupDeleteButton()
 		
@@ -51,7 +54,7 @@ class TaskSettingsTableViewController: UITableViewController {
 		case 0:
 			deadlineDatePicker.datePickerMode = .dateAndTime
 			if task.deadline != nil {
-				deadlineDatePicker.date = task.deadline!
+				deadlineDatePicker.date = task.deadline!.date
 			}
 			hideWeekdayPicker()
 		case 1:
@@ -63,6 +66,10 @@ class TaskSettingsTableViewController: UITableViewController {
 		default:
 			return
 		}
+	}
+	
+	@IBAction func didPressDeadlineRemindButton(_ sender: Any) {
+		//TODO
 	}
 	
 	func showWeekdayPicker() {
@@ -84,7 +91,7 @@ class TaskSettingsTableViewController: UITableViewController {
 	}
 	
 	@IBAction func didPickDeadline(_ sender: UIDatePicker) {
-		task.deadline = sender.date
+		task.deadline!.date = sender.date
 		TaskArchive.saveTask(task: task)
 		updateTaskTable()
 	}
@@ -95,13 +102,14 @@ class TaskSettingsTableViewController: UITableViewController {
 			self.isDeadlineCellCollapsed = true
 			self.tableView.reloadData()
 		} else {
-			task.deadline = Date()
+			task.deadline = Deadline(date: Date(), frequency: .unique)
 			self.isDeadlineCellCollapsed = false
 			self.tableView.reloadData()
 		}
 		self.rotateDeadlineArrow()
 		TaskArchive.saveTask(task: task)
 		self.updateDeadlineState()
+		self.updatePopoverSize()
 	}
 	
 	@IBAction func deleteTask(_ sender: UIButton) {
@@ -144,11 +152,13 @@ class TaskSettingsTableViewController: UITableViewController {
 			self.isDeadlineCellCollapsed = !self.isDeadlineCellCollapsed
 			self.rotateDeadlineArrow()
 			tableView.reloadData()
+			updatePopoverSize()
 			return
 		}
 		if indexPath.row == 3 {
 			self.isReminderCellCollapsed = !self.isReminderCellCollapsed
 			tableView.reloadData()
+			updatePopoverSize()
 			return
 		}
 	}
@@ -170,7 +180,7 @@ class TaskSettingsTableViewController: UITableViewController {
 	private func updateDeadlineState() {
 		if task.deadline != nil {
 			deadlineDatePicker.isEnabled = true
-			deadlineDatePicker.date = task.deadline ?? Date()
+			deadlineDatePicker.date = task.deadline?.date ?? Date()
 			deadlineEnabledButton.setTitle(NSLocalizedString("None", comment: ""), for: .normal)
 			if frequencyPicker.selectedSegmentIndex == 2 {
 				weekdayPicker.isUserInteractionEnabled = true
@@ -192,9 +202,13 @@ class TaskSettingsTableViewController: UITableViewController {
 	
 	private func rotateDeadlineArrow() {
 		let angle: CGFloat = self.isDeadlineCellCollapsed ? 0 : 180
-		UIView.animate(withDuration: 0.5) {
-			self.deadlineDropdownArrowButton.transform = CGAffineTransform.init(rotationAngle: angle / 360 * 2 * CGFloat.pi)
+		UIView.animate(withDuration: 0.35) {
+			self.deadlineDropdownArrow.transform = CGAffineTransform.init(rotationAngle: angle / 360 * 2 * CGFloat.pi)
 		}
+	}
+	
+	private func updatePopoverSize() {
+		self.preferredContentSize = CGSize(width: UIScreen.main.bounds.width, height: tableView.contentSize.height)
 	}
 	
 }
