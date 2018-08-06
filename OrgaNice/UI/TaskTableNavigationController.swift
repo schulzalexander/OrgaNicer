@@ -29,19 +29,19 @@ class TaskTableNavigationController: UINavigationController {
 	private func setupAddButton() {
 		//setup addButton
 		addButton = UIButton(type: .custom)
-		let title = NSAttributedString(string: "+", attributes: [NSAttributedStringKey.font: UIFont(name: "AmericanTypewriter", size: 45)!])
+		let title = NSAttributedString(string: "  +", attributes: [NSAttributedStringKey.font: UIFont(name: "AmericanTypewriter", size: 45)!])
 		addButton.setAttributedTitle(title, for: .normal)
 		addButton.setTitleColor(UIColor.black, for: .normal)
 		addButton.setTitleColor(UIColor.lightGray, for: .highlighted)
-		let size = 60
-		addButton.frame = CGRect(x: 0, y: 0, width: size, height: size)
+		addButton.contentHorizontalAlignment = .left
+		addButton.frame = CGRect(x: 0, y: 0, width: 150, height: 60)
 		addButton.backgroundColor = UIColor(red: 1, green: 0.9529, blue: 0.3176, alpha: 1.0)
 		//self.addGradient(view: addButton)
 		//addButton.layer.borderColor = UIColor.lightgray.cgColor
 		//addButton.layer.borderWidth = 1.0
 		self.view.insertSubview(addButton, aboveSubview: self.view)
 		
-		addButton.center = CGPoint(x: self.view.frame.width - 30 - (self.addButton.frame.width / 2), y: self.view.frame.height - 120 - (self.addButton.frame.height / 2))
+		addButton.center = CGPoint(x: self.view.frame.width, y: self.view.frame.height - 120 - (self.addButton.frame.height / 2))
 		if UIScreen.main.nativeBounds.height == 2436 {
 			//iPhone X
 			addButton.center = CGPoint(x: self.view.frame.width - 30 - (self.addButton.frame.width / 2), y: self.view.frame.height - 160 - (self.addButton.frame.height / 2))

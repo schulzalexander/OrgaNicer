@@ -7,6 +7,7 @@ target 'OrgaNice' do
 
   # Pods for OrgaNice
   pod 'SwiftReorder', '~> 5.0'
+  pod 'Firebase/Core'
 
   target 'OrgaNiceTests' do
     inherit! :search_paths

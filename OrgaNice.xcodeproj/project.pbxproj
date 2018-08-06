@@ -12,6 +12,8 @@
 		C90F49DA210615E7006DA22A /* TaskSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90F49D9210615E7006DA22A /* TaskSettingsViewController.swift */; };
 		C91043FA20DED6CF005096F5 /* FilterBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C91043F920DED6CF005096F5 /* FilterBar.swift */; };
 		C937589F211832B200B986D3 /* Deadline.swift in Sources */ = {isa = PBXBuildFile; fileRef = C937589E211832B200B986D3 /* Deadline.swift */; };
+		C93758A12118C47500B986D3 /* AlarmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93758A02118C47500B986D3 /* AlarmManager.swift */; };
+		C93758A32118D05E00B986D3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C93758A22118D05D00B986D3 /* GoogleService-Info.plist */; };
 		C938A99E20CB1920006E76E7 /* TaskCheckList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C938A99D20CB1920006E76E7 /* TaskCheckList.swift */; };
 		C938A9A020CB193B006E76E7 /* TaskConsecutiveList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C938A99F20CB193B006E76E7 /* TaskConsecutiveList.swift */; };
 		C938A9A320CB1CAB006E76E7 /* CheckListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C938A9A220CB1CAB006E76E7 /* CheckListView.swift */; };
@@ -76,6 +78,8 @@
 		C91043F920DED6CF005096F5 /* FilterBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterBar.swift; sourceTree = "<group>"; };
 		C9192A4B20CD8F2200526CB5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C937589E211832B200B986D3 /* Deadline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deadline.swift; sourceTree = "<group>"; };
+		C93758A02118C47500B986D3 /* AlarmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmManager.swift; sourceTree = "<group>"; };
+		C93758A22118D05D00B986D3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C938A99D20CB1920006E76E7 /* TaskCheckList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCheckList.swift; sourceTree = "<group>"; };
 		C938A99F20CB193B006E76E7 /* TaskConsecutiveList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskConsecutiveList.swift; sourceTree = "<group>"; };
 		C938A9A220CB1CAB006E76E7 /* CheckListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckListView.swift; sourceTree = "<group>"; };
@@ -221,6 +225,7 @@
 				C9713E8C20C596680074F232 /* Main.storyboard */,
 				C9713E9120C596690074F232 /* LaunchScreen.storyboard */,
 				C9713E9420C596690074F232 /* Info.plist */,
+				C93758A22118D05D00B986D3 /* GoogleService-Info.plist */,
 				C9C3D71F20CC6BCE00C881D3 /* Localizable.strings */,
 			);
 			path = OrgaNice;
@@ -248,6 +253,7 @@
 			isa = PBXGroup;
 			children = (
 				C9713EDF20C597810074F232 /* Utils.swift */,
+				C93758A02118C47500B986D3 /* AlarmManager.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -432,6 +438,7 @@
 			files = (
 				C9713E9320C596690074F232 /* LaunchScreen.storyboard in Resources */,
 				C9C3D71D20CC6BCE00C881D3 /* Localizable.strings in Resources */,
+				C93758A32118D05E00B986D3 /* GoogleService-Info.plist in Resources */,
 				C9713E9020C596690074F232 /* Assets.xcassets in Resources */,
 				C9713E8E20C596680074F232 /* Main.storyboard in Resources */,
 			);
@@ -497,11 +504,15 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-OrgaNice/Pods-OrgaNice-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftReorder/SwiftReorder.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftReorder.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -559,6 +570,7 @@
 				C9713EFC20C597810074F232 /* ParentTask.swift in Sources */,
 				C90F49DA210615E7006DA22A /* TaskSettingsViewController.swift in Sources */,
 				C9699318210503AA00922177 /* TaskCategorySettingsViewController.swift in Sources */,
+				C93758A12118C47500B986D3 /* AlarmManager.swift in Sources */,
 				C938A99E20CB1920006E76E7 /* TaskCheckList.swift in Sources */,
 				C937589F211832B200B986D3 /* Deadline.swift in Sources */,
 			);

@@ -55,10 +55,11 @@ class Deadline: NSObject, NSCoding {
 		*/
 		
 		let now = Date()
-		let timeString = formatter.string(from: now, to: getNextDeadlineDate())
+		let nextDeadline = getNextDeadlineDate()
+		let timeString = formatter.string(from: now, to: nextDeadline)
 		var res = ""
 		if timeString != nil {
-			res = self.date < now
+			res = nextDeadline < now
 				? String(format: NSLocalizedString("DeadlinePast", comment: ""), timeString!.suffix(timeString!.count-1) as CVarArg)
 				: String(format: NSLocalizedString("DeadlineFuture", comment: ""), timeString!)
 		}
@@ -87,12 +88,12 @@ class Deadline: NSObject, NSCoding {
 		let now = Date()
 		var nextDeadline = self.date
 		if self.frequency != .unique {
-			let pastMidnight = now.timeIntervalSince1970 / (3600 * 24)
+			
 			let dayTime = nextDeadline.timeIntervalSince1970.truncatingRemainder(dividingBy: 3600 * 24)
+			let pastMidnight = now.timeIntervalSince1970 - now.timeIntervalSince1970.truncatingRemainder(dividingBy: 3600 * 24)
 			
 			if self.frequency == .daily {
 				// Create Date with current day, but time taken from the stored deadline
-				
 				nextDeadline = Date(timeIntervalSince1970: pastMidnight + dayTime)
 				// if the time has already in the past, the next deadline will be on the next day
 				if nextDeadline < now {
@@ -114,7 +115,7 @@ class Deadline: NSObject, NSCoding {
 						let otherWeekday = Calendar.current.component(.weekday, from: otherDate)
 						if deadlineWeekday == otherWeekday {
 							let weekdayMidnight = otherDate.timeIntervalSince1970 -
-								otherDate.timeIntervalSince1970.truncatingRemainder(dividingBy: TimeInterval(i * 3600 * 24))
+								otherDate.timeIntervalSince1970.truncatingRemainder(dividingBy: TimeInterval(3600 * 24))
 							nextDeadline = Date(timeIntervalSince1970: weekdayMidnight + dayTime)
 						}
 					}

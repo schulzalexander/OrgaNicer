@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4AACC78B40E25E40D3579088B55F510C"
+               BlueprintIdentifier = "EACEC24807240574FC797CEF7CDD920A"
                BuildableName = "Pods_OrgaNice.framework"
                BlueprintName = "Pods-OrgaNice"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4AACC78B40E25E40D3579088B55F510C"
+            BlueprintIdentifier = "EACEC24807240574FC797CEF7CDD920A"
             BuildableName = "Pods_OrgaNice.framework"
             BlueprintName = "Pods-OrgaNice"
             ReferencedContainer = "container:Pods.xcodeproj">

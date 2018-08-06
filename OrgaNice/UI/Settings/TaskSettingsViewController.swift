@@ -54,18 +54,28 @@ class TaskSettingsTableViewController: UITableViewController {
 		case 0:
 			deadlineDatePicker.datePickerMode = .dateAndTime
 			if task.deadline != nil {
+				task.deadline!.frequency = Deadline.Frequency.unique
 				deadlineDatePicker.date = task.deadline!.date
 			}
 			hideWeekdayPicker()
 		case 1:
 			deadlineDatePicker.datePickerMode = .time
+			if task.deadline != nil {
+				task.deadline!.frequency = Deadline.Frequency.daily
+				//TODO
+			}
 			hideWeekdayPicker()
 		case 2:
 			deadlineDatePicker.datePickerMode = .time
+			if task.deadline != nil {
+				task.deadline!.frequency = Deadline.Frequency.weekly
+				//TODO
+			}
 			showWeekdayPicker()
 		default:
 			return
 		}
+		updateTaskTable()
 	}
 	
 	@IBAction func didPressDeadlineRemindButton(_ sender: Any) {
