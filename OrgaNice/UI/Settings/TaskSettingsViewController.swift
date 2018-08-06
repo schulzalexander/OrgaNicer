@@ -11,7 +11,7 @@ import UIKit
 class TaskSettingsTableViewController: UITableViewController {
 
 	static let DEADLINE_COLLAPSED_CELL_HEIGHT: CGFloat = 50
-	static let DEADLINE_EXPANDED_CELL_HEIGHT: CGFloat = 173
+	static let DEADLINE_EXPANDED_CELL_HEIGHT: CGFloat = 194
 	static let REMINDER_COLLAPSED_CELL_HEIGHT: CGFloat = 50
 	static let REMINDER_EXPANDED_CELL_HEIGHT: CGFloat = 173
 	
@@ -27,6 +27,7 @@ class TaskSettingsTableViewController: UITableViewController {
 	@IBOutlet weak var deadlineEnabledButton: UIButton!
 	@IBOutlet weak var weekdayPicker: UIPickerView!
 	@IBOutlet weak var deleteButton: UIButton!
+	@IBOutlet weak var deadlineDropdownArrowButton: UIButton!
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,6 +99,7 @@ class TaskSettingsTableViewController: UITableViewController {
 			self.isDeadlineCellCollapsed = false
 			self.tableView.reloadData()
 		}
+		self.rotateDeadlineArrow()
 		TaskArchive.saveTask(task: task)
 		self.updateDeadlineState()
 	}
@@ -140,6 +142,7 @@ class TaskSettingsTableViewController: UITableViewController {
 		super.tableView(tableView, heightForRowAt: indexPath)
 		if indexPath.row == 2 && task.deadline != nil {
 			self.isDeadlineCellCollapsed = !self.isDeadlineCellCollapsed
+			self.rotateDeadlineArrow()
 			tableView.reloadData()
 			return
 		}
@@ -185,6 +188,13 @@ class TaskSettingsTableViewController: UITableViewController {
 		deleteButton.backgroundColor = UIColor.red
 		deleteButton.layer.cornerRadius = deleteButton.frame.height / 2
 		deleteButton.clipsToBounds = true
+	}
+	
+	private func rotateDeadlineArrow() {
+		let angle: CGFloat = self.isDeadlineCellCollapsed ? 0 : 180
+		UIView.animate(withDuration: 0.5) {
+			self.deadlineDropdownArrowButton.transform = CGAffineTransform.init(rotationAngle: angle / 360 * 2 * CGFloat.pi)
+		}
 	}
 	
 }

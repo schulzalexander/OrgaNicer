@@ -87,8 +87,8 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 				}
 				newTaskCell.titleTextEdit.becomeFirstResponder()
 			}
+			tableView.scrollToRow(at: newIndexPath, at: .bottom, animated: true)
 		}
-		tableView.scrollToRow(at: newIndexPath, at: .bottom, animated: true)
 	}
 	
 	func setTaskCategory(category: TaskCategory) {
