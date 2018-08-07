@@ -14,6 +14,7 @@
 		C937589F211832B200B986D3 /* Deadline.swift in Sources */ = {isa = PBXBuildFile; fileRef = C937589E211832B200B986D3 /* Deadline.swift */; };
 		C93758A12118C47500B986D3 /* AlarmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93758A02118C47500B986D3 /* AlarmManager.swift */; };
 		C93758A32118D05E00B986D3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C93758A22118D05D00B986D3 /* GoogleService-Info.plist */; };
+		C93758A721196FDE00B986D3 /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93758A621196FDE00B986D3 /* Alarm.swift */; };
 		C938A99E20CB1920006E76E7 /* TaskCheckList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C938A99D20CB1920006E76E7 /* TaskCheckList.swift */; };
 		C938A9A020CB193B006E76E7 /* TaskConsecutiveList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C938A99F20CB193B006E76E7 /* TaskConsecutiveList.swift */; };
 		C938A9A320CB1CAB006E76E7 /* CheckListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C938A9A220CB1CAB006E76E7 /* CheckListView.swift */; };
@@ -80,6 +81,7 @@
 		C937589E211832B200B986D3 /* Deadline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deadline.swift; sourceTree = "<group>"; };
 		C93758A02118C47500B986D3 /* AlarmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmManager.swift; sourceTree = "<group>"; };
 		C93758A22118D05D00B986D3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C93758A621196FDE00B986D3 /* Alarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
 		C938A99D20CB1920006E76E7 /* TaskCheckList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCheckList.swift; sourceTree = "<group>"; };
 		C938A99F20CB193B006E76E7 /* TaskConsecutiveList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskConsecutiveList.swift; sourceTree = "<group>"; };
 		C938A9A220CB1CAB006E76E7 /* CheckListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckListView.swift; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 				C938A99D20CB1920006E76E7 /* TaskCheckList.swift */,
 				C938A99F20CB193B006E76E7 /* TaskConsecutiveList.swift */,
 				C937589E211832B200B986D3 /* Deadline.swift */,
+				C93758A621196FDE00B986D3 /* Alarm.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -547,6 +550,7 @@
 				C9D5C28B2103400A00AAE177 /* TableTabBar.swift in Sources */,
 				C9713F0020C597810074F232 /* TaskTableViewCell.swift in Sources */,
 				C97D0BBE20CB0F3C00991895 /* TaskTableViewCellContent.swift in Sources */,
+				C93758A721196FDE00B986D3 /* Alarm.swift in Sources */,
 				C958386F20FCED0F00E355C7 /* SelectorCollectionView.swift in Sources */,
 				C9713EF620C597810074F232 /* TaskCategory.swift in Sources */,
 				C9713EFA20C597810074F232 /* TaskManager.swift in Sources */,

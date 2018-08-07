@@ -47,6 +47,7 @@ class TaskSettingsTableViewController: UITableViewController {
 		self.setupDeleteButton()
 		
 		self.updateDeadlineState()
+		self.updateDeadlineRemindButtonTitle()
     }
 	
 	@IBAction func didPickFrequency(_ sender: UISegmentedControl) {
@@ -79,7 +80,20 @@ class TaskSettingsTableViewController: UITableViewController {
 	}
 	
 	@IBAction func didPressDeadlineRemindButton(_ sender: Any) {
-		//TODO
+		if task.hasAlarmSet(for: task.deadline!.id) {
+			task.removeAlarm(alarmID: task.deadline!.id)
+			if !task.hasAlarms() {
+				self.isReminderCellCollapsed = true
+				tableView.reloadData()
+			}
+		} else {
+			task.addAlarm(alarm: Alarm(deadline: task.deadline!, sound: false))
+			if self.isReminderCellCollapsed {
+				self.isReminderCellCollapsed = false
+				tableView.reloadData()
+			}
+		}
+		updateDeadlineRemindButtonTitle()
 	}
 	
 	func showWeekdayPicker() {
@@ -120,6 +134,7 @@ class TaskSettingsTableViewController: UITableViewController {
 		TaskArchive.saveTask(task: task)
 		self.updateDeadlineState()
 		self.updatePopoverSize()
+		self.updateDeadlineRemindButtonTitle()
 	}
 	
 	@IBAction func deleteTask(_ sender: UIButton) {
@@ -219,6 +234,18 @@ class TaskSettingsTableViewController: UITableViewController {
 	
 	private func updatePopoverSize() {
 		self.preferredContentSize = CGSize(width: UIScreen.main.bounds.width, height: tableView.contentSize.height)
+	}
+	
+	private func updateDeadlineRemindButtonTitle() {
+		guard task.deadline != nil else {
+			return
+		}
+		if task.hasAlarmSet(for: task.deadline!.id) {
+			deadlineRemindButton.setTitle(NSLocalizedString("DontRemindMeButtonTitle", comment: ""), for: .normal)
+		} else {
+			deadlineRemindButton.setTitle(NSLocalizedString("RemindMeButtonTitle", comment: ""), for: .normal)
+		}
+		deadlineRemindButton.sizeToFit()
 	}
 	
 }

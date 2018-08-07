@@ -15,6 +15,7 @@ class Deadline: NSObject, NSCoding {
 	}
 	
 	//MARK: Properties
+	var id: String!
 	var date: Date
 	var frequency: Frequency
 	
@@ -24,6 +25,13 @@ class Deadline: NSObject, NSCoding {
 	}
 	
 	init(date: Date, frequency: Frequency) {
+		self.id = Utils.generateID()
+		self.date = date
+		self.frequency = frequency
+	}
+	
+	init(id: String, date: Date, frequency: Frequency) {
+		self.id = id
 		self.date = date
 		self.frequency = frequency
 	}
@@ -33,26 +41,6 @@ class Deadline: NSObject, NSCoding {
 		formatter.unitsStyle = .full
 		formatter.allowedUnits = [.month, .day, .hour, .minute, .second]
 		formatter.maximumUnitCount = 2
-		
-		/*
-		let diff = self.deadline!.timeIntervalSinceNow
-		let minutes = Int(diff / 60)
-		let hours = Int(diff / 3600)
-		let days = Int(diff / (3600 * 24))
-		let weeks = Int(days / 7)
-		
-		if weeks >= 4 {
-		formatter.maximumUnitCount = 2
-		} else if days >= 2 {
-		formatter.maximumUnitCount = 1
-		} else if hours >= 1 {
-		formatter.maximumUnitCount = 2
-		} else if minutes >= 1 {
-		formatter.maximumUnitCount = 1
-		} else {
-		formatter.maximumUnitCount = 1
-		}
-		*/
 		
 		let now = Date()
 		let nextDeadline = getNextDeadlineDate()

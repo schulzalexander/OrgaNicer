@@ -40,3 +40,8 @@
 
 // Task Settings
 "TaskDeletionTitle" = "Delete Task?";
+"RemindMeButtonTitle" = "Remind Me";
+"DontRemindMeButtonTitle" = "Don't Remind Me";
+
+// Reminders
+"TodoReminder" = "ToDo Reminder";

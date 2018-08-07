@@ -19,16 +19,16 @@ class Task: NSObject, NSCoding {
 	var created: Date
 	var id: String
 	var deadline: Deadline?
-	var alarm: Date?
 	var done: Date?
 	var title: String
 	var cellHeight: CGFloat
+	var alarms: [Alarm]?
 	
 	struct PropertyKeys {
 		static let created = "created"
 		static let id = "id"
 		static let deadline = "deadline"
-		static let alarm = "alarm"
+		static let alarms = "alarms"
 		static let done = "done"
 		static let title = "title"
 		static let cellHeight = "cellHeight"
@@ -53,13 +53,47 @@ class Task: NSObject, NSCoding {
 		self.done = nil
 	}
 	
+	func hasAlarmSet(for alarmID: String) -> Bool {
+		guard alarms != nil else {
+			return false
+		}
+		for alarm in alarms! {
+			if alarm.id == alarmID {
+				return true
+			}
+		}
+		return false
+	}
+	
+	func addAlarm(alarm: Alarm) {
+		if alarms == nil {
+			alarms = [alarm]
+		} else {
+			alarms!.append(alarm)
+		}
+		AlarmManager.addAlarm(task: self, alarm: alarm)
+	}
+	
+	func removeAlarm(alarmID: String) {
+		for i in 0..<(alarms?.count ?? 0) {
+			if alarms![i].id == alarmID {
+				alarms!.remove(at: i)
+				break
+			}
+		}
+	}
+	
+	func hasAlarms() -> Bool {
+		return alarms != nil && alarms!.count > 0
+	}
+	
 	//MARK: NSCoding
 	
 	func encode(with aCoder: NSCoder) {
 		aCoder.encode(created, forKey: PropertyKeys.created)
 		aCoder.encode(id, forKey: PropertyKeys.id)
 		aCoder.encode(deadline, forKey: PropertyKeys.deadline)
-		aCoder.encode(alarm, forKey: PropertyKeys.alarm)
+		aCoder.encode(alarms, forKey: PropertyKeys.alarms)
 		aCoder.encode(done, forKey: PropertyKeys.done)
 		aCoder.encode(title, forKey: PropertyKeys.title)
 		aCoder.encode(cellHeight, forKey: PropertyKeys.cellHeight)
@@ -77,7 +111,7 @@ class Task: NSObject, NSCoding {
 		self.title = title
 		self.cellHeight = cellHeight
 		self.deadline = aDecoder.decodeObject(forKey: PropertyKeys.deadline) as? Deadline
-		self.alarm = aDecoder.decodeObject(forKey: PropertyKeys.alarm) as? Date
+		self.alarms = aDecoder.decodeObject(forKey: PropertyKeys.alarms) as? [Alarm]
 		self.done = aDecoder.decodeObject(forKey: PropertyKeys.done) as? Date
 	}
 	
