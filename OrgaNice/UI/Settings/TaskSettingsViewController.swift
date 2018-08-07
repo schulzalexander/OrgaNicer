@@ -46,6 +46,11 @@ class TaskSettingsTableViewController: UITableViewController {
 		
 		if task.deadline != nil {
 			self.frequencyPicker.selectedSegmentIndex = task.deadline!.frequency.rawValue
+			if task.deadline!.frequency == .weekly {
+				showWeekdayPicker()
+				deadlineDatePicker.datePickerMode = .time
+				setWeekday()
+			}
 		} else {
 			self.frequencyPicker.isEnabled = false
 			self.deadlineDropdownArrow.textColor = UIColor.lightGray
@@ -72,6 +77,7 @@ class TaskSettingsTableViewController: UITableViewController {
 			deadlineDatePicker.datePickerMode = .time
 			task.deadline!.frequency = Deadline.Frequency.weekly
 			showWeekdayPicker()
+			setWeekday()
 		default:
 			return
 		}
@@ -253,6 +259,15 @@ class TaskSettingsTableViewController: UITableViewController {
 		deadlineRemindButton.sizeToFit()
 	}
 	
+	private func setWeekday() {
+		guard self.task.deadline != nil else {
+			return
+		}
+		let weekday = Calendar.current.component(.weekday, from: self.task.deadline!.date)
+		self.weekdayPicker.selectRow(weekday - 1, inComponent: 0, animated: false)
+		
+	}
+	
 }
 
 extension TaskSettingsTableViewController: UITextFieldDelegate {
@@ -280,23 +295,22 @@ extension TaskSettingsTableViewController: UIPickerViewDelegate, UIPickerViewDat
 	}
 	
 	func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-		switch(row) {
-		case 0:
-			return NSLocalizedString("Monday", comment: "")
-		case 1:
-			return NSLocalizedString("Tuesday", comment: "")
-		case 2:
-			return NSLocalizedString("Wednesday", comment: "")
-		case 3:
-			return NSLocalizedString("Thursday", comment: "")
-		case 4:
-			return NSLocalizedString("Friday", comment: "")
-		case 5:
-			return NSLocalizedString("Saturday", comment: "")
-		case 6:
-			return NSLocalizedString("Sunday", comment: "")
-		default:
-			return ""
+		return DateFormatter().weekdaySymbols[row]
+	}
+	
+	func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+		guard task.deadline != nil else {
+			return
+		}
+		var date = task.deadline!.date
+		for _ in 0...7 {
+			if Calendar.current.component(.weekday, from: date) - 1 == row {
+				task.deadline!.date = date
+				deadlineDatePicker.setDate(date, animated: false)
+				updateTaskTable()
+				break
+			}
+			date.addTimeInterval(3600 * 24)
 		}
 	}
 	

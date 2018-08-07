@@ -141,7 +141,8 @@ class Task: NSObject, NSCoding {
 	}
 	
 	static func getPriorityFontColor(priority: CGFloat) -> UIColor {
-		let percentage = (priority - Task.PRIORITY_MIN) / (Task.PRIORITY_MAX - Task.PRIORITY_MIN)
+		var percentage = (priority - Task.PRIORITY_MIN) / (Task.PRIORITY_MAX - Task.PRIORITY_MIN)
+		percentage *= percentage
 		let revPercentage = 1.0 - percentage
 		let startColor = CIColor.black
 		let endColor = CIColor.white

@@ -65,6 +65,7 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 			}
 			navController.addButton.isHidden = true
 		}
+		setupTransparentGradientBackground()
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
@@ -235,6 +236,19 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 		self.present(viewController, animated: true, completion: nil)
 	}
 	
+	private func setupTransparentGradientBackground() {
+		let colour:UIColor = UIColor(red: 0.9765, green: 0.5216, blue: 0, alpha: 0.8)//UIColor(red: 1, green: 0.5922, blue: 0.098, alpha: 0.7)
+		let colours:[CGColor] = [colour.withAlphaComponent(0.3).cgColor,colour.cgColor]
+		let locations:[NSNumber] = [0, 1]
+		
+		let gradientLayer = CAGradientLayer()
+		gradientLayer.colors = colours
+		gradientLayer.locations = locations
+		gradientLayer.frame = self.view.bounds
+		
+		self.view.layer.insertSublayer(gradientLayer, below: self.view.layer.sublayers![0])
+	}
+	
 }
 
 //TODO: Move to TaskManager, assign task to cell
@@ -269,7 +283,7 @@ extension TaskTableViewController: UITableViewDelegate, UITableViewDataSource {
 		
 		let recognizer = UITapGestureRecognizer(target: self, action: #selector(TaskTableViewController.didTapOnTaskCell(_:)))
 		cell.addGestureRecognizer(recognizer)
-		
+		cell.backgroundColor = UIColor.clear
 		return cell
 	}
 	

@@ -99,7 +99,7 @@ class Deadline: NSObject, NSCoding {
 					nextDeadline = Date(timeIntervalSince1970: pastMidnight + dayTime)
 					// Check if deadline has already passed
 					if nextDeadline < now {
-						nextDeadline.addTimeInterval(3600 * 24)
+						nextDeadline.addTimeInterval(3600 * 24 * 7)
 					}
 				} else {
 					for i in 1..<7 {

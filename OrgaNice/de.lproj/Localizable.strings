@@ -30,15 +30,6 @@
 "DeadlinePast" = "fällig vor %@";
 "DeadlineFuture" = "fällig in %@";
 
-// Weekdays, used in WeekDay Picker
-"Monday" = "Montag";
-"Tuesday" = "Dienstag";
-"Wednesday" = "Mittwoch";
-"Thursday" = "Donnerstag";
-"Friday" = "Freitag";
-"Saturday" = "Samstag";
-"Sunday" = "Sonntag";
-
 // Task Settings
 "TaskDeletionTitle" = "Task löschen?";
 "RemindMeButtonTitle" = "Erinner mich";

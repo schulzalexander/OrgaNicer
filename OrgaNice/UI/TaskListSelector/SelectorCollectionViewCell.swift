@@ -55,7 +55,7 @@ class SelectorCollectionViewCell: UICollectionViewCell {
 	}
 	
 	func updateTodoCounter() {
-		self.taskCountLabel.text = "ToDo: \(category.countUndone()) / \(category.count())"
+		self.taskCountLabel.text = "\(NSLocalizedString("Done", comment: "")): \(category.countDone()) / \(category.count())"
 	}
 	
 }
