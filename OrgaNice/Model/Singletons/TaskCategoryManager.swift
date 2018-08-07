@@ -27,15 +27,21 @@ class TaskCategoryManager: NSObject, NSCoding {
 	}
 	
 	func deleteTaskCategory(id: String) {
+		guard let category = getTaskCategory(id: id) else {
+			return
+		}
+		
+		for task in category.tasks ?? [] {
+			TaskManager.shared.deleteTask(id: task)
+		}
+		
 		categories.removeValue(forKey: id)
 		TaskArchive.deleteTaskCategory(id: id)
 		TaskArchive.saveTaskCategoryManager()
 		
-		for i in 0..<categoryTitlesSorted.count - 1 {
-			if categoryTitlesSorted[i].id == id {
-				categoryTitlesSorted.remove(at: i)
-				break
-			}
+		let index = getTaskCategoryIndex(id: id)
+		if index >= 0 {
+			categoryTitlesSorted.remove(at: index)
 		}
 	}
 	

@@ -35,7 +35,7 @@ class SelectorCollectionView: UICollectionView {
 	}
 	
 	private func setupTransparentGradientBackground() {
-		let colour:UIColor = .white
+		let colour:UIColor = UIColor(red: 1, green: 0.5922, blue: 0.098, alpha: 0.5)
 		let colours:[CGColor] = [colour.withAlphaComponent(0.0).cgColor,colour.cgColor]
 		let locations:[NSNumber] = [0, 0.5]
 		

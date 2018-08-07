@@ -61,32 +61,23 @@ class TaskSettingsTableViewController: UITableViewController {
 		switch sender.selectedSegmentIndex {
 		case 0:
 			deadlineDatePicker.datePickerMode = .dateAndTime
-			if task.deadline != nil {
-				task.deadline!.frequency = Deadline.Frequency.unique
-				deadlineDatePicker.date = task.deadline!.date
-				task.resetAlarm(alarmID: task.deadline!.id)
-			}
+			task.deadline!.frequency = Deadline.Frequency.unique
+			deadlineDatePicker.date = task.deadline!.date
 			hideWeekdayPicker()
 		case 1:
 			deadlineDatePicker.datePickerMode = .time
-			if task.deadline != nil {
-				task.deadline!.frequency = Deadline.Frequency.daily
-				task.resetAlarm(alarmID: task.deadline!.id)
-				//TODO
-			}
+			task.deadline!.frequency = Deadline.Frequency.daily
 			hideWeekdayPicker()
 		case 2:
 			deadlineDatePicker.datePickerMode = .time
-			if task.deadline != nil {
-				task.deadline!.frequency = Deadline.Frequency.weekly
-				task.resetAlarm(alarmID: task.deadline!.id)
-				//TODO
-			}
+			task.deadline!.frequency = Deadline.Frequency.weekly
 			showWeekdayPicker()
 		default:
 			return
 		}
+		task.resetAlarm(alarmID: task.deadline!.id)
 		updateTaskTable()
+		TaskArchive.saveTask(task: task)
 	}
 	
 	@IBAction func didPressDeadlineRemindButton(_ sender: Any) {

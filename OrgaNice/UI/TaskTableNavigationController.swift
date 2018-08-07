@@ -17,6 +17,8 @@ class TaskTableNavigationController: UINavigationController {
         super.viewDidLoad()
 
         setupAddButton()
+		
+		self.navigationBar.backgroundColor = UIColor(red: 1, green: 0.5922, blue: 0.098, alpha: 1.0)
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,7 +35,7 @@ class TaskTableNavigationController: UINavigationController {
 		addButton.setTitleColor(UIColor.lightGray, for: .highlighted)
 		addButton.contentHorizontalAlignment = .left
 		addButton.frame = CGRect(x: 0, y: 0, width: 150, height: 60)
-		addButton.backgroundColor = UIColor(red: 1, green: 0.9529, blue: 0.3176, alpha: 1.0)
+		addButton.backgroundColor = UIColor(red: 1, green: 0.9098, blue: 0.1098, alpha: 1.0)//UIColor(red: 1, green: 0.9529, blue: 0.3176, alpha: 1.0)
 		//self.addGradient(view: addButton)
 		//addButton.layer.borderColor = UIColor.lightgray.cgColor
 		//addButton.layer.borderWidth = 1.0

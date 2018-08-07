@@ -96,11 +96,13 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 		}
 	}
 	
-	func setTaskCategory(category: TaskCategory) {
+	func setTaskCategory(category: TaskCategory?) {
 		self.currList = category
-		self.tableTabBar.switchToTab(index: category.filterTab)
-		self.updateTaskOrdering()
-		self.navigationItem.title = category.title
+		self.navigationItem.title = category?.title
+		if category != nil {
+			self.tableTabBar.switchToTab(index: category!.filterTab)
+			self.updateTaskOrdering()
+		}
 		self.tableView.reloadData()
 	}
 	
@@ -409,7 +411,6 @@ extension TaskTableViewController: UIGestureRecognizerDelegate {
 				navController.addButton.isHidden = false
 			}
 			self.setTaskCategory(category: category)
-			
 		})
 		let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
 		alertController.addAction(create)

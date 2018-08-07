@@ -15,11 +15,12 @@ class Deadline: NSObject, NSCoding {
 	}
 	
 	//MARK: Properties
-	var id: String!
+	var id: String
 	var date: Date
 	var frequency: Frequency
 	
 	struct PropertyKeys {
+		static let id = "id"
 		static let date = "date"
 		static let frequency = "frequency"
 	}
@@ -57,15 +58,18 @@ class Deadline: NSObject, NSCoding {
 	//MARK: NSCoding
 	
 	func encode(with aCoder: NSCoder) {
+		aCoder.encode(id, forKey: PropertyKeys.id)
 		aCoder.encode(date, forKey: PropertyKeys.date)
 		aCoder.encode(frequency.rawValue, forKey: PropertyKeys.frequency)
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
-		guard let date = aDecoder.decodeObject(forKey: PropertyKeys.date) as? Date,
+		guard let id = aDecoder.decodeObject(forKey: PropertyKeys.id) as? String,
+			let date = aDecoder.decodeObject(forKey: PropertyKeys.date) as? Date,
 			let frequency = Frequency(rawValue: aDecoder.decodeInteger(forKey: PropertyKeys.frequency)) else {
 			fatalError("Error while decoding deadline object!")
 		}
+		self.id = id
 		self.date = date
 		self.frequency = frequency
 	}
