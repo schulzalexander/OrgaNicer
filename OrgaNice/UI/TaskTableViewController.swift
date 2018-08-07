@@ -59,6 +59,11 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 			if let category = TaskCategoryManager.shared.getTaskCategory(id: id) {
 				self.setTaskCategory(category: category)
 			}
+		} else {
+			guard let navController = self.navigationController as? TaskTableNavigationController else {
+				fatalError("Failed to instantiate Task Table NavigationController!")
+			}
+			navController.addButton.isHidden = true
 		}
 	}
 	
@@ -395,7 +400,16 @@ extension TaskTableViewController: UIGestureRecognizerDelegate {
 			let category = TaskCategory(title: name)
 			TaskCategoryManager.shared.addTaskCategory(list: category)
 			self.categorySelector.reloadData()
+			
+			if self.currList == nil {
+				// TaskList was not set before, therefore add button was hidden -> show now
+				guard let navController = self.navigationController as? TaskTableNavigationController else {
+					fatalError("Failed to instantiate Task Table NavigationController!")
+				}
+				navController.addButton.isHidden = false
+			}
 			self.setTaskCategory(category: category)
+			
 		})
 		let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
 		alertController.addAction(create)

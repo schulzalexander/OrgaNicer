@@ -44,6 +44,13 @@ class TaskSettingsTableViewController: UITableViewController {
 		self.tableView.sizeToFit()
 		self.updatePopoverSize()
 		
+		if task.deadline != nil {
+			self.frequencyPicker.selectedSegmentIndex = task.deadline!.frequency.rawValue
+		} else {
+			self.frequencyPicker.isEnabled = false
+			self.deadlineDropdownArrow.textColor = UIColor.lightGray
+		}
+		
 		self.setupDeleteButton()
 		
 		self.updateDeadlineState()
@@ -57,12 +64,14 @@ class TaskSettingsTableViewController: UITableViewController {
 			if task.deadline != nil {
 				task.deadline!.frequency = Deadline.Frequency.unique
 				deadlineDatePicker.date = task.deadline!.date
+				task.resetAlarm(alarmID: task.deadline!.id)
 			}
 			hideWeekdayPicker()
 		case 1:
 			deadlineDatePicker.datePickerMode = .time
 			if task.deadline != nil {
 				task.deadline!.frequency = Deadline.Frequency.daily
+				task.resetAlarm(alarmID: task.deadline!.id)
 				//TODO
 			}
 			hideWeekdayPicker()
@@ -70,6 +79,7 @@ class TaskSettingsTableViewController: UITableViewController {
 			deadlineDatePicker.datePickerMode = .time
 			if task.deadline != nil {
 				task.deadline!.frequency = Deadline.Frequency.weekly
+				task.resetAlarm(alarmID: task.deadline!.id)
 				//TODO
 			}
 			showWeekdayPicker()
@@ -125,10 +135,14 @@ class TaskSettingsTableViewController: UITableViewController {
 			task.deadline = nil
 			self.isDeadlineCellCollapsed = true
 			self.tableView.reloadData()
+			self.frequencyPicker.isEnabled = false
+			self.deadlineDropdownArrow.textColor = UIColor.lightGray
 		} else {
 			task.deadline = Deadline(date: Date(), frequency: .unique)
 			self.isDeadlineCellCollapsed = false
 			self.tableView.reloadData()
+			self.frequencyPicker.isEnabled = true
+			self.deadlineDropdownArrow.textColor = UIColor.black
 		}
 		self.rotateDeadlineArrow()
 		TaskArchive.saveTask(task: task)

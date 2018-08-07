@@ -15,10 +15,4 @@ class Utils {
 		return UUID().uuidString
 	}
 	
-	//TODO:
-	static func isValidTextInput(text: String) -> Bool {
-		return true
-	}
-	
-	
 }

@@ -15,10 +15,7 @@ class SelectorCollectionViewCellAdd: UICollectionViewCell {
 	
 	override func awakeFromNib() {
 		super.awakeFromNib()
-
-		//TODO: make border dashed
-		// https://stackoverflow.com/questions/13679923/dashed-line-border-around-uiview
-		
+		setupLabel()
 	}
 	
 	override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
@@ -26,8 +23,6 @@ class SelectorCollectionViewCellAdd: UICollectionViewCell {
 		let customLayoutAttributes = layoutAttributes as! SelectorCollectionViewLayoutAttributes
 		self.layer.anchorPoint = customLayoutAttributes.anchorPoint
 		self.center.y += (customLayoutAttributes.anchorPoint.y - 0.5) * self.bounds.height
-		
-		setupLabel()
 	}
 	
 	private func setupLabel() {
@@ -36,7 +31,7 @@ class SelectorCollectionViewCellAdd: UICollectionViewCell {
 		
 		self.addLabel.frame.size.width += 40
 		self.addLabel.frame.size.height = self.addLabel.frame.size.width
-		self.addLabel.center.x = self.contentView.center.x
+		self.addLabel.center.x = UIScreen.main.bounds.width * 0.3
 		self.addLabel.center.y = self.addLabel.frame.height / 2
 		
 		self.addLabel.layer.shadowColor = UIColor.gray.cgColor

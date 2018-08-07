@@ -83,8 +83,28 @@ class Task: NSObject, NSCoding {
 		}
 	}
 	
+	func getAlarm(id: String) -> Alarm? {
+		guard alarms != nil else {
+			return nil
+		}
+		for alarm in alarms! {
+			if alarm.id == id {
+				return alarm
+			}
+		}
+		return nil
+	}
+	
 	func hasAlarms() -> Bool {
 		return alarms != nil && alarms!.count > 0
+	}
+	
+	func resetAlarm(alarmID: String) {
+		guard let alarm = getAlarm(id: alarmID) else {
+			return
+		}
+		removeAlarm(alarmID: alarmID)
+		addAlarm(alarm: alarm)
 	}
 	
 	//MARK: NSCoding

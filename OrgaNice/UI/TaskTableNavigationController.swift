@@ -13,7 +13,6 @@ class TaskTableNavigationController: UINavigationController {
 	//MARK: Properties
 	var addButton: UIButton!
 	
-	
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -25,7 +24,6 @@ class TaskTableNavigationController: UINavigationController {
         // Dispose of any resources that can be recreated.
     }
     
-
 	private func setupAddButton() {
 		//setup addButton
 		addButton = UIButton(type: .custom)

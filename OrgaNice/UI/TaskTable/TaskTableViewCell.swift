@@ -74,13 +74,11 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 	
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 		let newTitle = textField.text!
-		if Utils.isValidTextInput(text: newTitle) {
-			if newTitle != task.title {
-				task.title = newTitle
-				TaskArchive.saveTask(task: task)
-			}
-			textField.resignFirstResponder()
+		if newTitle != task.title {
+			task.title = newTitle
+			TaskArchive.saveTask(task: task)
 		}
+		textField.resignFirstResponder()
 		return true
 	}
 	
