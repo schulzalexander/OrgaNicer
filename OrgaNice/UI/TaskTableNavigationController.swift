@@ -54,10 +54,15 @@ class TaskTableNavigationController: UINavigationController {
 		addButton.layer.shadowRadius = 3.0
 		addButton.addTarget(self, action: #selector(self.buttonTouchUpInside), for: UIControlEvents.touchUpInside)
 		addButton.addTarget(self, action: #selector(self.buttonTouchDown), for: UIControlEvents.touchDown)
+		addButton.addTarget(self, action: #selector(self.buttonTouchUpOutside), for: UIControlEvents.touchUpOutside)
 	}
 	
 	@objc private func buttonTouchDown(_ sender: UIButton) {
 		sender.layer.shadowColor = UIColor.clear.cgColor
+	}
+	
+	@objc private func buttonTouchUpOutside(_ sender: UIButton) {
+		addButton.layer.shadowColor = UIColor.black.cgColor
 	}
 	
 	@objc private func buttonTouchUpInside(_ sender: UIButton) {

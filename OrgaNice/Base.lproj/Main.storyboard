@@ -83,11 +83,11 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="194" id="oVY-Aa-M7j">
-                                        <rect key="frame" x="0.0" y="143" width="375" height="194"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="161" id="oVY-Aa-M7j">
+                                        <rect key="frame" x="0.0" y="143" width="375" height="161"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oVY-Aa-M7j" id="Dcp-Ef-4Xe">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="193.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="160.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Deadline" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VtI-Fu-4Ce">
@@ -103,7 +103,7 @@
                                                 </pickerView>
                                                 <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="myh-fo-Ham">
                                                     <rect key="frame" x="16" y="46" width="343" height="116"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <date key="date" timeIntervalSinceReferenceDate="554055749.54979801">
                                                         <!--2018-07-23 16:22:29 +0000-->
                                                     </date>
@@ -111,17 +111,9 @@
                                                         <action selector="didPickDeadline:" destination="5G5-sk-Q8t" eventType="valueChanged" id="y1N-4N-Vq8"/>
                                                     </connections>
                                                 </datePicker>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Igb-Ch-B4L">
-                                                    <rect key="frame" x="149" y="152" width="77" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="Remind Me"/>
-                                                    <connections>
-                                                        <action selector="didPressDeadlineRemindButton:" destination="5G5-sk-Q8t" eventType="touchUpInside" id="0JG-Om-eXq"/>
-                                                    </connections>
-                                                </button>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i5L-Ve-yvI">
                                                     <rect key="frame" x="245" y="11" width="68" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <state key="normal" title="None"/>
                                                     <connections>
@@ -138,49 +130,88 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="168" id="aWH-QE-pZ2">
-                                        <rect key="frame" x="0.0" y="337" width="375" height="168"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="292" id="aWH-QE-pZ2">
+                                        <rect key="frame" x="0.0" y="304" width="375" height="292"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aWH-QE-pZ2" id="cV7-D6-H7b">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="167.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="291.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Reminder" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jAo-Q1-crO">
-                                                    <rect key="frame" x="16" y="11" width="112" height="33"/>
+                                                    <rect key="frame" x="16" y="5" width="112" height="33"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="d7K-Ib-rrU">
-                                                    <rect key="frame" x="16" y="52" width="343" height="105"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="▼" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="arR-Df-bLt">
+                                                    <rect key="frame" x="317" y="16" width="19" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <prototypes>
-                                                        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="L7Q-LI-2yu">
-                                                            <rect key="frame" x="0.0" y="28" width="343" height="44"/>
-                                                            <autoresizingMask key="autoresizingMask"/>
-                                                            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="L7Q-LI-2yu" id="Ser-4w-Bo5">
-                                                                <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
-                                                                <autoresizingMask key="autoresizingMask"/>
-                                                                <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k4Q-ib-QuH">
-                                                                        <rect key="frame" x="49" y="12" width="42" height="21"/>
-                                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                        <nil key="textColor"/>
-                                                                        <nil key="highlightedColor"/>
-                                                                    </label>
-                                                                </subviews>
-                                                            </tableViewCellContentView>
-                                                        </tableViewCell>
-                                                    </prototypes>
-                                                </tableView>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ysm-5Q-z6j">
+                                                    <rect key="frame" x="245" y="11" width="68" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <state key="normal" title="None"/>
+                                                    <connections>
+                                                        <action selector="switchReminderEnabled:" destination="5G5-sk-Q8t" eventType="touchUpInside" id="coa-tx-wP2"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="On Deadline" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oly-Dn-tVt">
+                                                    <rect key="frame" x="48" y="98" width="166" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g5y-C4-NYS">
+                                                    <rect key="frame" x="262" y="93" width="49" height="31"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="didChangeReminderDifferent:" destination="5G5-sk-Q8t" eventType="valueChanged" id="KpR-h2-ZJd"/>
+                                                    </connections>
+                                                </switch>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="MdX-k3-Czy">
+                                                    <rect key="frame" x="262" y="49" width="49" height="31"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="didChangeReminderSoundEnabled:" destination="5G5-sk-Q8t" eventType="valueChanged" id="fyC-ME-c5A"/>
+                                                    </connections>
+                                                </switch>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sound" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7sd-nj-b8C">
+                                                    <rect key="frame" x="48" y="54" width="50" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="a9Y-kE-uJD">
+                                                    <rect key="frame" x="16" y="142" width="343" height="29"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <segments>
+                                                        <segment title="Unique"/>
+                                                        <segment title="Daily"/>
+                                                        <segment title="Weekly"/>
+                                                    </segments>
+                                                    <connections>
+                                                        <action selector="didPickFrequency:" destination="5G5-sk-Q8t" eventType="valueChanged" id="7ql-Fi-06Y"/>
+                                                    </connections>
+                                                </segmentedControl>
+                                                <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="47l-ex-yaK">
+                                                    <rect key="frame" x="16" y="175" width="343" height="116"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <date key="date" timeIntervalSinceReferenceDate="554055749.54979801">
+                                                        <!--2018-07-23 16:22:29 +0000-->
+                                                    </date>
+                                                </datePicker>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="67" id="Hc5-fQ-1s2">
-                                        <rect key="frame" x="0.0" y="505" width="375" height="67"/>
+                                        <rect key="frame" x="0.0" y="596" width="375" height="67"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Hc5-fQ-1s2" id="dFT-NC-8qu">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="66.5"/>
@@ -211,9 +242,14 @@
                         <outlet property="deadlineDatePicker" destination="myh-fo-Ham" id="ZlA-Ab-pol"/>
                         <outlet property="deadlineDropdownArrow" destination="Dq9-Wz-nkC" id="RJO-9y-2Jx"/>
                         <outlet property="deadlineEnabledButton" destination="i5L-Ve-yvI" id="LuW-k1-sXI"/>
-                        <outlet property="deadlineRemindButton" destination="Igb-Ch-B4L" id="otx-sV-9Zd"/>
                         <outlet property="deleteButton" destination="bGO-dB-RqC" id="rRI-GG-u32"/>
                         <outlet property="frequencyPicker" destination="vxw-75-dno" id="0Hp-lq-GFA"/>
+                        <outlet property="reminderDatePicker" destination="47l-ex-yaK" id="DrE-KL-Ei7"/>
+                        <outlet property="reminderDifferentSwitch" destination="g5y-C4-NYS" id="Glq-fp-eLB"/>
+                        <outlet property="reminderDropdownArrow" destination="arR-Df-bLt" id="zPJ-X1-feL"/>
+                        <outlet property="reminderEnabledButton" destination="ysm-5Q-z6j" id="qfc-JB-eL9"/>
+                        <outlet property="reminderFrequencyPicker" destination="a9Y-kE-uJD" id="ggA-ll-n7s"/>
+                        <outlet property="reminderSoundSwitch" destination="MdX-k3-Czy" id="ft0-03-grR"/>
                         <outlet property="taskHeaderTextField" destination="UUz-o4-M96" id="ida-D9-8ca"/>
                         <outlet property="weekdayPicker" destination="nC6-FF-Yld" id="dnI-up-NIl"/>
                     </connections>

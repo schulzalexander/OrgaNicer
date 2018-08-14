@@ -26,3 +26,8 @@
 /* Delete button in task settings */
 "bGO-dB-RqC.normalTitle" = "Löschen";
 
+/* Label in task settings reminder section */
+"oly-Dn-tVt.text" = "An Deadline";
+
+/* Now button in task settings */
+"AQ0-WB-uOc.normalTitle" = "Jetzt";

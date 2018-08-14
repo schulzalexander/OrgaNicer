@@ -22,13 +22,13 @@ class Task: NSObject, NSCoding {
 	var done: Date?
 	var title: String
 	var cellHeight: CGFloat
-	var alarms: [Alarm]?
+	var alarm: Alarm?
 	
 	struct PropertyKeys {
 		static let created = "created"
 		static let id = "id"
 		static let deadline = "deadline"
-		static let alarms = "alarms"
+		static let alarm = "alarm"
 		static let done = "done"
 		static let title = "title"
 		static let cellHeight = "cellHeight"
@@ -53,58 +53,33 @@ class Task: NSObject, NSCoding {
 		self.done = nil
 	}
 	
-	func hasAlarmSet(for alarmID: String) -> Bool {
-		guard alarms != nil else {
-			return false
-		}
-		for alarm in alarms! {
-			if alarm.id == alarmID {
-				return true
-			}
-		}
-		return false
-	}
-	
 	func addAlarm(alarm: Alarm) {
-		if alarms == nil {
-			alarms = [alarm]
-		} else {
-			alarms!.append(alarm)
-		}
+		self.alarm = alarm
 		AlarmManager.addAlarm(task: self, alarm: alarm)
 	}
 	
-	func removeAlarm(alarmID: String) {
-		for i in 0..<(alarms?.count ?? 0) {
-			if alarms![i].id == alarmID {
-				alarms!.remove(at: i)
-				break
-			}
-		}
-	}
-	
-	func getAlarm(id: String) -> Alarm? {
-		guard alarms != nil else {
-			return nil
-		}
-		for alarm in alarms! {
-			if alarm.id == id {
-				return alarm
-			}
-		}
-		return nil
-	}
-	
-	func hasAlarms() -> Bool {
-		return alarms != nil && alarms!.count > 0
-	}
-	
-	func resetAlarm(alarmID: String) {
-		guard let alarm = getAlarm(id: alarmID) else {
+	func removeAlarm() {
+		guard alarm != nil else {
 			return
 		}
-		removeAlarm(alarmID: alarmID)
+		AlarmManager.removeAlarm(id: alarm!.id)
+		self.alarm = nil
+	}
+	
+	func resetAlarm() {
+		guard let alarm = self.alarm else {
+			return
+		}
+		removeAlarm()
 		addAlarm(alarm: alarm)
+	}
+	
+	// If custom alarm has been set, the alarm ID is different from the deadline
+	func hasSeperateAlarm() -> Bool {
+		guard self.deadline != nil, self.alarm != nil else {
+			return false
+		}
+		return self.deadline!.id != self.alarm!.id
 	}
 	
 	//MARK: NSCoding
@@ -113,7 +88,7 @@ class Task: NSObject, NSCoding {
 		aCoder.encode(created, forKey: PropertyKeys.created)
 		aCoder.encode(id, forKey: PropertyKeys.id)
 		aCoder.encode(deadline, forKey: PropertyKeys.deadline)
-		aCoder.encode(alarms, forKey: PropertyKeys.alarms)
+		aCoder.encode(alarm, forKey: PropertyKeys.alarm)
 		aCoder.encode(done, forKey: PropertyKeys.done)
 		aCoder.encode(title, forKey: PropertyKeys.title)
 		aCoder.encode(cellHeight, forKey: PropertyKeys.cellHeight)
@@ -131,7 +106,7 @@ class Task: NSObject, NSCoding {
 		self.title = title
 		self.cellHeight = cellHeight
 		self.deadline = aDecoder.decodeObject(forKey: PropertyKeys.deadline) as? Deadline
-		self.alarms = aDecoder.decodeObject(forKey: PropertyKeys.alarms) as? [Alarm]
+		self.alarm = aDecoder.decodeObject(forKey: PropertyKeys.alarm) as? Alarm
 		self.done = aDecoder.decodeObject(forKey: PropertyKeys.done) as? Date
 	}
 	

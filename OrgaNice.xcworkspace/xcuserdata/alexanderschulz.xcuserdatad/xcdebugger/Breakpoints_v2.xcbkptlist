@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OrgaNice/UI/TaskListSelector/SelectorCollectionViewCellAdd.swift"
-            timestampString = "555359904.919386"
+            timestampString = "555360182.736993"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "22"
@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OrgaNice/UI/TaskTableViewController.swift"
-            timestampString = "555359904.919979"
+            timestampString = "555920584.573873"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "87"
@@ -42,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OrgaNice/Model/Singletons/TaskCategoryManager.swift"
-            timestampString = "555359904.92066"
+            timestampString = "555360182.738692"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "136"
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OrgaNice/UI/Settings/TaskSettingsViewController.swift"
-            timestampString = "555359904.920947"
+            timestampString = "555921462.6811219"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "302"
-            endingLineNumber = "302"
+            startingLineNumber = "395"
+            endingLineNumber = "395"
             landmarkName = "pickerView(_:didSelectRow:inComponent:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -73,13 +73,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "OrgaNice/Model/Deadline.swift"
-            timestampString = "555359904.921739"
+            filePath = "OrgaNice/Other/AlarmManager.swift"
+            timestampString = "555921462.681298"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
-            landmarkName = "getDueString()"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "addAlarm(task:alarm:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "OrgaNice/Other/AlarmManager.swift"
+            timestampString = "555921462.682054"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "addAlarm(task:alarm:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
