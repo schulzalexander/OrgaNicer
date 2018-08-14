@@ -16,9 +16,13 @@ class SelectorCollectionView: UICollectionView {
 	}
 	
 	func scrollToIndex(index: Int) {
-		let offset = (self.contentSize.width - self.bounds.width)
-			/ CGFloat(self.numberOfItems(inSection: 0) - 1)
-			* CGFloat(index)
+		var offset: CGFloat = 0
+		let categoryCount = CGFloat(self.numberOfItems(inSection: 0) - 1)
+		if categoryCount > 0 {
+			offset = (self.contentSize.width - self.bounds.width)
+				/ categoryCount
+				* CGFloat(index)
+		}
 		self.setContentOffset(CGPoint(x: offset, y: 0), animated: true)
 	}
 	

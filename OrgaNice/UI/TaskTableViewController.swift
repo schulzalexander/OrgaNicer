@@ -451,6 +451,7 @@ extension TaskTableViewController: UIGestureRecognizerDelegate {
 			let category = TaskCategory(title: name)
 			TaskCategoryManager.shared.addTaskCategory(list: category)
 			self.categorySelector.reloadData()
+			self.categorySelector.scrollToIndex(index: 0)
 			
 			if self.currList == nil {
 				// TaskList was not set before, therefore add button was hidden -> show now

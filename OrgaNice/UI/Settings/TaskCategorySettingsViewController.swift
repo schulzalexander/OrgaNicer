@@ -46,6 +46,7 @@ class TaskCategorySettingsTableViewController: UITableViewController {
 				taskTable.setTaskCategory(category: nil)
 			}
 			taskTable.categorySelector.reloadData()
+			taskTable.categorySelector.scrollToIndex(index: 0)
 		})
 		let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
 		alertController.addAction(delete)
