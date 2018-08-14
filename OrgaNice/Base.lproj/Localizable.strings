@@ -20,6 +20,7 @@
 "None" = "None";
 "Done" = "Done";
 "Delete" = "Delete";
+"Oops" = "Oops";
 
 // TableTabBar
 "TableTabBarCustomOrder" = "Custom Order";
@@ -36,3 +37,6 @@
 
 // Reminders
 "TodoReminder" = "ToDo Reminder";
+
+// TaskTableView
+"SortingNotPossibleMessage" = "The task order is fixed in this tab.";

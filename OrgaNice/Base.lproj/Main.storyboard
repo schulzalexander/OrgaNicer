@@ -391,7 +391,7 @@
                                                 <constraint firstItem="27g-4j-aUx" firstAttribute="top" secondItem="PzB-m4-GWD" secondAttribute="top" constant="8" id="3RE-pu-l5g"/>
                                                 <constraint firstItem="dGI-S9-WKt" firstAttribute="leading" secondItem="27g-4j-aUx" secondAttribute="trailing" constant="13" id="9of-rg-dRw"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="dGI-S9-WKt" secondAttribute="trailing" constant="11" id="APL-3S-nM4"/>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="zB3-uC-x8Z" secondAttribute="trailingMargin" id="OxB-m4-c2d"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="zB3-uC-x8Z" secondAttribute="trailingMargin" constant="40" id="OxB-m4-c2d"/>
                                                 <constraint firstItem="zB3-uC-x8Z" firstAttribute="leading" secondItem="PzB-m4-GWD" secondAttribute="leadingMargin" constant="40" id="QBL-3c-I8N"/>
                                                 <constraint firstItem="dGI-S9-WKt" firstAttribute="top" secondItem="PzB-m4-GWD" secondAttribute="topMargin" id="SPq-Hi-7fK"/>
                                                 <constraint firstItem="27g-4j-aUx" firstAttribute="leading" secondItem="PzB-m4-GWD" secondAttribute="leading" constant="15" id="sQl-dc-9em"/>

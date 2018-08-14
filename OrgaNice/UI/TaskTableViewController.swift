@@ -30,6 +30,8 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 	@IBOutlet weak var tableView: UITableView!
 	@IBOutlet weak var categorySelector: SelectorCollectionView!
 	
+	var longPressRecognizer: UILongPressGestureRecognizer! // Will notify the user that reordering is disabled when table has fixed ordering
+	
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -42,6 +44,10 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 		tableView.reorder.cellScale = 1.05
 		tableView.rowHeight = UITableViewAutomaticDimension
 		tableView.estimatedRowHeight = 70
+		
+		longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.handleTableViewLongPress(_:)))
+		longPressRecognizer.minimumPressDuration = 0.5
+		tableView.addGestureRecognizer(longPressRecognizer)
 		
 		let pinchRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(TaskTableViewController.handlePinch))
 		tableView.addGestureRecognizer(pinchRecognizer)
@@ -68,6 +74,21 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 		setupTransparentGradientBackground()
 	}
 	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: .UIKeyboardWillHide, object: nil)
+	}
+	
+	@objc func keyboardWillShow(_ notification:Notification) {
+		if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+			tableView.contentInset = UIEdgeInsetsMake(0, 0, keyboardSize.height + 50, 0)
+		}
+	}
+	@objc func keyboardWillHide(_ notification:Notification) {
+		tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+	}
+	
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 		if currList != nil && currList!.count() > 0 {
@@ -83,14 +104,17 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 		currList!.addTask(task: newTask)
 		updateTaskOrdering()
 		tableView.reloadData()
+		
 		let newIndexPath = IndexPath(row: currList!.count() - 1, section: 0)
 		if let newTaskCell = self.tableView.cellForRow(at: newIndexPath) as? TaskTableViewCell {
+			newTaskCell.titleTextEdit.isEnabled = true
 			newTaskCell.titleTextEdit.becomeFirstResponder()
 		} else {
 			tableViewScrollCompletionBlock = {
 				guard let newTaskCell = self.tableView.cellForRow(at: newIndexPath) as? TaskTableViewCell else {
 					return
 				}
+				newTaskCell.titleTextEdit.isEnabled = true
 				newTaskCell.titleTextEdit.becomeFirstResponder()
 			}
 			tableView.scrollToRow(at: newIndexPath, at: .bottom, animated: true)
@@ -105,6 +129,15 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 			self.updateTaskOrdering()
 		}
 		self.tableView.reloadData()
+	}
+	
+	@objc func handleTableViewLongPress(_ sender: UILongPressGestureRecognizer) {
+		if sender.state == .began {
+			let alertController = UIAlertController(title: NSLocalizedString("Oops", comment: ""), message: NSLocalizedString("SortingNotPossibleMessage", comment: ""), preferredStyle: .alert)
+			DispatchQueue.main.async {
+				self.present(alertController, animated: true, completion: nil)
+			}
+		}
 	}
 	
 	@objc func handlePinch(_ sender: UIPinchGestureRecognizer) {
@@ -201,6 +234,7 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 			guard self.currList != nil else {
 				return
 			}
+			self.longPressRecognizer.isEnabled = true
 			self.currList!.filterTab = TaskCategory.FilterTab.CUSTOM
 			TaskArchive.saveTaskCategory(list: self.currList!)
 			self.updateTaskOrdering()
@@ -211,6 +245,7 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 			guard self.currList != nil else {
 				return
 			}
+			self.longPressRecognizer.isEnabled = false
 			self.currList!.filterTab = TaskCategory.FilterTab.DUEDATE
 			TaskArchive.saveTaskCategory(list: self.currList!)
 			self.updateTaskOrdering()

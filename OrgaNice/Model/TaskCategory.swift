@@ -108,9 +108,11 @@ class TaskCategory: NSObject, NSCoding {
 		var sortedTasks = Array(Zip2Sequence(_sequence1: 0..<tasks!.count, _sequence2: getTasks()))
 		sortedTasks.sort { (a, b) -> Bool in
 			// either only b or both a and b have no deadline
-			if b.1.deadline == nil {
+			if a.1.deadline == nil && b.1.deadline == nil {
+				return a.1.created < b.1.created
+			} else if a.1.deadline != nil && b.1.deadline == nil {
 				return true
-			} else if a.1.deadline == nil {
+			} else if a.1.deadline == nil && b.1.deadline != nil {
 				return false
 			} else {
 				return a.1.deadline!.date < b.1.deadline!.date
