@@ -18,7 +18,7 @@ class TaskTableNavigationController: UINavigationController {
 
         setupAddButton()
 		
-		self.navigationBar.backgroundColor = UIColor(red: 1, green: 0.5922, blue: 0.098, alpha: 1.0)
+		//self.navigationBar.backgroundColor = UIColor(red: 1, green: 0.5922, blue: 0.098, alpha: 1.0)
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,13 +29,13 @@ class TaskTableNavigationController: UINavigationController {
 	private func setupAddButton() {
 		//setup addButton
 		addButton = UIButton(type: .custom)
-		let title = NSAttributedString(string: "  +", attributes: [NSAttributedStringKey.font: UIFont(name: "AmericanTypewriter", size: 45)!])
+		let title = NSAttributedString(string: "  +", attributes: [NSAttributedString.Key.font: UIFont(name: "AmericanTypewriter", size: 45)!])
 		addButton.setAttributedTitle(title, for: .normal)
 		addButton.setTitleColor(UIColor.black, for: .normal)
 		addButton.setTitleColor(UIColor.lightGray, for: .highlighted)
 		addButton.contentHorizontalAlignment = .left
 		addButton.frame = CGRect(x: 0, y: 0, width: 150, height: 60)
-		addButton.backgroundColor = UIColor(red: 1, green: 0.9098, blue: 0.1098, alpha: 1.0)//UIColor(red: 1, green: 0.9529, blue: 0.3176, alpha: 1.0)
+		addButton.backgroundColor = UIColor(red: 1, green: 0.9373, blue: 0.3882, alpha: 1.0)//UIColor(red: 1, green: 0.9098, blue: 0.1098, alpha: 1.0)//UIColor(red: 1, green: 0.9529, blue: 0.3176, alpha: 1.0)
 		//self.addGradient(view: addButton)
 		//addButton.layer.borderColor = UIColor.lightgray.cgColor
 		//addButton.layer.borderWidth = 1.0
@@ -52,9 +52,9 @@ class TaskTableNavigationController: UINavigationController {
 		addButton.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
 		addButton.layer.shadowOpacity = 1.0
 		addButton.layer.shadowRadius = 3.0
-		addButton.addTarget(self, action: #selector(self.buttonTouchUpInside), for: UIControlEvents.touchUpInside)
-		addButton.addTarget(self, action: #selector(self.buttonTouchDown), for: UIControlEvents.touchDown)
-		addButton.addTarget(self, action: #selector(self.buttonTouchUpOutside), for: UIControlEvents.touchUpOutside)
+		addButton.addTarget(self, action: #selector(self.buttonTouchUpInside), for: UIControl.Event.touchUpInside)
+		addButton.addTarget(self, action: #selector(self.buttonTouchDown), for: UIControl.Event.touchDown)
+		addButton.addTarget(self, action: #selector(self.buttonTouchUpOutside), for: UIControl.Event.touchUpOutside)
 	}
 	
 	@objc private func buttonTouchDown(_ sender: UIButton) {

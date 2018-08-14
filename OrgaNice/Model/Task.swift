@@ -134,9 +134,9 @@ class Task: NSObject, NSCoding {
 		var percentage = (priority - Task.PRIORITY_MIN) / (Task.PRIORITY_MAX - Task.PRIORITY_MIN)
 		var resColor: UIColor
 		
-		let lowColor = CIColor(red: 1, green: 0.9098, blue: 0.1098, alpha: 1.0)
-		let middleColor = CIColor(red: 1, green: 0.1098, blue: 0.1098, alpha: 1.0)
-		let highColor = CIColor(red: 0.6078, green: 0, blue: 0, alpha: 1.0)
+		let lowColor = CIColor(red: 1, green: 0.9373, blue: 0.3882, alpha: 1.0)//CIColor(red: 1, green: 0.9098, blue: 0.1098, alpha: 1.0)
+		let middleColor = CIColor(red: 1, green: 0.6706, blue: 0.298, alpha: 1.0)//CIColor(red: 1, green: 0.1098, blue: 0.1098, alpha: 1.0)
+		let highColor = CIColor(red: 0.6275, green: 0.1882, blue: 0.1882, alpha: 1.0)//CIColor(red: 0.6078, green: 0, blue: 0, alpha: 1.0)
 		
 		if percentage > 0.5 {
 			percentage = (percentage - 0.5) * 2

@@ -42,7 +42,7 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 		tableView.dataSource = self
 		tableView.reorder.delegate = self
 		tableView.reorder.cellScale = 1.05
-		tableView.rowHeight = UITableViewAutomaticDimension
+		tableView.rowHeight = UITableView.automaticDimension
 		tableView.estimatedRowHeight = 70
 		
 		longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.handleTableViewLongPress(_:)))
@@ -57,7 +57,7 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 		// Catgory Selector
 		categorySelector.delegate = self
 		categorySelector.dataSource = TaskCategoryManager.shared
-		categorySelector.decelerationRate = 0.1
+		categorySelector.decelerationRate = UIScrollView.DecelerationRate(rawValue: 0.1)
 		
 		// Load first list if existing
 		if TaskCategoryManager.shared.categoryTitlesSorted.count > 0 {
@@ -76,17 +76,17 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
-		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: .UIKeyboardWillHide, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
 	}
 	
 	@objc func keyboardWillShow(_ notification:Notification) {
-		if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-			tableView.contentInset = UIEdgeInsetsMake(0, 0, keyboardSize.height + 50, 0)
+		if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+			tableView.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: keyboardSize.height + 50, right: 0)
 		}
 	}
 	@objc func keyboardWillHide(_ notification:Notification) {
-		tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+		tableView.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0)
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
@@ -134,6 +134,8 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 	@objc func handleTableViewLongPress(_ sender: UILongPressGestureRecognizer) {
 		if sender.state == .began {
 			let alertController = UIAlertController(title: NSLocalizedString("Oops", comment: ""), message: NSLocalizedString("SortingNotPossibleMessage", comment: ""), preferredStyle: .alert)
+			let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
+			alertController.addAction(cancel)
 			DispatchQueue.main.async {
 				self.present(alertController, animated: true, completion: nil)
 			}
@@ -234,7 +236,7 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 			guard self.currList != nil else {
 				return
 			}
-			self.longPressRecognizer.isEnabled = true
+			self.longPressRecognizer.isEnabled = false
 			self.currList!.filterTab = TaskCategory.FilterTab.CUSTOM
 			TaskArchive.saveTaskCategory(list: self.currList!)
 			self.updateTaskOrdering()
@@ -245,7 +247,7 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 			guard self.currList != nil else {
 				return
 			}
-			self.longPressRecognizer.isEnabled = false
+			self.longPressRecognizer.isEnabled = true
 			self.currList!.filterTab = TaskCategory.FilterTab.DUEDATE
 			TaskArchive.saveTaskCategory(list: self.currList!)
 			self.updateTaskOrdering()
@@ -279,9 +281,11 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 		let gradientLayer = CAGradientLayer()
 		gradientLayer.colors = colours
 		gradientLayer.locations = locations
-		gradientLayer.frame = self.view.bounds
+		gradientLayer.frame = self.tableView.bounds
 		
-		self.view.layer.insertSublayer(gradientLayer, below: self.view.layer.sublayers![0])
+		let view = UIView(frame: self.tableView.bounds)
+		view.layer.addSublayer(gradientLayer)
+		self.tableView.backgroundView = view
 	}
 	
 }
@@ -352,7 +356,7 @@ extension TaskTableViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension TaskTableViewController: TableViewReorderDelegate {
 	
-	func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+	func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
 		return .none
 	}
 	

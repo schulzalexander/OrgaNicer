@@ -15,7 +15,7 @@ class AlarmManager {
 		let content = UNMutableNotificationContent()
 		content.body = task.title
 		content.title = NSLocalizedString("TodoReminder", comment: "")
-		content.sound = alarm.sound ? UNNotificationSound.default() : nil
+		content.sound = alarm.sound ? UNNotificationSound.default : nil
 		
 		var attributes: Set<Calendar.Component> = [.hour, .minute]
 		if alarm.frequency == .unique {

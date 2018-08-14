@@ -44,7 +44,9 @@
                                                 </textField>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3DZ-0S-cUd">
                                                     <rect key="frame" x="175" y="14" width="30" height="30"/>
-                                                    <state key="normal" title="Edit"/>
+                                                    <state key="normal" title="Edit">
+                                                        <color key="titleColor" red="0.0" green="0.56577507819999995" blue="1" alpha="0.70232724469999996" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
                                                     <connections>
                                                         <action selector="startEditingTitle:" destination="5G5-sk-Q8t" eventType="touchUpInside" id="883-oB-QBc"/>
                                                     </connections>
@@ -76,6 +78,7 @@
                                                         <segment title="Daily"/>
                                                         <segment title="Weekly"/>
                                                     </segments>
+                                                    <color key="tintColor" red="0.30001619460000001" green="0.6880967617" blue="0.99971204999999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <connections>
                                                         <action selector="didPickFrequency:" destination="5G5-sk-Q8t" eventType="valueChanged" id="1n7-DE-cwn"/>
                                                     </connections>
@@ -115,7 +118,9 @@
                                                     <rect key="frame" x="245" y="11" width="68" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <state key="normal" title="None"/>
+                                                    <state key="normal" title="None">
+                                                        <color key="titleColor" red="0.0" green="0.56577507819999995" blue="1" alpha="0.70232724469999996" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
                                                     <connections>
                                                         <action selector="switchDeadlineEnabled:" destination="5G5-sk-Q8t" eventType="touchUpInside" id="VRq-fi-mtc"/>
                                                     </connections>
@@ -155,7 +160,9 @@
                                                     <rect key="frame" x="245" y="11" width="68" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <state key="normal" title="None"/>
+                                                    <state key="normal" title="None">
+                                                        <color key="titleColor" red="0.30001619458198547" green="0.68809676170349121" blue="0.99971204996109009" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
                                                     <connections>
                                                         <action selector="switchReminderEnabled:" destination="5G5-sk-Q8t" eventType="touchUpInside" id="coa-tx-wP2"/>
                                                     </connections>
@@ -170,6 +177,7 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g5y-C4-NYS">
                                                     <rect key="frame" x="262" y="93" width="49" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="onTintColor" red="0.30001619458198547" green="0.68809676170349121" blue="0.99971204996109009" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <connections>
                                                         <action selector="didChangeReminderDifferent:" destination="5G5-sk-Q8t" eventType="valueChanged" id="KpR-h2-ZJd"/>
                                                     </connections>
@@ -177,6 +185,7 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="MdX-k3-Czy">
                                                     <rect key="frame" x="262" y="49" width="49" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="onTintColor" red="0.30001619458198547" green="0.68809676170349121" blue="0.99971204996109009" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <connections>
                                                         <action selector="didChangeReminderSoundEnabled:" destination="5G5-sk-Q8t" eventType="valueChanged" id="fyC-ME-c5A"/>
                                                     </connections>
@@ -196,6 +205,7 @@
                                                         <segment title="Daily"/>
                                                         <segment title="Weekly"/>
                                                     </segments>
+                                                    <color key="tintColor" red="0.29975247383117676" green="0.69215255975723267" blue="0.99964040517807007" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <connections>
                                                         <action selector="didPickFrequency:" destination="5G5-sk-Q8t" eventType="valueChanged" id="7ql-Fi-06Y"/>
                                                     </connections>
@@ -220,7 +230,7 @@
                                                 <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGO-dB-RqC">
                                                     <rect key="frame" x="112" y="11" width="151" height="45"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" red="1" green="0.1124867392" blue="0.065501891830000006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="backgroundColor" red="1" green="0.028639300027590964" blue="0.0" alpha="0.70232724471830987" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <state key="normal" title="Delete"/>
                                                     <connections>
@@ -312,7 +322,7 @@
                                                 <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hYB-Hq-9Zx">
                                                     <rect key="frame" x="112" y="16" width="151" height="45"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" red="1" green="0.1124867392" blue="0.065501891830000006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="backgroundColor" red="1" green="0.028639300029999998" blue="0.0" alpha="0.70232724469999996" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <state key="normal" title="Delete"/>
                                                     <connections>
