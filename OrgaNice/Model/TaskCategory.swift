@@ -99,11 +99,13 @@ class TaskCategory: NSObject, NSCoding {
 		TaskArchive.saveTaskCategory(list: self)
 	}
 	
-	func getOrderByDueDate() -> [Int] {
+	func getOrderByDueDate(done: Bool?) -> [Int] {
 		guard tasks != nil else {
 			return [Int]()
 		}
-		var sortedTasks = Array(Zip2Sequence(_sequence1: 0..<tasks!.count, _sequence2: getTasks()))
+		let taskList = done != nil ? (done! ? getDone() : getUndone()) : getTasks()
+		let indexes = done != nil ? getOrderForStatus(done: done!) : Array(0..<taskList.count)
+		var sortedTasks = Array(Zip2Sequence(_sequence1: indexes,_sequence2: taskList))
 		sortedTasks.sort { (a, b) -> Bool in
 			// either only b or both a and b have no deadline
 			if a.1.deadline == nil && b.1.deadline == nil {
@@ -118,6 +120,20 @@ class TaskCategory: NSObject, NSCoding {
 		}
 		return sortedTasks.map { tuple in
 			tuple.0
+		}
+	}
+	
+	func getOrderForStatus(done: Bool?) -> [Int] {
+		guard tasks != nil else {
+			return [Int]()
+		}
+		if done != nil {
+			let sortedTasks = Array(Zip2Sequence(_sequence1: 0..<tasks!.count, _sequence2: getTasks()))
+			return (sortedTasks.filter { ($1.done != nil) == done }).map({ (tuple) -> Int in
+				return tuple.0
+			})
+		} else {
+			return Array(0..<tasks!.count)
 		}
 	}
 	

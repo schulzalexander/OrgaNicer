@@ -11,7 +11,7 @@ import Foundation
 class TaskCategorySettings: NSObject, NSCoding {
 	
 	enum TaskOrder: Int {
-		case custom, duedate
+		case duedate, custom
 	}
 	
 	enum TaskStatus: Int {
@@ -21,15 +21,18 @@ class TaskCategorySettings: NSObject, NSCoding {
 	//MARK: Properties
 	var taskOrder: TaskOrder
 	var selectedTaskStatusTab: TaskStatus
+	var seperateByTaskStatus: Bool
 	
 	struct PropertyKeys {
 		static let taskOrder = "taskOrder"
 		static let selectedTaskStatusTab = "selectedTaskStatusTab"
+		static let seperateByTaskStatus = "seperateByTaskStatus"
 	}
 	
 	init(taskOrder: TaskOrder, selectedTaskStatusTab: TaskStatus) {
 		self.taskOrder = taskOrder
 		self.selectedTaskStatusTab = selectedTaskStatusTab
+		self.seperateByTaskStatus = true
 	}
 	
 	//MARK: NSCoding
@@ -37,6 +40,7 @@ class TaskCategorySettings: NSObject, NSCoding {
 	func encode(with aCoder: NSCoder) {
 		aCoder.encode(taskOrder.rawValue, forKey: PropertyKeys.taskOrder)
 		aCoder.encode(selectedTaskStatusTab.rawValue, forKey: PropertyKeys.selectedTaskStatusTab)
+		aCoder.encode(seperateByTaskStatus, forKey: PropertyKeys.seperateByTaskStatus)
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
@@ -46,6 +50,7 @@ class TaskCategorySettings: NSObject, NSCoding {
 		}
 		self.taskOrder = taskOrder
 		self.selectedTaskStatusTab = selectedTaskStatusTab
+		self.seperateByTaskStatus = aDecoder.decodeBool(forKey: PropertyKeys.seperateByTaskStatus)
 	}
 	
 }

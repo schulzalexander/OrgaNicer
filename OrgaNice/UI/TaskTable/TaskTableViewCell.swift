@@ -68,6 +68,8 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 				return
 		}
 		viewController.updateTodoCounter()
+		viewController.updateTaskOrdering()
+		viewController.tableView.reloadData()
 	}
 	
 	//MARK: TextFieldDelegate

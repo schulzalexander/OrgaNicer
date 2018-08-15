@@ -125,7 +125,7 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 		self.currList = category
 		self.navigationItem.title = category?.title
 		if category != nil {
-			self.tableTabBar.switchToTab(index: category!.settings.taskOrder.rawValue)
+			self.tableTabBar.switchToTab(index: category!.settings.selectedTaskStatusTab.rawValue)
 			self.updateTaskOrdering()
 		}
 		self.tableView.reloadData()
@@ -213,12 +213,12 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 	}
 	
 	func updateTaskOrdering() {
-		guard currList != nil else {
+		guard let currList = currList else {
 			return
 		}
-		self.taskOrdering = currList!.settings.taskOrder == .custom
-			? Array(0..<(currList!.tasks?.count ?? 0))
-			: currList!.getOrderByDueDate()
+		self.taskOrdering = currList.settings.taskOrder == .custom
+			? currList.getOrderForStatus(done: currList.settings.selectedTaskStatusTab == .done)
+			: currList.getOrderByDueDate(done: currList.settings.selectedTaskStatusTab == .done)
 	}
 	
 	//MARK: Private Methods
@@ -233,10 +233,20 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 		tableTabBar = TableTabBar(frame: rect)
 		
 		tableTabBar.addTab(title: NSLocalizedString("Open", comment: ""), action: {
-			
+			guard self.currList != nil else {
+				return
+			}
+			self.currList?.settings.selectedTaskStatusTab = .undone
+			self.updateTaskOrdering()
+			self.tableView.reloadData()
 		})
 		tableTabBar.addTab(title: NSLocalizedString("Done", comment: ""), action: {
-			
+			guard self.currList != nil else {
+				return
+			}
+			self.currList?.settings.selectedTaskStatusTab = .done
+			self.updateTaskOrdering()
+			self.tableView.reloadData()
 		})
 	}
 	
@@ -348,8 +358,9 @@ extension TaskTableViewController: TableViewReorderDelegate {
 		guard self.currList != nil, self.currList!.tasks != nil else {
 			return
 		}
-		let task = self.currList!.tasks!.remove(at: sourceIndexPath.row)
-		self.currList!.tasks!.insert(task, at: destinationIndexPath.row)
+		let task = self.currList!.tasks!.remove(at: taskOrdering![sourceIndexPath.row])
+		self.currList!.tasks!.insert(task, at: taskOrdering![destinationIndexPath.row])
+		
 		TaskArchive.saveTaskCategory(list: self.currList!)
 	}
 	

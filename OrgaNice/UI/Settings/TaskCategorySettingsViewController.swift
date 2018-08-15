@@ -33,31 +33,30 @@ class TaskCategorySettingsTableViewController: UITableViewController {
     }
 	
 	@IBAction func didSelectTaskOrder(_ sender: UISegmentedControl) {
-		guard let taskTable = self.popoverPresentationController?.delegate as? TaskTableViewController,
-			taskTable.currList != nil else {
+		guard let taskTable = self.popoverPresentationController?.delegate as? TaskTableViewController else {
 			return
 		}
 		switch sender.selectedSegmentIndex {
 		case 0: // By Deadline
 			taskTable.longPressRecognizer.isEnabled = true
-			taskTable.currList!.settings.taskOrder = .duedate
+			category.settings.taskOrder = .duedate
 			taskTable.tableView.reorder.isEnabled = false
 		case 1: // Custom
 			taskTable.longPressRecognizer.isEnabled = false
-			taskTable.currList!.settings.taskOrder = .custom
+			category.settings.taskOrder = .custom
 			taskTable.tableView.reorder.isEnabled = true
 		default:
 			fatalError("Unknown segment selected in task order selector!")
 		}
-		TaskArchive.saveTaskCategory(list: taskTable.currList!)
+		TaskArchive.saveTaskCategory(list: category)
 		taskTable.updateTaskOrdering()
 		taskTable.tableView.reloadData()
-		
-		//TODO save this
 	}
 	
 	@IBAction func didSwitchSeperateDoneTasks(_ sender: UISwitch) {
-		
+		//TODO
+		category.settings.seperateByTaskStatus = sender.isOn
+		TaskArchive.saveTaskCategory(list: category)
 	}
 	
 	@IBAction func deleteList(_ sender: UIButton) {
@@ -102,7 +101,8 @@ class TaskCategorySettingsTableViewController: UITableViewController {
 	}
 	
 	private func loadCategorySettings() {
-		//TODO
+		seperateDoneTasksSwitch.isOn = category.settings.seperateByTaskStatus
+		taskOrderSelector.selectedSegmentIndex = category.settings.taskOrder.rawValue
 	}
 	
 }
