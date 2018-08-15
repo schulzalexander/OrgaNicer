@@ -16,6 +16,8 @@ class TaskCategorySettingsTableViewController: UITableViewController {
 	//MARK: Outlets
 	@IBOutlet weak var categoryHeaderTextField: UITextField!
 	@IBOutlet weak var deleteButton: UIButton!
+	@IBOutlet weak var seperateDoneTasksSwitch: UISwitch!
+	@IBOutlet weak var taskOrderSelector: UISegmentedControl!
 	
 	
     override func viewDidLoad() {
@@ -25,9 +27,38 @@ class TaskCategorySettingsTableViewController: UITableViewController {
 		self.categoryHeaderTextField.delegate = self
 		
 		self.setupDeleteButton()
+		self.loadCategorySettings() // Set controls to saved settings
 		
 		self.tableView.tableFooterView = UIView()
     }
+	
+	@IBAction func didSelectTaskOrder(_ sender: UISegmentedControl) {
+		guard let taskTable = self.popoverPresentationController?.delegate as? TaskTableViewController,
+			taskTable.currList != nil else {
+			return
+		}
+		switch sender.selectedSegmentIndex {
+		case 0: // By Deadline
+			taskTable.longPressRecognizer.isEnabled = true
+			taskTable.currList!.settings.taskOrder = .duedate
+			taskTable.tableView.reorder.isEnabled = false
+		case 1: // Custom
+			taskTable.longPressRecognizer.isEnabled = false
+			taskTable.currList!.settings.taskOrder = .custom
+			taskTable.tableView.reorder.isEnabled = true
+		default:
+			fatalError("Unknown segment selected in task order selector!")
+		}
+		TaskArchive.saveTaskCategory(list: taskTable.currList!)
+		taskTable.updateTaskOrdering()
+		taskTable.tableView.reloadData()
+		
+		//TODO save this
+	}
+	
+	@IBAction func didSwitchSeperateDoneTasks(_ sender: UISwitch) {
+		
+	}
 	
 	@IBAction func deleteList(_ sender: UIButton) {
 		let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -68,6 +99,10 @@ class TaskCategorySettingsTableViewController: UITableViewController {
 		deleteButton.backgroundColor = UIColor.red
 		deleteButton.layer.cornerRadius = deleteButton.frame.height / 2
 		deleteButton.clipsToBounds = true
+	}
+	
+	private func loadCategorySettings() {
+		//TODO
 	}
 	
 }

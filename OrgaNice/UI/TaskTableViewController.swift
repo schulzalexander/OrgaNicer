@@ -13,7 +13,7 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 	
 	//MARK: Properties
 	var currList: TaskCategory?
-	var taskOrdering: [Int]?
+	var taskOrdering: [Int]? // contains indexes of tasks in sortedTasks array of category
 	
 	var pinchCellSizeBuffer: CGFloat!
 	var pinchCellBuffer: TaskTableViewCell!
@@ -125,7 +125,7 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 		self.currList = category
 		self.navigationItem.title = category?.title
 		if category != nil {
-			self.tableTabBar.switchToTab(index: category!.filterTab)
+			self.tableTabBar.switchToTab(index: category!.settings.taskOrder.rawValue)
 			self.updateTaskOrdering()
 		}
 		self.tableView.reloadData()
@@ -216,7 +216,7 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 		guard currList != nil else {
 			return
 		}
-		self.taskOrdering = currList!.filterTab == TaskCategory.FilterTab.CUSTOM
+		self.taskOrdering = currList!.settings.taskOrder == .custom
 			? Array(0..<(currList!.tasks?.count ?? 0))
 			: currList!.getOrderByDueDate()
 	}
@@ -232,27 +232,11 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 		let rect = CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 30)
 		tableTabBar = TableTabBar(frame: rect)
 		
-		tableTabBar.addTab(title: NSLocalizedString("TableTabBarCustomOrder", comment: ""), action: {
-			guard self.currList != nil else {
-				return
-			}
-			self.longPressRecognizer.isEnabled = false
-			self.currList!.filterTab = TaskCategory.FilterTab.CUSTOM
-			TaskArchive.saveTaskCategory(list: self.currList!)
-			self.updateTaskOrdering()
-			self.tableView.reorder.isEnabled = true
-			self.tableView.reloadData()
+		tableTabBar.addTab(title: NSLocalizedString("Open", comment: ""), action: {
+			
 		})
-		tableTabBar.addTab(title: NSLocalizedString("TableTabBarDueDateOrder", comment: ""), action: {
-			guard self.currList != nil else {
-				return
-			}
-			self.longPressRecognizer.isEnabled = true
-			self.currList!.filterTab = TaskCategory.FilterTab.DUEDATE
-			TaskArchive.saveTaskCategory(list: self.currList!)
-			self.updateTaskOrdering()
-			self.tableView.reorder.isEnabled = false
-			self.tableView.reloadData()
+		tableTabBar.addTab(title: NSLocalizedString("Done", comment: ""), action: {
+			
 		})
 	}
 	
@@ -299,7 +283,7 @@ extension TaskTableViewController: UITableViewDelegate, UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		updateTodoCounter()
-		return currList != nil ? currList!.count() : 0
+		return taskOrdering?.count ?? 0
 	}
 	
 	func numberOfSections(in tableView: UITableView) -> Int {

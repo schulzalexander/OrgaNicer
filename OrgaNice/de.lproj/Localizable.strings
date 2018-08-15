@@ -26,6 +26,8 @@
 // TableTabBar
 "TableTabBarCustomOrder" = "Eigene Reihenfolge";
 "TableTabBarDueDateOrder" = "Anstehend";
+"Done" = "Geschafft";
+"Open" = "Offen";
 
 // TaskTableViewCell
 "DeadlinePast" = "fällig vor %@";
@@ -40,4 +42,4 @@
 "TodoReminder" = "ToDo Erinnerung";
 
 // TaskTableView
-"SortingNotPossibleMessage" = "Die Sortierung der Tasks kann in diesem Tab nicht geändert werden.";
+"SortingNotPossibleMessage" = "Die Reihenfolge der Tasks kann in dieser Sortierung nicht geändert werden.";

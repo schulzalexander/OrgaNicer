@@ -10,22 +10,19 @@ import Foundation
 
 class TaskCategory: NSObject, NSCoding {
 	
-	struct FilterTab {
-		static let CUSTOM = 0
-		static let DUEDATE = 1
-	}
+	
 	
 	//MARK: Properties
 	var tasks: [String]?
 	var id: String
 	var title: String
-	var filterTab: Int
+	var settings: TaskCategorySettings
 	
 	struct PropertyKeys {
 		static let taskIDs = "taskIDs"
 		static let id = "id"
 		static let title = "title"
-		static let filterTab = "filterTab"
+		static let settings = "settings"
 	}
 	
 	//MARK: Methods
@@ -33,7 +30,8 @@ class TaskCategory: NSObject, NSCoding {
 	init(title: String) {
 		self.id = Utils.generateID()
 		self.title = title
-		self.filterTab = FilterTab.CUSTOM
+		self.settings = TaskCategorySettings(taskOrder: .custom,
+											 selectedTaskStatusTab: .undone)
 	}
 	
 	func count() -> Int {
@@ -124,13 +122,27 @@ class TaskCategory: NSObject, NSCoding {
 	}
 	
 	func getTasks() -> [Task] {
+		return getTasksWithStatus(done: nil)
+	}
+	
+	func getDone() -> [Task] {
+		return getTasksWithStatus(done: true)
+	}
+	
+	func getUndone() -> [Task] {
+		return getTasksWithStatus(done: false)
+	}
+	
+	private func getTasksWithStatus(done: Bool?) -> [Task] {
 		var ret = [Task]()
 		guard tasks != nil else {
 			return ret
 		}
 		for id in tasks! {
 			if let newTask = TaskManager.shared.getTask(id: id) {
-				ret.append(newTask)
+				if done == nil || (newTask.done != nil) == done! {
+					ret.append(newTask)
+				}
 			}
 		}
 		return ret
@@ -142,17 +154,18 @@ class TaskCategory: NSObject, NSCoding {
 		aCoder.encode(tasks, forKey: PropertyKeys.taskIDs)
 		aCoder.encode(id, forKey: PropertyKeys.id)
 		aCoder.encode(title, forKey: PropertyKeys.title)
-		aCoder.encode(filterTab, forKey: PropertyKeys.filterTab)
+		aCoder.encode(settings, forKey: PropertyKeys.settings)
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
 		guard let id = aDecoder.decodeObject(forKey: PropertyKeys.id) as? String,
-			let title = aDecoder.decodeObject(forKey: PropertyKeys.title) as? String else {
+			let title = aDecoder.decodeObject(forKey: PropertyKeys.title) as? String,
+			let settings = aDecoder.decodeObject(forKey: PropertyKeys.settings) as? TaskCategorySettings else {
 			fatalError("Error while loading task list from storage!")
 		}
 		self.id = id
 		self.title = title
-		self.filterTab = aDecoder.decodeInteger(forKey: PropertyKeys.filterTab)
+		self.settings = settings
 		self.tasks = aDecoder.decodeObject(forKey: PropertyKeys.taskIDs) as? [String]
 	}
 	

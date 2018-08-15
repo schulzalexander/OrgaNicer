@@ -25,6 +25,8 @@
 // TableTabBar
 "TableTabBarCustomOrder" = "Custom Order";
 "TableTabBarDueDateOrder" = "Upcoming";
+"Done" = "Done";
+"Open" = "Open";
 
 // TaskTableViewCell
 "DeadlinePast" = "due for %@";
@@ -39,4 +41,4 @@
 "TodoReminder" = "ToDo Reminder";
 
 // TaskTableView
-"SortingNotPossibleMessage" = "The task order is fixed in this tab.";
+"SortingNotPossibleMessage" = "The task order is fixed for the selected sorting.";
