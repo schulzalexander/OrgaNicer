@@ -43,7 +43,7 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 		tableView.reorder.delegate = self
 		tableView.reorder.cellScale = 1.05
 		tableView.rowHeight = UITableView.automaticDimension
-		tableView.estimatedRowHeight = 70
+		//tableView.estimatedRowHeight = 70
 		
 		longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.handleTableViewLongPress(_:)))
 		longPressRecognizer.minimumPressDuration = 0.5
@@ -367,9 +367,6 @@ extension TaskTableViewController: TableViewReorderDelegate {
 		guard self.currList != nil, self.currList!.tasks != nil else {
 			return
 		}
-		print("reorder")
-		print(sourceIndexPath.row)
-		print(destinationIndexPath.row)
 		let task = self.currList!.tasks![taskOrdering![sourceIndexPath.row]]
 		let neighbourNodeIndex = taskOrdering![destinationIndexPath.row]
 		if sourceIndexPath.row < destinationIndexPath.row {
@@ -470,6 +467,7 @@ extension TaskTableViewController: UIGestureRecognizerDelegate {
 			let category = TaskCategory(title: name)
 			TaskCategoryManager.shared.addTaskCategory(list: category)
 			self.categorySelector.reloadData()
+			self.categorySelector.layoutIfNeeded()
 			if let index = TaskCategoryManager.shared.getTaskCategoryIndex(id: category.id) {
 				self.categorySelector.scrollToIndex(index: index)
 			}

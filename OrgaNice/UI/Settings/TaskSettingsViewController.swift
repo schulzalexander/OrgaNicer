@@ -209,6 +209,7 @@ class TaskSettingsTableViewController: UITableViewController {
 			guard let taskTable = self.popoverPresentationController?.delegate as? TaskTableViewController else {
 				return
 			}
+			taskTable.updateTaskOrdering()
 			taskTable.tableView.reloadData()
 		})
 		let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
