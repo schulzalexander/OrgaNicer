@@ -39,8 +39,7 @@ class TaskCategoryManager: NSObject, NSCoding {
 		TaskArchive.deleteTaskCategory(id: id)
 		TaskArchive.saveTaskCategoryManager()
 		
-		let index = getTaskCategoryIndex(id: id)
-		if index >= 0 {
+		if let index = getTaskCategoryIndex(id: id) {
 			categoryTitlesSorted.remove(at: index)
 		}
 	}
@@ -58,13 +57,13 @@ class TaskCategoryManager: NSObject, NSCoding {
 		return categories.count
 	}
 	
-	func getTaskCategoryIndex(id: String) -> Int {
+	func getTaskCategoryIndex(id: String) -> Int? {
 		for i in 0..<categoryTitlesSorted.count {
 			if categoryTitlesSorted[i].id == id {
 				return i
 			}
 		}
-		return -1
+		return nil
 	}
 	
 	func getTaskCategory(id: String) -> TaskCategory? {

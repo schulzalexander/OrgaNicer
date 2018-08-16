@@ -105,7 +105,7 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 		updateTaskOrdering()
 		tableView.reloadData()
 		
-		let newIndexPath = IndexPath(row: currList!.count() - 1, section: 0)
+		let newIndexPath = IndexPath(row: taskOrdering!.count - 1, section: 0)
 		if let newTaskCell = self.tableView.cellForRow(at: newIndexPath) as? TaskTableViewCell {
 			newTaskCell.titleTextEdit.isEnabled = true
 			newTaskCell.titleTextEdit.becomeFirstResponder()
@@ -128,6 +128,8 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 			self.tableTabBar.switchToTab(index: category!.settings.selectedTaskStatusTab.rawValue)
 			self.updateTaskOrdering()
 		}
+		self.longPressRecognizer.isEnabled = (self.currList?.settings.taskOrder ?? nil) != .custom
+		self.tableView.reorder.isEnabled = (self.currList?.settings.taskOrder ?? nil) == .custom
 		self.tableView.reloadData()
 	}
 	
@@ -217,8 +219,12 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 			return
 		}
 		self.taskOrdering = currList.settings.taskOrder == .custom
-			? currList.getOrderForStatus(done: currList.settings.selectedTaskStatusTab == .done)
-			: currList.getOrderByDueDate(done: currList.settings.selectedTaskStatusTab == .done)
+			? currList.getOrderForStatus(done: currList.settings.seperateByTaskStatus
+				? currList.settings.selectedTaskStatusTab == .done
+				: nil)
+			: currList.getOrderByDueDate(done: currList.settings.seperateByTaskStatus
+				? currList.settings.selectedTaskStatusTab == .done
+				: nil)
 	}
 	
 	//MARK: Private Methods
@@ -313,6 +319,7 @@ extension TaskTableViewController: UITableViewDelegate, UITableViewDataSource {
 		}
 		cell.task = TaskManager.shared.getTask(id: currList!.tasks![taskOrdering![indexPath.row]])
 		cell.adjustTitleFont()
+		cell.contentView.backgroundColor = Task.getPriorityColor(priority: cell.task.cellHeight)
 		
 		let recognizer = UITapGestureRecognizer(target: self, action: #selector(TaskTableViewController.didTapOnTaskCell(_:)))
 		cell.addGestureRecognizer(recognizer)
@@ -320,6 +327,7 @@ extension TaskTableViewController: UITableViewDelegate, UITableViewDataSource {
 		return cell
 	}
 	
+	/*
 	func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
 		let deleteAction = UITableViewRowAction(style: .default, title: "Delete") { (rowAction, indexPath) in
 			guard let cell = tableView.cellForRow(at: indexPath) as? TaskTableViewCell else {
@@ -329,6 +337,7 @@ extension TaskTableViewController: UITableViewDelegate, UITableViewDataSource {
 		}
 		return [deleteAction]
 	}
+	*/
 	
 	func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
 		return UIView(frame: categorySelector.bounds)
@@ -339,11 +348,11 @@ extension TaskTableViewController: UITableViewDelegate, UITableViewDataSource {
 	}
 	
 	func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-		return tableTabBar
+		return (currList?.settings.seperateByTaskStatus ?? false) ? tableTabBar : nil
 	}
 	
 	func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-		return tableTabBar.bounds.height
+		return (currList?.settings.seperateByTaskStatus ?? false) ? tableTabBar.bounds.height : 0
 	}
 	
 }
@@ -358,9 +367,21 @@ extension TaskTableViewController: TableViewReorderDelegate {
 		guard self.currList != nil, self.currList!.tasks != nil else {
 			return
 		}
-		let task = self.currList!.tasks!.remove(at: taskOrdering![sourceIndexPath.row])
-		self.currList!.tasks!.insert(task, at: taskOrdering![destinationIndexPath.row])
-		
+		print("reorder")
+		print(sourceIndexPath.row)
+		print(destinationIndexPath.row)
+		let task = self.currList!.tasks![taskOrdering![sourceIndexPath.row]]
+		let neighbourNodeIndex = taskOrdering![destinationIndexPath.row]
+		if sourceIndexPath.row < destinationIndexPath.row {
+			// Moved to the back -> insert behind neighbour
+			currList!.tasks!.insert(task, at: neighbourNodeIndex + 1)
+			currList!.tasks!.remove(at: taskOrdering![sourceIndexPath.row])
+		} else {
+			// Moved to the front -> insert before neighbour
+			currList!.tasks!.insert(task, at: neighbourNodeIndex)
+			currList!.tasks!.remove(at: taskOrdering![sourceIndexPath.row] + 1)
+		}
+		self.updateTaskOrdering()
 		TaskArchive.saveTaskCategory(list: self.currList!)
 	}
 	
@@ -373,8 +394,7 @@ extension TaskTableViewController: UICollectionViewDelegate, UIScrollViewDelegat
 			fatalError("Error while retreiving SelectorCollectionViewCell from TapGestureRecognizer!")
 		}
 		self.setTaskCategory(category: cell.category)
-		let index = TaskCategoryManager.shared.getTaskCategoryIndex(id: cell.category.id)
-		if index >= 0 {
+		if let index = TaskCategoryManager.shared.getTaskCategoryIndex(id: cell.category.id) {
 			self.categorySelector.scrollToIndex(index: index)
 		}
 	}
@@ -450,7 +470,9 @@ extension TaskTableViewController: UIGestureRecognizerDelegate {
 			let category = TaskCategory(title: name)
 			TaskCategoryManager.shared.addTaskCategory(list: category)
 			self.categorySelector.reloadData()
-			self.categorySelector.scrollToIndex(index: 0)
+			if let index = TaskCategoryManager.shared.getTaskCategoryIndex(id: category.id) {
+				self.categorySelector.scrollToIndex(index: index)
+			}
 			
 			if self.currList == nil {
 				// TaskList was not set before, therefore add button was hidden -> show now
@@ -471,6 +493,7 @@ extension TaskTableViewController: UIGestureRecognizerDelegate {
 			self.present(alertController, animated: true, completion: nil)
 		}
 	}
+	
 }
 
 

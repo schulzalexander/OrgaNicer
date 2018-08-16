@@ -54,8 +54,21 @@ class TaskCategorySettingsTableViewController: UITableViewController {
 	}
 	
 	@IBAction func didSwitchSeperateDoneTasks(_ sender: UISwitch) {
-		//TODO
+		guard let taskTable = self.popoverPresentationController?.delegate as? TaskTableViewController else {
+			return
+		}
+		if sender.isOn {
+			taskTable.taskOrdering = category.settings.taskOrder == .custom
+				? category.getOrderForStatus(done: category.settings.selectedTaskStatusTab == .done)
+				: category.getOrderByDueDate(done: category.settings.selectedTaskStatusTab == .done)
+		} else {
+			taskTable.taskOrdering = category.settings.taskOrder == .custom
+				? category.getOrderForStatus(done: nil)
+				: category.getOrderByDueDate(done: nil)
+		}
 		category.settings.seperateByTaskStatus = sender.isOn
+		taskTable.updateTaskOrdering()
+		taskTable.tableView.reloadData()
 		TaskArchive.saveTaskCategory(list: category)
 	}
 	
