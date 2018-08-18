@@ -443,6 +443,17 @@
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N2v-uY-ysE">
+                                                    <rect key="frame" x="172" y="42" width="30" height="32"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="black" pointSize="16"/>
+                                                    <state key="normal" title=". . .">
+                                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="didPressExtensionButton:" destination="5XQ-ew-BOU" eventType="touchUpInside" id="NG8-0d-2ml"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="27g-4j-aUx" firstAttribute="top" secondItem="PzB-m4-GWD" secondAttribute="top" constant="8" id="3RE-pu-l5g"/>
@@ -458,6 +469,7 @@
                                         <connections>
                                             <outlet property="checkButton" destination="dGI-S9-WKt" id="Zqe-0Z-vsh"/>
                                             <outlet property="deadlineLabel" destination="zB3-uC-x8Z" id="9sx-ki-ayY"/>
+                                            <outlet property="extensionButton" destination="N2v-uY-ysE" id="b9Q-Vp-H5f"/>
                                             <outlet property="titleTextEdit" destination="27g-4j-aUx" id="0np-UJ-8Gl"/>
                                             <segue destination="uUL-zZ-hs8" kind="show" id="218-4n-pRM"/>
                                         </connections>

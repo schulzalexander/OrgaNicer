@@ -18,7 +18,7 @@ class TaskSettingsTableViewController: UITableViewController {
 	static let REMINDER_EXPANDED_SAME_CELL_HEIGHT: CGFloat = 135
 	
 	//MARK: Properties
-	var task: Task!
+	var task: MainTask!
 	var isDeadlineCellCollapsed: Bool = true
 	var isReminderCellCollapsed: Bool = true
 	

@@ -11,7 +11,7 @@ import UIKit
 class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 
 	//MARK: Properties
-	var task: Task! {
+	var task: MainTask! {
 		didSet {
 			self.titleTextEdit.text = task.title
 			if task.title.count != 0 {
@@ -24,15 +24,17 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 			self.contentView.backgroundColor = Task.getPriorityColor(priority: self.task.cellHeight)
 			self.adjustTitleFont()
 			self.seperator.frame = getSeperatorFrame()
+			self.updateCellExtension()
 		}
 	}
-	var content: TaskTableViewCellContent?
+	var cellExtension: TaskTableViewCellContent?
 	var seperator: UIView!
 	
 	//MARK: Outlets
 	@IBOutlet weak var titleTextEdit: UITextField!
 	@IBOutlet weak var checkButton: UIButton!
 	@IBOutlet weak var deadlineLabel: UILabel!
+	@IBOutlet weak var extensionButton: UIButton!
 	
 	static let PADDING_X: CGFloat = 5
 	static let PADDING_Y: CGFloat = 5
@@ -40,7 +42,7 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-		titleTextEdit.delegate = self
+		self.titleTextEdit.delegate = self
 		self.setupCheckButton()
 		self.setupBackgroundView()
 		self.addSeperator()
@@ -70,6 +72,21 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 		viewController.updateTodoCounter()
 		viewController.updateTaskOrdering()
 		viewController.tableView.reloadData()
+	}
+	
+	@IBAction func didPressExtensionButton(_ sender: UIButton) {
+		guard let tableView = superview as? UITableView,
+			let viewController = tableView.delegate as? TaskTableViewController else {
+				fatalError("Could not retrieve tableView as superview of tableViewCell!")
+		}
+		let decisionMenu = OverlayDecisionView(presenter: viewController.navigationController!, cancelPosition: .center)
+		decisionMenu.addOption(title: "Checklist") {
+			print("Checlist")
+		}
+		decisionMenu.addOption(title: "Follow Up") {
+			print("follow up")
+		}
+		decisionMenu.show()
 	}
 	
 	//MARK: TextFieldDelegate
@@ -116,6 +133,7 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 		let fontColor = Task.getPriorityFontColor(priority: task.cellHeight)
 		self.titleTextEdit.textColor = fontColor
 		self.deadlineLabel.textColor = fontColor
+		self.extensionButton.setTitleColor(fontColor, for: .normal)
 		self.titleTextEdit.sizeToFit()
 	}
 	
@@ -181,6 +199,10 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 		view.backgroundColor = UIColor.white
 		self.addSubview(view)
 		self.seperator = view
+	}
+	
+	private func updateCellExtension() {
+		
 	}
 	
 }

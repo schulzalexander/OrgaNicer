@@ -100,7 +100,11 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 		guard currList != nil else {
 			return
 		}
-		let newTask = Task(title: "")
+		if currList!.settings.selectedTaskStatusTab != .undone {
+			tableTabBar.switchToTab(index: TaskCategorySettings.TaskStatus.undone.rawValue)
+			switchToUndoneTasks()
+		}
+		let newTask = MainTask(title: "")
 		currList!.addTask(task: newTask)
 		updateTaskOrdering()
 		tableView.reloadData()
@@ -239,21 +243,29 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 		tableTabBar = TableTabBar(frame: rect)
 		
 		tableTabBar.addTab(title: NSLocalizedString("Open", comment: ""), action: {
-			guard self.currList != nil else {
-				return
-			}
-			self.currList?.settings.selectedTaskStatusTab = .undone
-			self.updateTaskOrdering()
-			self.tableView.reloadData()
+			self.switchToUndoneTasks()
 		})
 		tableTabBar.addTab(title: NSLocalizedString("Done", comment: ""), action: {
-			guard self.currList != nil else {
-				return
-			}
-			self.currList?.settings.selectedTaskStatusTab = .done
-			self.updateTaskOrdering()
-			self.tableView.reloadData()
+			self.switchToDoneTasks()
 		})
+	}
+	
+	private func switchToUndoneTasks() {
+		guard self.currList != nil else {
+			return
+		}
+		self.currList?.settings.selectedTaskStatusTab = .undone
+		self.updateTaskOrdering()
+		self.tableView.reloadData()
+	}
+	
+	private func switchToDoneTasks() {
+		guard self.currList != nil else {
+			return
+		}
+		self.currList?.settings.selectedTaskStatusTab = .done
+		self.updateTaskOrdering()
+		self.tableView.reloadData()
 	}
 	
 	private func presentCategorySettingsView(category: TaskCategory) {
@@ -274,7 +286,10 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 	}
 	
 	private func setupTransparentGradientBackground() {
-		let colour:UIColor = UIColor(red: 0.9765, green: 0.5216, blue: 0, alpha: 0.8)//UIColor(red: 1, green: 0.5922, blue: 0.098, alpha: 0.7)
+		let colour:UIColor = UIColor(red: 0.8078, green: 0.9412, blue: 1, alpha: 1.0)
+		//LightOrange  UIColor(red: 1, green: 0.7412, blue: 0.4471, alpha: 1.0)
+		//Orange  UIColor(red: 0.9765, green: 0.5216, blue: 0, alpha: 0.8)
+		//DK  UIColor(red: 1, green: 0.5922, blue: 0.098, alpha: 0.7)
 		let colours:[CGColor] = [colour.withAlphaComponent(0.3).cgColor,colour.cgColor]
 		let locations:[NSNumber] = [0, 1]
 		
@@ -317,7 +332,10 @@ extension TaskTableViewController: UITableViewDelegate, UITableViewDataSource {
 		guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? TaskTableViewCell else {
 			fatalError("Dequeued cell is not an instance of TaskTableViewCell!")
 		}
-		cell.task = TaskManager.shared.getTask(id: currList!.tasks![taskOrdering![indexPath.row]])
+		guard let task = TaskManager.shared.getTask(id: currList!.tasks![taskOrdering![indexPath.row]]) as? MainTask else {
+			fatalError("Type error while loading task for cell setup.")
+		}
+		cell.task = task
 		cell.adjustTitleFont()
 		cell.contentView.backgroundColor = Task.getPriorityColor(priority: cell.task.cellHeight)
 		
