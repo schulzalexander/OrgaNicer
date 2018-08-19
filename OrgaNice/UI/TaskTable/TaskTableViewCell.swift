@@ -21,7 +21,7 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 				? NSLocalizedString("Done", comment: "").uppercased()
 				: task.deadline?.getDueString()
 			self.reloadCheckBoxContent()
-			self.contentView.backgroundColor = Task.getPriorityColor(priority: self.task.cellHeight)
+			self.contentView.backgroundColor = Utils.getTaskCellColor(priority: self.task.cellHeight)
 			self.adjustTitleFont()
 			self.seperator.frame = getSeperatorFrame()
 			self.updateCellExtension()
@@ -118,19 +118,19 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 	}
 	
 	func updateAppearance(newHeight: CGFloat) {
-		let scaledHeight = Task.getPriorityCellHeight(priority: newHeight)
+		let scaledHeight = Utils.getTaskCellHeight(priority: newHeight)
 		self.task.cellHeight = scaledHeight
-		self.contentView.backgroundColor = Task.getPriorityColor(priority: scaledHeight)
+		self.contentView.backgroundColor = Utils.getTaskCellColor(priority: scaledHeight)
 	}
 	
 	func adjustTitleFont() {
 		guard task != nil else {
 			return
 		}
-		let fontSize = Task.getPriorityTextSize(priority: task.cellHeight)
+		let fontSize = Utils.getTaskCellTextSize(priority: task.cellHeight)
 		self.titleTextEdit.font = self.titleTextEdit.font!.withSize(fontSize)
 		self.deadlineLabel.font = self.deadlineLabel.font.withSize(min(fontSize - 5, 20))
-		let fontColor = Task.getPriorityFontColor(priority: task.cellHeight)
+		let fontColor = Utils.getTaskCellFontColor(priority: task.cellHeight)
 		self.titleTextEdit.textColor = fontColor
 		self.deadlineLabel.textColor = fontColor
 		self.extensionButton.setTitleColor(fontColor, for: .normal)

@@ -309,7 +309,10 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 extension TaskTableViewController: UITableViewDelegate, UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		return TaskManager.shared.getTask(id: currList!.tasks![taskOrdering![indexPath.row]])?.cellHeight ?? Task.DEFAULT_CELL_HEIGHT
+		guard let task = TaskManager.shared.getTask(id: currList!.tasks![taskOrdering![indexPath.row]]) else {
+			fatalError("Failed to retrieve task \(currList!.tasks![taskOrdering![indexPath.row]]) while specifying row height.")
+		}
+		return task.cellHeight
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -337,7 +340,7 @@ extension TaskTableViewController: UITableViewDelegate, UITableViewDataSource {
 		}
 		cell.task = task
 		cell.adjustTitleFont()
-		cell.contentView.backgroundColor = Task.getPriorityColor(priority: cell.task.cellHeight)
+		cell.contentView.backgroundColor = Utils.getTaskCellColor(priority: cell.task.cellHeight)
 		
 		let recognizer = UITapGestureRecognizer(target: self, action: #selector(TaskTableViewController.didTapOnTaskCell(_:)))
 		cell.addGestureRecognizer(recognizer)

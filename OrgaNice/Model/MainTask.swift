@@ -51,6 +51,10 @@ class MainTask: Task {
 		return self.deadline!.id != self.alarm!.id
 	}
 	
+	func getContentHeight() -> CGFloat {
+		return 0
+	}
+	
 	//MARK: NSCoding
 	
 	override func encode(with aCoder: NSCoder) {
