@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class MainTask: Task {
+class MainTask: Task, TaskTableDisplayable {
 	
 	//MARK: Properties
 	var alarm: Alarm?
@@ -51,10 +51,6 @@ class MainTask: Task {
 		return self.deadline!.id != self.alarm!.id
 	}
 	
-	func getContentHeight() -> CGFloat {
-		return 0
-	}
-	
 	//MARK: NSCoding
 	
 	override func encode(with aCoder: NSCoder) {
@@ -67,4 +63,16 @@ class MainTask: Task {
 		super.init(coder: aDecoder)
 	}
 	
+	//MARK: TaskTableDisplayable
+	
+	func createTaskExtensionView(frame: CGRect) -> UIView? {
+		return nil
+	}
+	
+	func getTaskExtensionHeight() -> CGFloat {
+		return 0
+	}
+	
 }
+
+

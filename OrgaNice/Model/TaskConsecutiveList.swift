@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class TaskConsecutiveList: MainTask {
 	
@@ -27,11 +28,18 @@ class TaskConsecutiveList: MainTask {
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
-		guard let subTasks = aDecoder.decodeObject(forKey: PropertyKeys.subTasks) as? [Task] else {
-			fatalError("Error while decoding object of class TaskConsecutiveList")
-		}
-		self.subTasks = subTasks
+		self.subTasks = aDecoder.decodeObject(forKey: PropertyKeys.subTasks) as? [Task]
 		super.init(coder: aDecoder)
+	}
+	
+	//MARK: TaskTableDisplayable
+	
+	override func createTaskExtensionView(frame: CGRect) -> UIView? {
+		return nil
+	}
+	
+	override func getTaskExtensionHeight() -> CGFloat {
+		return 0
 	}
 	
 }

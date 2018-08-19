@@ -82,6 +82,9 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 		let decisionMenu = OverlayDecisionView(presenter: viewController.navigationController!, cancelPosition: .center)
 		decisionMenu.addOption(title: "Checklist") {
 			print("Checlist")
+			let newTask = TaskCheckList(task: self.task)
+			TaskManager.shared.addTask(task: newTask)
+			tableView.reloadData()
 		}
 		decisionMenu.addOption(title: "Follow Up") {
 			print("follow up")

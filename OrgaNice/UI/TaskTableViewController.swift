@@ -309,10 +309,10 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 extension TaskTableViewController: UITableViewDelegate, UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		guard let task = TaskManager.shared.getTask(id: currList!.tasks![taskOrdering![indexPath.row]]) else {
+		guard let task = TaskManager.shared.getTask(id: currList!.tasks![taskOrdering![indexPath.row]]) as? MainTask else {
 			fatalError("Failed to retrieve task \(currList!.tasks![taskOrdering![indexPath.row]]) while specifying row height.")
 		}
-		return task.cellHeight
+		return task.cellHeight + task.getTaskExtensionHeight()
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -341,6 +341,23 @@ extension TaskTableViewController: UITableViewDelegate, UITableViewDataSource {
 		cell.task = task
 		cell.adjustTitleFont()
 		cell.contentView.backgroundColor = Utils.getTaskCellColor(priority: cell.task.cellHeight)
+		
+		for subview in cell.subviews {
+			if subview is CheckListView || subview is ConsecutiveListView {
+				subview.removeFromSuperview()
+			}
+		}
+		
+		let extensionVerticalPadding: CGFloat = 10
+		let extensionFrame = CGRect(x: cell.titleTextEdit.frame.minX,
+									y: cell.deadlineLabel.frame.maxY + extensionVerticalPadding,
+									width: cell.checkButton.frame.maxX - cell.titleTextEdit.frame.minX,
+									height: 200)
+		if let cellExtension = task.createTaskExtensionView(frame: extensionFrame) {
+			cell.addSubview(cellExtension)
+			//cellExtension.topAnchor.constraint(equalTo: cell.deadlineLabel.bottomAnchor).isActive = true
+			cell.extensionButton.isHidden = true
+		}
 		
 		let recognizer = UITapGestureRecognizer(target: self, action: #selector(TaskTableViewController.didTapOnTaskCell(_:)))
 		cell.addGestureRecognizer(recognizer)

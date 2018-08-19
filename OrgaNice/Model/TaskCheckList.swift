@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class TaskCheckList: MainTask {
 	
@@ -17,6 +18,15 @@ class TaskCheckList: MainTask {
 		static let subTasks = "subTasks"
 	}
 	
+	init(task: MainTask) {
+		super.init(title: task.title)
+		alarm = task.alarm
+		created = task.created
+		id = task.id
+		deadline = task.deadline
+		done = task.done
+		cellHeight = task.cellHeight
+	}
 	
 	//MARK: NSCoding
 	
@@ -26,11 +36,18 @@ class TaskCheckList: MainTask {
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
-		guard let subTasks = aDecoder.decodeObject(forKey: PropertyKeys.subTasks) as? [Task] else {
-			fatalError("Error while decoding object of class TaskCheckList")
-		}
-		self.subTasks = subTasks
+		self.subTasks = aDecoder.decodeObject(forKey: PropertyKeys.subTasks) as? [Task]
 		super.init(coder: aDecoder)
+	}
+	
+	//MARK: TaskTableDisplayable
+	
+	override func createTaskExtensionView(frame: CGRect) -> UIView? {
+		return CheckListView(task: self, frame: frame)
+	}
+	
+	override func getTaskExtensionHeight() -> CGFloat {
+		return CheckListView.getContentHeight(task: self)
 	}
 	
 }
