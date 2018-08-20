@@ -65,7 +65,7 @@ class MainTask: Task, TaskTableDisplayable {
 	
 	//MARK: TaskTableDisplayable
 	
-	func createTaskExtensionView(frame: CGRect) -> UIView? {
+	func createTaskExtensionView(frame: CGRect) -> TaskTableViewCellContent? {
 		return nil
 	}
 	

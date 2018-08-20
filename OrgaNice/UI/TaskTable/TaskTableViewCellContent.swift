@@ -10,16 +10,5 @@ import UIKit
 
 class TaskTableViewCellContent: UIView {
 	
-	init(task: MainTask, frame: CGRect) {
-		fatalError("Function init(task) must be implemented by subclasses of TaskTableViewCellContent!")
-	}
-	
-	override init(frame: CGRect) {
-		super.init(frame: frame)
-	}
-	
-	required init?(coder aDecoder: NSCoder) {
-		super.init(coder: aDecoder)
-	}
 	
 }

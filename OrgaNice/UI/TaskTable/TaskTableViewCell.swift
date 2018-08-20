@@ -144,14 +144,38 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 		self.titleTextEdit.isHidden = true
 		self.deadlineLabel.isHidden = true
 		self.seperator.isHidden = true
+		self.cellExtension?.isHidden = true
 	}
 	
 	func endPinchMode() {
 		self.titleTextEdit.isHidden = false
 		self.deadlineLabel.isHidden = false
-		adjustTitleFont()
+		self.adjustTitleFont()
 		self.seperator.frame = getSeperatorFrame()
 		self.seperator.isHidden = false
+		self.cellExtension?.isHidden = false
+		self.updateCellExtension()
+	}
+	
+	func updateCellExtension() {
+		// Remove prior task extensions (e.g. checklists)
+		for subview in self.subviews {
+			if subview is CheckListView || subview is ConsecutiveListView {
+				subview.removeFromSuperview()
+			}
+		}
+		
+		let extensionFrame = CGRect(x: self.titleTextEdit.frame.minX,
+									y: self.contentView.bounds.maxY - task.getTaskExtensionHeight() - (TaskTableViewController.extensionBottomPadding),
+									width: self.contentView.bounds.maxX - 30 - self.titleTextEdit.frame.minX, //TODO: remove magic number
+			height: task.getTaskExtensionHeight())
+		if let cellExtension = task.createTaskExtensionView(frame: extensionFrame) {
+			self.addSubview(cellExtension)
+			self.extensionButton.isHidden = true
+			self.cellExtension = cellExtension
+			
+			cellExtension.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -0.5 * TaskTableViewController.extensionBottomPadding)
+		}
 	}
 	
 	//MARK: Private Methods
@@ -164,9 +188,6 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 	
 	private func setupBackgroundView() {
 		self.contentView.layer.cornerRadius = 20
-		//self.contentView.layer.borderColor = UIColor.lightGray.cgColor
-		//self.contentView.layer.borderWidth = 1.0
-		
 		self.contentView.layer.masksToBounds = false
 		self.contentView.layer.shadowColor = UIColor.gray.cgColor
 		self.contentView.layer.shadowRadius = 3.0
@@ -192,7 +213,7 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 	private func getSeperatorFrame() -> CGRect {
 		return CGRect(x: self.titleTextEdit.frame.minX,
 					  y: self.titleTextEdit.frame.maxY + 5,
-					  width: self.checkButton.frame.minX - self.titleTextEdit.frame.minX - 20,
+					  width: self.contentView.frame.width - self.titleTextEdit.frame.minX - 80,
 					  height: 1)
 	}
 	
@@ -202,10 +223,6 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 		view.backgroundColor = UIColor.white
 		self.addSubview(view)
 		self.seperator = view
-	}
-	
-	private func updateCellExtension() {
-		
 	}
 	
 }

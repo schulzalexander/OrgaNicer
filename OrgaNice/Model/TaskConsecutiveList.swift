@@ -34,7 +34,7 @@ class TaskConsecutiveList: MainTask {
 	
 	//MARK: TaskTableDisplayable
 	
-	override func createTaskExtensionView(frame: CGRect) -> UIView? {
+	override func createTaskExtensionView(frame: CGRect) -> TaskTableViewCellContent? {
 		return nil
 	}
 	

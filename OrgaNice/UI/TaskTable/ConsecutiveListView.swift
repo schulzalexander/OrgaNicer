@@ -11,11 +11,8 @@ import UIKit
 
 class ConsecutiveListView: TaskTableViewCellContent {
 	
-	override init(task: MainTask, frame: CGRect) {
+	init(task: TaskConsecutiveList, frame: CGRect) {
 		super.init(frame: frame)
-		guard let consecTask = task as? TaskConsecutiveList else {
-			return
-		}
 		
 	}
 	

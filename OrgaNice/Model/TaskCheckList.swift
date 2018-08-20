@@ -40,9 +40,18 @@ class TaskCheckList: MainTask {
 		super.init(coder: aDecoder)
 	}
 	
+	func addSubtask(task: Task) {
+		if subTasks != nil {
+			subTasks!.append(task)
+		} else {
+			subTasks = [task]
+		}
+		// Don't save because new task might be "empty", when user hasn't given a title yet
+	}
+	
 	//MARK: TaskTableDisplayable
 	
-	override func createTaskExtensionView(frame: CGRect) -> UIView? {
+	override func createTaskExtensionView(frame: CGRect) -> TaskTableViewCellContent? {
 		return CheckListView(task: self, frame: frame)
 	}
 	
