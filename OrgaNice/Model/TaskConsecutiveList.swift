@@ -12,7 +12,7 @@ import UIKit
 class TaskConsecutiveList: MainTask {
 	
 	//MARK: Properties
-	var subTasks: [Task]?
+	var subTasks: [String]?
 	
 	
 	struct PropertyKeys {
@@ -28,7 +28,7 @@ class TaskConsecutiveList: MainTask {
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
-		self.subTasks = aDecoder.decodeObject(forKey: PropertyKeys.subTasks) as? [Task]
+		self.subTasks = aDecoder.decodeObject(forKey: PropertyKeys.subTasks) as? [String]
 		super.init(coder: aDecoder)
 	}
 	

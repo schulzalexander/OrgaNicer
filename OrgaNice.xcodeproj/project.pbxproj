@@ -45,6 +45,8 @@
 		C998040921282A700010FFD4 /* MainTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = C998040821282A700010FFD4 /* MainTask.swift */; };
 		C998040C212831E10010FFD4 /* OverlayDecisionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C998040B212831E10010FFD4 /* OverlayDecisionView.swift */; };
 		C998040F21297BD20010FFD4 /* TaskTableDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C998040E21297BD20010FFD4 /* TaskTableDisplayable.swift */; };
+		C9BAF3AC2131330800375DD0 /* CheckListViewLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BAF3AB2131330800375DD0 /* CheckListViewLine.swift */; };
+		C9BAF3AE213134A100375DD0 /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BAF3AD213134A100375DD0 /* Checkbox.swift */; };
 		C9C3D71820CC66C900C881D3 /* SelectorCollectionViewCellAdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C3D71720CC66C900C881D3 /* SelectorCollectionViewCellAdd.swift */; };
 		C9C3D71D20CC6BCE00C881D3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C9C3D71F20CC6BCE00C881D3 /* Localizable.strings */; };
 		C9D5C28B2103400A00AAE177 /* TableTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D5C28A2103400A00AAE177 /* TableTabBar.swift */; };
@@ -120,6 +122,8 @@
 		C998040821282A700010FFD4 /* MainTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTask.swift; sourceTree = "<group>"; };
 		C998040B212831E10010FFD4 /* OverlayDecisionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayDecisionView.swift; sourceTree = "<group>"; };
 		C998040E21297BD20010FFD4 /* TaskTableDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableDisplayable.swift; sourceTree = "<group>"; };
+		C9BAF3AB2131330800375DD0 /* CheckListViewLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckListViewLine.swift; sourceTree = "<group>"; };
+		C9BAF3AD213134A100375DD0 /* Checkbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
 		C9C3D71720CC66C900C881D3 /* SelectorCollectionViewCellAdd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectorCollectionViewCellAdd.swift; sourceTree = "<group>"; };
 		C9C3D72020CC6CDE00C881D3 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
 		C9C3D72120CC6CDE00C881D3 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -320,6 +324,8 @@
 				C938A9A220CB1CAB006E76E7 /* CheckListView.swift */,
 				C938A9A420CB1CC9006E76E7 /* ConsecutiveListView.swift */,
 				C91043F920DED6CF005096F5 /* FilterBar.swift */,
+				C9BAF3AB2131330800375DD0 /* CheckListViewLine.swift */,
+				C9BAF3AD213134A100375DD0 /* Checkbox.swift */,
 			);
 			path = TaskTable;
 			sourceTree = "<group>";
@@ -596,6 +602,7 @@
 				C9C3D71820CC66C900C881D3 /* SelectorCollectionViewCellAdd.swift in Sources */,
 				C938A9A320CB1CAB006E76E7 /* CheckListView.swift in Sources */,
 				C9713EF720C597810074F232 /* TaskCategoryManager.swift in Sources */,
+				C9BAF3AE213134A100375DD0 /* Checkbox.swift in Sources */,
 				C91043FA20DED6CF005096F5 /* FilterBar.swift in Sources */,
 				C998040C212831E10010FFD4 /* OverlayDecisionView.swift in Sources */,
 				C938A9A020CB193B006E76E7 /* TaskConsecutiveList.swift in Sources */,
@@ -605,6 +612,7 @@
 				C9713F0220C597810074F232 /* SelectorCollectionViewLayoutAttributes.swift in Sources */,
 				C9713EF520C597810074F232 /* Utils.swift in Sources */,
 				C9713EFB20C597810074F232 /* Task.swift in Sources */,
+				C9BAF3AC2131330800375DD0 /* CheckListViewLine.swift in Sources */,
 				C9713F0320C597810074F232 /* SelectorCollectionViewLayout.swift in Sources */,
 				C998040F21297BD20010FFD4 /* TaskTableDisplayable.swift in Sources */,
 				C90F49DA210615E7006DA22A /* TaskSettingsViewController.swift in Sources */,

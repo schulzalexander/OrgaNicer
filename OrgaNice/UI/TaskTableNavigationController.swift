@@ -17,8 +17,6 @@ class TaskTableNavigationController: UINavigationController {
         super.viewDidLoad()
 
         setupAddButton()
-		
-		//self.navigationBar.backgroundColor = UIColor(red: 1, green: 0.5922, blue: 0.098, alpha: 1.0)
     }
 
     override func didReceiveMemoryWarning() {

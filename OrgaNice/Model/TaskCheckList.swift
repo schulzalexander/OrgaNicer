@@ -12,7 +12,7 @@ import UIKit
 class TaskCheckList: MainTask {
 	
 	//MARK: Properties
-	var subTasks: [Task]?
+	var subTasks: [String]?
 	
 	struct PropertyKeys {
 		static let subTasks = "subTasks"
@@ -36,17 +36,26 @@ class TaskCheckList: MainTask {
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
-		self.subTasks = aDecoder.decodeObject(forKey: PropertyKeys.subTasks) as? [Task]
+		self.subTasks = aDecoder.decodeObject(forKey: PropertyKeys.subTasks) as? [String]
 		super.init(coder: aDecoder)
 	}
 	
-	func addSubtask(task: Task) {
+	func addSubtask(id: String) {
 		if subTasks != nil {
-			subTasks!.append(task)
+			subTasks!.append(id)
 		} else {
-			subTasks = [task]
+			subTasks = [id]
 		}
 		// Don't save because new task might be "empty", when user hasn't given a title yet
+	}
+	
+	func removeSubtask(id: String) {
+		for i in 0..<(subTasks?.count ?? 0) {
+			if subTasks![i] == id {
+				subTasks?.remove(at: i)
+				break
+			}
+		}
 	}
 	
 	//MARK: TaskTableDisplayable

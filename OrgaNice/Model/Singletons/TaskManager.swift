@@ -26,6 +26,28 @@ class TaskManager: NSObject, NSCoding {
 	}
 	
 	func deleteTask(id: String) {
+		guard let task = TaskManager.shared.getTask(id: id) else {
+			fatalError("Error: Tried to delete task that does not exist!")
+		}
+		if task is TaskCheckList {
+			guard let parentTask = task as? TaskCheckList else {
+				fatalError("Error: Failed to cast task to subclass!")
+			}
+			for subtask in parentTask.subTasks ?? [] {
+				tasks.removeValue(forKey: subtask)
+				TaskArchive.deleteTask(id: subtask)
+			}
+		}
+		if task is TaskConsecutiveList {
+			guard let parentTask = task as? TaskConsecutiveList else {
+				fatalError("Error: Failed to cast task to subclass!")
+			}
+			for subtask in parentTask.subTasks ?? [] {
+				tasks.removeValue(forKey: subtask)
+				TaskArchive.deleteTask(id: subtask)
+			}
+		}
+		
 		tasks.removeValue(forKey: id)
 		TaskArchive.deleteTask(id: id)
 		TaskArchive.saveTaskManager()

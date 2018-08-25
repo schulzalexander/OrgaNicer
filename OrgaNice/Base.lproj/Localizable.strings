@@ -41,4 +41,4 @@
 "TodoReminder" = "ToDo Reminder";
 
 // TaskTableView
-"SortingNotPossibleMessage" = "The task order is fixed for the selected sorting.";
+"SortingNotPossibleMessage" = "The task order is fixed for the selected ordering.";
