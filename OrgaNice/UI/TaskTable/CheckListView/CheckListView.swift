@@ -127,7 +127,7 @@ class CheckListView: TaskTableViewCellContent, UITextFieldDelegate, UIGestureRec
 			let index = tableView.indexPath(for: cell) else {
 			fatalError("Checklist failed to retreive containing tableview.")
 		}
-		tableView.reloadData()
+		tableView.reloadRows(at: [index], with: .automatic)
 		guard let newCell = tableView.cellForRow(at: index) as? TaskTableViewCell,
 			let checklist = newCell.cellExtension as? CheckListView else {
 			fatalError("Checklist failed to retreive new checklist after tableview reload.")
@@ -144,6 +144,12 @@ class CheckListView: TaskTableViewCellContent, UITextFieldDelegate, UIGestureRec
 			return
 		}
 		parentTask.removeSubtask(id: markedLine!.task.id)
+		if parentTask.subTasks?.count == 0 {
+			let mainTask = MainTask(task: parentTask)
+			TaskManager.shared.addTask(task: mainTask)
+		} else {
+			TaskArchive.saveTask(task: parentTask)
+		}
 		TaskManager.shared.deleteTask(id: markedLine!.task.id)
 		tableView.reloadRows(at: [index], with: .automatic)
 	}

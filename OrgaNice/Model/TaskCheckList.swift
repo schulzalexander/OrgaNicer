@@ -18,14 +18,8 @@ class TaskCheckList: MainTask {
 		static let subTasks = "subTasks"
 	}
 	
-	init(task: MainTask) {
-		super.init(title: task.title)
-		alarm = task.alarm
-		created = task.created
-		id = task.id
-		deadline = task.deadline
-		done = task.done
-		cellHeight = task.cellHeight
+	override init(task: MainTask) {
+		super.init(task: task)
 	}
 	
 	//MARK: NSCoding

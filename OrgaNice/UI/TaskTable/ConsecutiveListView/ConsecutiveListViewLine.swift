@@ -38,6 +38,7 @@ class ConsecutiveListViewLine: UIView {
 										  y: (self.frame.height - contentHeight) / 2,
 										  width: contentHeight,
 										  height: contentHeight))
+		label.textColor = ConsecutiveListView.toolButtonFontColor
 		let textfield = UITextField(frame: CGRect(x: label.frame.maxX + 10,
 												  y: 0,
 												  width: self.frame.width - contentHeight - 30,

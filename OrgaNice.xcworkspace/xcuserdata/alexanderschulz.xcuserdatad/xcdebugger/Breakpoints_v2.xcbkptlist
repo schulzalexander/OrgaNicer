@@ -25,14 +25,30 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "OrgaNice/UI/TaskTableViewController.swift"
-            timestampString = "556978314.048628"
+            filePath = "OrgaNice/UI/TaskTable/ConsecutiveListView/ConsecutiveListView.swift"
+            timestampString = "557002634.154803"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "132"
-            endingLineNumber = "132"
-            landmarkName = "setTaskCategory(category:)"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
+            landmarkName = "rewindToLastTask(_:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "OrgaNice/Model/TaskConsecutiveList.swift"
+            timestampString = "557002634.154935"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "TaskConsecutiveList"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -41,29 +57,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "OrgaNice/UI/TaskTableViewController.swift"
-            timestampString = "556978314.048704"
+            filePath = "OrgaNice/UI/TaskTable/TaskTableViewCell.swift"
+            timestampString = "557002634.155023"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "222"
-            endingLineNumber = "222"
-            landmarkName = "updateTaskOrdering()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "OrgaNice/Model/TaskCategory.swift"
-            timestampString = "556919905.862422"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
-            landmarkName = "getOrderForStatus(done:)"
+            startingLineNumber = "164"
+            endingLineNumber = "164"
+            landmarkName = "updateCellExtension()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

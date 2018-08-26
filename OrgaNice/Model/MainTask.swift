@@ -22,6 +22,16 @@ class MainTask: Task, TaskTableDisplayable {
 		super.init(title: title)
 	}
 	
+	init(task: MainTask) {
+		super.init(title: task.title)
+		alarm = task.alarm
+		created = task.created
+		id = task.id
+		deadline = task.deadline
+		done = task.done
+		cellHeight = task.cellHeight
+	}
+	
 	func addAlarm(alarm: Alarm) {
 		self.alarm = alarm
 		AlarmManager.addAlarm(task: self, alarm: alarm)

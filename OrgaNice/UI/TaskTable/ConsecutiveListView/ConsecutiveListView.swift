@@ -12,9 +12,11 @@ import UIKit
 class ConsecutiveListView: TaskTableViewCellContent, UITextFieldDelegate {
 	
 	static let lineHeight: CGFloat = 25
-	static let linePaddingVertical: CGFloat = 10
+	static let linePaddingVertical: CGFloat = 5
 	static let linePaddingHorizontal: CGFloat = 10
 	static let toolButtonDimension: CGFloat = 30 // for add and remove button
+	static let toolButtonFontSize: CGFloat = 15
+	static let toolButtonFontColor: UIColor = UIColor.lightGray
 	
 	var parentTask: TaskConsecutiveList!
 	var lines: [ConsecutiveListViewLine]!
@@ -78,22 +80,24 @@ class ConsecutiveListView: TaskTableViewCellContent, UITextFieldDelegate {
 		if let count = subtasks?.count {
 			setCurrentLine(index: count - 1)
 		}
-		
-		let forwardButton = UIButton(frame: CGRect(x: self.frame.width - 10 - ConsecutiveListView.toolButtonDimension,
-											   y: currY,
-											   width: 0,
-											   height: 0))
+		let forwardButton = UIButton()
 		forwardButton.setTitle(NSLocalizedString("Forward", comment: ""), for: .normal)
+		forwardButton.titleLabel?.font = forwardButton.titleLabel?.font.withSize(ConsecutiveListView.toolButtonFontSize)
+		forwardButton.setTitleColor(ConsecutiveListView.toolButtonFontColor, for: .normal)
 		forwardButton.sizeToFit()
 		forwardButton.layer.cornerRadius = forwardButton.frame.height / 2
 		forwardButton.addTarget(self, action: #selector(createFollowUpTask(_:)), for: .touchUpInside)
-		let backButton = UIButton(frame: CGRect(x: forwardButton.frame.minX - 10 - ConsecutiveListView.toolButtonDimension,
-												  y: currY,
-												  width: 0,
-												  height: 0))
+		forwardButton.center = CGPoint(x: self.frame.width - ConsecutiveListView.linePaddingHorizontal - forwardButton.frame.width / 2,
+									   y: currY + ConsecutiveListView.lineHeight / 2)
+		let backButton = UIButton()
 		backButton.setTitle(NSLocalizedString("Back", comment: ""), for: .normal)
-		backButton.layer.cornerRadius = forwardButton.frame.height / 2
+		backButton.titleLabel?.font = backButton.titleLabel?.font.withSize(ConsecutiveListView.toolButtonFontSize)
+		backButton.setTitleColor(ConsecutiveListView.toolButtonFontColor, for: .normal)
+		backButton.sizeToFit()
+		backButton.layer.cornerRadius = backButton.frame.height / 2
 		backButton.addTarget(self, action: #selector(rewindToLastTask(_:)), for: .touchUpInside)
+		backButton.center = CGPoint(x: forwardButton.frame.minX - 20 - backButton.frame.width / 2,
+									   y: currY + ConsecutiveListView.lineHeight / 2)
 		self.addSubview(forwardButton)
 		self.addSubview(backButton)
 		
@@ -116,7 +120,7 @@ class ConsecutiveListView: TaskTableViewCellContent, UITextFieldDelegate {
 			let index = tableView.indexPath(for: cell) else {
 				fatalError("Checklist failed to retreive containing tableview.")
 		}
-		tableView.reloadData()
+		tableView.reloadRows(at: [index], with: .automatic)
 		guard let newCell = tableView.cellForRow(at: index) as? TaskTableViewCell,
 			let consecutiveList = newCell.cellExtension as? ConsecutiveListView else {
 				fatalError("Checklist failed to retreive new checklist after tableview reload.")
@@ -136,6 +140,12 @@ class ConsecutiveListView: TaskTableViewCellContent, UITextFieldDelegate {
 				return
 		}
 		parentTask.removeSubtask(id: subtask)
+		if parentTask.subTasks?.count == 0 {
+			let mainTask = MainTask(task: parentTask)
+			TaskManager.shared.addTask(task: mainTask)
+		} else {
+			TaskArchive.saveTask(task: parentTask)
+		}
 		TaskManager.shared.deleteTask(id: subtask)
 		tableView.reloadRows(at: [index], with: .automatic)
 	}
