@@ -111,13 +111,6 @@ class CheckListView: TaskTableViewCellContent, UITextFieldDelegate, UIGestureRec
 		layer.borderColor = UIColor.white.cgColor
 		layer.borderWidth = 1
 		layer.cornerRadius = 5
-		/*layer.shadowOffset = CGSize(width: 0, height: 0)
-		layer.shadowColor = UIColor.black.cgColor
-		layer.shadowRadius = 3
-		layer.shadowOpacity = 1
-		layer.cornerRadius = 10*/
-		//layer.shadowPath = UIBezierPath(roundedRect: self.frame, cornerRadius: 10).cgPath
-		
 		backgroundColor = UIColor.white.withAlphaComponent(0.2)//Utils.getTaskCellColor(priority: parentTask.cellHeight)
 	}
 	

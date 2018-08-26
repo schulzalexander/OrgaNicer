@@ -42,3 +42,7 @@
 
 // TaskTableView
 "SortingNotPossibleMessage" = "The task order is fixed for the selected ordering.";
+
+// Consecutive Task List
+"Forward" = "Forward";
+"Back" = "Back";

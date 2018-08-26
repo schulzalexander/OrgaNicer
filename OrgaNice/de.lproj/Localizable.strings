@@ -43,3 +43,7 @@
 
 // TaskTableView
 "SortingNotPossibleMessage" = "Die Reihenfolge der Tasks kann in dieser Sortierung nicht geändert werden.";
+
+// Consecutive Task List
+"Forward" = "Weiter";
+"Back" = "Zurück";

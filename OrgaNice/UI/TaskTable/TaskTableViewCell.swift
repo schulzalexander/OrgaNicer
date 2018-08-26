@@ -81,13 +81,14 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 		}
 		let decisionMenu = OverlayDecisionView(presenter: viewController.navigationController!, cancelPosition: .center)
 		decisionMenu.addOption(title: "Checklist") {
-			print("Checlist")
 			let newTask = TaskCheckList(task: self.task)
 			TaskManager.shared.addTask(task: newTask)
 			tableView.reloadData()
 		}
 		decisionMenu.addOption(title: "Follow Up") {
-			print("follow up")
+			let newTask = TaskConsecutiveList(task: self.task)
+			TaskManager.shared.addTask(task: newTask)
+			tableView.reloadData()
 		}
 		decisionMenu.show()
 	}
@@ -111,6 +112,7 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 					fatalError("Could not retrieve tableView as superview of tableViewCell!")
 			}
 			viewController.currList!.deleteTask(id: task.id)
+			viewController.updateTaskOrdering()
 			tableView.reloadData()
 			return
 		}
@@ -167,7 +169,7 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 		
 		let extensionFrame = CGRect(x: self.titleTextEdit.frame.minX,
 									y: self.contentView.bounds.maxY - task.getTaskExtensionHeight() - (TaskTableViewController.extensionBottomPadding),
-									width: self.contentView.bounds.maxX - 30 - self.titleTextEdit.frame.minX, //TODO: remove magic number
+									width: self.contentView.bounds.maxX - 30 - self.titleTextEdit.frame.minX,
 			height: task.getTaskExtensionHeight())
 		if let cellExtension = task.createTaskExtensionView(frame: extensionFrame) {
 			self.addSubview(cellExtension)
@@ -175,6 +177,8 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 			self.cellExtension = cellExtension
 			
 			cellExtension.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -0.5 * TaskTableViewController.extensionBottomPadding)
+		} else {
+			self.extensionButton.isHidden = false
 		}
 	}
 	

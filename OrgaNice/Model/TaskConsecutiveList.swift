@@ -19,6 +19,15 @@ class TaskConsecutiveList: MainTask {
 		static let subTasks = "subTasks"
 	}
 	
+	init(task: MainTask) {
+		super.init(title: task.title)
+		alarm = task.alarm
+		created = task.created
+		id = task.id
+		deadline = task.deadline
+		done = task.done
+		cellHeight = task.cellHeight
+	}
 	
 	//MARK: NSCoding
 	
@@ -32,14 +41,23 @@ class TaskConsecutiveList: MainTask {
 		super.init(coder: aDecoder)
 	}
 	
+	func removeSubtask(id: String) {
+		for i in 0..<(subTasks?.count ?? 0) {
+			if subTasks![i] == id {
+				subTasks?.remove(at: i)
+				break
+			}
+		}
+	}
+	
 	//MARK: TaskTableDisplayable
 	
 	override func createTaskExtensionView(frame: CGRect) -> TaskTableViewCellContent? {
-		return nil
+		return ConsecutiveListView(task: self, frame: frame)
 	}
 	
 	override func getTaskExtensionHeight() -> CGFloat {
-		return 0
+		return ConsecutiveListView.getContentHeight(task: self)
 	}
 	
 }
