@@ -135,19 +135,26 @@ class ConsecutiveListView: TaskTableViewCellContent, UITextFieldDelegate {
 	@objc private func rewindToLastTask(_ sender: UIButton) {
 		guard let tableView = self.superview?.superview as? UITableView,
 			let cell = self.superview as? TaskTableViewCell,
-			let index = tableView.indexPath(for: cell),
-			let subtask = parentTask.subTasks?.last else {
+			let index = tableView.indexPath(for: cell) else {
 				return
 		}
-		parentTask.removeSubtask(id: subtask)
-		if parentTask.subTasks?.count == 0 {
-			let mainTask = MainTask(task: parentTask)
-			TaskManager.shared.addTask(task: mainTask)
+		if let subtask = parentTask.subTasks?.last {
+			parentTask.removeSubtask(id: subtask)
+			if parentTask.subTasks?.count == 0 {
+				downcastToMainTask()
+			} else {
+				TaskArchive.saveTask(task: parentTask)
+			}
+			TaskManager.shared.deleteTask(id: subtask)
 		} else {
-			TaskArchive.saveTask(task: parentTask)
+			downcastToMainTask()
 		}
-		TaskManager.shared.deleteTask(id: subtask)
 		tableView.reloadRows(at: [index], with: .automatic)
+	}
+	
+	private func downcastToMainTask() {
+		let mainTask = MainTask(task: parentTask)
+		TaskManager.shared.addTask(task: mainTask)
 	}
 	
 	private func setCurrentLine(index: Int) {

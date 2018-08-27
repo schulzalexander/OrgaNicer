@@ -22,11 +22,13 @@ class Utils {
 	}
 	
 	static func getTaskCellFontColor(priority: CGFloat) -> UIColor {
-		var percentage = (priority - Task.PRIORITY_MIN) / (Task.PRIORITY_MAX - Task.PRIORITY_MIN)
-		percentage *= percentage
+		let percentage = (priority - Task.PRIORITY_MIN) / (Task.PRIORITY_MAX - Task.PRIORITY_MIN)
+		/*percentage *= percentage
 		let revPercentage = 1.0 - percentage
 		let startColor = CIColor.black
-		let endColor = CIColor.white
+		let endColor = CIColor.white*/
+		return percentage < 0.5 ? UIColor.black : UIColor.white
+		/*
 		let newR = (percentage * endColor.red
 			+ revPercentage * startColor.red)
 		let newG = (percentage * endColor.green
@@ -34,6 +36,7 @@ class Utils {
 		let newB = (percentage * endColor.blue
 			+ revPercentage * startColor.blue)
 		return UIColor(red: newR, green: newG, blue: newB, alpha: 1.0)
+		*/
 	}
 	
 	static func getTaskCellColor(priority: CGFloat) -> UIColor {

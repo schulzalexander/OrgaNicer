@@ -18,23 +18,27 @@ class Deadline: NSObject, NSCoding {
 	var id: String
 	var date: Date
 	var frequency: Frequency
+	var category: String?
 	
 	struct PropertyKeys {
 		static let id = "id"
 		static let date = "date"
 		static let frequency = "frequency"
+		static let category = "category"
 	}
 	
-	init(date: Date, frequency: Frequency) {
+	init(date: Date, frequency: Frequency, category: String?) {
 		self.id = Utils.generateID()
 		self.date = date
 		self.frequency = frequency
+		self.category = category
 	}
 	
-	init(id: String, date: Date, frequency: Frequency) {
+	init(id: String, date: Date, frequency: Frequency, category: String?) {
 		self.id = id
 		self.date = date
 		self.frequency = frequency
+		self.category = category
 	}
 	
 	func getDueString() -> String {
@@ -61,6 +65,7 @@ class Deadline: NSObject, NSCoding {
 		aCoder.encode(id, forKey: PropertyKeys.id)
 		aCoder.encode(date, forKey: PropertyKeys.date)
 		aCoder.encode(frequency.rawValue, forKey: PropertyKeys.frequency)
+		aCoder.encode(category, forKey: PropertyKeys.category)
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
@@ -72,6 +77,7 @@ class Deadline: NSObject, NSCoding {
 		self.id = id
 		self.date = date
 		self.frequency = frequency
+		self.category = aDecoder.decodeObject(forKey: PropertyKeys.category) as? String
 	}
 	
 	//MARK: Private Methods

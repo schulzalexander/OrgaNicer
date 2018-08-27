@@ -19,6 +19,7 @@ class TaskSettingsTableViewController: UITableViewController {
 	
 	//MARK: Properties
 	var task: MainTask!
+	var taskCategory: TaskCategory?
 	var isDeadlineCellCollapsed: Bool = true
 	var isReminderCellCollapsed: Bool = true
 	
@@ -29,7 +30,6 @@ class TaskSettingsTableViewController: UITableViewController {
 	@IBOutlet weak var deadlineEnabledButton: UIButton!
 	@IBOutlet weak var weekdayPicker: UIPickerView!
 	@IBOutlet weak var deleteButton: UIButton!
-	@IBOutlet weak var deadlineTodayButton: UIButton!
 	@IBOutlet weak var deadlineDropdownArrow: UILabel!
 	@IBOutlet weak var reminderDropdownArrow: UILabel!
 	@IBOutlet weak var reminderEnabledButton: UIButton!
@@ -40,6 +40,8 @@ class TaskSettingsTableViewController: UITableViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		
+		self.taskCategory = getCurrentTaskCategory()
 		
 		self.taskHeaderTextField.text = task.title
 		self.taskHeaderTextField.sizeToFit()
@@ -77,13 +79,14 @@ class TaskSettingsTableViewController: UITableViewController {
 	
 	@IBAction func didChangeReminderDifferent(_ sender: UISwitch) {
 		guard self.task.alarm != nil, self.task.deadline != nil else {
-			return
+				fatalError("Error during alarm setup after reminder change!")
 		}
 		if !sender.isOn {
 			self.task.removeAlarm()
 			self.task.addAlarm(alarm: Alarm(id: Utils.generateID(),
 											date: task.deadline!.date,
 											frequency: task.deadline!.frequency,
+											category: taskCategory?.id,
 											sound: false))
 			self.reminderDatePicker.date = self.task.alarm!.date
 			self.reminderFrequencyPicker.selectedSegmentIndex = self.task.alarm!.frequency.rawValue
@@ -186,7 +189,7 @@ class TaskSettingsTableViewController: UITableViewController {
 			self.frequencyPicker.isEnabled = false
 			self.deadlineDropdownArrow.textColor = UIColor.lightGray
 		} else {
-			task.deadline = Deadline(date: Date(), frequency: .unique)
+			task.deadline = Deadline(date: Date(), frequency: .unique, category: taskCategory?.id)
 			self.isDeadlineCellCollapsed = false
 			self.frequencyPicker.isEnabled = true
 			self.deadlineDropdownArrow.textColor = UIColor.black
@@ -360,6 +363,14 @@ class TaskSettingsTableViewController: UITableViewController {
 		task.removeAlarm()
 		isReminderCellCollapsed = true
 		updateReminderCellComponents()
+	}
+	
+	private func getCurrentTaskCategory() -> TaskCategory? {
+		guard let taskTableController = self.popoverPresentationController?.delegate as? TaskTableViewController,
+			let currList = taskTableController.currList else {
+				return nil
+		}
+		return currList
 	}
 	
 }

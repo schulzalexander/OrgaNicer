@@ -46,3 +46,8 @@
 // Consecutive Task List
 "Forward" = "Forward";
 "Back" = "Back";
+
+// CheckList AlertController
+"GotIt" = "Got it";
+"CheckListViewAlertControllerMessage" = "You have to select a list entry first.";
+

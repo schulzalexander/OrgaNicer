@@ -70,6 +70,16 @@ class TaskCategoryManager: NSObject, NSCoding {
 		return categories[id]
 	}
 	
+	func getTaskCategoriesContaining(task: String) -> [String] {
+		var res = [String]()
+		for category in categories {
+			if category.value.containsTask(task: task) {
+				res.append(category.key)
+			}
+		}
+		return res
+	}
+	
 	func deleteTask(id: String) {
 		for category in categories {
 			let index = category.value.tasks?.index(of: id) ?? -1

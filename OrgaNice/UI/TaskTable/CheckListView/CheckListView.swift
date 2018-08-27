@@ -122,6 +122,7 @@ class CheckListView: TaskTableViewCellContent, UITextFieldDelegate, UIGestureRec
 		} else {
 			parentTask.subTasks = [newTask.id]
 		}
+		TaskArchive.saveTask(task: parentTask)
 		guard let tableView = self.superview?.superview as? UITableView,
 			let cell = self.superview as? TaskTableViewCell,
 			let index = tableView.indexPath(for: cell) else {
@@ -137,21 +138,40 @@ class CheckListView: TaskTableViewCellContent, UITextFieldDelegate, UIGestureRec
 	}
 	
 	@objc private func removeSubTask(_ sender: UIButton) {
-		guard markedLine != nil,
-			let tableView = self.superview?.superview as? UITableView,
+		guard let tableView = self.superview?.superview as? UITableView,
 			let cell = self.superview as? TaskTableViewCell,
 			let index = tableView.indexPath(for: cell) else {
 			return
 		}
-		parentTask.removeSubtask(id: markedLine!.task.id)
-		if parentTask.subTasks?.count == 0 {
-			let mainTask = MainTask(task: parentTask)
-			TaskManager.shared.addTask(task: mainTask)
+		if markedLine == nil {
+			if (parentTask.subTasks?.count ?? 0) > 0 {
+				// Remove button was pressed, but no selection
+				guard let viewController = tableView.delegate as? TaskTableViewController else {
+					fatalError("Error: Failed to retrieve tableview delegeate when trying to show alertController, reason: no selected checklistline during removal.")
+				}
+				let alertController = UIAlertController(title: nil, message: NSLocalizedString("CheckListViewAlertControllerMessage", comment: ""), preferredStyle: .alert)
+				alertController.addAction(UIAlertAction(title: NSLocalizedString("GotIt", comment: ""), style: .cancel, handler: nil))
+				viewController.present(alertController, animated: true, completion: nil)
+				
+			} else {
+				// Remove button was pressed with no subtasks -> remove checklist
+				downcastToMainTask()
+			}
 		} else {
-			TaskArchive.saveTask(task: parentTask)
+			parentTask.removeSubtask(id: markedLine!.task.id)
+			if parentTask.subTasks?.count == 0 {
+				downcastToMainTask()
+			} else {
+				TaskArchive.saveTask(task: parentTask)
+			}
+			TaskManager.shared.deleteTask(id: markedLine!.task.id)
 		}
-		TaskManager.shared.deleteTask(id: markedLine!.task.id)
 		tableView.reloadRows(at: [index], with: .automatic)
+	}
+	
+	private func downcastToMainTask() {
+		let mainTask = MainTask(task: parentTask)
+		TaskManager.shared.addTask(task: mainTask)
 	}
 	
 	@objc private func markLine(_ sender: UITapGestureRecognizer) {

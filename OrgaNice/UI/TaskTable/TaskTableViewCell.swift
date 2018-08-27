@@ -76,19 +76,20 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 	
 	@IBAction func didPressExtensionButton(_ sender: UIButton) {
 		guard let tableView = superview as? UITableView,
-			let viewController = tableView.delegate as? TaskTableViewController else {
+			let viewController = tableView.delegate as? TaskTableViewController,
+			let index = getIndexInTableView() else {
 				fatalError("Could not retrieve tableView as superview of tableViewCell!")
 		}
 		let decisionMenu = OverlayDecisionView(presenter: viewController.navigationController!, cancelPosition: .center)
 		decisionMenu.addOption(title: "Checklist") {
 			let newTask = TaskCheckList(task: self.task)
 			TaskManager.shared.addTask(task: newTask)
-			tableView.reloadData()
+			tableView.reloadRows(at: [index], with: .automatic)
 		}
 		decisionMenu.addOption(title: "Follow Up") {
 			let newTask = TaskConsecutiveList(task: self.task)
 			TaskManager.shared.addTask(task: newTask)
-			tableView.reloadData()
+			tableView.reloadRows(at: [index], with: .automatic)
 		}
 		decisionMenu.show()
 	}
@@ -183,6 +184,13 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 	}
 	
 	//MARK: Private Methods
+	
+	private func getIndexInTableView() -> IndexPath? {
+		guard let tableView = self.superview as? UITableView else {
+			fatalError("Error: Failed to retrieve tableview while returning index of cell!")
+		}
+		return tableView.indexPath(for: self)
+	}
 	
 	private func setupCheckButton() {
 		checkButton.layer.cornerRadius = 5

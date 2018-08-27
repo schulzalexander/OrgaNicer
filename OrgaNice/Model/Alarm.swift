@@ -17,14 +17,14 @@ class Alarm: Deadline {
 		static let sound = "sound"
 	}
 	
-	init(id: String, date: Date, frequency: Frequency, sound: Bool) {
+	init(id: String, date: Date, frequency: Frequency, category: String?, sound: Bool) {
 		self.sound = sound
-		super.init(id: id, date: date, frequency: frequency)
+		super.init(id: id, date: date, frequency: frequency, category: category)
 	}
 	
 	init(deadline: Deadline, sound: Bool) {
 		self.sound = sound
-		super.init(id: deadline.id, date: deadline.date, frequency: deadline.frequency)
+		super.init(id: deadline.id, date: deadline.date, frequency: deadline.frequency, category: deadline.category)
 	}
 	
 	//MARK: NSCoding

@@ -34,6 +34,10 @@ class TaskCategory: NSObject, NSCoding {
 											 selectedTaskStatusTab: .undone)
 	}
 	
+	func containsTask(task: String) -> Bool {
+		return tasks != nil && tasks!.contains(id)
+	}
+	
 	func count() -> Int {
 		return (tasks ?? []).count
 	}

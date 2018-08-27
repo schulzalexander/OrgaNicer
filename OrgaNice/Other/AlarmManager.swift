@@ -14,7 +14,8 @@ class AlarmManager {
 	static func addAlarm(task: Task, alarm: Alarm) {
 		let content = UNMutableNotificationContent()
 		content.body = task.title
-		content.title = NSLocalizedString("TodoReminder", comment: "")
+		content.title = TaskCategoryManager.shared.getTaskCategory(id: alarm.category ?? "")?.title
+			?? NSLocalizedString("TodoReminder", comment: "")
 		content.sound = alarm.sound ? UNNotificationSound.default : nil
 		
 		var attributes: Set<Calendar.Component> = [.hour, .minute]
