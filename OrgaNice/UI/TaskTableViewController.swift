@@ -18,7 +18,7 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 	var pinchCellSizeBuffer: CGFloat!
 	var pinchCellBuffer: TaskTableViewCell!
 	
-	var swipeCategoryCenterPoint: CGPoint!
+	var swipeCategoryCenterPoint: CGPoint?
 	
 	var tableTabBar: TableTabBar!
 	// Will be set when tableview scrolls to bottom after adding new task
@@ -111,6 +111,7 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 		
 		let newIndexPath = IndexPath(row: taskOrdering!.count - 1, section: 0)
 		if let newTaskCell = self.tableView.cellForRow(at: newIndexPath) as? TaskTableViewCell {
+			tableView.scrollToRow(at: newIndexPath, at: .bottom, animated: true)
 			newTaskCell.titleTextEdit.isEnabled = true
 			newTaskCell.titleTextEdit.becomeFirstResponder()
 		} else {
@@ -137,9 +138,24 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 		self.tableView.reloadData()
 	}
 	
+	func updateTaskCategoryProgressbar() {
+		guard currList != nil else {
+			return
+		}
+		for cell in categorySelector.visibleCells {
+			if let categoryCell = cell as? SelectorCollectionViewCell,
+				categoryCell.category.id == currList!.id {
+				categoryCell.setupGradientLayer()
+				break
+			}
+		}
+	}
+	
 	@objc func handleTableViewLongPress(_ sender: UILongPressGestureRecognizer) {
 		if sender.state == .began {
-			let alertController = UIAlertController(title: NSLocalizedString("Oops", comment: ""), message: NSLocalizedString("SortingNotPossibleMessage", comment: ""), preferredStyle: .alert)
+			let alertController = UIAlertController(title: NSLocalizedString("Oops", comment: ""),
+													message: NSLocalizedString("SortingNotPossibleMessage", comment: ""),
+													preferredStyle: .alert)
 			let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
 			alertController.addAction(cancel)
 			DispatchQueue.main.async {
@@ -178,6 +194,7 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 		
 		if sender.state == .ended {
 			TaskArchive.saveTask(task: pinchCellBuffer.task)
+			TaskArchive.saveTaskCategory(list: self.currList!)
 			pinchCellBuffer.endPinchMode()
 			UIView.setAnimationsEnabled(true)
 		}
@@ -286,16 +303,19 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 	}
 	
 	private func setupTransparentGradientBackground() {
-		let colour:UIColor = UIColor(red: 0.8078, green: 0.9412, blue: 1, alpha: 1.0)
+		let colour:UIColor = UIColor.lightGray
+		//LightBlue  UIColor(red: 0.8078, green: 0.9412, blue: 1, alpha: 1.0)
 		//LightOrange  UIColor(red: 1, green: 0.7412, blue: 0.4471, alpha: 1.0)
 		//Orange  UIColor(red: 0.9765, green: 0.5216, blue: 0, alpha: 0.8)
 		//DK  UIColor(red: 1, green: 0.5922, blue: 0.098, alpha: 0.7)
-		let colours:[CGColor] = [colour.withAlphaComponent(0.3).cgColor,colour.cgColor]
-		let locations:[NSNumber] = [0, 1]
+		let colours:[CGColor] = [UIColor.lightGray.withAlphaComponent(0.1).cgColor, UIColor.white.cgColor]
+		let locations:[NSNumber] = [0, 0.6]
 		
 		let gradientLayer = CAGradientLayer()
 		gradientLayer.colors = colours
 		gradientLayer.locations = locations
+		gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+		gradientLayer.endPoint = CGPoint(x: 1, y: 1)
 		gradientLayer.frame = self.tableView.bounds
 		
 		let view = UIView(frame: self.tableView.bounds)
@@ -368,7 +388,9 @@ extension TaskTableViewController: UITableViewDelegate, UITableViewDataSource {
 	*/
 	
 	func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-		return UIView(frame: categorySelector.bounds)
+		var frame = categorySelector.bounds
+		frame.size.height *= 2
+		return UIView(frame: frame)
 	}
 	
 	func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -407,7 +429,6 @@ extension TaskTableViewController: TableViewReorderDelegate {
 			currList!.tasks!.remove(at: taskOrdering![sourceIndexPath.row] + 1)
 		}
 		self.updateTaskOrdering()
-		TaskArchive.saveTaskCategory(list: self.currList!)
 	}
 	
 }
@@ -455,33 +476,42 @@ extension TaskTableViewController: UIGestureRecognizerDelegate {
 	
 	//TODO: Doesn't look too nice
 	@objc func didSwipeTaskCategory(_ sender: UIPanGestureRecognizer) {
-		
 		guard let cell = sender.view as? SelectorCollectionViewCell else {
 			return
 		}
 		
-		if sender.state == .began {
-			self.swipeCategoryCenterPoint = cell.center
+		// Make sure center point buffer is set
+		if self.swipeCategoryCenterPoint == nil {
+			if sender.state == .began {
+				self.swipeCategoryCenterPoint = cell.center
+			} else {
+				return
+			}
 		}
+
+		// Move cell along with swiping finger in y direction
+		let maxMovement: CGFloat = 20
+		cell.center.y = min(max(self.swipeCategoryCenterPoint!.y + sender.translation(in: self.view).y,
+								self.swipeCategoryCenterPoint!.y - maxMovement),
+							self.swipeCategoryCenterPoint!.y)
 		
-		cell.center.y = min(max(self.swipeCategoryCenterPoint.y + sender.translation(in: self.view).y,
-								self.swipeCategoryCenterPoint.y - 20),
-							self.swipeCategoryCenterPoint.y)
-		
-		if cell.center.y <= self.swipeCategoryCenterPoint.y - 20 {
+		if cell.center.y <= self.swipeCategoryCenterPoint!.y - maxMovement {
 			self.presentCategorySettingsView(category: cell.category)
 			
 			sender.isEnabled = false
-			sender.isEnabled = true
-			UIView.animate(withDuration: 0.2) {
-				cell.center.y = self.swipeCategoryCenterPoint.y
+			UIView.animate(withDuration: 0.2, animations: {
+				cell.center.y = self.swipeCategoryCenterPoint!.y
+			}) { (error) in
+				sender.isEnabled = true
+				self.swipeCategoryCenterPoint = nil
 			}
 		}
 		
 		if sender.state == .ended {
 			UIView.animate(withDuration: 0.2) {
-				cell.center.y = self.swipeCategoryCenterPoint.y
+				cell.center.y = self.swipeCategoryCenterPoint!.y
 			}
+			self.swipeCategoryCenterPoint = nil
 		}
 	}
 	

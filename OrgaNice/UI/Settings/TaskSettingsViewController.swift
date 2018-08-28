@@ -124,7 +124,10 @@ class TaskSettingsTableViewController: UITableViewController {
 					print("No success requesting user notification authorization!")
 					return
 				} else {
-					self.task.alarm = Alarm(deadline: self.task.deadline!, sound: false)
+					let newAlarm = Alarm(deadline: self.task.deadline!, sound: false)
+					self.task.alarm = newAlarm
+					AlarmManager.addAlarm(task: self.task, alarm: newAlarm)
+					TaskArchive.saveTask(task: self.task)
 					self.isReminderCellCollapsed = false
 					DispatchQueue.main.async {
 						self.reminderStateSwitchCompletion()
@@ -171,13 +174,7 @@ class TaskSettingsTableViewController: UITableViewController {
 	}
 	
 	@IBAction func didPickDeadline(_ sender: UIDatePicker) {
-		task.deadline!.date = sender.date
-		if task.alarm != nil && !task.hasSeperateAlarm() {
-			task.alarm!.date = sender.date
-			task.resetAlarm()
-		}
-		TaskArchive.saveTask(task: task)
-		updateTaskTable()
+		updateTaskDeadlineDate(date: sender.date)
 	}
 	
 	@IBAction func switchDeadlineEnabled(_ sender: UIButton) {
@@ -373,6 +370,16 @@ class TaskSettingsTableViewController: UITableViewController {
 		return currList
 	}
 	
+	private func updateTaskDeadlineDate(date: Date) {
+		task.deadline!.date = date
+		if task.alarm != nil && !task.hasSeperateAlarm() {
+			task.alarm!.date = date
+			task.resetAlarm()
+		}
+		TaskArchive.saveTask(task: task)
+		updateTaskTable()
+	}
+	
 }
 
 extension TaskSettingsTableViewController: UITextFieldDelegate {
@@ -410,9 +417,8 @@ extension TaskSettingsTableViewController: UIPickerViewDelegate, UIPickerViewDat
 		var date = task.deadline!.date
 		for _ in 0...7 {
 			if Calendar.current.component(.weekday, from: date) - 1 == row {
-				task.deadline!.date = date
+				updateTaskDeadlineDate(date: date)
 				deadlineDatePicker.setDate(date, animated: false)
-				updateTaskTable()
 				break
 			}
 			date.addTimeInterval(3600 * 24)

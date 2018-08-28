@@ -71,7 +71,8 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 		}
 		viewController.updateTodoCounter()
 		viewController.updateTaskOrdering()
-		viewController.tableView.reloadData()
+		viewController.updateTaskCategoryProgressbar()
+		viewController.tableView.reloadData() // update whole content in order to apply new order
 	}
 	
 	@IBAction func didPressExtensionButton(_ sender: UIButton) {
@@ -171,7 +172,7 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 		let extensionFrame = CGRect(x: self.titleTextEdit.frame.minX,
 									y: self.contentView.bounds.maxY - task.getTaskExtensionHeight() - (TaskTableViewController.extensionBottomPadding),
 									width: self.contentView.bounds.maxX - 30 - self.titleTextEdit.frame.minX,
-			height: task.getTaskExtensionHeight())
+									height: task.getTaskExtensionHeight())
 		if let cellExtension = task.createTaskExtensionView(frame: extensionFrame) {
 			self.addSubview(cellExtension)
 			self.extensionButton.isHidden = true

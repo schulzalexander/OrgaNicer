@@ -12,7 +12,8 @@ class SelectorCollectionView: UICollectionView {
 	
 	override func draw(_ rect: CGRect) {
 		super.draw(rect)
-		setupTransparentGradientBackground()
+		//setupTransparentGradientBackground()
+		setupTrapez()
 	}
 	
 	func scrollToIndex(index: Int) {
@@ -51,6 +52,27 @@ class SelectorCollectionView: UICollectionView {
 		
 		backgrdView.layer.addSublayer(gradientLayer)
 		self.backgroundView = backgrdView
+	}
+	
+	private func setupTrapez() {
+		let shape = CAShapeLayer()
+		let backgrdView = UIView(frame: self.frame)
+		backgrdView.layer.addSublayer(shape)
+		self.backgroundView = backgrdView
+		
+		shape.opacity = 0.8
+		shape.lineWidth = 2
+		shape.lineJoin = CAShapeLayerLineJoin.miter
+		shape.strokeColor = UIColor.black.cgColor
+		shape.fillColor = UIColor.gray.cgColor
+		
+		let path = UIBezierPath()
+		path.move(to: CGPoint(x: 0, y: frame.height))
+		path.addLine(to: CGPoint(x: 15, y: frame.height - 40))
+		path.addLine(to: CGPoint(x: frame.width - 15, y: frame.height - 40))
+		path.addLine(to: CGPoint(x: frame.width, y: frame.height))
+		path.close()
+		shape.path = path.cgPath
 	}
 
 }

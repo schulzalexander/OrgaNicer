@@ -38,6 +38,8 @@ class SelectorCollectionViewCellAdd: UICollectionViewCell {
 		self.addLabel.layer.shadowRadius = 5.0
 		self.addLabel.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
 		self.addLabel.layer.shadowOpacity = 1.0
+		
+		self.addLabel.layer.cornerRadius = 5
 	}
 	
 }

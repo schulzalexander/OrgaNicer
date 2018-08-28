@@ -135,6 +135,11 @@ extension TaskCategoryManager: UICollectionViewDataSource {
 				let currView = collectionView.delegate as? TaskTableViewController else {
 					fatalError("Error dequeuing cell of type SelectorCollectionViewCell!")
 			}
+			
+			for recognizer in cell.gestureRecognizers ?? [] {
+				cell.removeGestureRecognizer(recognizer)
+			}
+			
 			let tapRecognizer = UITapGestureRecognizer(target: currView, action: #selector(TaskTableViewController.didTapOnTaskCategory(_:)))
 			let panRecognizer = UIPanGestureRecognizer(target: currView, action: #selector(TaskTableViewController.didSwipeTaskCategory(_:)))
 			tapRecognizer.delegate = currView

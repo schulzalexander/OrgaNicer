@@ -18,6 +18,7 @@ class SelectorCollectionViewCell: UICollectionViewCell {
 			}
 			self.titleLabel.text = category!.title
 			self.updateTodoCounter()
+			self.setupGradientLayer()
 		}
 	}
 	
@@ -29,7 +30,7 @@ class SelectorCollectionViewCell: UICollectionViewCell {
 	override func awakeFromNib() {
 		super.awakeFromNib()
 		
-		self.backgroundColor = .white
+		//self.backgroundColor = .white
 		self.layer.masksToBounds = false
 		self.layer.shadowColor = UIColor.gray.cgColor
 		self.layer.shadowRadius = 5.0
@@ -45,13 +46,34 @@ class SelectorCollectionViewCell: UICollectionViewCell {
 		self.layer.sublayers![0].frame = self.layer.bounds // Scale gradient to cell size
 	}
 	
-	func createGradientLayer(view: UIView) {
+	func setupGradientLayer() {
+		if self.layer.sublayers != nil && self.layer.sublayers!.count > 1 {
+			guard let oldLayer = self.layer.sublayers?.first else {
+				return
+			}
+			self.layer.replaceSublayer(oldLayer, with: createGradientLayer())
+		} else {
+			self.layer.insertSublayer(createGradientLayer(), at: 0)
+		}
+	}
+	
+	private func createGradientLayer() -> CALayer {
+		let done = category.countDone()
+		let loadedPercentage: CGFloat = done == 0 ? 0 : CGFloat(done) / CGFloat(category.count())
 		let gradientLayer = CAGradientLayer()
-		gradientLayer.frame = view.bounds
-		gradientLayer.colors = [UIColor.red.cgColor, UIColor.yellow.cgColor]
-		gradientLayer.locations = [0, 1]
-		view.layer.sublayers!.insert(gradientLayer, at: 0)
-		//view.layer.sublayers![1].zPosition = 0
+		gradientLayer.frame = self.bounds
+		gradientLayer.colors = [UIColor(red: 0.1255, green: 0.8588, blue: 0, alpha: 0.6).cgColor, UIColor.white.cgColor]
+		if loadedPercentage == 0 || loadedPercentage == 1 {
+			// Completely fill progressbar
+			gradientLayer.locations = [loadedPercentage, loadedPercentage] as [NSNumber]
+		} else {
+			// Smoothen transition
+			gradientLayer.locations = [max(0, loadedPercentage - 0.15), loadedPercentage] as [NSNumber]
+		}
+		
+		gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
+		gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
+		return gradientLayer
 	}
 	
 	func updateTodoCounter() {

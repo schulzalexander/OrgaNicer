@@ -418,8 +418,12 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dGI-S9-WKt">
-                                                    <rect key="frame" x="319" y="19" width="30" height="34"/>
+                                                    <rect key="frame" x="319" y="19" width="30" height="30"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="f8c-wl-IoH"/>
+                                                        <constraint firstAttribute="width" constant="30" id="rWG-CF-DNZ"/>
+                                                    </constraints>
                                                     <state key="normal">
                                                         <color key="titleColor" red="0.2081904442413553" green="0.8034326424870466" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
@@ -427,8 +431,8 @@
                                                         <action selector="check:" destination="5XQ-ew-BOU" eventType="touchUpInside" id="RZd-EE-kBe"/>
                                                     </connections>
                                                 </button>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="27g-4j-aUx">
-                                                    <rect key="frame" x="15" y="8" width="9" height="22"/>
+                                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="27g-4j-aUx">
+                                                    <rect key="frame" x="15" y="8" width="294" height="22"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -454,8 +458,10 @@
                                                 <constraint firstItem="27g-4j-aUx" firstAttribute="leading" secondItem="PzB-m4-GWD" secondAttribute="leading" constant="15" id="KQ9-ZD-28T"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="dGI-S9-WKt" secondAttribute="trailing" constant="11" id="RwR-hZ-9Tw"/>
                                                 <constraint firstItem="zB3-uC-x8Z" firstAttribute="top" secondItem="27g-4j-aUx" secondAttribute="bottom" constant="5" id="Sao-5s-JGg"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="zB3-uC-x8Z" secondAttribute="trailing" constant="30" id="ShZ-GJ-beh"/>
                                                 <constraint firstItem="zB3-uC-x8Z" firstAttribute="leading" secondItem="PzB-m4-GWD" secondAttribute="leadingMargin" constant="39" id="WYV-p7-8Z7"/>
                                                 <constraint firstItem="dGI-S9-WKt" firstAttribute="top" secondItem="PzB-m4-GWD" secondAttribute="topMargin" constant="8" id="fwR-gy-42H"/>
+                                                <constraint firstItem="dGI-S9-WKt" firstAttribute="leading" secondItem="27g-4j-aUx" secondAttribute="trailing" constant="10" id="guw-up-fnv"/>
                                                 <constraint firstItem="N2v-uY-ysE" firstAttribute="centerX" secondItem="PzB-m4-GWD" secondAttribute="centerX" id="jFh-VH-bDe"/>
                                                 <constraint firstAttribute="bottom" secondItem="N2v-uY-ysE" secondAttribute="bottom" constant="-4" id="lxX-Ys-3Yr"/>
                                                 <constraint firstItem="27g-4j-aUx" firstAttribute="top" secondItem="PzB-m4-GWD" secondAttribute="top" constant="8" id="mcj-UT-xYU"/>
