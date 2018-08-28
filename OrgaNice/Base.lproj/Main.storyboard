@@ -72,7 +72,7 @@
                                             <subviews>
                                                 <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="vxw-75-dno">
                                                     <rect key="frame" x="16" y="17" width="343" height="29"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <segments>
                                                         <segment title="Unique"/>
                                                         <segment title="Daily"/>
@@ -287,9 +287,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="76.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Category Name" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RYk-c1-vw0">
-                                                    <rect key="frame" x="16" y="11" width="343" height="36"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Category Name" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RYk-c1-vw0">
+                                                    <rect key="frame" x="8" y="11" width="222" height="36"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -301,7 +300,24 @@
                                                     <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HNm-LO-Cfw">
+                                                    <rect key="frame" x="233" y="14" width="30" height="30"/>
+                                                    <state key="normal" title="Edit">
+                                                        <color key="titleColor" red="0.0" green="0.56577507819999995" blue="1" alpha="0.70232724469999996" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="startEditingTitle:" destination="mVv-Vn-6Qy" eventType="touchUpInside" id="3pi-DA-do7"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="RYk-c1-vw0" firstAttribute="leading" secondItem="ZaO-4Q-CD8" secondAttribute="leadingMargin" constant="-8" id="2oC-85-tUw"/>
+                                                <constraint firstItem="RYk-c1-vw0" firstAttribute="top" secondItem="ZaO-4Q-CD8" secondAttribute="topMargin" id="3y4-K8-Gzk"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="RYk-c1-vw0" secondAttribute="bottom" constant="19" id="VDZ-4U-3ZT"/>
+                                                <constraint firstItem="HNm-LO-Cfw" firstAttribute="leading" secondItem="RYk-c1-vw0" secondAttribute="trailing" constant="3" id="XjN-hq-vau"/>
+                                                <constraint firstItem="HNm-LO-Cfw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="RYk-c1-vw0" secondAttribute="leadingMargin" id="pip-UH-gRj"/>
+                                                <constraint firstItem="HNm-LO-Cfw" firstAttribute="centerY" secondItem="RYk-c1-vw0" secondAttribute="centerY" id="v32-GU-N9q"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="77" id="lDC-pk-7F3">
@@ -345,7 +361,7 @@
                                                 </label>
                                                 <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="m6O-qk-YC2">
                                                     <rect key="frame" x="58" y="54" width="258" height="29"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <segments>
                                                         <segment title="By Deadline"/>
                                                         <segment title="Custom"/>
@@ -407,7 +423,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="T1c-2n-Eoq">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TaskTableViewCell" rowHeight="70" id="5XQ-ew-BOU" customClass="TaskTableViewCell" customModule="OrgaNice" customModuleProvider="target">
@@ -479,7 +495,7 @@
                             </tableView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="bDQ-eL-i2H" customClass="SelectorCollectionView" customModule="OrgaNice" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="557" width="375" height="110"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewLayout key="collectionViewLayout" id="0mz-h2-Bdl" customClass="SelectorCollectionViewLayout" customModule="OrgaNice" customModuleProvider="target"/>
                                 <cells>

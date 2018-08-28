@@ -43,7 +43,12 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 		tableView.reorder.delegate = self
 		tableView.reorder.cellScale = 1.05
 		tableView.rowHeight = UITableView.automaticDimension
-		//tableView.estimatedRowHeight = 70
+		
+		/*  Setting footer via delegate methods lets the footer float over bottom
+			content of the table, and not be part of it  */
+		var footerFrame = categorySelector.bounds
+		footerFrame.size.height *= 2
+		tableView.tableFooterView = UIView(frame: footerFrame)
 		
 		longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.handleTableViewLongPress(_:)))
 		longPressRecognizer.minimumPressDuration = 0.5
@@ -107,6 +112,7 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 		let newTask = MainTask(title: "")
 		currList!.addTask(task: newTask)
 		updateTaskOrdering()
+		updateCurrListProgressBar()
 		tableView.reloadData()
 		
 		let newIndexPath = IndexPath(row: taskOrdering!.count - 1, section: 0)
@@ -248,6 +254,17 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 				: nil)
 	}
 	
+	func updateCurrListProgressBar() {
+		for cell in categorySelector.visibleCells {
+			if let categoryCell = cell as? SelectorCollectionViewCell,
+				currList != nil,
+				categoryCell.category.id == currList!.id {
+				categoryCell.setupGradientLayer()
+				break
+			}
+		}
+	}
+	
 	//MARK: Private Methods
 	
 	private func setupFilterBar() {
@@ -386,7 +403,7 @@ extension TaskTableViewController: UITableViewDelegate, UITableViewDataSource {
 		return [deleteAction]
 	}
 	*/
-	
+	/*
 	func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
 		var frame = categorySelector.bounds
 		frame.size.height *= 2
@@ -394,8 +411,8 @@ extension TaskTableViewController: UITableViewDelegate, UITableViewDataSource {
 	}
 	
 	func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-		return categorySelector.bounds.height * 2
-	}
+		return categorySelector.bounds.height
+	}*/
 	
 	func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 		return (currList?.settings.seperateByTaskStatus ?? false) ? tableTabBar : nil

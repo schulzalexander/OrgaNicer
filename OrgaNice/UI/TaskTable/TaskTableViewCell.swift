@@ -115,6 +115,7 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 			}
 			viewController.currList!.deleteTask(id: task.id)
 			viewController.updateTaskOrdering()
+			viewController.updateCurrListProgressBar()
 			tableView.reloadData()
 			return
 		}

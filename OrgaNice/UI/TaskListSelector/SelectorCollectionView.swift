@@ -12,7 +12,6 @@ class SelectorCollectionView: UICollectionView {
 	
 	override func draw(_ rect: CGRect) {
 		super.draw(rect)
-		//setupTransparentGradientBackground()
 		setupTrapez()
 	}
 	
@@ -39,32 +38,28 @@ class SelectorCollectionView: UICollectionView {
 		}
 	}
 	
-	private func setupTransparentGradientBackground() {
-		let colour:UIColor = .white//UIColor(red: 1, green: 0.5922, blue: 0.098, alpha: 0.5)
-		let colours:[CGColor] = [colour.withAlphaComponent(0.0).cgColor,colour.cgColor]
-		let locations:[NSNumber] = [0, 0.7]
-		
-		let backgrdView = UIView(frame: self.frame)
+	private func setupGradientBackground(frame: CGRect) -> CAGradientLayer {
+		let colours:[CGColor] = [UIColor.gray.cgColor,UIColor.white.cgColor]
+		let locations:[NSNumber] = [0, 1]
 		let gradientLayer = CAGradientLayer()
+		
 		gradientLayer.colors = colours
 		gradientLayer.locations = locations
-		gradientLayer.frame = self.bounds
+		gradientLayer.frame = frame
+		gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
+		gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
 		
-		backgrdView.layer.addSublayer(gradientLayer)
-		self.backgroundView = backgrdView
+		return gradientLayer
 	}
 	
 	private func setupTrapez() {
+		let height: CGFloat = 40, width: CGFloat = self.frame.width
+		let frame = CGRect(x: 0, y: self.frame.height - height, width: width, height: height)
 		let shape = CAShapeLayer()
-		let backgrdView = UIView(frame: self.frame)
-		backgrdView.layer.addSublayer(shape)
-		self.backgroundView = backgrdView
 		
-		shape.opacity = 0.8
+		shape.opacity = 0.9
 		shape.lineWidth = 2
 		shape.lineJoin = CAShapeLayerLineJoin.miter
-		shape.strokeColor = UIColor.black.cgColor
-		shape.fillColor = UIColor.gray.cgColor
 		
 		let path = UIBezierPath()
 		path.move(to: CGPoint(x: 0, y: frame.height))
@@ -73,6 +68,12 @@ class SelectorCollectionView: UICollectionView {
 		path.addLine(to: CGPoint(x: frame.width, y: frame.height))
 		path.close()
 		shape.path = path.cgPath
+		
+		let gradientLayer = setupGradientBackground(frame: frame)
+		gradientLayer.mask = shape
+		let backgrdView = UIView(frame: self.frame)
+		backgrdView.layer.addSublayer(gradientLayer)
+		self.backgroundView = backgrdView
 	}
 
 }

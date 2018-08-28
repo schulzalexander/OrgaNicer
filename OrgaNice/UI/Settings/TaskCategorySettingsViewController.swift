@@ -53,6 +53,10 @@ class TaskCategorySettingsTableViewController: UITableViewController {
 		taskTable.tableView.reloadData()
 	}
 	
+	@IBAction func startEditingTitle(_ sender: UIButton) {
+		self.categoryHeaderTextField.becomeFirstResponder()
+	}
+	
 	@IBAction func didSwitchSeperateDoneTasks(_ sender: UISwitch) {
 		guard let taskTable = self.popoverPresentationController?.delegate as? TaskTableViewController else {
 			return

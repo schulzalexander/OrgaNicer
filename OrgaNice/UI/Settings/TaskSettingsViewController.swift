@@ -56,11 +56,12 @@ class TaskSettingsTableViewController: UITableViewController {
 		
 		if task.deadline != nil {
 			self.frequencyPicker.selectedSegmentIndex = task.deadline!.frequency.rawValue
-			if task.deadline!.frequency == .weekly {
+			updateUIControlsToFrequency(frequency: task.deadline!.frequency)
+			/*if task.deadline!.frequency == .weekly {
 				showWeekdayPicker()
 				deadlineDatePicker.datePickerMode = .time
 				setWeekday()
-			}
+			}*/
 		} else {
 			self.frequencyPicker.isEnabled = false
 			self.deadlineDropdownArrow.textColor = UIColor.lightGray
@@ -147,30 +148,35 @@ class TaskSettingsTableViewController: UITableViewController {
 	//MARK: Deadline Cell
 	
 	@IBAction func didPickFrequency(_ sender: UISegmentedControl) {
-		switch sender.selectedSegmentIndex {
-		case 0:
-			deadlineDatePicker.datePickerMode = .dateAndTime
-			task.deadline!.frequency = Deadline.Frequency.unique
-			deadlineDatePicker.date = task.deadline!.date
-			hideWeekdayPicker()
-		case 1:
-			deadlineDatePicker.datePickerMode = .time
-			task.deadline!.frequency = Deadline.Frequency.daily
-			hideWeekdayPicker()
-		case 2:
-			deadlineDatePicker.datePickerMode = .time
-			task.deadline!.frequency = Deadline.Frequency.weekly
-			showWeekdayPicker()
-			setWeekday()
-		default:
-			return
+		guard let frequency = Deadline.Frequency(rawValue: sender.selectedSegmentIndex) else {
+			fatalError("Error: Failed to create Frequency out of SegmentedControl's selected index!")
 		}
+		updateUIControlsToFrequency(frequency: frequency)
 		if task.alarm != nil && !task.hasSeperateAlarm() {
 			task.alarm!.frequency = task.deadline!.frequency
 			task.resetAlarm()
 		}
 		updateTaskTable()
 		TaskArchive.saveTask(task: task)
+	}
+	
+	private func updateUIControlsToFrequency(frequency: Deadline.Frequency) {
+		switch frequency {
+		case .unique:
+			deadlineDatePicker.datePickerMode = .dateAndTime
+			task.deadline!.frequency = Deadline.Frequency.unique
+			deadlineDatePicker.date = task.deadline!.date
+			hideWeekdayPicker()
+		case .daily:
+			deadlineDatePicker.datePickerMode = .time
+			task.deadline!.frequency = Deadline.Frequency.daily
+			hideWeekdayPicker()
+		case .weekly:
+			deadlineDatePicker.datePickerMode = .time
+			task.deadline!.frequency = Deadline.Frequency.weekly
+			showWeekdayPicker()
+			setWeekday()
+		}
 	}
 	
 	@IBAction func didPickDeadline(_ sender: UIDatePicker) {
@@ -210,6 +216,7 @@ class TaskSettingsTableViewController: UITableViewController {
 				return
 			}
 			taskTable.updateTaskOrdering()
+			taskTable.updateCurrListProgressBar()
 			taskTable.tableView.reloadData()
 		})
 		let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)

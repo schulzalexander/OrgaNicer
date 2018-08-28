@@ -62,7 +62,7 @@ class SelectorCollectionViewCell: UICollectionViewCell {
 		let loadedPercentage: CGFloat = done == 0 ? 0 : CGFloat(done) / CGFloat(category.count())
 		let gradientLayer = CAGradientLayer()
 		gradientLayer.frame = self.bounds
-		gradientLayer.colors = [UIColor(red: 0.1255, green: 0.8588, blue: 0, alpha: 0.6).cgColor, UIColor.white.cgColor]
+		gradientLayer.colors = [UIColor(red: 0.349, green: 0.9176, blue: 0, alpha: 0.7).cgColor, UIColor.white.cgColor]
 		if loadedPercentage == 0 || loadedPercentage == 1 {
 			// Completely fill progressbar
 			gradientLayer.locations = [loadedPercentage, loadedPercentage] as [NSNumber]

@@ -31,3 +31,27 @@
 
 /* Now button in task settings */
 "AQ0-WB-uOc.normalTitle" = "Jetzt";
+
+/* Task Category Settings */
+"ffw-cp-cVf.text" = "Erledigte Tasks aussortieren";
+"CeN-L7-URb.text" = "Task Sortierung";
+"OSH-hm-xCK.text" = "ToDo-List Einstellungen";
+"Nda-QY-j9Z.normalTitle" = "Löschen";
+"m6O-qk-YC2.segmentTitles[0]" = "Nach Deadline";
+"m6O-qk-YC2.segmentTitles[1]" = "Eigene";
+"HNm-LO-Cfw.normalTitle" = "Ändern";
+
+/* Task Settings */
+"3DZ-0S-cUd.text" = "Task Einstellungen";
+"vxw-75-dno.segmentTitles[0]" = "Einmal";
+"vxw-75-dno.segmentTitles[1]" = "Täglich";
+"vxw-75-dno.segmentTitles[2]" = "Wöchentlich";
+"jAo-Q1-crO.text" = "Erinnerung";
+"7sd-nj-b8C.text" = "Ton";
+"oly-Dn-tVt.text" = "Zu Deadline";
+"a9Y-kE-uJD.segmentTitles[0]" = "Einmal";
+"a9Y-kE-uJD.segmentTitles[1]" = "Täglich";
+"a9Y-kE-uJD.segmentTitles[2]" = "Wöchentlich";
+"bGO-dB-RqC.normalTitle" = "Löschen";
+"3DZ-0S-cUd.normalTitle" = "Ändern";
+
