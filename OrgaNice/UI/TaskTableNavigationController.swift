@@ -39,10 +39,10 @@ class TaskTableNavigationController: UINavigationController {
 		//addButton.layer.borderWidth = 1.0
 		self.view.insertSubview(addButton, aboveSubview: self.view)
 		
-		addButton.center = CGPoint(x: self.view.frame.width, y: self.view.frame.height - 120 - (self.addButton.frame.height / 2))
+		addButton.center = CGPoint(x: self.view.frame.width, y: self.view.frame.height - 130 - (self.addButton.frame.height / 2))
 		if UIScreen.main.nativeBounds.height == 2436 {
 			//iPhone X
-			addButton.center = CGPoint(x: self.view.frame.width - 30 - (self.addButton.frame.width / 2), y: self.view.frame.height - 160 - (self.addButton.frame.height / 2))
+			addButton.center = CGPoint(x: self.view.frame.width, y: self.view.frame.height - 160 - (self.addButton.frame.height / 2))
 		}
 		//addButton.clipsToBounds = true
 		addButton.layer.cornerRadius = addButton.frame.height / 2

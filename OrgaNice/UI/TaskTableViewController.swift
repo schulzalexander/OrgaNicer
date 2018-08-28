@@ -157,6 +157,10 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 		}
 	}
 	
+	@IBAction func toggleSideMenu(_ sender: UIBarButtonItem) {
+		
+	}
+	
 	@objc func handleTableViewLongPress(_ sender: UILongPressGestureRecognizer) {
 		if sender.state == .began {
 			let alertController = UIAlertController(title: NSLocalizedString("Oops", comment: ""),
