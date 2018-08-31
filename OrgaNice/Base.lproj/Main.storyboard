@@ -580,6 +580,28 @@
             </objects>
             <point key="canvasLocation" x="972" y="32.833583208395808"/>
         </scene>
+        <!--Privacy Policy-->
+        <scene sceneID="SvT-8Z-SO8">
+            <objects>
+                <viewController id="8xz-cg-XDd" customClass="PrivacyPolicyViewController" customModule="OrgaNice" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="V02-cl-swP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="drn-Fp-kn3"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Privacy Policy" id="2ID-dC-4wD">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="Fcg-X0-RLg">
+                            <connections>
+                                <action selector="cancel:" destination="8xz-cg-XDd" id="w8B-eF-7gF"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zgh-2L-MO8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="972" y="780"/>
+        </scene>
         <!--Task Table Navigation Controller-->
         <scene sceneID="DCl-ze-mlr">
             <objects>
@@ -597,6 +619,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fqx-SY-JQj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-26" y="33"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="U5e-R5-gKk">
+            <objects>
+                <navigationController storyboardIdentifier="PrivacyPolicyViewController" automaticallyAdjustsScrollViewInsets="NO" id="202-4X-h3c" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="dmz-w2-KED">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="8xz-cg-XDd" kind="relationship" relationship="rootViewController" id="uCu-03-6Gh"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VJS-M0-6Yb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-26" y="780"/>
         </scene>
     </scenes>
 </document>

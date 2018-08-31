@@ -158,7 +158,10 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 	}
 	
 	@IBAction func toggleSideMenu(_ sender: UIBarButtonItem) {
-		
+		guard let navController = navigationController as? TaskTableNavigationController else {
+			return
+		}
+		navController.sideMenu.toggle()
 	}
 	
 	@objc func handleTableViewLongPress(_ sender: UILongPressGestureRecognizer) {

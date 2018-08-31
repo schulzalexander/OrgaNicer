@@ -42,6 +42,9 @@
 		C9713F0420C597810074F232 /* SelectorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9713EF320C597810074F232 /* SelectorCollectionViewCell.swift */; };
 		C9713F0520C597810074F232 /* TaskTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9713EF420C597810074F232 /* TaskTableViewController.swift */; };
 		C9713F0720C5CEE30074F232 /* TaskTableNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9713F0620C5CEE30074F232 /* TaskTableNavigationController.swift */; };
+		C97428F121398E4C00727470 /* SideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97428F021398E4C00727470 /* SideMenu.swift */; };
+		C97428F321398E5800727470 /* SideMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97428F221398E5800727470 /* SideMenuButton.swift */; };
+		C97428F62139A27500727470 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97428F52139A27500727470 /* PrivacyPolicyViewController.swift */; };
 		C97D0BBE20CB0F3C00991895 /* TaskTableViewCellContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97D0BBD20CB0F3C00991895 /* TaskTableViewCellContent.swift */; };
 		C998040921282A700010FFD4 /* MainTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = C998040821282A700010FFD4 /* MainTask.swift */; };
 		C998040C212831E10010FFD4 /* OverlayDecisionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C998040B212831E10010FFD4 /* OverlayDecisionView.swift */; };
@@ -120,6 +123,9 @@
 		C9713EF320C597810074F232 /* SelectorCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectorCollectionViewCell.swift; sourceTree = "<group>"; };
 		C9713EF420C597810074F232 /* TaskTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskTableViewController.swift; sourceTree = "<group>"; };
 		C9713F0620C5CEE30074F232 /* TaskTableNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableNavigationController.swift; sourceTree = "<group>"; };
+		C97428F021398E4C00727470 /* SideMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenu.swift; sourceTree = "<group>"; };
+		C97428F221398E5800727470 /* SideMenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuButton.swift; sourceTree = "<group>"; };
+		C97428F52139A27500727470 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 		C97D0BBD20CB0F3C00991895 /* TaskTableViewCellContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCellContent.swift; sourceTree = "<group>"; };
 		C998040821282A700010FFD4 /* MainTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTask.swift; sourceTree = "<group>"; };
 		C998040B212831E10010FFD4 /* OverlayDecisionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayDecisionView.swift; sourceTree = "<group>"; };
@@ -325,6 +331,8 @@
 		C9713EEA20C597810074F232 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				C97428F42139A25D00727470 /* PrivacyPolicy */,
+				C97428EF21398E3D00727470 /* SideMenu */,
 				C998040A212831760010FFD4 /* OverlayDecisionView */,
 				C96993162105038300922177 /* Settings */,
 				C9D5C28921033FE200AAE177 /* TableTabBar */,
@@ -359,6 +367,23 @@
 				C9C3D71720CC66C900C881D3 /* SelectorCollectionViewCellAdd.swift */,
 			);
 			path = TaskListSelector;
+			sourceTree = "<group>";
+		};
+		C97428EF21398E3D00727470 /* SideMenu */ = {
+			isa = PBXGroup;
+			children = (
+				C97428F021398E4C00727470 /* SideMenu.swift */,
+				C97428F221398E5800727470 /* SideMenuButton.swift */,
+			);
+			path = SideMenu;
+			sourceTree = "<group>";
+		};
+		C97428F42139A25D00727470 /* PrivacyPolicy */ = {
+			isa = PBXGroup;
+			children = (
+				C97428F52139A27500727470 /* PrivacyPolicyViewController.swift */,
+			);
+			path = PrivacyPolicy;
 			sourceTree = "<group>";
 		};
 		C998040A212831760010FFD4 /* OverlayDecisionView */ = {
@@ -608,6 +633,7 @@
 				C9D5C28B2103400A00AAE177 /* TableTabBar.swift in Sources */,
 				C9713F0020C597810074F232 /* TaskTableViewCell.swift in Sources */,
 				C97D0BBE20CB0F3C00991895 /* TaskTableViewCellContent.swift in Sources */,
+				C97428F121398E4C00727470 /* SideMenu.swift in Sources */,
 				C93758A721196FDE00B986D3 /* Alarm.swift in Sources */,
 				C958386F20FCED0F00E355C7 /* SelectorCollectionView.swift in Sources */,
 				C9713EF620C597810074F232 /* TaskCategory.swift in Sources */,
@@ -615,6 +641,7 @@
 				C998040921282A700010FFD4 /* MainTask.swift in Sources */,
 				C9713EFA20C597810074F232 /* TaskManager.swift in Sources */,
 				C9713F0520C597810074F232 /* TaskTableViewController.swift in Sources */,
+				C97428F62139A27500727470 /* PrivacyPolicyViewController.swift in Sources */,
 				C9713E8920C596680074F232 /* AppDelegate.swift in Sources */,
 				C9713EFD20C597810074F232 /* TaskArchive.swift in Sources */,
 				C96993152104776200922177 /* Settings.swift in Sources */,
@@ -636,6 +663,7 @@
 				C998040F21297BD20010FFD4 /* TaskTableDisplayable.swift in Sources */,
 				C90F49DA210615E7006DA22A /* TaskSettingsViewController.swift in Sources */,
 				C9699318210503AA00922177 /* TaskCategorySettingsViewController.swift in Sources */,
+				C97428F321398E5800727470 /* SideMenuButton.swift in Sources */,
 				C93758A12118C47500B986D3 /* AlarmManager.swift in Sources */,
 				C938A99E20CB1920006E76E7 /* TaskCheckList.swift in Sources */,
 				C93F4DD72132BF6100AD5DBD /* ConsecutiveListViewLine.swift in Sources */,

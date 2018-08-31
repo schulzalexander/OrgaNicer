@@ -12,47 +12,48 @@ class TaskTableNavigationController: UINavigationController {
 
 	//MARK: Properties
 	var addButton: UIButton!
+	var sideMenu: SideMenu!
 	
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupAddButton()
+		setupSideMenu()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-	private func setupAddButton() {
-		//setup addButton
-		addButton = UIButton(type: .custom)
-		let title = NSAttributedString(string: "  +", attributes: [NSAttributedString.Key.font: UIFont(name: "AmericanTypewriter", size: 45)!])
-		addButton.setAttributedTitle(title, for: .normal)
-		addButton.setTitleColor(UIColor.black, for: .normal)
-		addButton.setTitleColor(UIColor.lightGray, for: .highlighted)
-		addButton.contentHorizontalAlignment = .left
-		addButton.frame = CGRect(x: 0, y: 0, width: 150, height: 60)
-		addButton.backgroundColor = UIColor(red: 1, green: 0.9373, blue: 0.3882, alpha: 1.0)//UIColor(red: 1, green: 0.9098, blue: 0.1098, alpha: 1.0)//UIColor(red: 1, green: 0.9529, blue: 0.3176, alpha: 1.0)
-		//self.addGradient(view: addButton)
-		//addButton.layer.borderColor = UIColor.lightgray.cgColor
-		//addButton.layer.borderWidth = 1.0
-		self.view.insertSubview(addButton, aboveSubview: self.view)
+	
+	private func setupSideMenu() {
+		sideMenu = SideMenu(superview: view)
+		let frameTemp = CGRect(x: view.frame.maxX + 5, // +5 for shadow
+			y: view.frame.height - (UIScreen.main.nativeBounds.height == 2436 ? 220 : 190),
+						   width: 150,
+						   height: 60)
 		
-		addButton.center = CGPoint(x: self.view.frame.width, y: self.view.frame.height - 130 - (self.addButton.frame.height / 2))
-		if UIScreen.main.nativeBounds.height == 2436 {
-			//iPhone X
-			addButton.center = CGPoint(x: self.view.frame.width, y: self.view.frame.height - 160 - (self.addButton.frame.height / 2))
+		let addFrame = CGRect(x: frameTemp.minX  - frameTemp.width / 2, y: frameTemp.minY, width: frameTemp.width, height: frameTemp.height)
+		let addButton = SideMenuButton(frame: addFrame, title: NSAttributedString(string: "  +", attributes: [NSAttributedString.Key.font: UIFont(name: "Times", size: 45)!]), color: UIColor(red: 1, green: 0.9373, blue: 0.3882, alpha: 1.0)) { (sender) in
+			guard let taskTable = self.viewControllers.first as? TaskTableViewController else {
+				return
+			}
+			taskTable.newTask()
 		}
-		//addButton.clipsToBounds = true
-		addButton.layer.cornerRadius = addButton.frame.height / 2
-		addButton.layer.shadowColor = UIColor.black.cgColor
-		addButton.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-		addButton.layer.shadowOpacity = 1.0
-		addButton.layer.shadowRadius = 3.0
-		addButton.addTarget(self, action: #selector(self.buttonTouchUpInside), for: UIControl.Event.touchUpInside)
-		addButton.addTarget(self, action: #selector(self.buttonTouchDown), for: UIControl.Event.touchDown)
-		addButton.addTarget(self, action: #selector(self.buttonTouchUpOutside), for: UIControl.Event.touchUpOutside)
+		sideMenu.addButton(button: addButton, alwaysOn: true)
+
+		let priPolFrame = CGRect(x: frameTemp.minX, y: frameTemp.minY - 80, width: frameTemp.width, height: frameTemp.height)
+		let priPolButton = SideMenuButton(frame: priPolFrame, title: NSAttributedString(string: "  ?", attributes: [NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 45)!]), color: UIColor(red: 0, green: 0.7216, blue: 0.8667, alpha: 1.0)) { (sender) in
+			let controller = self.storyboard!.instantiateViewController(withIdentifier: "PrivacyPolicyViewController")
+			self.present(controller, animated: true, completion: nil)
+		}
+		sideMenu.addButton(button: priPolButton, alwaysOn: false)
+		
+		let settingsFrame = CGRect(x: frameTemp.minX, y: frameTemp.minY - 160, width: frameTemp.width, height: frameTemp.height)
+		let settingsButton = SideMenuButton(frame: settingsFrame, title: NSAttributedString(string: "  ?", attributes: [NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 45)!]), color: UIColor(red: 0, green: 0.7216, blue: 0.8667, alpha: 1.0)) { (sender) in
+			let controller = self.storyboard!.instantiateViewController(withIdentifier: "PrivacyPolicyViewController")
+			self.present(controller, animated: true, completion: nil)
+		}
+		sideMenu.addButton(button: settingsButton, alwaysOn: false)
 	}
 	
 	@objc private func buttonTouchDown(_ sender: UIButton) {
