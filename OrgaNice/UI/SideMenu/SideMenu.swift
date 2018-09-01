@@ -31,14 +31,17 @@ class SideMenu {
 				break
 			}
 		}
+		if alwaysOn {
+			button.show()
+		}
 		buttons.insert((button, alwaysOn), at: insertAt)
 		superview.addSubview(button)
 	}
 	
-	func show() {
+	func show(showStatic: Bool) {
 		var delay: Double = 0
 		for button in buttons {
-			if button.1 {
+			if !showStatic && button.1 {
 				continue
 			}
 			UIView.animate(withDuration: 0.2, delay: delay, options: .curveEaseOut, animations: {
@@ -49,10 +52,10 @@ class SideMenu {
 		isHidden = false
 	}
 	
-	func hide() {
+	func hide(hideStatic: Bool) {
 		var delay: Double = 0
 		for button in buttons {
-			if button.1 {
+			if !hideStatic && button.1 {
 				continue
 			}
 			UIView.animate(withDuration: 0.2, delay: delay, options: .curveEaseOut, animations: {
@@ -65,9 +68,9 @@ class SideMenu {
 	
 	func toggle() {
 		if isHidden {
-			show()
+			show(showStatic: false)
 		} else {
-			hide()
+			hide(hideStatic: false)
 		}
 	}
 	

@@ -30,6 +30,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			TaskManager.shared = savedTaskManager
 		}
 		
+		// Load Settings if saved
+		if let settings = SettingsArchive.load() {
+			Settings.shared = settings
+		}
+		
 		return true
 	}
 

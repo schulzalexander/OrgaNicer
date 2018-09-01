@@ -58,17 +58,51 @@ class FeedbackViewController: UIViewController, UITextViewDelegate {
 	}
 	
 	@IBAction func send(_ sender: UIButton) {
+		if textView.text.count > 5000 {
+			let alertController = UIAlertController(title: nil, message: NSLocalizedString("FeedbackTooLongMessage", comment: ""), preferredStyle: .alert)
+			alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
+			self.present(alertController, animated: true, completion: nil)
+			return
+		}
 		if textView.text.count != 0 && textView.textColor != UIColor.lightGray {
+			if !shouldSendFeedback() {
+				// too many feedbacks were sent within the last hour
+				print("User sent too many feedbacks already, canceling...")
+				self.navigationController?.popViewController(animated: true)
+				return
+			}
+			updateSendingDateSettings()
+			
 			let ref = Database.database().reference().child("Feedback")
 			let key = ref.childByAutoId().key
-			ref.child(key).child("value").setValue(textView.text) { (error, database) in
-				guard error != nil else {
+			let post = ["value": textView.text]
+			let childUpdates = ["/Feedback/\(key)": post]
+			ref.updateChildValues(childUpdates) { (error, database) in
+				guard error == nil else {
 					print("Error during Feedback upload: \(error!.localizedDescription)")
 					return
 				}
 			}
 		}
 		self.navigationController?.popViewController(animated: true)
+	}
+	
+	private func shouldSendFeedback() -> Bool {
+		let dates = Settings.shared.feedbackSendingDates
+		if dates.count < 2 {
+			return true
+		} else {
+			return dates[0] < Date().addingTimeInterval(-3600)
+		}
+	}
+	
+	private func updateSendingDateSettings() {
+		// We save the dates of sent feedback to prevent flooding
+		if Settings.shared.feedbackSendingDates.count >= 10 {
+			Settings.shared.feedbackSendingDates.remove(at: 0)
+		}
+		Settings.shared.feedbackSendingDates.append(Date())
+		SettingsArchive.save()
 	}
 
 }

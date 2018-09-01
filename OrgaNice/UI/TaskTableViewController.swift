@@ -20,6 +20,10 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 	
 	var swipeCategoryCenterPoint: CGPoint?
 	
+	// status of side menu, static menu points like the "add task" button may still be shown when hidden
+	// used to restore menu status after coming back from another viewcontroller
+	var isSideMenuHidden: Bool!
+	
 	var tableTabBar: TableTabBar!
 	// Will be set when tableview scrolls to bottom after adding new task
 	// in order to set focus on the textView of the last cell
@@ -38,6 +42,8 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 		
 		self.navigationController?.navigationBar.prefersLargeTitles = true
 		self.navigationItem.largeTitleDisplayMode = .automatic
+		
+		isSideMenuHidden = true
 		
 		tableView.delegate = self
 		tableView.dataSource = self
@@ -84,6 +90,10 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 		super.viewWillAppear(animated)
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+		
+		if !isSideMenuHidden, let navController = self.navigationController as? TaskTableNavigationController {
+			navController.sideMenu.show(showStatic: true)
+		}
 	}
 	
 	@objc func keyboardWillShow(_ notification:Notification) {
@@ -163,6 +173,7 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 			return
 		}
 		navController.sideMenu.toggle()
+		isSideMenuHidden = !isSideMenuHidden
 	}
 	
 	@objc func handleTableViewLongPress(_ sender: UILongPressGestureRecognizer) {

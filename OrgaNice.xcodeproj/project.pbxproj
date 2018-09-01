@@ -11,6 +11,7 @@
 		27AA6EF6D4F3CCD5B662CDEF /* Pods_OrgaNiceUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C80FEEB1B598671A03AA506 /* Pods_OrgaNiceUITests.framework */; };
 		C90F49DA210615E7006DA22A /* TaskSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90F49D9210615E7006DA22A /* TaskSettingsViewController.swift */; };
 		C91043FA20DED6CF005096F5 /* FilterBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C91043F920DED6CF005096F5 /* FilterBar.swift */; };
+		C9253551213AAC6900FB9F92 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9253550213AAC6900FB9F92 /* Settings.swift */; };
 		C937589F211832B200B986D3 /* Deadline.swift in Sources */ = {isa = PBXBuildFile; fileRef = C937589E211832B200B986D3 /* Deadline.swift */; };
 		C93758A12118C47500B986D3 /* AlarmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93758A02118C47500B986D3 /* AlarmManager.swift */; };
 		C93758A32118D05E00B986D3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C93758A22118D05D00B986D3 /* GoogleService-Info.plist */; };
@@ -22,7 +23,7 @@
 		C93F4DD72132BF6100AD5DBD /* ConsecutiveListViewLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93F4DD62132BF6100AD5DBD /* ConsecutiveListViewLine.swift */; };
 		C943FA6E21241E2E001F6A33 /* TaskCategorySettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C943FA6D21241E2E001F6A33 /* TaskCategorySettings.swift */; };
 		C958386F20FCED0F00E355C7 /* SelectorCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C958386E20FCED0F00E355C7 /* SelectorCollectionView.swift */; };
-		C96993152104776200922177 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96993142104776200922177 /* Settings.swift */; };
+		C96993152104776200922177 /* SettingsArchive.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96993142104776200922177 /* SettingsArchive.swift */; };
 		C9699318210503AA00922177 /* TaskCategorySettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9699317210503AA00922177 /* TaskCategorySettingsViewController.swift */; };
 		C9713E8920C596680074F232 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9713E8820C596680074F232 /* AppDelegate.swift */; };
 		C9713E8E20C596680074F232 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9713E8C20C596680074F232 /* Main.storyboard */; };
@@ -87,6 +88,7 @@
 		C90F49D9210615E7006DA22A /* TaskSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskSettingsViewController.swift; sourceTree = "<group>"; };
 		C91043F920DED6CF005096F5 /* FilterBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterBar.swift; sourceTree = "<group>"; };
 		C9192A4B20CD8F2200526CB5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C9253550213AAC6900FB9F92 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		C937589E211832B200B986D3 /* Deadline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deadline.swift; sourceTree = "<group>"; };
 		C93758A02118C47500B986D3 /* AlarmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmManager.swift; sourceTree = "<group>"; };
 		C93758A22118D05D00B986D3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -98,7 +100,7 @@
 		C93F4DD62132BF6100AD5DBD /* ConsecutiveListViewLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsecutiveListViewLine.swift; sourceTree = "<group>"; };
 		C943FA6D21241E2E001F6A33 /* TaskCategorySettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCategorySettings.swift; sourceTree = "<group>"; };
 		C958386E20FCED0F00E355C7 /* SelectorCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectorCollectionView.swift; sourceTree = "<group>"; };
-		C96993142104776200922177 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		C96993142104776200922177 /* SettingsArchive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsArchive.swift; sourceTree = "<group>"; };
 		C9699317210503AA00922177 /* TaskCategorySettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCategorySettingsViewController.swift; sourceTree = "<group>"; };
 		C9713E8520C596680074F232 /* OrgaNice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OrgaNice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9713E8820C596680074F232 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -300,6 +302,7 @@
 			children = (
 				C9713EDF20C597810074F232 /* Utils.swift */,
 				C93758A02118C47500B986D3 /* AlarmManager.swift */,
+				C9253550213AAC6900FB9F92 /* Settings.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -325,7 +328,7 @@
 			isa = PBXGroup;
 			children = (
 				C9713EE920C597810074F232 /* TaskArchive.swift */,
-				C96993142104776200922177 /* Settings.swift */,
+				C96993142104776200922177 /* SettingsArchive.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -658,7 +661,7 @@
 				C97428F62139A27500727470 /* PrivacyPolicyViewController.swift in Sources */,
 				C9713E8920C596680074F232 /* AppDelegate.swift in Sources */,
 				C9713EFD20C597810074F232 /* TaskArchive.swift in Sources */,
-				C96993152104776200922177 /* Settings.swift in Sources */,
+				C96993152104776200922177 /* SettingsArchive.swift in Sources */,
 				C9C3D71820CC66C900C881D3 /* SelectorCollectionViewCellAdd.swift in Sources */,
 				C938A9A320CB1CAB006E76E7 /* CheckListView.swift in Sources */,
 				C9713EF720C597810074F232 /* TaskCategoryManager.swift in Sources */,
@@ -677,6 +680,7 @@
 				C998040F21297BD20010FFD4 /* TaskTableDisplayable.swift in Sources */,
 				C90F49DA210615E7006DA22A /* TaskSettingsViewController.swift in Sources */,
 				C9699318210503AA00922177 /* TaskCategorySettingsViewController.swift in Sources */,
+				C9253551213AAC6900FB9F92 /* Settings.swift in Sources */,
 				C97428F321398E5800727470 /* SideMenuButton.swift in Sources */,
 				C93758A12118C47500B986D3 /* AlarmManager.swift in Sources */,
 				C938A99E20CB1920006E76E7 /* TaskCheckList.swift in Sources */,

@@ -577,7 +577,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="Ahr-50-wya">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="fastForward" id="iGd-fg-X07">
+                        <barButtonItem key="rightBarButtonItem" image="MenuIcon" style="plain" id="iGd-fg-X07">
                             <connections>
                                 <action selector="toggleSideMenu:" destination="BYZ-38-t0r" id="Cvr-yM-7Rd"/>
                             </connections>
@@ -683,4 +683,7 @@
             <point key="canvasLocation" x="-26" y="779"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="MenuIcon" width="50" height="50"/>
+    </resources>
 </document>
