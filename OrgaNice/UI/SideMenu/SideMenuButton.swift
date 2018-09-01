@@ -16,14 +16,22 @@ class SideMenuButton: UIButton {
 	var xCenterHidden: CGFloat!
 	var action: ((_ sender: UIButton) -> ())!
 	
-	init(frame: CGRect, title: NSAttributedString, color: UIColor, action: @escaping (_ sender: UIButton) -> ()) {
+	var backgroundImageView: UIImageView?
+	
+	init(frame: CGRect, title: NSAttributedString?, image: UIImage?, color: UIColor, action: @escaping (_ sender: UIButton) -> ()) {
 		super.init(frame: frame)
 		
 		self.action = action
 		self.xCenterHidden = self.center.x
 		self.xCenterActive = self.center.x - frame.width / 2
 		
-		setupAppearance(title: title, color: color)
+		if title != nil {
+			setupTitle(title: title!)
+		}
+		if image != nil {
+			setupImage(image: image!)
+		}
+		setupAppearance(color: color)
 		setupActions()
 	}
 	
@@ -39,10 +47,22 @@ class SideMenuButton: UIButton {
 		center.x = xCenterHidden
 	}
 	
-	private func setupAppearance(title: NSAttributedString, color: UIColor) {
+	private func setupImage(image: UIImage) {
+		let length = frame.height - 20
+		let margin: CGFloat = 10
+
+		backgroundImageView = UIImageView(frame: CGRect(x: 1.5 * margin, y: margin, width: length, height: length))
+		backgroundImageView?.image = image
+		self.addSubview(backgroundImageView!)
+	}
+	
+	private func setupTitle(title: NSAttributedString) {
 		setAttributedTitle(title, for: .normal)
 		setTitleColor(UIColor.black, for: .normal)
 		setTitleColor(UIColor.lightGray, for: .highlighted)
+	}
+	
+	private func setupAppearance(color: UIColor) {
 		contentHorizontalAlignment = .left
 		backgroundColor = color
 		

@@ -11,9 +11,17 @@ import UIKit
 
 class PrivacyPolicyViewController: UIViewController {
 	
+	@IBOutlet weak var textView: UITextView!
 	
-	@IBAction func cancel(_ sender: UIBarButtonItem) {
-		dismiss(animated: true, completion: nil)
+	override func viewDidLoad() {
+		self.navigationItem.largeTitleDisplayMode = .never
+		do {
+			let at : NSAttributedString = try NSAttributedString(data: NSLocalizedString("PrivacyPolicy", comment: "").data(using: .unicode)!, options:
+				[NSAttributedString.DocumentReadingOptionKey.documentType : NSAttributedString.DocumentType.html], documentAttributes: nil);
+			textView.attributedText = at;
+		} catch {
+			textView.text = NSLocalizedString("PrivacyPolicy", comment: "");
+		}
 	}
 	
 }

@@ -33,7 +33,7 @@ class TaskTableNavigationController: UINavigationController {
 						   height: 60)
 		
 		let addFrame = CGRect(x: frameTemp.minX  - frameTemp.width / 2, y: frameTemp.minY, width: frameTemp.width, height: frameTemp.height)
-		let addButton = SideMenuButton(frame: addFrame, title: NSAttributedString(string: "  +", attributes: [NSAttributedString.Key.font: UIFont(name: "Times", size: 45)!]), color: UIColor(red: 1, green: 0.9373, blue: 0.3882, alpha: 1.0)) { (sender) in
+		let addButton = SideMenuButton(frame: addFrame, title: NSAttributedString(string: "  +", attributes: [NSAttributedString.Key.font: UIFont(name: "Times", size: 45)!]), image: nil, color: UIColor(red: 1, green: 0.9373, blue: 0.3882, alpha: 1.0)) { (sender) in
 			guard let taskTable = self.viewControllers.first as? TaskTableViewController else {
 				return
 			}
@@ -42,18 +42,24 @@ class TaskTableNavigationController: UINavigationController {
 		sideMenu.addButton(button: addButton, alwaysOn: true)
 
 		let priPolFrame = CGRect(x: frameTemp.minX, y: frameTemp.minY - 80, width: frameTemp.width, height: frameTemp.height)
-		let priPolButton = SideMenuButton(frame: priPolFrame, title: NSAttributedString(string: "  ?", attributes: [NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 45)!]), color: UIColor(red: 0, green: 0.7216, blue: 0.8667, alpha: 1.0)) { (sender) in
-			let controller = self.storyboard!.instantiateViewController(withIdentifier: "PrivacyPolicyViewController")
-			self.present(controller, animated: true, completion: nil)
+		let priPolButton = SideMenuButton(frame: priPolFrame, title: NSAttributedString(string: "  ?", attributes: [NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 45)!]), image: nil, color: UIColor(red: 0, green: 0.7216, blue: 0.8667, alpha: 1.0)) { (sender) in
+			if !(self.topViewController is PrivacyPolicyViewController) {
+				self.performSegue(withIdentifier: "TaskTableToPrivacyPolicy", sender: self)
+			}
+			//let controller = self.storyboard!.instantiateViewController(withIdentifier: "PrivacyPolicyViewController")
+			//self.present(controller, animated: true, completion: nil)
 		}
 		sideMenu.addButton(button: priPolButton, alwaysOn: false)
 		
-		let settingsFrame = CGRect(x: frameTemp.minX, y: frameTemp.minY - 160, width: frameTemp.width, height: frameTemp.height)
-		let settingsButton = SideMenuButton(frame: settingsFrame, title: NSAttributedString(string: "  ?", attributes: [NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 45)!]), color: UIColor(red: 0, green: 0.7216, blue: 0.8667, alpha: 1.0)) { (sender) in
-			let controller = self.storyboard!.instantiateViewController(withIdentifier: "PrivacyPolicyViewController")
-			self.present(controller, animated: true, completion: nil)
+		let feedbackFrame = CGRect(x: frameTemp.minX, y: frameTemp.minY - 160, width: frameTemp.width, height: frameTemp.height)
+		let feedbackButton = SideMenuButton(frame: feedbackFrame, title: nil, image: UIImage(named: "ChatBubble"), color: UIColor(red: 1, green: 0.9373, blue: 0.3882, alpha: 1.0)) { (sender) in
+			if !(self.topViewController is FeedbackViewController) {
+				self.performSegue(withIdentifier: "TaskTableToFeedback", sender: nil)
+			}
+			//let controller = self.storyboard!.instantiateViewController(withIdentifier: "FeedbackViewController")
+			//self.present(controller, animated: true, completion: nil)
 		}
-		sideMenu.addButton(button: settingsButton, alwaysOn: false)
+		sideMenu.addButton(button: feedbackButton, alwaysOn: false)
 	}
 	
 	@objc private func buttonTouchDown(_ sender: UIButton) {

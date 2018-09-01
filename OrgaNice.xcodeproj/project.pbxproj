@@ -45,6 +45,7 @@
 		C97428F121398E4C00727470 /* SideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97428F021398E4C00727470 /* SideMenu.swift */; };
 		C97428F321398E5800727470 /* SideMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97428F221398E5800727470 /* SideMenuButton.swift */; };
 		C97428F62139A27500727470 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97428F52139A27500727470 /* PrivacyPolicyViewController.swift */; };
+		C97428F92139BD1000727470 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97428F82139BD1000727470 /* FeedbackViewController.swift */; };
 		C97D0BBE20CB0F3C00991895 /* TaskTableViewCellContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97D0BBD20CB0F3C00991895 /* TaskTableViewCellContent.swift */; };
 		C998040921282A700010FFD4 /* MainTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = C998040821282A700010FFD4 /* MainTask.swift */; };
 		C998040C212831E10010FFD4 /* OverlayDecisionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C998040B212831E10010FFD4 /* OverlayDecisionView.swift */; };
@@ -126,6 +127,7 @@
 		C97428F021398E4C00727470 /* SideMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenu.swift; sourceTree = "<group>"; };
 		C97428F221398E5800727470 /* SideMenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuButton.swift; sourceTree = "<group>"; };
 		C97428F52139A27500727470 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
+		C97428F82139BD1000727470 /* FeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
 		C97D0BBD20CB0F3C00991895 /* TaskTableViewCellContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCellContent.swift; sourceTree = "<group>"; };
 		C998040821282A700010FFD4 /* MainTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTask.swift; sourceTree = "<group>"; };
 		C998040B212831E10010FFD4 /* OverlayDecisionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayDecisionView.swift; sourceTree = "<group>"; };
@@ -331,6 +333,7 @@
 		C9713EEA20C597810074F232 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				C97428F72139BCFE00727470 /* Feedback */,
 				C97428F42139A25D00727470 /* PrivacyPolicy */,
 				C97428EF21398E3D00727470 /* SideMenu */,
 				C998040A212831760010FFD4 /* OverlayDecisionView */,
@@ -384,6 +387,14 @@
 				C97428F52139A27500727470 /* PrivacyPolicyViewController.swift */,
 			);
 			path = PrivacyPolicy;
+			sourceTree = "<group>";
+		};
+		C97428F72139BCFE00727470 /* Feedback */ = {
+			isa = PBXGroup;
+			children = (
+				C97428F82139BD1000727470 /* FeedbackViewController.swift */,
+			);
+			path = Feedback;
 			sourceTree = "<group>";
 		};
 		C998040A212831760010FFD4 /* OverlayDecisionView */ = {
@@ -592,12 +603,14 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-OrgaNice/Pods-OrgaNice-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftReorder/SwiftReorder.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftReorder.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -640,6 +653,7 @@
 				C943FA6E21241E2E001F6A33 /* TaskCategorySettings.swift in Sources */,
 				C998040921282A700010FFD4 /* MainTask.swift in Sources */,
 				C9713EFA20C597810074F232 /* TaskManager.swift in Sources */,
+				C97428F92139BD1000727470 /* FeedbackViewController.swift in Sources */,
 				C9713F0520C597810074F232 /* TaskTableViewController.swift in Sources */,
 				C97428F62139A27500727470 /* PrivacyPolicyViewController.swift in Sources */,
 				C9713E8920C596680074F232 /* AppDelegate.swift in Sources */,

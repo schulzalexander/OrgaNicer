@@ -37,6 +37,7 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 		super.viewDidLoad()
 		
 		self.navigationController?.navigationBar.prefersLargeTitles = true
+		self.navigationItem.largeTitleDisplayMode = .automatic
 		
 		tableView.delegate = self
 		tableView.dataSource = self
