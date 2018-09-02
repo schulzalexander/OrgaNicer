@@ -339,11 +339,6 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 	}
 	
 	private func setupTransparentGradientBackground() {
-		let colour:UIColor = UIColor.lightGray
-		//LightBlue  UIColor(red: 0.8078, green: 0.9412, blue: 1, alpha: 1.0)
-		//LightOrange  UIColor(red: 1, green: 0.7412, blue: 0.4471, alpha: 1.0)
-		//Orange  UIColor(red: 0.9765, green: 0.5216, blue: 0, alpha: 0.8)
-		//DK  UIColor(red: 1, green: 0.5922, blue: 0.098, alpha: 0.7)
 		let colours:[CGColor] = [UIColor.lightGray.withAlphaComponent(0.1).cgColor, UIColor.white.cgColor]
 		let locations:[NSNumber] = [0, 0.6]
 		

@@ -192,7 +192,7 @@ class TaskSettingsTableViewController: UITableViewController {
 			self.frequencyPicker.isEnabled = false
 			self.deadlineDropdownArrow.textColor = UIColor.lightGray
 		} else {
-			task.deadline = Deadline(date: Date(), frequency: .unique, category: taskCategory?.id)
+			task.deadline = Deadline(date: defaultDate(), frequency: .unique, category: taskCategory?.id)
 			self.isDeadlineCellCollapsed = false
 			self.frequencyPicker.isEnabled = true
 			self.deadlineDropdownArrow.textColor = UIColor.black
@@ -300,7 +300,7 @@ class TaskSettingsTableViewController: UITableViewController {
 		if task.deadline != nil {
 			deadlineDropdownArrow.textColor = UIColor.black
 			deadlineDatePicker.isEnabled = true
-			deadlineDatePicker.date = task.deadline?.date ?? Date()
+			deadlineDatePicker.date = task.deadline?.date ?? defaultDate()
 			deadlineEnabledButton.setTitle(NSLocalizedString("Delete", comment: ""), for: .normal)
 			if frequencyPicker.selectedSegmentIndex == 2 {
 				weekdayPicker.isUserInteractionEnabled = true
@@ -314,6 +314,12 @@ class TaskSettingsTableViewController: UITableViewController {
 		deadlineEnabledButton.sizeToFit()
 		updateTaskTable()
 		rotateDeadlineArrow()
+	}
+	
+	private func defaultDate() -> Date {
+		let date = Date().addingTimeInterval(3600)
+		let seconds = date.timeIntervalSince1970.truncatingRemainder(dividingBy: 60) // we want to neglect seconds
+		return date.addingTimeInterval(-1 * seconds)
 	}
 	
 	private func updateReminderCellComponents() {

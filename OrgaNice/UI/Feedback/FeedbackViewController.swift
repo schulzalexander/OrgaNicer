@@ -28,7 +28,7 @@ class FeedbackViewController: UIViewController, UITextViewDelegate {
 		textView.layer.borderColor = UIColor.gray.cgColor
 		textView.layer.cornerRadius = 10
 		
-		sendButton.backgroundColor = UIColor(red: 0, green: 0.6314, blue: 1, alpha: 1.0)
+		sendButton.backgroundColor = Utils.getTaskCellColor(priority: (Task.PRIORITY_MIN + Task.PRIORITY_MAX) / 2)
 		sendButton.layer.cornerRadius = 20
 		sendButton.layer.shadowColor = UIColor.black.cgColor
 		sendButton.layer.shadowRadius = 1.0

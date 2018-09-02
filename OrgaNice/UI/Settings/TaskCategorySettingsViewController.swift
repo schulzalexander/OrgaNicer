@@ -29,7 +29,10 @@ class TaskCategorySettingsTableViewController: UITableViewController {
 		self.setupDeleteButton()
 		self.loadCategorySettings() // Set controls to saved settings
 		
-		self.tableView.tableFooterView = UIView()
+		//self.tableView.tableFooterView = UIView()
+		self.tableView.estimatedRowHeight = 0 // Without this, tableviews content size will be off
+		self.tableView.sizeToFit()
+		self.updatePopoverSize()
     }
 	
 	@IBAction func didSelectTaskOrder(_ sender: UISegmentedControl) {
@@ -120,6 +123,10 @@ class TaskCategorySettingsTableViewController: UITableViewController {
 	private func loadCategorySettings() {
 		seperateDoneTasksSwitch.isOn = category.settings.seperateByTaskStatus
 		taskOrderSelector.selectedSegmentIndex = category.settings.taskOrder.rawValue
+	}
+	
+	private func updatePopoverSize() {
+		self.preferredContentSize = CGSize(width: UIScreen.main.bounds.width, height: tableView.contentSize.height)
 	}
 	
 }
