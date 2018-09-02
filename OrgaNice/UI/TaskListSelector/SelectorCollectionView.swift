@@ -60,6 +60,7 @@ class SelectorCollectionView: UICollectionView {
 		shape.opacity = 0.9
 		shape.lineWidth = 2
 		shape.lineJoin = CAShapeLayerLineJoin.miter
+		shape.backgroundColor = UIColor.clear.cgColor
 		
 		let path = UIBezierPath()
 		path.move(to: CGPoint(x: 0, y: frame.height))

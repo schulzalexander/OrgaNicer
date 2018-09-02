@@ -29,7 +29,6 @@ class TaskCategorySettingsTableViewController: UITableViewController {
 		self.setupDeleteButton()
 		self.loadCategorySettings() // Set controls to saved settings
 		
-		//self.tableView.tableFooterView = UIView()
 		self.tableView.estimatedRowHeight = 0 // Without this, tableviews content size will be off
 		self.tableView.sizeToFit()
 		self.updatePopoverSize()

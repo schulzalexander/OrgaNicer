@@ -30,7 +30,9 @@ class TaskSettingsTableViewController: UITableViewController {
 	@IBOutlet weak var deadlineEnabledButton: UIButton!
 	@IBOutlet weak var weekdayPicker: UIPickerView!
 	@IBOutlet weak var deleteButton: UIButton!
+	@IBOutlet weak var deadlineLabel: UILabel!
 	@IBOutlet weak var deadlineDropdownArrow: UILabel!
+	@IBOutlet weak var reminderLabel: UILabel!
 	@IBOutlet weak var reminderDropdownArrow: UILabel!
 	@IBOutlet weak var reminderEnabledButton: UIButton!
 	@IBOutlet weak var reminderDifferentSwitch: UISwitch!
@@ -191,11 +193,13 @@ class TaskSettingsTableViewController: UITableViewController {
 			self.updateReminderCellComponents()
 			self.frequencyPicker.isEnabled = false
 			self.deadlineDropdownArrow.textColor = UIColor.lightGray
+			self.deadlineLabel.textColor = UIColor.lightGray
 		} else {
 			task.deadline = Deadline(date: defaultDate(), frequency: .unique, category: taskCategory?.id)
 			self.isDeadlineCellCollapsed = false
 			self.frequencyPicker.isEnabled = true
 			self.deadlineDropdownArrow.textColor = UIColor.black
+			self.deadlineLabel.textColor = UIColor.black
 		}
 		self.tableView.reloadData()
 		TaskArchive.saveTask(task: task)
@@ -299,6 +303,7 @@ class TaskSettingsTableViewController: UITableViewController {
 	private func updateDeadlineCellComponents() {
 		if task.deadline != nil {
 			deadlineDropdownArrow.textColor = UIColor.black
+			deadlineLabel.textColor = UIColor.black
 			deadlineDatePicker.isEnabled = true
 			deadlineDatePicker.date = task.deadline?.date ?? defaultDate()
 			deadlineEnabledButton.setTitle(NSLocalizedString("Delete", comment: ""), for: .normal)
@@ -307,6 +312,7 @@ class TaskSettingsTableViewController: UITableViewController {
 			}
 		} else {
 			deadlineDropdownArrow.textColor = UIColor.lightGray
+			deadlineLabel.textColor = UIColor.lightGray
 			deadlineDatePicker.isEnabled = false
 			weekdayPicker.isUserInteractionEnabled = false
 			deadlineEnabledButton.setTitle(NSLocalizedString("Set", comment: ""), for: .normal)
@@ -325,11 +331,13 @@ class TaskSettingsTableViewController: UITableViewController {
 	private func updateReminderCellComponents() {
 		if task.alarm != nil {
 			reminderDropdownArrow.textColor = UIColor.black
+			reminderLabel.textColor = UIColor.black
 			reminderEnabledButton.setTitle(NSLocalizedString("Delete", comment: ""), for: .normal)
 			reminderDifferentSwitch.isOn = !task.hasSeperateAlarm()
 			reminderSoundSwitch.isOn = task.alarm!.sound
 		} else {
 			reminderDropdownArrow.textColor = UIColor.lightGray
+			reminderLabel.textColor = UIColor.lightGray
 			reminderEnabledButton.setTitle(NSLocalizedString("Set", comment: ""), for: .normal)
 		}
 		reminderEnabledButton.sizeToFit()

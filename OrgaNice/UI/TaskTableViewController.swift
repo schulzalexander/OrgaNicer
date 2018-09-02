@@ -77,11 +77,6 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 			if let category = TaskCategoryManager.shared.getTaskCategory(id: id) {
 				self.setTaskCategory(category: category)
 			}
-		} else {
-			guard let navController = self.navigationController as? TaskTableNavigationController else {
-				fatalError("Failed to instantiate Task Table NavigationController!")
-			}
-			navController.addButton.isHidden = true
 		}
 		setupTransparentGradientBackground()
 	}
@@ -113,7 +108,7 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 	}
 	
 	func newTask() {
-		guard currList != nil else {
+		guard currList != nil, navigationController?.topViewController is TaskTableViewController else {
 			return
 		}
 		if currList!.settings.selectedTaskStatusTab != .undone {
@@ -347,9 +342,9 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 		gradientLayer.locations = locations
 		gradientLayer.startPoint = CGPoint(x: 0, y: 0)
 		gradientLayer.endPoint = CGPoint(x: 1, y: 1)
-		gradientLayer.frame = self.tableView.bounds
+		gradientLayer.frame = self.view.bounds
 		
-		let view = UIView(frame: self.tableView.bounds)
+		let view = UIView(frame: self.view.bounds)
 		view.layer.addSublayer(gradientLayer)
 		self.tableView.backgroundView = view
 	}
@@ -561,13 +556,6 @@ extension TaskTableViewController: UIGestureRecognizerDelegate {
 				self.categorySelector.scrollToIndex(index: index)
 			}
 			
-			if self.currList == nil {
-				// TaskList was not set before, therefore add button was hidden -> show now
-				guard let navController = self.navigationController as? TaskTableNavigationController else {
-					fatalError("Failed to instantiate Task Table NavigationController!")
-				}
-				navController.addButton.isHidden = false
-			}
 			self.setTaskCategory(category: category)
 		})
 		let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)

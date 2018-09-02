@@ -36,6 +36,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 			Settings.shared = settings
 		}
 		
+		UNUserNotificationCenter.current().delegate = self
+		
 		return true
 	}
 

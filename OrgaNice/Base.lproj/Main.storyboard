@@ -258,8 +258,9 @@
                     </tableView>
                     <connections>
                         <outlet property="deadlineDatePicker" destination="myh-fo-Ham" id="ZlA-Ab-pol"/>
-                        <outlet property="deadlineDropdownArrow" destination="Dq9-Wz-nkC" id="RJO-9y-2Jx"/>
+                        <outlet property="deadlineDropdownArrow" destination="Dq9-Wz-nkC" id="yFU-uV-hx1"/>
                         <outlet property="deadlineEnabledButton" destination="i5L-Ve-yvI" id="LuW-k1-sXI"/>
+                        <outlet property="deadlineLabel" destination="VtI-Fu-4Ce" id="CaM-1N-hwe"/>
                         <outlet property="deleteButton" destination="bGO-dB-RqC" id="rRI-GG-u32"/>
                         <outlet property="frequencyPicker" destination="vxw-75-dno" id="0Hp-lq-GFA"/>
                         <outlet property="reminderDatePicker" destination="47l-ex-yaK" id="DrE-KL-Ei7"/>
@@ -267,6 +268,7 @@
                         <outlet property="reminderDropdownArrow" destination="arR-Df-bLt" id="zPJ-X1-feL"/>
                         <outlet property="reminderEnabledButton" destination="ysm-5Q-z6j" id="qfc-JB-eL9"/>
                         <outlet property="reminderFrequencyPicker" destination="a9Y-kE-uJD" id="ggA-ll-n7s"/>
+                        <outlet property="reminderLabel" destination="jAo-Q1-crO" id="Dib-jF-QwD"/>
                         <outlet property="reminderSoundSwitch" destination="MdX-k3-Czy" id="ft0-03-grR"/>
                         <outlet property="taskHeaderTextField" destination="UUz-o4-M96" id="ida-D9-8ca"/>
                         <outlet property="weekdayPicker" destination="nC6-FF-Yld" id="dnI-up-NIl"/>
@@ -361,7 +363,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Task Order" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CeN-L7-URb">
-                                                    <rect key="frame" x="16" y="11" width="112" height="33"/>
+                                                    <rect key="frame" x="16" y="11" width="343" height="33"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                     <nil key="textColor"/>

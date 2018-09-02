@@ -82,12 +82,12 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 				fatalError("Could not retrieve tableView as superview of tableViewCell!")
 		}
 		let decisionMenu = OverlayDecisionView(presenter: viewController.navigationController!, cancelPosition: .center)
-		decisionMenu.addOption(title: "Checklist") {
+		decisionMenu.addOption(title: NSLocalizedString("Checklist", comment: "")) {
 			let newTask = TaskCheckList(task: self.task)
 			TaskManager.shared.addTask(task: newTask)
 			tableView.reloadRows(at: [index], with: .automatic)
 		}
-		decisionMenu.addOption(title: "Follow Up") {
+		decisionMenu.addOption(title: NSLocalizedString("FollowUp", comment: "")) {
 			let newTask = TaskConsecutiveList(task: self.task)
 			TaskManager.shared.addTask(task: newTask)
 			tableView.reloadRows(at: [index], with: .automatic)
