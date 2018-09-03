@@ -51,7 +51,7 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 		tableView.dataSource = self
 		tableView.reorder.delegate = self
 		tableView.reorder.cellScale = 1.05
-		tableView.rowHeight = UITableView.automaticDimension
+		//tableView.rowHeight = UITableView.automaticDimension
 		
 		/*  Setting footer via delegate methods lets the footer float over bottom
 			content of the table, and not be part of it  */
@@ -71,7 +71,7 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 		// Catgory Selector
 		categorySelector.delegate = self
 		categorySelector.dataSource = TaskCategoryManager.shared
-		categorySelector.decelerationRate = UIScrollView.DecelerationRate(rawValue: 0.1)
+		categorySelector.decelerationRate = 0.1//UIScrollView.decelerationRate(rawValue: 0.1)
 		
 		// Load first list if existing
 		if TaskCategoryManager.shared.categoryTitlesSorted.count > 0 {
@@ -85,8 +85,8 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: .UIKeyboardWillHide, object: nil)
 		
 		if !isSideMenuHidden, let navController = self.navigationController as? TaskTableNavigationController {
 			navController.sideMenu.show(showStatic: true)
@@ -94,7 +94,7 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 	}
 	
 	@objc func keyboardWillShow(_ notification:Notification) {
-		if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+		if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
 			tableView.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: keyboardSize.height + 50, right: 0)
 		}
 	}
@@ -437,7 +437,7 @@ extension TaskTableViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension TaskTableViewController: TableViewReorderDelegate {
 	
-	func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+	func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
 		return .none
 	}
 	

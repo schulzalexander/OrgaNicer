@@ -74,9 +74,9 @@ class SideMenuButton: UIButton {
 	}
 	
 	private func setupActions() {
-		addTarget(self, action: #selector(self.buttonTouchUpInside), for: UIControl.Event.touchUpInside)
-		addTarget(self, action: #selector(self.buttonTouchDown), for: UIControl.Event.touchDown)
-		addTarget(self, action: #selector(self.buttonTouchUpOutside), for: UIControl.Event.touchUpOutside)
+		addTarget(self, action: #selector(self.buttonTouchUpInside), for: UIControlEvents.touchUpInside)
+		addTarget(self, action: #selector(self.buttonTouchDown), for: UIControlEvents.touchDown)
+		addTarget(self, action: #selector(self.buttonTouchUpOutside), for: UIControlEvents.touchUpOutside)
 	}
 	
 	@objc private func buttonTouchDown(_ sender: UIButton) {

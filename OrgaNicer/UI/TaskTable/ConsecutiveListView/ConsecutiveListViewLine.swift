@@ -60,7 +60,7 @@ class ConsecutiveListViewLine: UIView {
 	
 	private func setTitleScoredOut(isRuledOut: Bool) {
 		let attributes = isRuledOut
-			? [NSAttributedString.Key.strikethroughStyle: 2]
+			? [NSAttributedStringKey.strikethroughStyle: 2]
 			: nil
 		let attributedText = NSAttributedString(string: task.title,
 												attributes: attributes)

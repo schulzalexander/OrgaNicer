@@ -33,7 +33,7 @@ class TaskTableNavigationController: UINavigationController {
 						   height: 60)
 		
 		let addFrame = CGRect(x: frameTemp.minX, y: frameTemp.minY, width: frameTemp.width, height: frameTemp.height)
-		let addButton = SideMenuButton(frame: addFrame, title: NSAttributedString(string: "  +", attributes: [NSAttributedString.Key.font: UIFont(name: "Times", size: 45)!]), image: nil, color: Utils.getTaskCellColor(priority: Task.PRIORITY_MIN)) { (sender) in
+		let addButton = SideMenuButton(frame: addFrame, title: NSAttributedString(string: "  +", attributes: [NSAttributedStringKey.font: UIFont(name: "Times", size: 45)!]), image: nil, color: Utils.getTaskCellColor(priority: Task.PRIORITY_MIN)) { (sender) in
 			guard let taskTable = self.viewControllers.first as? TaskTableViewController else {
 				return
 			}
@@ -53,7 +53,7 @@ class TaskTableNavigationController: UINavigationController {
 		sideMenu.addButton(button: feedbackButton, alwaysOn: false)
 		
 		let priPolFrame = CGRect(x: frameTemp.minX, y: frameTemp.minY - 160, width: frameTemp.width, height: frameTemp.height)
-		let priPolButton = SideMenuButton(frame: priPolFrame, title: NSAttributedString(string: "  ?", attributes: [NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 45)!]), image: nil, color: Utils.getTaskCellColor(priority: Task.PRIORITY_MIN + 40)) { (sender) in
+		let priPolButton = SideMenuButton(frame: priPolFrame, title: NSAttributedString(string: "  ?", attributes: [NSAttributedStringKey.font: UIFont(name: "Helvetica Neue", size: 45)!]), image: nil, color: Utils.getTaskCellColor(priority: Task.PRIORITY_MIN + 40)) { (sender) in
 			if !(self.topViewController is PrivacyPolicyViewController) {
 				self.sideMenu.hide(hideStatic: true)
 				self.performSegue(withIdentifier: "TaskTableToPrivacyPolicy", sender: self)

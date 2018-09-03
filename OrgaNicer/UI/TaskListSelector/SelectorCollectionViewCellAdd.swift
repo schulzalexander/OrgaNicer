@@ -29,7 +29,7 @@ class SelectorCollectionViewCellAdd: UICollectionViewCell {
 		self.addLabel.text = NSLocalizedString("CategorySelectorAddList", comment: "")
 		self.addLabel.sizeToFit()
 		
-		self.addLabel.frame.size.width += 40
+		self.addLabel.frame.size.width += 30
 		self.addLabel.frame.size.height = self.addLabel.frame.size.width
 		self.addLabel.center.x = UIScreen.main.bounds.width * 0.3
 		self.addLabel.center.y = self.addLabel.frame.height / 2
@@ -38,8 +38,6 @@ class SelectorCollectionViewCellAdd: UICollectionViewCell {
 		self.addLabel.layer.shadowRadius = 5.0
 		self.addLabel.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
 		self.addLabel.layer.shadowOpacity = 1.0
-		
-		self.addLabel.layer.cornerRadius = 5
 	}
 	
 }

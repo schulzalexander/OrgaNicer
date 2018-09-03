@@ -95,7 +95,7 @@ class TableTabBar: UIView {
 		highlighter.backgroundColor = titleColor
 		highlighter.layer.cornerRadius = highlighterHeight / 2
 		self.addSubview(highlighter)
-		self.sendSubviewToBack(highlighter)
+		self.sendSubview(toBack: highlighter)
 	}
 	
 	private func getHighlighterRectForIndex(index: Int) -> CGRect {

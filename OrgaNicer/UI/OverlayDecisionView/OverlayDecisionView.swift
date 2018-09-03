@@ -53,8 +53,8 @@ class OverlayDecisionView: UIView {
 		var currY = selectedCancelPosition == .top ? OverlayDecisionView.DEFAULT_CANCEL_HEIGHT : 0
 		for i in 0..<decisionButtonInfo.count {
 			let newButton = UIButton(frame: CGRect(x: 0, y: currY, width: width, height: height))
-			let attrTitle = NSAttributedString(string: decisionButtonInfo[i].0, attributes: [NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 30)!,
-																							 NSAttributedString.Key.foregroundColor: UIColor.white])
+			let attrTitle = NSAttributedString(string: decisionButtonInfo[i].0, attributes: [NSAttributedStringKey.font: UIFont(name: "Helvetica Neue", size: 30)!,
+																							 NSAttributedStringKey.foregroundColor: UIColor.white])
 			newButton.setAttributedTitle(attrTitle, for: .normal)
 			newButton.setTitleColor(UIColor.black, for: .normal)
 			newButton.backgroundColor = OverlayDecisionView.DEFAULT_BUTTON_COLOR
@@ -98,8 +98,8 @@ class OverlayDecisionView: UIView {
 		cancelButton.backgroundColor = OverlayDecisionView.DEFAULT_CANCEL_COLOR.withAlphaComponent(0.7)
 		cancelButton.layer.borderWidth = 3
 		cancelButton.layer.borderColor = OverlayDecisionView.DEFAULT_CANCEL_COLOR.cgColor
-		let attrTitle = NSAttributedString(string: "×", attributes: [NSAttributedString.Key.font: UIFont(name: "AmericanTypewriter", size: 45)!,
-																	  NSAttributedString.Key.foregroundColor: UIColor.white])
+		let attrTitle = NSAttributedString(string: "×", attributes: [NSAttributedStringKey.font: UIFont(name: "AmericanTypewriter", size: 45)!,
+																	  NSAttributedStringKey.foregroundColor: UIColor.white])
 		cancelButton.setAttributedTitle(attrTitle, for: .normal)
 		cancelButton.addTarget(self, action: #selector(dismiss), for: .touchUpInside)
 		self.addSubview(cancelButton)
