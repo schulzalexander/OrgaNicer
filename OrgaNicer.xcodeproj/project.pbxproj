@@ -15,7 +15,6 @@
 		C9253551213AAC6900FB9F92 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9253550213AAC6900FB9F92 /* Settings.swift */; };
 		C937589F211832B200B986D3 /* Deadline.swift in Sources */ = {isa = PBXBuildFile; fileRef = C937589E211832B200B986D3 /* Deadline.swift */; };
 		C93758A12118C47500B986D3 /* AlarmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93758A02118C47500B986D3 /* AlarmManager.swift */; };
-		C93758A32118D05E00B986D3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C93758A22118D05D00B986D3 /* GoogleService-Info.plist */; };
 		C93758A721196FDE00B986D3 /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93758A621196FDE00B986D3 /* Alarm.swift */; };
 		C938A99E20CB1920006E76E7 /* TaskCheckList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C938A99D20CB1920006E76E7 /* TaskCheckList.swift */; };
 		C938A9A020CB193B006E76E7 /* TaskConsecutiveList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C938A99F20CB193B006E76E7 /* TaskConsecutiveList.swift */; };
@@ -54,6 +53,7 @@
 		C998040F21297BD20010FFD4 /* TaskTableDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C998040E21297BD20010FFD4 /* TaskTableDisplayable.swift */; };
 		C9BAF3AC2131330800375DD0 /* CheckListViewLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BAF3AB2131330800375DD0 /* CheckListViewLine.swift */; };
 		C9BAF3AE213134A100375DD0 /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BAF3AD213134A100375DD0 /* Checkbox.swift */; };
+		C9BD5FAD213DCC2E0049C5AB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C9BD5FAC213DCC2D0049C5AB /* GoogleService-Info.plist */; };
 		C9C3D71820CC66C900C881D3 /* SelectorCollectionViewCellAdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C3D71720CC66C900C881D3 /* SelectorCollectionViewCellAdd.swift */; };
 		C9C3D71D20CC6BCE00C881D3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C9C3D71F20CC6BCE00C881D3 /* Localizable.strings */; };
 		C9D5C28B2103400A00AAE177 /* TableTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D5C28A2103400A00AAE177 /* TableTabBar.swift */; };
@@ -92,7 +92,6 @@
 		C9253550213AAC6900FB9F92 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		C937589E211832B200B986D3 /* Deadline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deadline.swift; sourceTree = "<group>"; };
 		C93758A02118C47500B986D3 /* AlarmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmManager.swift; sourceTree = "<group>"; };
-		C93758A22118D05D00B986D3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C93758A621196FDE00B986D3 /* Alarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
 		C938A99D20CB1920006E76E7 /* TaskCheckList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCheckList.swift; sourceTree = "<group>"; };
 		C938A99F20CB193B006E76E7 /* TaskConsecutiveList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskConsecutiveList.swift; sourceTree = "<group>"; };
@@ -137,6 +136,7 @@
 		C998040E21297BD20010FFD4 /* TaskTableDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableDisplayable.swift; sourceTree = "<group>"; };
 		C9BAF3AB2131330800375DD0 /* CheckListViewLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckListViewLine.swift; sourceTree = "<group>"; };
 		C9BAF3AD213134A100375DD0 /* Checkbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
+		C9BD5FAC213DCC2D0049C5AB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C9C3D71720CC66C900C881D3 /* SelectorCollectionViewCellAdd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectorCollectionViewCellAdd.swift; sourceTree = "<group>"; };
 		C9C3D72020CC6CDE00C881D3 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
 		C9C3D72120CC6CDE00C881D3 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -273,7 +273,7 @@
 				C9713E8C20C596680074F232 /* Main.storyboard */,
 				C9713E9120C596690074F232 /* LaunchScreen.storyboard */,
 				C9713E9420C596690074F232 /* Info.plist */,
-				C93758A22118D05D00B986D3 /* GoogleService-Info.plist */,
+				C9BD5FAC213DCC2D0049C5AB /* GoogleService-Info.plist */,
 				C9C3D71F20CC6BCE00C881D3 /* Localizable.strings */,
 			);
 			path = OrgaNicer;
@@ -436,6 +436,7 @@
 				C9713E8220C596680074F232 /* Frameworks */,
 				C9713E8320C596680074F232 /* Resources */,
 				F23967A4940712F936D98406 /* [CP] Embed Pods Frameworks */,
+				C93AE543213DCF5A002C53BB /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -543,7 +544,7 @@
 			files = (
 				C9713E9320C596690074F232 /* LaunchScreen.storyboard in Resources */,
 				C9C3D71D20CC6BCE00C881D3 /* Localizable.strings in Resources */,
-				C93758A32118D05E00B986D3 /* GoogleService-Info.plist in Resources */,
+				C9BD5FAD213DCC2E0049C5AB /* GoogleService-Info.plist in Resources */,
 				C9713E9020C596690074F232 /* Assets.xcassets in Resources */,
 				C9713E8E20C596680074F232 /* Main.storyboard in Resources */,
 			);
@@ -601,6 +602,20 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		C93AE543213DCF5A002C53BB /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\"";
 		};
 		F23967A4940712F936D98406 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -808,7 +823,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -863,7 +878,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;

@@ -78,7 +78,7 @@ class FeedbackViewController: UIViewController, UITextViewDelegate {
 			let ref = Database.database().reference().child("Feedback")
 			let key = ref.childByAutoId().key
 			let post = ["value": textView.text]
-			let childUpdates = ["/Feedback/\(key)": post]
+			let childUpdates = [key: post]
 			ref.updateChildValues(childUpdates) { (error, database) in
 				guard error == nil else {
 					print("Error during Feedback upload: \(error!.localizedDescription)")

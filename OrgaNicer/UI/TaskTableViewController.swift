@@ -145,8 +145,8 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 		self.navigationItem.title = category?.title
 		if category != nil {
 			self.tableTabBar.switchToTab(index: category!.settings.selectedTaskStatusTab.rawValue)
-			self.updateTaskOrdering()
 		}
+		self.updateTaskOrdering()
 		self.longPressRecognizer.isEnabled = (self.currList?.settings.taskOrder ?? nil) != .custom
 		self.tableView.reorder.isEnabled = (self.currList?.settings.taskOrder ?? nil) == .custom
 		self.tableView.reloadData()
@@ -259,6 +259,7 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 	
 	func updateTaskOrdering() {
 		guard let currList = currList else {
+			self.taskOrdering = nil
 			return
 		}
 		self.taskOrdering = currList.settings.taskOrder == .custom

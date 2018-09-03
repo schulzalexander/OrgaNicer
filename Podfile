@@ -9,6 +9,8 @@ target 'OrgaNicer' do
   pod 'SwiftReorder', '~> 5.0'
   pod 'Firebase/Core'
   pod 'Firebase/Database'
+  pod 'Fabric', '~> 1.7.11'
+  pod 'Crashlytics', '~> 3.10.7'
 
   target 'OrgaNicerTests' do
     inherit! :search_paths
