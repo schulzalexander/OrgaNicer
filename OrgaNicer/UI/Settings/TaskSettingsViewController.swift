@@ -39,6 +39,7 @@ class TaskSettingsTableViewController: UITableViewController {
 	@IBOutlet weak var reminderDatePicker: UIDatePicker!
 	@IBOutlet weak var reminderFrequencyPicker: UISegmentedControl!
 	@IBOutlet weak var reminderSoundSwitch: UISwitch!
+	@IBOutlet weak var reminderWeekdayPicker: UIPickerView!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -52,6 +53,9 @@ class TaskSettingsTableViewController: UITableViewController {
 		self.weekdayPicker.dataSource = self
 		self.weekdayPicker.delegate = self
 		
+		self.reminderWeekdayPicker.dataSource = self
+		self.reminderWeekdayPicker.delegate = self
+		
 		self.tableView.estimatedRowHeight = 0 // Without this, tableviews content size will be off
 		self.tableView.sizeToFit()
 		self.updatePopoverSize()
@@ -59,16 +63,14 @@ class TaskSettingsTableViewController: UITableViewController {
 		if task.deadline != nil {
 			self.frequencyPicker.selectedSegmentIndex = task.deadline!.frequency.rawValue
 			updateUIControlsToFrequency(frequency: task.deadline!.frequency)
-			/*if task.deadline!.frequency == .weekly {
-				showWeekdayPicker()
-				deadlineDatePicker.datePickerMode = .time
-				setWeekday()
-			}*/
 		} else {
 			self.frequencyPicker.isEnabled = false
 			self.deadlineDropdownArrow.textColor = UIColor.lightGray
 		}
-		if task.alarm == nil {
+		if task.alarm != nil {
+			self.reminderFrequencyPicker.selectedSegmentIndex = task.alarm!.frequency.rawValue
+			updateReminderUIControlsToFrequency(frequency: task.alarm!.frequency)
+		} else {
 			self.reminderDropdownArrow.textColor = UIColor.lightGray
 		}
 		
@@ -145,6 +147,66 @@ class TaskSettingsTableViewController: UITableViewController {
 		self.updateReminderCellComponents()
 		TaskArchive.saveTask(task: task)
 		self.tableView.reloadData()
+	}
+	
+	private func updateReminderUIControlsToFrequency(frequency: Deadline.Frequency) {
+		switch frequency {
+		case .unique:
+			reminderDatePicker.datePickerMode = .dateAndTime
+			task.alarm!.frequency = Deadline.Frequency.unique //TODO: do generic
+			reminderDatePicker.date = task.alarm!.date
+			hideReminderWeekdayPicker()
+		case .daily:
+			reminderDatePicker.datePickerMode = .time
+			task.alarm!.frequency = Deadline.Frequency.daily
+			hideReminderWeekdayPicker()
+		case .weekly:
+			reminderDatePicker.datePickerMode = .time
+			task.alarm!.frequency = Deadline.Frequency.weekly
+			showReminderWeekdayPicker()
+			setReminderWeekday()
+		}
+	}
+	
+	private func showReminderWeekdayPicker() {
+		reminderWeekdayPicker.isHidden = false
+		reminderWeekdayPicker.frame.size.width = self.view.frame.width / 2 - 16
+		reminderWeekdayPicker.center.x = self.view.frame.width / 4 + 8
+		reminderDatePicker.frame.size.width = self.view.frame.width / 2 - 16
+		reminderDatePicker.center.x = self.view.frame.width / 4 * 3 - 8
+	}
+	
+	private func hideReminderWeekdayPicker() {
+		reminderWeekdayPicker.isHidden = true
+		reminderDatePicker.frame.size.width = self.view.frame.width - 32
+		reminderDatePicker.center.x = self.view.frame.width / 2
+	}
+	
+	private func setReminderWeekday() {
+		guard self.task.alarm != nil else {
+			return
+		}
+		let weekday = Calendar.current.component(.weekday, from: self.task.alarm!.date)
+		self.reminderWeekdayPicker.selectRow(weekday - 1, inComponent: 0, animated: false)
+	}
+	
+	@IBAction func didPickReminderDate(_ sender: UIDatePicker) {
+		updateTaskReminderDate(date: sender.date)
+	}
+	
+	@IBAction func didPickReminderFrequency(_ sender: UISegmentedControl) {
+		guard let frequency = Deadline.Frequency(rawValue: sender.selectedSegmentIndex) else {
+			fatalError("Error: Failed to create Frequency out of SegmentedControl's selected index!")
+		}
+		updateReminderUIControlsToFrequency(frequency: frequency)
+		task.resetAlarm()
+		TaskArchive.saveTask(task: task)
+	}
+	
+	private func updateTaskReminderDate(date: Date) {
+		task.alarm!.date = date
+		task.resetAlarm()
+		TaskArchive.saveTask(task: task)
 	}
 	
 	//MARK: Deadline Cell
@@ -374,7 +436,6 @@ class TaskSettingsTableViewController: UITableViewController {
 		}
 		let weekday = Calendar.current.component(.weekday, from: self.task.deadline!.date)
 		self.weekdayPicker.selectRow(weekday - 1, inComponent: 0, animated: false)
-		
 	}
 	
 	private func disableReminder() {
@@ -432,17 +493,33 @@ extension TaskSettingsTableViewController: UIPickerViewDelegate, UIPickerViewDat
 	}
 	
 	func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-		guard task.deadline != nil else {
-			return
-		}
-		var date = task.deadline!.date
-		for _ in 0...7 {
-			if Calendar.current.component(.weekday, from: date) - 1 == row {
-				updateTaskDeadlineDate(date: date)
-				deadlineDatePicker.setDate(date, animated: false)
-				break
+		if pickerView == weekdayPicker {
+			guard task.deadline != nil else {
+				return
 			}
-			date.addTimeInterval(3600 * 24)
+			var date = task.deadline!.date
+			for _ in 0...7 {
+				if Calendar.current.component(.weekday, from: date) - 1 == row {
+					updateTaskDeadlineDate(date: date)
+					deadlineDatePicker.setDate(date, animated: false)
+					break
+				}
+				date.addTimeInterval(3600 * 24)
+			}
+		}
+		if pickerView == reminderWeekdayPicker {
+			guard task.alarm != nil else {
+				return
+			}
+			var date = task.alarm!.date
+			for _ in 0...7 {
+				if Calendar.current.component(.weekday, from: date) - 1 == row {
+					updateTaskReminderDate(date: date)
+					reminderDatePicker.setDate(date, animated: false)
+					break
+				}
+				date.addTimeInterval(3600 * 24)
+			}
 		}
 	}
 	

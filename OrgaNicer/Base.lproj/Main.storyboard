@@ -213,6 +213,7 @@
                                                     <color key="tintColor" red="0.29975247383117676" green="0.69215255975723267" blue="0.99964040517807007" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <connections>
                                                         <action selector="didPickFrequency:" destination="5G5-sk-Q8t" eventType="valueChanged" id="7ql-Fi-06Y"/>
+                                                        <action selector="didPickReminderFrequency:" destination="5G5-sk-Q8t" eventType="valueChanged" id="Ubi-ao-sZ3"/>
                                                     </connections>
                                                 </segmentedControl>
                                                 <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="47l-ex-yaK">
@@ -221,7 +222,14 @@
                                                     <date key="date" timeIntervalSinceReferenceDate="554055749.54979801">
                                                         <!--2018-07-23 16:22:29 +0000-->
                                                     </date>
+                                                    <connections>
+                                                        <action selector="didPickReminderDate:" destination="5G5-sk-Q8t" eventType="valueChanged" id="1Rg-XD-4dp"/>
+                                                    </connections>
                                                 </datePicker>
+                                                <pickerView hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sdJ-Ze-pDw">
+                                                    <rect key="frame" x="16" y="175" width="162" height="116"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                </pickerView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="a9Y-kE-uJD" firstAttribute="top" secondItem="cV7-D6-H7b" secondAttribute="top" constant="142" id="J6a-3E-lt0"/>
@@ -272,6 +280,7 @@
                         <outlet property="reminderFrequencyPicker" destination="a9Y-kE-uJD" id="ggA-ll-n7s"/>
                         <outlet property="reminderLabel" destination="jAo-Q1-crO" id="Dib-jF-QwD"/>
                         <outlet property="reminderSoundSwitch" destination="MdX-k3-Czy" id="ft0-03-grR"/>
+                        <outlet property="reminderWeekdayPicker" destination="sdJ-Ze-pDw" id="CP9-pI-WAu"/>
                         <outlet property="taskHeaderTextField" destination="UUz-o4-M96" id="ida-D9-8ca"/>
                         <outlet property="weekdayPicker" destination="nC6-FF-Yld" id="dnI-up-NIl"/>
                     </connections>
