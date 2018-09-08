@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -31,37 +30,49 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="76.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Task Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jD0-Pk-3hO">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Task Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jD0-Pk-3hO">
                                                     <rect key="frame" x="43" y="41" width="316" height="25"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                     <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Task Name" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UUz-o4-M96">
-                                                    <rect key="frame" x="16" y="11" width="153" height="36"/>
-                                                    <nil key="textColor"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3DZ-0S-cUd">
-                                                    <rect key="frame" x="172" y="14" width="30" height="30"/>
-                                                    <state key="normal" title="Edit">
-                                                        <color key="titleColor" red="0.0" green="0.56577507819999995" blue="1" alpha="0.70232724469999996" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="startEditingTitle:" destination="5G5-sk-Q8t" eventType="touchUpInside" id="883-oB-QBc"/>
-                                                    </connections>
-                                                </button>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="fx5-0j-TPC">
+                                                    <rect key="frame" x="16" y="11" width="197" height="36"/>
+                                                    <subviews>
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UUz-o4-M96">
+                                                            <rect key="frame" x="0.0" y="0.0" width="162" height="36"/>
+                                                            <attributedString key="attributedText">
+                                                                <fragment content="Task Name">
+                                                                    <attributes>
+                                                                        <font key="NSFont" size="30" name="HelveticaNeue-Bold"/>
+                                                                    </attributes>
+                                                                </fragment>
+                                                            </attributedString>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3DZ-0S-cUd">
+                                                            <rect key="frame" x="167" y="0.0" width="30" height="36"/>
+                                                            <state key="normal" title="Edit">
+                                                                <color key="titleColor" red="0.0" green="0.56577507819999995" blue="1" alpha="0.70232724469999996" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="startEditingTitle:" destination="5G5-sk-Q8t" eventType="touchUpInside" id="883-oB-QBc"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="3DZ-0S-cUd" secondAttribute="trailing" id="7bS-Yr-xAR"/>
+                                                    </constraints>
+                                                </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="UUz-o4-M96" firstAttribute="centerY" secondItem="3DZ-0S-cUd" secondAttribute="centerY" id="3N3-u1-fiE"/>
-                                                <constraint firstItem="3DZ-0S-cUd" firstAttribute="leading" secondItem="UUz-o4-M96" secondAttribute="trailing" constant="3" id="4ja-SW-Sjd"/>
-                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="3DZ-0S-cUd" secondAttribute="trailing" id="B9f-gA-OKZ"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="UUz-o4-M96" secondAttribute="bottom" constant="19" id="NiY-K2-YV6"/>
-                                                <constraint firstItem="UUz-o4-M96" firstAttribute="top" secondItem="wEn-hd-gEg" secondAttribute="topMargin" id="Vd4-k4-Pce"/>
-                                                <constraint firstItem="3DZ-0S-cUd" firstAttribute="top" secondItem="wEn-hd-gEg" secondAttribute="topMargin" constant="3" id="lRV-ri-Dhq"/>
-                                                <constraint firstItem="UUz-o4-M96" firstAttribute="leading" secondItem="wEn-hd-gEg" secondAttribute="leadingMargin" id="qXq-gE-mhy"/>
+                                                <constraint firstItem="fx5-0j-TPC" firstAttribute="leading" secondItem="wEn-hd-gEg" secondAttribute="leadingMargin" id="RYh-cv-39X"/>
+                                                <constraint firstItem="jD0-Pk-3hO" firstAttribute="bottom" secondItem="wEn-hd-gEg" secondAttribute="bottomMargin" id="Won-m6-yho"/>
+                                                <constraint firstItem="jD0-Pk-3hO" firstAttribute="leading" secondItem="wEn-hd-gEg" secondAttribute="leadingMargin" constant="27" id="lo9-He-pp0"/>
+                                                <constraint firstItem="jD0-Pk-3hO" firstAttribute="top" secondItem="wEn-hd-gEg" secondAttribute="topMargin" constant="30" id="mGh-dd-o6m"/>
+                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="fx5-0j-TPC" secondAttribute="trailing" id="pxO-eB-TBV"/>
+                                                <constraint firstItem="jD0-Pk-3hO" firstAttribute="trailing" secondItem="wEn-hd-gEg" secondAttribute="trailingMargin" id="yFG-LX-GTh"/>
+                                                <constraint firstItem="fx5-0j-TPC" firstAttribute="top" secondItem="wEn-hd-gEg" secondAttribute="topMargin" id="zOR-gu-TTd"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -212,7 +223,6 @@
                                                     </segments>
                                                     <color key="tintColor" red="0.29975247383117676" green="0.69215255975723267" blue="0.99964040517807007" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <connections>
-                                                        <action selector="didPickFrequency:" destination="5G5-sk-Q8t" eventType="valueChanged" id="7ql-Fi-06Y"/>
                                                         <action selector="didPickReminderFrequency:" destination="5G5-sk-Q8t" eventType="valueChanged" id="Ubi-ao-sZ3"/>
                                                     </connections>
                                                 </segmentedControl>
@@ -308,36 +318,50 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="76.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Category Name" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RYk-c1-vw0">
-                                                    <rect key="frame" x="8" y="11" width="216" height="36"/>
-                                                    <nil key="textColor"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ToDo-List Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OSH-hm-xCK">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ToDo-List Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OSH-hm-xCK">
                                                     <rect key="frame" x="39" y="41" width="320" height="25"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                     <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HNm-LO-Cfw">
-                                                    <rect key="frame" x="227" y="14" width="30" height="30"/>
-                                                    <state key="normal" title="Edit">
-                                                        <color key="titleColor" red="0.0" green="0.56577507819999995" blue="1" alpha="0.70232724469999996" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="startEditingTitle:" destination="mVv-Vn-6Qy" eventType="touchUpInside" id="3pi-DA-do7"/>
-                                                    </connections>
-                                                </button>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="BVQ-bT-pkN">
+                                                    <rect key="frame" x="8" y="11" width="262.5" height="36"/>
+                                                    <subviews>
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RYk-c1-vw0">
+                                                            <rect key="frame" x="0.0" y="0.0" width="227.5" height="36"/>
+                                                            <attributedString key="attributedText">
+                                                                <fragment content="Category Name">
+                                                                    <attributes>
+                                                                        <font key="NSFont" size="30" name="HelveticaNeue-Bold"/>
+                                                                    </attributes>
+                                                                </fragment>
+                                                            </attributedString>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HNm-LO-Cfw">
+                                                            <rect key="frame" x="232.5" y="0.0" width="30" height="36"/>
+                                                            <state key="normal" title="Edit">
+                                                                <color key="titleColor" red="0.0" green="0.56577507819999995" blue="1" alpha="0.70232724469999996" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="startEditingTitle:" destination="mVv-Vn-6Qy" eventType="touchUpInside" id="3pi-DA-do7"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="HNm-LO-Cfw" secondAttribute="trailing" id="lMd-yA-CRj"/>
+                                                    </constraints>
+                                                </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="RYk-c1-vw0" firstAttribute="leading" secondItem="ZaO-4Q-CD8" secondAttribute="leadingMargin" constant="-8" id="2oC-85-tUw"/>
-                                                <constraint firstItem="RYk-c1-vw0" firstAttribute="top" secondItem="ZaO-4Q-CD8" secondAttribute="topMargin" id="3y4-K8-Gzk"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="RYk-c1-vw0" secondAttribute="bottom" constant="19" id="VDZ-4U-3ZT"/>
-                                                <constraint firstItem="HNm-LO-Cfw" firstAttribute="leading" secondItem="RYk-c1-vw0" secondAttribute="trailing" constant="3" id="XjN-hq-vau"/>
-                                                <constraint firstItem="HNm-LO-Cfw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="RYk-c1-vw0" secondAttribute="leadingMargin" id="pip-UH-gRj"/>
-                                                <constraint firstItem="HNm-LO-Cfw" firstAttribute="centerY" secondItem="RYk-c1-vw0" secondAttribute="centerY" id="v32-GU-N9q"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="BVQ-bT-pkN" secondAttribute="bottom" constant="19" id="1SO-PF-KWg"/>
+                                                <constraint firstItem="OSH-hm-xCK" firstAttribute="trailing" secondItem="ZaO-4Q-CD8" secondAttribute="trailingMargin" id="4Ms-s8-tom"/>
+                                                <constraint firstItem="OSH-hm-xCK" firstAttribute="top" secondItem="ZaO-4Q-CD8" secondAttribute="topMargin" constant="30" id="8Nj-8C-Cdp"/>
+                                                <constraint firstItem="BVQ-bT-pkN" firstAttribute="top" secondItem="ZaO-4Q-CD8" secondAttribute="topMargin" id="IJR-j9-a1O"/>
+                                                <constraint firstItem="OSH-hm-xCK" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="BVQ-bT-pkN" secondAttribute="trailing" id="UVh-YL-2AV"/>
+                                                <constraint firstItem="BVQ-bT-pkN" firstAttribute="leading" secondItem="ZaO-4Q-CD8" secondAttribute="leadingMargin" constant="-8" id="VEn-QY-dMA"/>
+                                                <constraint firstItem="OSH-hm-xCK" firstAttribute="leading" secondItem="ZaO-4Q-CD8" secondAttribute="leadingMargin" constant="23" id="k06-Q7-APV"/>
+                                                <constraint firstItem="OSH-hm-xCK" firstAttribute="bottom" secondItem="ZaO-4Q-CD8" secondAttribute="bottomMargin" id="u8R-6v-Ao6"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>

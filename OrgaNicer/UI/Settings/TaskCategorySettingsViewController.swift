@@ -125,7 +125,7 @@ class TaskCategorySettingsTableViewController: UITableViewController {
 	}
 	
 	private func updatePopoverSize() {
-		self.preferredContentSize = CGSize(width: UIScreen.main.bounds.width, height: tableView.contentSize.height)
+		self.preferredContentSize = CGSize(width: UIScreen.main.bounds.width, height: min(UIScreen.main.bounds.height * 0.7, tableView.contentSize.height))
 	}
 	
 }

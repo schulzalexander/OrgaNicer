@@ -47,7 +47,6 @@ class TaskSettingsTableViewController: UITableViewController {
 		self.taskCategory = getCurrentTaskCategory()
 		
 		self.taskHeaderTextField.text = task.title
-		self.taskHeaderTextField.sizeToFit()
 		self.taskHeaderTextField.delegate = self
 		
 		self.weekdayPicker.dataSource = self
@@ -60,6 +59,7 @@ class TaskSettingsTableViewController: UITableViewController {
 			self.frequencyPicker.selectedSegmentIndex = task.deadline!.frequency.rawValue
 			updateUIControlsToFrequency(frequency: task.deadline!.frequency)
 		} else {
+			self.frequencyPicker.selectedSegmentIndex = 0
 			self.frequencyPicker.isEnabled = false
 			self.deadlineDropdownArrow.textColor = UIColor.lightGray
 		}
@@ -101,6 +101,7 @@ class TaskSettingsTableViewController: UITableViewController {
 			TaskArchive.saveTask(task: task)
 		}
 		self.tableView.reloadData()
+		updatePopoverSize()
 	}
 	
 	@IBAction func didChangeReminderSoundEnabled(_ sender: UISwitch) {
@@ -134,6 +135,7 @@ class TaskSettingsTableViewController: UITableViewController {
 					AlarmManager.addAlarm(task: self.task, alarm: newAlarm)
 					TaskArchive.saveTask(task: self.task)
 					self.isReminderCellCollapsed = false
+					self.updatePopoverSize()
 					DispatchQueue.main.async {
 						self.reminderStateSwitchCompletion()
 					}
@@ -153,16 +155,13 @@ class TaskSettingsTableViewController: UITableViewController {
 		switch frequency {
 		case .unique:
 			reminderDatePicker.datePickerMode = .dateAndTime
-			task.alarm!.frequency = Deadline.Frequency.unique //TODO: do generic
 			reminderDatePicker.date = task.alarm!.date
 			hideReminderWeekdayPicker()
 		case .daily:
 			reminderDatePicker.datePickerMode = .time
-			task.alarm!.frequency = Deadline.Frequency.daily
 			hideReminderWeekdayPicker()
 		case .weekly:
 			reminderDatePicker.datePickerMode = .time
-			task.alarm!.frequency = Deadline.Frequency.weekly
 			showReminderWeekdayPicker()
 			setReminderWeekday()
 		}
@@ -198,6 +197,7 @@ class TaskSettingsTableViewController: UITableViewController {
 		guard let frequency = Deadline.Frequency(rawValue: sender.selectedSegmentIndex) else {
 			fatalError("Error: Failed to create Frequency out of SegmentedControl's selected index!")
 		}
+		task.alarm?.frequency = frequency
 		updateReminderUIControlsToFrequency(frequency: frequency)
 		task.resetAlarm()
 		TaskArchive.saveTask(task: task)
@@ -215,6 +215,7 @@ class TaskSettingsTableViewController: UITableViewController {
 		guard let frequency = Deadline.Frequency(rawValue: sender.selectedSegmentIndex) else {
 			fatalError("Error: Failed to create Frequency out of SegmentedControl's selected index!")
 		}
+		task.deadline?.frequency = frequency
 		updateUIControlsToFrequency(frequency: frequency)
 		if task.alarm != nil && !task.hasSeperateAlarm() {
 			task.alarm!.frequency = task.deadline!.frequency
@@ -228,16 +229,13 @@ class TaskSettingsTableViewController: UITableViewController {
 		switch frequency {
 		case .unique:
 			deadlineDatePicker.datePickerMode = .dateAndTime
-			task.deadline!.frequency = Deadline.Frequency.unique
 			deadlineDatePicker.date = task.deadline!.date
 			hideWeekdayPicker()
 		case .daily:
 			deadlineDatePicker.datePickerMode = .time
-			task.deadline!.frequency = Deadline.Frequency.daily
 			hideWeekdayPicker()
 		case .weekly:
 			deadlineDatePicker.datePickerMode = .time
-			task.deadline!.frequency = Deadline.Frequency.weekly
 			showWeekdayPicker()
 			setWeekday()
 		}
@@ -369,14 +367,10 @@ class TaskSettingsTableViewController: UITableViewController {
 			deadlineDatePicker.isEnabled = true
 			deadlineDatePicker.date = task.deadline?.date ?? defaultDate()
 			deadlineEnabledButton.setTitle(NSLocalizedString("Delete", comment: ""), for: .normal)
-			if frequencyPicker.selectedSegmentIndex == 2 {
-				weekdayPicker.isUserInteractionEnabled = true
-			}
 		} else {
 			deadlineDropdownArrow.textColor = UIColor.lightGray
 			deadlineLabel.textColor = UIColor.lightGray
 			deadlineDatePicker.isEnabled = false
-			weekdayPicker.isUserInteractionEnabled = false
 			deadlineEnabledButton.setTitle(NSLocalizedString("Set", comment: ""), for: .normal)
 		}
 		deadlineEnabledButton.sizeToFit()
@@ -427,7 +421,7 @@ class TaskSettingsTableViewController: UITableViewController {
 	}
 	
 	private func updatePopoverSize() {
-		self.preferredContentSize = CGSize(width: UIScreen.main.bounds.width, height: tableView.contentSize.height)
+		self.preferredContentSize = CGSize(width: UIScreen.main.bounds.width, height: min(UIScreen.main.bounds.height * 0.7, tableView.contentSize.height))
 	}
 	
 	private func setWeekday() {
@@ -442,6 +436,7 @@ class TaskSettingsTableViewController: UITableViewController {
 		task.removeAlarm()
 		isReminderCellCollapsed = true
 		updateReminderCellComponents()
+		updatePopoverSize()
 	}
 	
 	private func getCurrentTaskCategory() -> TaskCategory? {
@@ -467,12 +462,13 @@ class TaskSettingsTableViewController: UITableViewController {
 extension TaskSettingsTableViewController: UITextFieldDelegate {
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 		textField.resignFirstResponder()
-		if textField.text != nil && textField.text?.count == 0 {
+		if textField.text == nil || textField.text?.count == 0 {
 			textField.text = task.title
 		} else {
 			task.title = textField.text!
 			TaskArchive.saveTask(task: task)
 			updateTaskTable()
+			textField.frame.size.width += 10
 		}
 		return true
 	}
