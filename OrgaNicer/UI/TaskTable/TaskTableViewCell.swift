@@ -86,11 +86,21 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 			let newTask = TaskCheckList(task: self.task)
 			TaskManager.shared.addTask(task: newTask)
 			tableView.reloadRows(at: [index], with: .automatic)
+			guard let newCell = tableView.cellForRow(at: index) as? TaskTableViewCell,
+				let checkList = newCell.cellExtension as? CheckListView else {
+					return
+			}
+			checkList.addSubTask(checkList.addButton)
 		}
 		decisionMenu.addOption(title: NSLocalizedString("FollowUp", comment: "")) {
 			let newTask = TaskConsecutiveList(task: self.task)
 			TaskManager.shared.addTask(task: newTask)
 			tableView.reloadRows(at: [index], with: .automatic)
+			guard let newCell = tableView.cellForRow(at: index) as? TaskTableViewCell,
+				let consecutiveList = newCell.cellExtension as? ConsecutiveListView else {
+				return
+			}
+			consecutiveList.createFollowUpTask(consecutiveList.forwardButton)
 		}
 		decisionMenu.show()
 	}

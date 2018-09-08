@@ -21,6 +21,9 @@ class ConsecutiveListView: TaskTableViewCellContent, UITextFieldDelegate {
 	var parentTask: TaskConsecutiveList!
 	var lines: [ConsecutiveListViewLine]!
 	
+	var forwardButton: UIButton!
+	var backButton: UIButton!
+	
 	init(task: TaskConsecutiveList, frame: CGRect) {
 		super.init(frame: frame)
 		
@@ -51,9 +54,53 @@ class ConsecutiveListView: TaskTableViewCellContent, UITextFieldDelegate {
 			TaskArchive.saveTask(task: parentTask)
 			tableView.reloadRows(at: [index], with: .automatic)
 		}
-		
 		textField.resignFirstResponder()
 		return true
+	}
+	
+	@objc func createFollowUpTask(_ sender: UIButton) {
+		let newTask = Task(title: "")
+		TaskManager.shared.addTask(task: newTask)
+		if parentTask.subTasks != nil {
+			parentTask.subTasks!.append(newTask.id)
+		} else {
+			parentTask.subTasks = [newTask.id]
+		}
+		guard let cell = self.superview as? TaskTableViewCell,
+			let tableView = cell.getTableView(),
+			let index = tableView.indexPath(for: cell) else {
+				fatalError("Checklist failed to retreive containing tableview.")
+		}
+		tableView.reloadRows(at: [index], with: .automatic)
+		guard let newCell = tableView.cellForRow(at: index) as? TaskTableViewCell,
+			let consecutiveList = newCell.cellExtension as? ConsecutiveListView else {
+				fatalError("Checklist failed to retreive new checklist after tableview reload.")
+		}
+		let lastIndex = consecutiveList.lines.count - 1
+		if lastIndex >= 0 {
+			consecutiveList.lines[lastIndex].titleTextField.becomeFirstResponder()
+			consecutiveList.setCurrentLine(index: lastIndex)
+		}
+	}
+	
+	@objc func rewindToLastTask(_ sender: UIButton) {
+		guard let cell = self.superview as? TaskTableViewCell,
+			let tableView = cell.getTableView(),
+			let index = tableView.indexPath(for: cell) else {
+				return
+		}
+		if let subtask = parentTask.subTasks?.last {
+			parentTask.removeSubtask(id: subtask)
+			if parentTask.subTasks?.count == 0 {
+				downcastToMainTask()
+			} else {
+				TaskArchive.saveTask(task: parentTask)
+			}
+			TaskManager.shared.deleteTask(id: subtask)
+		} else {
+			downcastToMainTask()
+		}
+		tableView.reloadRows(at: [index], with: .automatic)
 	}
 	
 	private func layoutConsecutiveTaskList(subtasks: [String]?) {
@@ -80,7 +127,7 @@ class ConsecutiveListView: TaskTableViewCellContent, UITextFieldDelegate {
 		if let count = subtasks?.count {
 			setCurrentLine(index: count - 1)
 		}
-		let forwardButton = UIButton()
+		forwardButton = UIButton()
 		forwardButton.setTitle(NSLocalizedString("Forward", comment: ""), for: .normal)
 		forwardButton.titleLabel?.font = forwardButton.titleLabel?.font.withSize(ConsecutiveListView.toolButtonFontSize)
 		forwardButton.setTitleColor(ConsecutiveListView.toolButtonFontColor, for: .normal)
@@ -89,7 +136,7 @@ class ConsecutiveListView: TaskTableViewCellContent, UITextFieldDelegate {
 		forwardButton.addTarget(self, action: #selector(createFollowUpTask(_:)), for: .touchUpInside)
 		forwardButton.center = CGPoint(x: self.frame.width - ConsecutiveListView.linePaddingHorizontal - forwardButton.frame.width / 2,
 									   y: currY + ConsecutiveListView.lineHeight / 2)
-		let backButton = UIButton()
+		backButton = UIButton()
 		backButton.setTitle(NSLocalizedString("Back", comment: ""), for: .normal)
 		backButton.titleLabel?.font = backButton.titleLabel?.font.withSize(ConsecutiveListView.toolButtonFontSize)
 		backButton.setTitleColor(ConsecutiveListView.toolButtonFontColor, for: .normal)
@@ -105,51 +152,6 @@ class ConsecutiveListView: TaskTableViewCellContent, UITextFieldDelegate {
 		layer.borderWidth = 1
 		layer.cornerRadius = 5
 		backgroundColor = UIColor.white.withAlphaComponent(0.2)
-	}
-	
-	@objc private func createFollowUpTask(_ sender: UIButton) {
-		let newTask = Task(title: "")
-		TaskManager.shared.addTask(task: newTask)
-		if parentTask.subTasks != nil {
-			parentTask.subTasks!.append(newTask.id)
-		} else {
-			parentTask.subTasks = [newTask.id]
-		}
-		guard let cell = self.superview as? TaskTableViewCell,
-			let tableView = cell.getTableView(),
-			let index = tableView.indexPath(for: cell) else {
-				fatalError("Checklist failed to retreive containing tableview.")
-		}
-		tableView.reloadRows(at: [index], with: .automatic)
-		guard let newCell = tableView.cellForRow(at: index) as? TaskTableViewCell,
-			let consecutiveList = newCell.cellExtension as? ConsecutiveListView else {
-				fatalError("Checklist failed to retreive new checklist after tableview reload.")
-		}
-		let lastIndex = consecutiveList.lines.count - 1
-		if lastIndex >= 0 {
-			consecutiveList.lines[lastIndex].titleTextField.becomeFirstResponder()
-			consecutiveList.setCurrentLine(index: lastIndex)
-		}
-	}
-	
-	@objc private func rewindToLastTask(_ sender: UIButton) {
-		guard let cell = self.superview as? TaskTableViewCell,
-			let tableView = cell.getTableView(),
-			let index = tableView.indexPath(for: cell) else {
-				return
-		}
-		if let subtask = parentTask.subTasks?.last {
-			parentTask.removeSubtask(id: subtask)
-			if parentTask.subTasks?.count == 0 {
-				downcastToMainTask()
-			} else {
-				TaskArchive.saveTask(task: parentTask)
-			}
-			TaskManager.shared.deleteTask(id: subtask)
-		} else {
-			downcastToMainTask()
-		}
-		tableView.reloadRows(at: [index], with: .automatic)
 	}
 	
 	private func downcastToMainTask() {

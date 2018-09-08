@@ -20,6 +20,9 @@ class CheckListView: TaskTableViewCellContent, UITextFieldDelegate, UIGestureRec
 	var lines: [CheckListViewLine]!
 	var markedLine: CheckListViewLine? // Clicking the remove button will delete the currently marked line
 	
+	var addButton: UIButton!
+	var removeButton: UIButton!
+	
 	init(task: TaskCheckList, frame: CGRect) {
 		super.init(frame: frame)
 		self.parentTask = task
@@ -81,6 +84,62 @@ class CheckListView: TaskTableViewCellContent, UITextFieldDelegate, UIGestureRec
 		}
 	}
 	
+	
+	@objc func addSubTask(_ sender: UIButton) {
+		let newTask = Task(title: "")
+		TaskManager.shared.addTask(task: newTask)
+		if parentTask.subTasks != nil {
+			parentTask.subTasks!.append(newTask.id)
+		} else {
+			parentTask.subTasks = [newTask.id]
+		}
+		TaskArchive.saveTask(task: parentTask)
+		guard let cell = self.superview as? TaskTableViewCell,
+			let tableView = cell.getTableView(),
+			let index = tableView.indexPath(for: cell) else {
+				fatalError("Checklist failed to retreive containing tableview.")
+		}
+		tableView.reloadRows(at: [index], with: .automatic)
+		guard let newCell = tableView.cellForRow(at: index) as? TaskTableViewCell,
+			let checklist = newCell.cellExtension as? CheckListView else {
+				fatalError("Checklist failed to retreive new checklist after tableview reload.")
+		}
+		checklist.lines.last?.titleTextField.isEnabled = true
+		checklist.lines.last?.titleTextField.becomeFirstResponder()
+	}
+	
+	@objc func removeSubTask(_ sender: UIButton) {
+		guard let cell = self.superview as? TaskTableViewCell,
+			let tableView = cell.getTableView(),
+			let index = tableView.indexPath(for: cell) else {
+				return
+		}
+		if markedLine == nil {
+			if (parentTask.subTasks?.count ?? 0) > 0 {
+				// Remove button was pressed, but no selection
+				guard let viewController = tableView.delegate as? TaskTableViewController else {
+					fatalError("Error: Failed to retrieve tableview delegeate when trying to show alertController, reason: no selected checklistline during removal.")
+				}
+				let alertController = UIAlertController(title: nil, message: NSLocalizedString("CheckListViewAlertControllerMessage", comment: ""), preferredStyle: .alert)
+				alertController.addAction(UIAlertAction(title: NSLocalizedString("GotIt", comment: ""), style: .cancel, handler: nil))
+				viewController.present(alertController, animated: true, completion: nil)
+				
+			} else {
+				// Remove button was pressed with no subtasks -> remove checklist
+				downcastToMainTask()
+			}
+		} else {
+			parentTask.removeSubtask(id: markedLine!.task.id)
+			if parentTask.subTasks?.count == 0 {
+				downcastToMainTask()
+			} else {
+				TaskArchive.saveTask(task: parentTask)
+			}
+			TaskManager.shared.deleteTask(id: markedLine!.task.id)
+		}
+		tableView.reloadRows(at: [index], with: .automatic)
+	}
+	
 	private func layoutChecklist(subtasks: [String]?) {
 		var currY = CheckListView.linePaddingVertical
 		
@@ -109,7 +168,7 @@ class CheckListView: TaskTableViewCellContent, UITextFieldDelegate, UIGestureRec
 			currY += CheckListView.lineHeight + CheckListView.linePaddingVertical
 		}
 		
-		let addButton = UIButton(frame: CGRect(x: self.frame.width - 10 - CheckListView.toolButtonDimension,
+		addButton = UIButton(frame: CGRect(x: self.frame.width - 10 - CheckListView.toolButtonDimension,
 											   y: currY,
 											   width: CheckListView.toolButtonDimension,
 											   height: CheckListView.toolButtonDimension))
@@ -118,7 +177,7 @@ class CheckListView: TaskTableViewCellContent, UITextFieldDelegate, UIGestureRec
 		addButton.layer.cornerRadius = addButton.frame.height / 2
 		addButton.layer.backgroundColor = UIColor.white.cgColor
 		addButton.addTarget(self, action: #selector(addSubTask), for: .touchUpInside)
-		let removeButton = UIButton(frame: CGRect(x: addButton.frame.minX - 10 - CheckListView.toolButtonDimension,
+		removeButton = UIButton(frame: CGRect(x: addButton.frame.minX - 10 - CheckListView.toolButtonDimension,
 												  y: currY,
 												  width: CheckListView.toolButtonDimension,
 												  height: CheckListView.toolButtonDimension))
@@ -134,61 +193,6 @@ class CheckListView: TaskTableViewCellContent, UITextFieldDelegate, UIGestureRec
 		layer.borderWidth = 1
 		layer.cornerRadius = 5
 		backgroundColor = UIColor.white.withAlphaComponent(0.2)//Utils.getTaskCellColor(priority: parentTask.cellHeight)
-	}
-	
-	@objc private func addSubTask(_ sender: UIButton) {
-		let newTask = Task(title: "")
-		TaskManager.shared.addTask(task: newTask)
-		if parentTask.subTasks != nil {
-			parentTask.subTasks!.append(newTask.id)
-		} else {
-			parentTask.subTasks = [newTask.id]
-		}
-		TaskArchive.saveTask(task: parentTask)
-		guard let cell = self.superview as? TaskTableViewCell,
-			let tableView = cell.getTableView(),
-			let index = tableView.indexPath(for: cell) else {
-			fatalError("Checklist failed to retreive containing tableview.")
-		}
-		tableView.reloadRows(at: [index], with: .automatic)
-		guard let newCell = tableView.cellForRow(at: index) as? TaskTableViewCell,
-			let checklist = newCell.cellExtension as? CheckListView else {
-			fatalError("Checklist failed to retreive new checklist after tableview reload.")
-		}
-		checklist.lines.last?.titleTextField.isEnabled = true
-		checklist.lines.last?.titleTextField.becomeFirstResponder()
-	}
-	
-	@objc private func removeSubTask(_ sender: UIButton) {
-		guard let cell = self.superview as? TaskTableViewCell,
-			let tableView = cell.getTableView(),
-			let index = tableView.indexPath(for: cell) else {
-			return
-		}
-		if markedLine == nil {
-			if (parentTask.subTasks?.count ?? 0) > 0 {
-				// Remove button was pressed, but no selection
-				guard let viewController = tableView.delegate as? TaskTableViewController else {
-					fatalError("Error: Failed to retrieve tableview delegeate when trying to show alertController, reason: no selected checklistline during removal.")
-				}
-				let alertController = UIAlertController(title: nil, message: NSLocalizedString("CheckListViewAlertControllerMessage", comment: ""), preferredStyle: .alert)
-				alertController.addAction(UIAlertAction(title: NSLocalizedString("GotIt", comment: ""), style: .cancel, handler: nil))
-				viewController.present(alertController, animated: true, completion: nil)
-				
-			} else {
-				// Remove button was pressed with no subtasks -> remove checklist
-				downcastToMainTask()
-			}
-		} else {
-			parentTask.removeSubtask(id: markedLine!.task.id)
-			if parentTask.subTasks?.count == 0 {
-				downcastToMainTask()
-			} else {
-				TaskArchive.saveTask(task: parentTask)
-			}
-			TaskManager.shared.deleteTask(id: markedLine!.task.id)
-		}
-		tableView.reloadRows(at: [index], with: .automatic)
 	}
 	
 	private func downcastToMainTask() {
