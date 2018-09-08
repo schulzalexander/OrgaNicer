@@ -36,7 +36,7 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 	
 	var longPressRecognizer: UILongPressGestureRecognizer! // Will notify the user that reordering is disabled when table has fixed ordering
 	
-	
+	//MARK: Main View Events
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -93,6 +93,14 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 		}
 	}
 	
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		if currList != nil && currList!.count() > 0 {
+			tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+		}
+	}
+	
+	//MARK: Keyboard Events
 	@objc func keyboardWillShow(_ notification:Notification) {
 		if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
 			tableView.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: keyboardSize.height + 50, right: 0)
@@ -100,13 +108,6 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 	}
 	@objc func keyboardWillHide(_ notification:Notification) {
 		tableView.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0)
-	}
-	
-	override func viewDidAppear(_ animated: Bool) {
-		super.viewDidAppear(animated)
-		if currList != nil && currList!.count() > 0 {
-			tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
-		}
 	}
 	
 	func newTask() {
@@ -403,28 +404,6 @@ extension TaskTableViewController: UITableViewDelegate, UITableViewDataSource {
 		cell.backgroundColor = UIColor.clear
 		return cell
 	}
-	
-	/*
-	func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
-		let deleteAction = UITableViewRowAction(style: .default, title: "Delete") { (rowAction, indexPath) in
-			guard let cell = tableView.cellForRow(at: indexPath) as? TaskTableViewCell else {
-				fatalError("Error while retrieving TaskTableViewCell from tableView!")
-			}
-			self.currList!.deleteTask(id: cell.task.id)
-		}
-		return [deleteAction]
-	}
-	*/
-	/*
-	func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-		var frame = categorySelector.bounds
-		frame.size.height *= 2
-		return UIView(frame: frame)
-	}
-	
-	func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-		return categorySelector.bounds.height
-	}*/
 	
 	func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 		return (currList?.settings.seperateByTaskStatus ?? false) ? tableTabBar : nil

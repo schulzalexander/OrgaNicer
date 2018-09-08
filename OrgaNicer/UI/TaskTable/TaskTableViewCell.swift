@@ -98,17 +98,26 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 	//MARK: TextFieldDelegate
 	
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-		let newTitle = textField.text!
-		if newTitle != task.title {
-			task.title = newTitle
-			TaskArchive.saveTask(task: task)
-		}
 		textField.resignFirstResponder()
 		return true
 	}
 	
+	func textFieldDidBeginEditing(_ textField: UITextField) {
+		// Add overlay view on whole screen, so that user can also end editing by tapping outside the keyboard
+		let view = UIView(frame: UIScreen.main.bounds)
+		let stopTitleEditingTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(stopEditingTitle(_:)))
+		view.addGestureRecognizer(stopTitleEditingTapGestureRecognizer)
+		window?.addSubview(view)
+	}
+	
+	@objc private func stopEditingTitle(_ sender: UITapGestureRecognizer) {
+		titleTextEdit.resignFirstResponder()
+	}
+	
 	func textFieldDidEndEditing(_ textField: UITextField) {
-		guard textField.text != nil, textField.text!.count > 0 else {
+		window?.subviews.last?.removeFromSuperview()
+		
+		guard let newTitle = textField.text, newTitle.count > 0 else {
 			guard let tableView = getTableView(),
 				let viewController = tableView.delegate as? TaskTableViewController else {
 					fatalError("Could not retrieve tableView as superview of tableViewCell!")
@@ -119,7 +128,8 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 			tableView.reloadData()
 			return
 		}
-		textField.text = task.title
+		task.title = newTitle
+		TaskArchive.saveTask(task: task)
 		// Disable textfield once the title was inserted to make for a bigger surface for tap gesture
 		// Title can be changed in the Task Settings afterwards
 		textField.isEnabled = false

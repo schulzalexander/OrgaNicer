@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 
-class CheckListViewLine: UIView {
+class CheckListViewLine: UIView, UIGestureRecognizerDelegate {
 	
 	var task: Task! {
 		didSet {
@@ -30,6 +30,15 @@ class CheckListViewLine: UIView {
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 		initSubviews(task: nil)
+	}
+	
+	// Called when user is editing this line, and taps outside the keyboard
+	@objc func stopEditingSubtask(_ sender: UITapGestureRecognizer) {
+		guard let checklist = self.superview as? CheckListView else {
+			return
+		}
+		titleTextField.resignFirstResponder()
+		checklist.saveSubTask(titleTextField)
 	}
 	
 	private func initSubviews(task: Task?) {

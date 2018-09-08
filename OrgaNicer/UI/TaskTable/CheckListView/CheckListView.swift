@@ -34,12 +34,37 @@ class CheckListView: TaskTableViewCellContent, UITextFieldDelegate, UIGestureRec
 	
 	//MARK: UITextFieldDelegate
 	
+	func textFieldDidBeginEditing(_ textField: UITextField) {
+		// Add overlay view on whole screen, so that user can also end editing by tapping outside the keyboard
+		guard let line = textField.superview as? CheckListViewLine else {
+			fatalError("Failed to retrieve checklist line from textfield delegate function!")
+		}
+		let saveTaskTapGestureRecognizer = UITapGestureRecognizer(target: line, action: #selector(CheckListViewLine.stopEditingSubtask(_:)))
+		saveTaskTapGestureRecognizer.delegate = line
+		let view = UIView(frame: UIScreen.main.bounds)
+		view.addGestureRecognizer(saveTaskTapGestureRecognizer)
+		window?.addSubview(view)
+		window?.bringSubview(toFront: view)
+	}
+	
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+		saveSubTask(textField)
+		textField.resignFirstResponder()
+		return true
+	}
+	
+	func textFieldDidEndEditing(_ textField: UITextField) {
+		window?.subviews.last?.removeFromSuperview()
+	}
+	
+	@objc func saveSubTask(_ textField: UITextField) {
 		guard let cell = textField.superview?.superview?.superview as? TaskTableViewCell,
 			let tableview = cell.getTableView(),
 			let index = tableview.indexPath(for: cell) else {
-			fatalError("Failed to retreive checklist line after return on title textfield!")
+				fatalError("Failed to retreive checklist line after return on title textfield!")
 		}
+		
+		// Save the new subtask if title is non empty, else delete line
 		if textField.text != nil && textField.text!.count > 0 {
 			if parentTask.subTasks != nil, let task = TaskManager.shared.getTask(id: parentTask.subTasks![textField.tag]) {
 				task.title = textField.text ?? ""
@@ -54,9 +79,6 @@ class CheckListView: TaskTableViewCellContent, UITextFieldDelegate, UIGestureRec
 			TaskArchive.saveTask(task: parentTask)
 			tableview.reloadRows(at: [index], with: .automatic)
 		}
-		
-		textField.resignFirstResponder()
-		return true
 	}
 	
 	private func layoutChecklist(subtasks: [String]?) {

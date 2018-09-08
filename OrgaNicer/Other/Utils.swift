@@ -15,7 +15,6 @@ class Utils {
 		return UUID().uuidString
 	}
 	
-	
 	//MARK: Static functions returning cell attributes depending on current priority
 	static func getTaskCellHeight(priority: CGFloat) -> CGFloat {
 		return min(Task.PRIORITY_MAX, max(priority, Task.PRIORITY_MIN))
