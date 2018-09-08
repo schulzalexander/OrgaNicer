@@ -248,8 +248,9 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 		
 		let popover = viewController.popoverPresentationController
 		popover?.delegate = self
-		popover?.sourceView = cell
-		popover?.sourceRect = cell.bounds
+		popover?.sourceView = view
+		popover?.sourceRect = CGRect(x: view.center.x, y: view.center.y, width: 0, height: 0)
+		popover?.permittedArrowDirections = .init(rawValue: 0)
 		
 		self.present(viewController, animated: true, completion: nil)
 	}

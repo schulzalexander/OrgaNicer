@@ -56,10 +56,6 @@ class TaskSettingsTableViewController: UITableViewController {
 		self.reminderWeekdayPicker.dataSource = self
 		self.reminderWeekdayPicker.delegate = self
 		
-		self.tableView.estimatedRowHeight = 0 // Without this, tableviews content size will be off
-		self.tableView.sizeToFit()
-		self.updatePopoverSize()
-		
 		if task.deadline != nil {
 			self.frequencyPicker.selectedSegmentIndex = task.deadline!.frequency.rawValue
 			updateUIControlsToFrequency(frequency: task.deadline!.frequency)
@@ -77,6 +73,10 @@ class TaskSettingsTableViewController: UITableViewController {
 		self.setupDeleteButton()
 		self.updateDeadlineCellComponents()
 		self.updateReminderCellComponents()
+		
+		self.tableView.estimatedRowHeight = 0 // Without this, tableviews content size will be off
+		self.tableView.sizeToFit()
+		self.updatePopoverSize()
 	}
 	
 	
