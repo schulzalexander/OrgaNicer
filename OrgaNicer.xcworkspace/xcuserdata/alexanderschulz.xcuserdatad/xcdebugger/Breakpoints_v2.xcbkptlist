@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OrgaNicer/UI/TaskTable/CheckListView/CheckListViewLine.swift"
-            timestampString = "558108623.396329"
+            timestampString = "558129656.874135"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "37"
@@ -42,12 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OrgaNicer/UI/Settings/TaskSettingsViewController.swift"
-            timestampString = "558108623.396467"
+            timestampString = "558129656.874743"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "439"
-            endingLineNumber = "439"
-            landmarkName = "disableReminder()"
+            startingLineNumber = "231"
+            endingLineNumber = "231"
+            landmarkName = "updateUIControlsToFrequency(frequency:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

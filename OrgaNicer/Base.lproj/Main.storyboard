@@ -372,22 +372,27 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="76.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Seperate done Tasks" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="ffw-cp-cVf">
-                                                    <rect key="frame" x="16" y="11" width="238" height="55"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Seperate done Tasks" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="ffw-cp-cVf">
+                                                    <rect key="frame" x="93.5" y="28.5" width="160" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y3E-Nb-WhE">
-                                                    <rect key="frame" x="262" y="23" width="49" height="31"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y3E-Nb-WhE">
+                                                    <rect key="frame" x="262" y="23" width="51" height="31"/>
                                                     <color key="onTintColor" red="0.30001619460000001" green="0.6880967617" blue="0.99971204999999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <connections>
                                                         <action selector="didSwitchSeperateDoneTasks:" destination="mVv-Vn-6Qy" eventType="valueChanged" id="g7w-7D-zEP"/>
                                                     </connections>
                                                 </switch>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="y3E-Nb-WhE" secondAttribute="trailing" constant="48" id="26m-Jf-tQe"/>
+                                                <constraint firstItem="ffw-cp-cVf" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="QaI-UN-GhJ" secondAttribute="leadingMargin" id="CC8-We-U8G"/>
+                                                <constraint firstItem="y3E-Nb-WhE" firstAttribute="centerY" secondItem="QaI-UN-GhJ" secondAttribute="centerY" id="RZ8-z7-LcF"/>
+                                                <constraint firstItem="y3E-Nb-WhE" firstAttribute="leading" secondItem="ffw-cp-cVf" secondAttribute="trailing" constant="8" id="o7D-4l-kec"/>
+                                                <constraint firstItem="y3E-Nb-WhE" firstAttribute="centerY" secondItem="ffw-cp-cVf" secondAttribute="centerY" id="pAg-Lu-tMJ"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="100" id="1gt-Ya-3lK">

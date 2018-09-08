@@ -55,21 +55,6 @@ class TaskSettingsTableViewController: UITableViewController {
 		self.reminderWeekdayPicker.dataSource = self
 		self.reminderWeekdayPicker.delegate = self
 		
-		if task.deadline != nil {
-			self.frequencyPicker.selectedSegmentIndex = task.deadline!.frequency.rawValue
-			updateUIControlsToFrequency(frequency: task.deadline!.frequency)
-		} else {
-			self.frequencyPicker.selectedSegmentIndex = 0
-			self.frequencyPicker.isEnabled = false
-			self.deadlineDropdownArrow.textColor = UIColor.lightGray
-		}
-		if task.alarm != nil {
-			self.reminderFrequencyPicker.selectedSegmentIndex = task.alarm!.frequency.rawValue
-			updateReminderUIControlsToFrequency(frequency: task.alarm!.frequency)
-		} else {
-			self.reminderDropdownArrow.textColor = UIColor.lightGray
-		}
-		
 		self.setupDeleteButton()
 		self.updateDeadlineCellComponents()
 		self.updateReminderCellComponents()
@@ -77,6 +62,19 @@ class TaskSettingsTableViewController: UITableViewController {
 		self.tableView.estimatedRowHeight = 0 // Without this, tableviews content size will be off
 		self.tableView.sizeToFit()
 		self.updatePopoverSize()
+		
+		if task.deadline != nil {
+			self.frequencyPicker.selectedSegmentIndex = task.deadline!.frequency.rawValue
+		} else {
+			self.frequencyPicker.selectedSegmentIndex = 0
+			self.frequencyPicker.isEnabled = false
+			self.deadlineDropdownArrow.textColor = UIColor.lightGray
+		}
+		if task.alarm != nil {
+			self.reminderFrequencyPicker.selectedSegmentIndex = task.alarm!.frequency.rawValue
+		} else {
+			self.reminderDropdownArrow.textColor = UIColor.lightGray
+		}
 	}
 	
 	
@@ -87,6 +85,8 @@ class TaskSettingsTableViewController: UITableViewController {
 				fatalError("Error during alarm setup after reminder change!")
 		}
 		if !sender.isOn {
+			// Alarm is different, but we init the reminder date pickers with the deadline
+			// new Alarm is generated, to have different ID from deadline
 			self.task.removeAlarm()
 			self.task.addAlarm(alarm: Alarm(id: Utils.generateID(),
 											date: task.deadline!.date,
@@ -100,7 +100,8 @@ class TaskSettingsTableViewController: UITableViewController {
 			self.task.addAlarm(alarm: Alarm(deadline: task.deadline!, sound: false))
 			TaskArchive.saveTask(task: task)
 		}
-		self.tableView.reloadData()
+		updateReminderCellComponents()
+		tableView.reloadData()
 		updatePopoverSize()
 	}
 	
@@ -145,10 +146,11 @@ class TaskSettingsTableViewController: UITableViewController {
 	}
 	
 	private func reminderStateSwitchCompletion() {
-		self.reminderDifferentSwitch.isOn = self.task.alarm != nil
-		self.updateReminderCellComponents()
+		reminderDifferentSwitch.isOn = !task.hasSeperateAlarm()
+		updateReminderCellComponents()
+		rotateReminderArrow()
 		TaskArchive.saveTask(task: task)
-		self.tableView.reloadData()
+		tableView.reloadData()
 	}
 	
 	private func updateReminderUIControlsToFrequency(frequency: Deadline.Frequency) {
@@ -169,10 +171,10 @@ class TaskSettingsTableViewController: UITableViewController {
 	
 	private func showReminderWeekdayPicker() {
 		reminderWeekdayPicker.isHidden = false
-		reminderWeekdayPicker.frame.size.width = self.view.frame.width / 2 - 16
-		reminderWeekdayPicker.center.x = self.view.frame.width / 4 + 8
-		reminderDatePicker.frame.size.width = self.view.frame.width / 2 - 16
-		reminderDatePicker.center.x = self.view.frame.width / 4 * 3 - 8
+		reminderWeekdayPicker.frame.size.width = self.view.frame.width / 2 - 4
+		reminderWeekdayPicker.center.x = self.view.frame.width / 4 + 2
+		reminderDatePicker.frame.size.width = self.view.frame.width / 2 - 4
+		reminderDatePicker.center.x = self.view.frame.width / 4 * 3 - 2
 	}
 	
 	private func hideReminderWeekdayPicker() {
@@ -254,6 +256,7 @@ class TaskSettingsTableViewController: UITableViewController {
 			self.frequencyPicker.isEnabled = false
 			self.deadlineDropdownArrow.textColor = UIColor.lightGray
 			self.deadlineLabel.textColor = UIColor.lightGray
+			self.rotateReminderArrow()
 		} else {
 			task.deadline = Deadline(date: defaultDate(), frequency: .unique, category: taskCategory?.id)
 			self.isDeadlineCellCollapsed = false
@@ -319,6 +322,7 @@ class TaskSettingsTableViewController: UITableViewController {
 			self.rotateDeadlineArrow()
 			tableView.reloadData()
 			updatePopoverSize()
+			updateUIControlsToFrequency(frequency: task.deadline!.frequency) //TODO: why does this not work in viewdidload?
 			return
 		}
 		if indexPath.row == 3 && task.alarm != nil {
@@ -326,6 +330,7 @@ class TaskSettingsTableViewController: UITableViewController {
 			self.rotateReminderArrow()
 			tableView.reloadData()
 			updatePopoverSize()
+			updateReminderUIControlsToFrequency(frequency: task.alarm!.frequency)
 			return
 		}
 	}
@@ -340,10 +345,10 @@ class TaskSettingsTableViewController: UITableViewController {
 	
 	private func showWeekdayPicker() {
 		weekdayPicker.isHidden = false
-		weekdayPicker.frame.size.width = self.view.frame.width / 2 - 16
-		weekdayPicker.center.x = self.view.frame.width / 4 + 8
-		deadlineDatePicker.frame.size.width = self.view.frame.width / 2 - 16
-		deadlineDatePicker.center.x = self.view.frame.width / 4 * 3 - 8
+		weekdayPicker.frame.size.width = self.view.frame.width / 2 - 4
+		weekdayPicker.center.x = self.view.frame.width / 4 + 2
+		deadlineDatePicker.frame.size.width = self.view.frame.width / 2 - 4
+		deadlineDatePicker.center.x = self.view.frame.width / 4 * 3 - 2
 	}
 	
 	private func hideWeekdayPicker() {
@@ -391,13 +396,13 @@ class TaskSettingsTableViewController: UITableViewController {
 			reminderEnabledButton.setTitle(NSLocalizedString("Delete", comment: ""), for: .normal)
 			reminderDifferentSwitch.isOn = !task.hasSeperateAlarm()
 			reminderSoundSwitch.isOn = task.alarm!.sound
+			updateReminderUIControlsToFrequency(frequency: task.alarm!.frequency)
 		} else {
 			reminderDropdownArrow.textColor = UIColor.lightGray
 			reminderLabel.textColor = UIColor.lightGray
 			reminderEnabledButton.setTitle(NSLocalizedString("Set", comment: ""), for: .normal)
 		}
 		reminderEnabledButton.sizeToFit()
-		rotateReminderArrow()
 	}
 	
 	private func setupDeleteButton() {

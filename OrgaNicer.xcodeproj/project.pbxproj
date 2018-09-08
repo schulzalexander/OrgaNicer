@@ -11,7 +11,6 @@
 		337BAC3570C78BCA1C4458B6 /* Pods_OrgaNicer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6258C7E5B4B24E7EF0DEEA3F /* Pods_OrgaNicer.framework */; };
 		5ABC61AB0AF65F39D054F7C4 /* Pods_OrgaNicerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 048E06A9EA6368297E63084F /* Pods_OrgaNicerTests.framework */; };
 		C90F49DA210615E7006DA22A /* TaskSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90F49D9210615E7006DA22A /* TaskSettingsViewController.swift */; };
-		C91043FA20DED6CF005096F5 /* FilterBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C91043F920DED6CF005096F5 /* FilterBar.swift */; };
 		C9253551213AAC6900FB9F92 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9253550213AAC6900FB9F92 /* Settings.swift */; };
 		C937589F211832B200B986D3 /* Deadline.swift in Sources */ = {isa = PBXBuildFile; fileRef = C937589E211832B200B986D3 /* Deadline.swift */; };
 		C93758A12118C47500B986D3 /* AlarmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93758A02118C47500B986D3 /* AlarmManager.swift */; };
@@ -87,7 +86,6 @@
 		99AEFD749B9B64B03FBAA340 /* Pods-OrgaNicerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OrgaNicerUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OrgaNicerUITests/Pods-OrgaNicerUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C7D0CB03AF9D48D2E7388B25 /* Pods_OrgaNicerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OrgaNicerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C90F49D9210615E7006DA22A /* TaskSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskSettingsViewController.swift; sourceTree = "<group>"; };
-		C91043F920DED6CF005096F5 /* FilterBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterBar.swift; sourceTree = "<group>"; };
 		C9192A4B20CD8F2200526CB5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C9253550213AAC6900FB9F92 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		C937589E211832B200B986D3 /* Deadline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deadline.swift; sourceTree = "<group>"; };
@@ -357,7 +355,6 @@
 				C93F4DD42132BF3600AD5DBD /* CheckListView */,
 				C9713EEE20C597810074F232 /* TaskTableViewCell.swift */,
 				C97D0BBD20CB0F3C00991895 /* TaskTableViewCellContent.swift */,
-				C91043F920DED6CF005096F5 /* FilterBar.swift */,
 				C9BAF3AD213134A100375DD0 /* Checkbox.swift */,
 			);
 			path = TaskTable;
@@ -686,7 +683,6 @@
 				C938A9A320CB1CAB006E76E7 /* CheckListView.swift in Sources */,
 				C9713EF720C597810074F232 /* TaskCategoryManager.swift in Sources */,
 				C9BAF3AE213134A100375DD0 /* Checkbox.swift in Sources */,
-				C91043FA20DED6CF005096F5 /* FilterBar.swift in Sources */,
 				C998040C212831E10010FFD4 /* OverlayDecisionView.swift in Sources */,
 				C938A9A020CB193B006E76E7 /* TaskConsecutiveList.swift in Sources */,
 				C938A9A520CB1CC9006E76E7 /* ConsecutiveListView.swift in Sources */,

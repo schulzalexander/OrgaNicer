@@ -292,7 +292,7 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 	}
 	
 	private func setupTableTabBar() {
-		let rect = CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 30)
+		let rect = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 30)
 		tableTabBar = TableTabBar(frame: rect)
 		
 		tableTabBar.addTab(title: NSLocalizedString("Open", comment: ""), action: {
