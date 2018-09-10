@@ -18,7 +18,7 @@ class SelectorCollectionViewCell: UICollectionViewCell {
 			}
 			self.titleLabel.text = category!.title
 			self.updateTodoCounter()
-			self.setupGradientLayer()
+			self.setupProgressbarLayer()
 		}
 	}
 	
@@ -46,18 +46,26 @@ class SelectorCollectionViewCell: UICollectionViewCell {
 		self.layer.sublayers![0].frame = self.layer.bounds // Scale gradient to cell size
 	}
 	
-	func setupGradientLayer() {
+	//MARK: Content Setup
+	
+	func updateTodoCounter() {
+		self.taskCountLabel.text = "\(NSLocalizedString("Done", comment: "")): \(category.countDone()) / \(category.count())"
+	}
+	
+	//MARK: Appearance
+	
+	func setupProgressbarLayer() {
 		if self.layer.sublayers != nil && self.layer.sublayers!.count > 1 {
 			guard let oldLayer = self.layer.sublayers?.first else {
 				return
 			}
-			self.layer.replaceSublayer(oldLayer, with: createGradientLayer())
+			self.layer.replaceSublayer(oldLayer, with: createProgressbarLayer())
 		} else {
-			self.layer.insertSublayer(createGradientLayer(), at: 0)
+			self.layer.insertSublayer(createProgressbarLayer(), at: 0)
 		}
 	}
 	
-	private func createGradientLayer() -> CALayer {
+	private func createProgressbarLayer() -> CALayer {
 		let done = category.countDone()
 		let loadedPercentage: CGFloat = done == 0 ? 0 : CGFloat(done) / CGFloat(category.count())
 		let gradientLayer = CAGradientLayer()
@@ -76,8 +84,6 @@ class SelectorCollectionViewCell: UICollectionViewCell {
 		return gradientLayer
 	}
 	
-	func updateTodoCounter() {
-		self.taskCountLabel.text = "\(NSLocalizedString("Done", comment: "")): \(category.countDone()) / \(category.count())"
-	}
+	
 	
 }

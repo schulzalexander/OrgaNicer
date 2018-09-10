@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class TaskCategory: NSObject, NSCoding {
 	
@@ -101,6 +102,18 @@ class TaskCategory: NSObject, NSCoding {
 		}
 		TaskManager.shared.addTask(task: task)
 		TaskArchive.saveTaskCategory(list: self)
+	}
+	
+	func getAverageTaskPriority() -> CGFloat {
+		var avg: CGFloat = 0
+		var count: CGFloat = 0
+		tasks?.forEach({ (id) in
+			if let task = TaskManager.shared.getTask(id: id) {
+				avg += task.cellHeight
+				count += 1
+			}
+		})
+		return count > 0 ? avg / count : 0
 	}
 	
 	func getOrderByDueDate(done: Bool?) -> [Int] {

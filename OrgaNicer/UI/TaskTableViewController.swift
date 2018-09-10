@@ -160,7 +160,7 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 		for cell in categorySelector.visibleCells {
 			if let categoryCell = cell as? SelectorCollectionViewCell,
 				categoryCell.category.id == currList!.id {
-				categoryCell.setupGradientLayer()
+				categoryCell.setupProgressbarLayer()
 				break
 			}
 		}
@@ -278,7 +278,7 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 			if let categoryCell = cell as? SelectorCollectionViewCell,
 				currList != nil,
 				categoryCell.category.id == currList!.id {
-				categoryCell.setupGradientLayer()
+				categoryCell.setupProgressbarLayer()
 				break
 			}
 		}
