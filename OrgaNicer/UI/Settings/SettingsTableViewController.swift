@@ -30,6 +30,7 @@ class SettingsTableViewController: UITableViewController {
 				return
 			}
 			TaskCategoryManager.shared.deleteAllTaskCategories()
+			AlarmManager.removeAllAlarms()
 			taskTable.currList = nil
 			taskTable.updateTaskOrdering()
 			taskTable.tableView.reloadData()

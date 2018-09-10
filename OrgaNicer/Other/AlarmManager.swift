@@ -40,4 +40,8 @@ class AlarmManager {
 		UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: [id])
 	}
 	
+	static func removeAllAlarms() {
+		UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+	}
+	
 }
