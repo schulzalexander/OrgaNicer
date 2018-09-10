@@ -23,6 +23,8 @@
 "Delete" = "Löschen";
 "Oops" = "Ups";
 "Attention" = "Achtung";
+"Send" = "Senden";
+"Create" = "Erstellen";
 
 // TableTabBar
 "TableTabBarCustomOrder" = "Eigene Reihenfolge";

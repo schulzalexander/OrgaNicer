@@ -136,13 +136,16 @@ class TaskSettingsTableViewController: UITableViewController {
 					AlarmManager.addAlarm(task: self.task, alarm: newAlarm)
 					TaskArchive.saveTask(task: self.task)
 					self.isReminderCellCollapsed = false
-					self.updatePopoverSize()
+					
 					DispatchQueue.main.async {
 						self.reminderStateSwitchCompletion()
 					}
 				}
 			}
 		}
+		self.tableView.reloadData()
+		self.updateReminderCellComponents()
+		self.updatePopoverSize()
 	}
 	
 	private func reminderStateSwitchCompletion() {

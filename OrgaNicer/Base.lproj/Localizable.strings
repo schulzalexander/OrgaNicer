@@ -22,6 +22,8 @@
 "Delete" = "Delete";
 "Oops" = "Oops";
 "Attention" = "Attention";
+"Send" = "Send";
+"Create" = "Create";
 
 // TableTabBar
 "TableTabBarCustomOrder" = "Custom Order";
