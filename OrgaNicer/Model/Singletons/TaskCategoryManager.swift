@@ -44,6 +44,12 @@ class TaskCategoryManager: NSObject, NSCoding {
 		}
 	}
 	
+	func deleteAllTaskCategories() {
+		categories.forEach { (key, val) in
+			TaskCategoryManager.shared.deleteTaskCategory(id: key)
+		}
+	}
+	
 	func addTaskCategory(list: TaskCategory) {
 		categories[list.id] = list
 		TaskArchive.saveTaskCategory(list: list)
@@ -80,6 +86,7 @@ class TaskCategoryManager: NSObject, NSCoding {
 		return res
 	}
 	
+	// Search for the category of a task and delete it there
 	func deleteTask(id: String) {
 		for category in categories {
 			let index = category.value.tasks?.index(of: id) ?? -1

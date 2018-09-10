@@ -463,6 +463,54 @@
             </objects>
             <point key="canvasLocation" x="972" y="-701.19940029985014"/>
         </scene>
+        <!--Settings-->
+        <scene sceneID="9xy-c7-pxe">
+            <objects>
+                <tableViewController id="zG3-Ir-s44" customClass="SettingsTableViewController" customModule="OrgaNicer" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="aqy-It-DPu">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections>
+                            <tableViewSection id="7bf-Z3-T0z">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="77" id="X6E-uD-uHf">
+                                        <rect key="frame" x="0.0" y="35" width="375" height="77"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="X6E-uD-uHf" id="AvE-cn-1Ge">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="76.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3EG-a9-t3W">
+                                                    <rect key="frame" x="112" y="16" width="151" height="45"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" red="1" green="0.028639300029999998" blue="0.0" alpha="0.70232724469999996" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <state key="normal" title="Reset"/>
+                                                    <connections>
+                                                        <action selector="resetContent:" destination="zG3-Ir-s44" eventType="touchUpInside" id="h5v-zu-Rba"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="zG3-Ir-s44" id="udq-ob-pXM"/>
+                            <outlet property="delegate" destination="zG3-Ir-s44" id="w8u-4A-OAW"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Settings" id="kOF-lK-Hgn"/>
+                    <connections>
+                        <outlet property="resetButton" destination="3EG-a9-t3W" id="nf2-yY-vaD"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="stN-TB-UbY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1994" y="-701"/>
+        </scene>
         <!--Task Table View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -679,6 +727,7 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="0oM-h6-Dqh"/>
                         <segue destination="8xz-cg-XDd" kind="show" identifier="TaskTableToPrivacyPolicy" id="rFC-vz-XQo"/>
                         <segue destination="Nlh-cd-Fwf" kind="show" identifier="TaskTableToFeedback" id="PKq-0L-qpc"/>
+                        <segue destination="zG3-Ir-s44" kind="show" identifier="TaskTableToSettings" id="6aK-d0-cgn"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fqx-SY-JQj" userLabel="First Responder" sceneMemberID="firstResponder"/>

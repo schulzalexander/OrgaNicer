@@ -41,25 +41,30 @@ class TaskTableNavigationController: UINavigationController {
 		}
 		sideMenu.addButton(button: addButton, alwaysOn: true)
 		
-		let feedbackFrame = CGRect(x: frameTemp.minX, y: frameTemp.minY - 80, width: frameTemp.width, height: frameTemp.height)
-		let feedbackButton = SideMenuButton(frame: feedbackFrame, title: nil, image: UIImage(named: "ChatBubble"), color: Utils.getTaskCellColor(priority: Task.PRIORITY_MIN + 20)) { (sender) in
+		let settingsFrame = CGRect(x: frameTemp.minX, y: frameTemp.minY - 80, width: frameTemp.width, height: frameTemp.height)
+		let settingsButton = SideMenuButton(frame: settingsFrame, title: nil, image: UIImage(named: "SettingsIcon"), color: Utils.getTaskCellColor(priority: Task.PRIORITY_MIN + 20)) { (sender) in
+			if !(self.topViewController is SettingsTableViewController) {
+				self.sideMenu.hide(hideStatic: true)
+				self.performSegue(withIdentifier: "TaskTableToSettings", sender: nil)
+			}
+		}
+		sideMenu.addButton(button: settingsButton, alwaysOn: false)
+		
+		let feedbackFrame = CGRect(x: frameTemp.minX, y: frameTemp.minY - 160, width: frameTemp.width, height: frameTemp.height)
+		let feedbackButton = SideMenuButton(frame: feedbackFrame, title: nil, image: UIImage(named: "ChatBubble"), color: Utils.getTaskCellColor(priority: Task.PRIORITY_MIN + 40)) { (sender) in
 			if !(self.topViewController is FeedbackViewController) {
 				self.sideMenu.hide(hideStatic: true)
 				self.performSegue(withIdentifier: "TaskTableToFeedback", sender: nil)
 			}
-			//let controller = self.storyboard!.instantiateViewController(withIdentifier: "FeedbackViewController")
-			//self.present(controller, animated: true, completion: nil)
 		}
 		sideMenu.addButton(button: feedbackButton, alwaysOn: false)
 		
-		let priPolFrame = CGRect(x: frameTemp.minX, y: frameTemp.minY - 160, width: frameTemp.width, height: frameTemp.height)
-		let priPolButton = SideMenuButton(frame: priPolFrame, title: NSAttributedString(string: "  ?", attributes: [NSAttributedStringKey.font: UIFont(name: "Helvetica Neue", size: 45)!]), image: nil, color: Utils.getTaskCellColor(priority: Task.PRIORITY_MIN + 40)) { (sender) in
+		let priPolFrame = CGRect(x: frameTemp.minX, y: frameTemp.minY - 240, width: frameTemp.width, height: frameTemp.height)
+		let priPolButton = SideMenuButton(frame: priPolFrame, title: NSAttributedString(string: "  ?", attributes: [NSAttributedStringKey.font: UIFont(name: "Helvetica Neue", size: 45)!]), image: nil, color: Utils.getTaskCellColor(priority: Task.PRIORITY_MIN + 60)) { (sender) in
 			if !(self.topViewController is PrivacyPolicyViewController) {
 				self.sideMenu.hide(hideStatic: true)
 				self.performSegue(withIdentifier: "TaskTableToPrivacyPolicy", sender: self)
 			}
-			//let controller = self.storyboard!.instantiateViewController(withIdentifier: "PrivacyPolicyViewController")
-			//self.present(controller, animated: true, completion: nil)
 		}
 		sideMenu.addButton(button: priPolButton, alwaysOn: false)
 	}
