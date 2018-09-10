@@ -13,6 +13,7 @@ class SelectorCollectionViewLayout: UICollectionViewLayout {
 	
 	//MARK: Properties
 	let itemSize = CGSize(width: UIScreen.main.bounds.width * 0.6, height: 75)
+	let addListSize = CGSize(width: UIScreen.main.bounds.width * 0.6, height: 100)
 	var angleAtExtreme: CGFloat {
 		return collectionView!.numberOfItems(inSection: 0) > 0 ?
 			-CGFloat(collectionView!.numberOfItems(inSection: 0) - 1) * anglePerItem : 0
@@ -60,7 +61,7 @@ class SelectorCollectionViewLayout: UICollectionViewLayout {
 		} else {
 			attributesList = (startIndex...endIndex).map { (i) -> SelectorCollectionViewLayoutAttributes in
 				let attributes = SelectorCollectionViewLayoutAttributes(forCellWith: IndexPath(item: i, section: 0))
-				attributes.size = self.itemSize
+				attributes.size = i == endIndex ? self.addListSize : self.itemSize
 				attributes.center = CGPoint(x: centerX, y: self.collectionView!.bounds.midY)
 				attributes.angle = self.angle + (self.anglePerItem * CGFloat(i))
 				attributes.anchorPoint = CGPoint(x: 0.5, y: anchorPointY)

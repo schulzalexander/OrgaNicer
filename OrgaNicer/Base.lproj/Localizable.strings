@@ -10,9 +10,6 @@
 "NewCategoryAlertControllerTitle" = "New List";
 "NewCategoryAlertControllerMessage" = "Please provide a name for the new list:";
 
-// Category Selector
-"CategorySelectorAddList" = "➕\nAdd\nList";
-
 // General
 "Cancel" = "Cancel";
 "Name" = "Name";
