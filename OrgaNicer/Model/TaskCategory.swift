@@ -104,7 +104,7 @@ class TaskCategory: NSObject, NSCoding {
 		TaskArchive.saveTaskCategory(list: self)
 	}
 	
-	func getAverageTaskPriority() -> CGFloat {
+	func getAverageTaskPriority() -> CGFloat? {
 		var avg: CGFloat = 0
 		var count: CGFloat = 0
 		tasks?.forEach({ (id) in
@@ -113,7 +113,7 @@ class TaskCategory: NSObject, NSCoding {
 				count += 1
 			}
 		})
-		return count > 0 ? avg / count : 0
+		return count > 0 ? avg / count : nil
 	}
 	
 	func getOrderByDueDate(done: Bool?) -> [Int] {

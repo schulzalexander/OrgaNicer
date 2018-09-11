@@ -21,6 +21,8 @@
 		C938A9A520CB1CC9006E76E7 /* ConsecutiveListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C938A9A420CB1CC9006E76E7 /* ConsecutiveListView.swift */; };
 		C93F4DD72132BF6100AD5DBD /* ConsecutiveListViewLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93F4DD62132BF6100AD5DBD /* ConsecutiveListViewLine.swift */; };
 		C943FA6E21241E2E001F6A33 /* TaskCategorySettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C943FA6D21241E2E001F6A33 /* TaskCategorySettings.swift */; };
+		C949FBC321479EC9002F0238 /* ProgressbarLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C949FBC221479EC9002F0238 /* ProgressbarLayer.swift */; };
+		C949FBC52147A1CA002F0238 /* PriorityGradientLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C949FBC42147A1CA002F0238 /* PriorityGradientLayer.swift */; };
 		C958386F20FCED0F00E355C7 /* SelectorCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C958386E20FCED0F00E355C7 /* SelectorCollectionView.swift */; };
 		C96993152104776200922177 /* SettingsArchive.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96993142104776200922177 /* SettingsArchive.swift */; };
 		C9699318210503AA00922177 /* TaskCategorySettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9699317210503AA00922177 /* TaskCategorySettingsViewController.swift */; };
@@ -97,6 +99,8 @@
 		C938A9A420CB1CC9006E76E7 /* ConsecutiveListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsecutiveListView.swift; sourceTree = "<group>"; };
 		C93F4DD62132BF6100AD5DBD /* ConsecutiveListViewLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsecutiveListViewLine.swift; sourceTree = "<group>"; };
 		C943FA6D21241E2E001F6A33 /* TaskCategorySettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCategorySettings.swift; sourceTree = "<group>"; };
+		C949FBC221479EC9002F0238 /* ProgressbarLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressbarLayer.swift; sourceTree = "<group>"; };
+		C949FBC42147A1CA002F0238 /* PriorityGradientLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityGradientLayer.swift; sourceTree = "<group>"; };
 		C958386E20FCED0F00E355C7 /* SelectorCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectorCollectionView.swift; sourceTree = "<group>"; };
 		C96993142104776200922177 /* SettingsArchive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsArchive.swift; sourceTree = "<group>"; };
 		C9699317210503AA00922177 /* TaskCategorySettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCategorySettingsViewController.swift; sourceTree = "<group>"; };
@@ -226,6 +230,17 @@
 				C943FA6D21241E2E001F6A33 /* TaskCategorySettings.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		C949FBC62147A1DD002F0238 /* SelectorCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				C9713EF320C597810074F232 /* SelectorCollectionViewCell.swift */,
+				C9C3D71720CC66C900C881D3 /* SelectorCollectionViewCellAdd.swift */,
+				C949FBC221479EC9002F0238 /* ProgressbarLayer.swift */,
+				C949FBC42147A1CA002F0238 /* PriorityGradientLayer.swift */,
+			);
+			path = SelectorCollectionViewCell;
 			sourceTree = "<group>";
 		};
 		C96993162105038300922177 /* Settings */ = {
@@ -363,11 +378,10 @@
 		C9713EF020C597810074F232 /* TaskListSelector */ = {
 			isa = PBXGroup;
 			children = (
+				C949FBC62147A1DD002F0238 /* SelectorCollectionViewCell */,
 				C958386E20FCED0F00E355C7 /* SelectorCollectionView.swift */,
 				C9713EF120C597810074F232 /* SelectorCollectionViewLayoutAttributes.swift */,
 				C9713EF220C597810074F232 /* SelectorCollectionViewLayout.swift */,
-				C9713EF320C597810074F232 /* SelectorCollectionViewCell.swift */,
-				C9C3D71720CC66C900C881D3 /* SelectorCollectionViewCellAdd.swift */,
 			);
 			path = TaskListSelector;
 			sourceTree = "<group>";
@@ -671,10 +685,12 @@
 				C958386F20FCED0F00E355C7 /* SelectorCollectionView.swift in Sources */,
 				C9713EF620C597810074F232 /* TaskCategory.swift in Sources */,
 				C943FA6E21241E2E001F6A33 /* TaskCategorySettings.swift in Sources */,
+				C949FBC321479EC9002F0238 /* ProgressbarLayer.swift in Sources */,
 				C998040921282A700010FFD4 /* MainTask.swift in Sources */,
 				C9713EFA20C597810074F232 /* TaskManager.swift in Sources */,
 				C97428F92139BD1000727470 /* FeedbackViewController.swift in Sources */,
 				C9713F0520C597810074F232 /* TaskTableViewController.swift in Sources */,
+				C949FBC52147A1CA002F0238 /* PriorityGradientLayer.swift in Sources */,
 				C97428F62139A27500727470 /* PrivacyPolicyViewController.swift in Sources */,
 				C9713E8920C596680074F232 /* AppDelegate.swift in Sources */,
 				C9713EFD20C597810074F232 /* TaskArchive.swift in Sources */,

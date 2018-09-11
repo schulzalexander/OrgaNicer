@@ -69,7 +69,7 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 			let viewController = tableView.delegate as? TaskTableViewController else {
 				return
 		}
-		viewController.updateTodoCounter()
+		viewController.updateCategoryCellContent()
 		viewController.updateTaskOrdering()
 		viewController.updateTaskCategoryProgressbar()
 		viewController.tableView.reloadData() // update whole content in order to apply new order

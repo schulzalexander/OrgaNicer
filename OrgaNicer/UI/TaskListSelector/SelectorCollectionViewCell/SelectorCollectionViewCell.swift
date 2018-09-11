@@ -17,8 +17,7 @@ class SelectorCollectionViewCell: UICollectionViewCell {
 				return
 			}
 			self.titleLabel.text = category!.title
-			self.updateTodoCounter()
-			self.setupProgressbarLayer()
+			self.updateContent()
 		}
 	}
 	
@@ -48,42 +47,60 @@ class SelectorCollectionViewCell: UICollectionViewCell {
 	
 	//MARK: Content Setup
 	
-	func updateTodoCounter() {
+	func updateContent() {
+		updateTodoCounter()
+		setupProgressbarLayer()
+		setupPriorityGradientLayer()
+	}
+	
+	private func updateTodoCounter() {
 		self.taskCountLabel.text = "\(NSLocalizedString("Done", comment: "")): \(category.countDone()) / \(category.count())"
 	}
 	
 	//MARK: Appearance
 	
-	func setupProgressbarLayer() {
-		if self.layer.sublayers != nil && self.layer.sublayers!.count > 1 {
-			guard let oldLayer = self.layer.sublayers?.first else {
-				return
+	private func setupPriorityGradientLayer() {
+		let prioAvg = category.getAverageTaskPriority()
+		let gradientLayer = PriorityGradientLayer(taskPriority: prioAvg)
+		gradientLayer.frame = self.bounds
+		var found = false
+		for layer in self.layer.sublayers ?? [] {
+			if layer is PriorityGradientLayer {
+				self.layer.replaceSublayer(layer, with: gradientLayer)
+				found = true
+				break
 			}
-			self.layer.replaceSublayer(oldLayer, with: createProgressbarLayer())
-		} else {
-			self.layer.insertSublayer(createProgressbarLayer(), at: 0)
+		}
+		if !found {
+			self.layer.insertSublayer(gradientLayer, at: 0)
 		}
 	}
 	
-	private func createProgressbarLayer() -> CALayer {
+	private func setupProgressbarLayer() {
 		let done = category.countDone()
 		let loadedPercentage: CGFloat = done == 0 ? 0 : CGFloat(done) / CGFloat(category.count())
-		let gradientLayer = CAGradientLayer()
-		gradientLayer.frame = self.bounds
-		gradientLayer.colors = [UIColor(red: 0.349, green: 0.9176, blue: 0, alpha: 0.7).cgColor, UIColor.white.cgColor]
-		if loadedPercentage == 0 || loadedPercentage == 1 {
-			// Completely fill progressbar
-			gradientLayer.locations = [loadedPercentage, loadedPercentage] as [NSNumber]
-		} else {
-			// Smoothen transition
-			gradientLayer.locations = [max(0, loadedPercentage - 0.15), loadedPercentage] as [NSNumber]
+		let progressbarLayer = ProgressbarLayer(loadedPercentage: loadedPercentage)
+		progressbarLayer.frame = self.bounds
+		var found = false
+		for layer in self.layer.sublayers ?? [] {
+			if layer is ProgressbarLayer {
+				self.layer.replaceSublayer(layer, with: progressbarLayer)
+				found = true
+				break
+			}
 		}
-		
-		gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
-		gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
-		return gradientLayer
+		if !found {
+			self.layer.insertSublayer(progressbarLayer, at: 0)
+		}
 	}
 	
-	
-	
 }
+
+
+
+
+
+
+
+
+

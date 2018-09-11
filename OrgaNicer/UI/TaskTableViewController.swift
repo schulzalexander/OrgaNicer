@@ -160,7 +160,7 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 		for cell in categorySelector.visibleCells {
 			if let categoryCell = cell as? SelectorCollectionViewCell,
 				categoryCell.category.id == currList!.id {
-				categoryCell.setupProgressbarLayer()
+				categoryCell.updateContent()
 				break
 			}
 		}
@@ -223,14 +223,14 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 		}
 	}
 	
-	func updateTodoCounter() {
+	func updateCategoryCellContent() {
 		if self.currList != nil {
 			for cell in categorySelector.visibleCells {
 				guard let taskListCell = cell as? SelectorCollectionViewCell else {
 					continue
 				}
 				if taskListCell.category.id == self.currList!.id {
-					taskListCell.updateTodoCounter()
+					taskListCell.updateContent()
 					break
 				}
 			}
@@ -278,7 +278,7 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 			if let categoryCell = cell as? SelectorCollectionViewCell,
 				currList != nil,
 				categoryCell.category.id == currList!.id {
-				categoryCell.setupProgressbarLayer()
+				categoryCell.updateContent()
 				break
 			}
 		}
@@ -373,7 +373,7 @@ extension TaskTableViewController: UITableViewDelegate, UITableViewDataSource {
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		updateTodoCounter()
+		updateCategoryCellContent()
 		return taskOrdering?.count ?? 0
 	}
 	
