@@ -34,13 +34,13 @@ class SelectorCollectionViewCell: UICollectionViewCell {
 		super.awakeFromNib()
 		
 		viewContainer = UIView(frame: self.bounds)
-		viewContainer.backgroundColor = UIColor.purple
+		viewContainer.layer.cornerRadius = 10
+		viewContainer.clipsToBounds = true
 		insertSubview(viewContainer, at: 0)
 		
 		initPriorityGradient()
 		initProgressbar()
 		
-		self.backgroundColor = UIColor.white
 		self.layer.masksToBounds = false
 		self.layer.shadowColor = UIColor.gray.cgColor
 		self.layer.shadowRadius = 5.0

@@ -155,6 +155,9 @@ extension TaskCategoryManager: UICollectionViewDataSource {
 			cell.addGestureRecognizer(tapRecognizer)
 			cell.addGestureRecognizer(panRecognizer)
 			cell.category = self.getTaskCategory(id: self.categoryTitlesSorted[indexPath.row].id)
+			cell.contentView.layer.cornerRadius = 20
+//			cell.clipsToBounds = true
+			cell.contentView.layer.masksToBounds = false
 			return cell
 		}
 	}
