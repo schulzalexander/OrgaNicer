@@ -52,8 +52,13 @@ class SelectorCollectionViewLayout: UICollectionViewLayout {
 		let theta = atan2(self.collectionView!.bounds.width / 2.0, radius + (itemSize.height / 2.0) - (self.collectionView!.bounds.height / 2.0))
 		var startIndex = 0
 		var endIndex = collectionView!.numberOfItems(inSection: 0) - 1
+		var isFullIndexRange = true
 		if (angle < -theta) {
 			startIndex = Int(floor((-theta - angle) / anglePerItem))
+		}
+		if endIndex > Int(ceil((theta - angle) / anglePerItem)) {
+			endIndex = Int(ceil((theta - angle) / anglePerItem))
+			isFullIndexRange = false
 		}
 		endIndex = min(endIndex, Int(ceil((theta - angle) / anglePerItem)))
 		if (endIndex < startIndex) {
@@ -61,7 +66,8 @@ class SelectorCollectionViewLayout: UICollectionViewLayout {
 		} else {
 			attributesList = (startIndex...endIndex).map { (i) -> SelectorCollectionViewLayoutAttributes in
 				let attributes = SelectorCollectionViewLayoutAttributes(forCellWith: IndexPath(item: i, section: 0))
-				attributes.size = i == endIndex ? self.addListSize : self.itemSize
+				attributes.size = (i == endIndex && isFullIndexRange) ? self.addListSize : self.itemSize
+				print("index \(i), size \(attributes.size)")
 				attributes.center = CGPoint(x: centerX, y: self.collectionView!.bounds.midY)
 				attributes.angle = self.angle + (self.anglePerItem * CGFloat(i))
 				attributes.anchorPoint = CGPoint(x: 0.5, y: anchorPointY)
