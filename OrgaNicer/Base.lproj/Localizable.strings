@@ -68,6 +68,7 @@
 // Settings
 "Reset" = "Reset";
 "ContentResetAlertMessage" = "All content will be deleted and cannot be restored!";
+"AlarmResetAlertMessage" = "Delete all reminders?";
 
 
 

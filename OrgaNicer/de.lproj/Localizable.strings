@@ -69,6 +69,7 @@
 // Settings
 "Reset" = "Zurücksetzen";
 "ContentResetAlertMessage" = "Alle Daten werden gelöscht und können nicht wiederhergestellt werden!";
+"AlarmResetAlertMessage" = "Alle Erinnerungen löschen?";
 
 
 
