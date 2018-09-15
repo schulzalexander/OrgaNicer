@@ -42,7 +42,7 @@
 "HNm-LO-Cfw.normalTitle" = "Ändern";
 
 /* Task Settings */
-"3DZ-0S-cUd.text" = "Task Einstellungen";
+"jD0-Pk-3hO.text" = "Task Einstellungen";
 "vxw-75-dno.segmentTitles[0]" = "Einmal";
 "vxw-75-dno.segmentTitles[1]" = "Täglich";
 "vxw-75-dno.segmentTitles[2]" = "Wöchentlich";
@@ -61,4 +61,9 @@
 /* Feedback */
 "8xI-7G-E9T.normalTitle" = "Senden";
 
+/* Settings */
+"8Ig-jU-GQf.text" = "Erinnerungen";
+"3Zc-uv-NiQ.text" = "Alle Daten";
+"kOF-lK-Hgn.title" = "Einstellungen";
+"7bf-Z3-T0z.headerTitle" = "Zurücksetzen";
 

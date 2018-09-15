@@ -526,7 +526,7 @@ extension TaskTableViewController: UIGestureRecognizerDelegate {
 	
 	@objc func didTapOnAddCategory(_ sender: UITapGestureRecognizer) {
 		let alertController = UIAlertController(title: NSLocalizedString("NewCategoryAlertControllerTitle", comment: ""), message: NSLocalizedString("NewCategoryAlertControllerMessage", comment: ""), preferredStyle: .alert)
-		let create = UIAlertAction(title: NSLocalizedString("Send", comment: ""), style: .default, handler: { (action) in
+		let create = UIAlertAction(title: NSLocalizedString("Create", comment: ""), style: .default, handler: { (action) in
 			let name = alertController.textFields![0].text ?? ""
 			if name.count == 0 {
 				return

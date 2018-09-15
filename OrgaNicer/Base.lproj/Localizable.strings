@@ -18,6 +18,9 @@
 "Done" = "Done";
 "Delete" = "Delete";
 "Oops" = "Oops";
+"Attention" = "Attention";
+"Send" = "Send";
+"Create" = "Create";
 
 // TableTabBar
 "TableTabBarCustomOrder" = "Custom Order";
@@ -58,3 +61,30 @@
 // Decision Overlay
 "Checklist" = "Checklist";
 "FollowUp" = "Follow Up";
+
+// Settings
+"Reset" = "Reset";
+"ContentResetAlertMessage" = "All content will be deleted and cannot be restored!";
+"AlarmResetAlertMessage" = "Delete all reminders?";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

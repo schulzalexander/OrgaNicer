@@ -10,7 +10,8 @@
 		00CBC3B49136DC36ADBFCB99 /* Pods_OrgaNicerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7D0CB03AF9D48D2E7388B25 /* Pods_OrgaNicerUITests.framework */; };
 		337BAC3570C78BCA1C4458B6 /* Pods_OrgaNicer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6258C7E5B4B24E7EF0DEEA3F /* Pods_OrgaNicer.framework */; };
 		5ABC61AB0AF65F39D054F7C4 /* Pods_OrgaNicerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 048E06A9EA6368297E63084F /* Pods_OrgaNicerTests.framework */; };
-		C90F49DA210615E7006DA22A /* TaskSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90F49D9210615E7006DA22A /* TaskSettingsViewController.swift */; };
+		C90749B72145A1D3000D26DB /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90749B62145A1D3000D26DB /* SettingsTableViewController.swift */; };
+		C90F49DA210615E7006DA22A /* TaskSettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90F49D9210615E7006DA22A /* TaskSettingsTableViewController.swift */; };
 		C9253551213AAC6900FB9F92 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9253550213AAC6900FB9F92 /* Settings.swift */; };
 		C937589F211832B200B986D3 /* Deadline.swift in Sources */ = {isa = PBXBuildFile; fileRef = C937589E211832B200B986D3 /* Deadline.swift */; };
 		C93758A12118C47500B986D3 /* AlarmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93758A02118C47500B986D3 /* AlarmManager.swift */; };
@@ -25,7 +26,7 @@
 		C949FBC52147A1CA002F0238 /* PriorityGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C949FBC42147A1CA002F0238 /* PriorityGradientView.swift */; };
 		C958386F20FCED0F00E355C7 /* SelectorCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C958386E20FCED0F00E355C7 /* SelectorCollectionView.swift */; };
 		C96993152104776200922177 /* SettingsArchive.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96993142104776200922177 /* SettingsArchive.swift */; };
-		C9699318210503AA00922177 /* TaskCategorySettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9699317210503AA00922177 /* TaskCategorySettingsViewController.swift */; };
+		C9699318210503AA00922177 /* TaskCategorySettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9699317210503AA00922177 /* TaskCategorySettingsTableViewController.swift */; };
 		C9713E8920C596680074F232 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9713E8820C596680074F232 /* AppDelegate.swift */; };
 		C9713E8E20C596680074F232 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9713E8C20C596680074F232 /* Main.storyboard */; };
 		C9713E9020C596690074F232 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9713E8F20C596690074F232 /* Assets.xcassets */; };
@@ -87,7 +88,8 @@
 		6258C7E5B4B24E7EF0DEEA3F /* Pods_OrgaNicer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OrgaNicer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		99AEFD749B9B64B03FBAA340 /* Pods-OrgaNicerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OrgaNicerUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OrgaNicerUITests/Pods-OrgaNicerUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C7D0CB03AF9D48D2E7388B25 /* Pods_OrgaNicerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OrgaNicerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C90F49D9210615E7006DA22A /* TaskSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskSettingsViewController.swift; sourceTree = "<group>"; };
+		C90749B62145A1D3000D26DB /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		C90F49D9210615E7006DA22A /* TaskSettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskSettingsTableViewController.swift; sourceTree = "<group>"; };
 		C9192A4B20CD8F2200526CB5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C9253550213AAC6900FB9F92 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		C937589E211832B200B986D3 /* Deadline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deadline.swift; sourceTree = "<group>"; };
@@ -103,7 +105,7 @@
 		C949FBC42147A1CA002F0238 /* PriorityGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityGradientView.swift; sourceTree = "<group>"; };
 		C958386E20FCED0F00E355C7 /* SelectorCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectorCollectionView.swift; sourceTree = "<group>"; };
 		C96993142104776200922177 /* SettingsArchive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsArchive.swift; sourceTree = "<group>"; };
-		C9699317210503AA00922177 /* TaskCategorySettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCategorySettingsViewController.swift; sourceTree = "<group>"; };
+		C9699317210503AA00922177 /* TaskCategorySettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCategorySettingsTableViewController.swift; sourceTree = "<group>"; };
 		C9713E8520C596680074F232 /* OrgaNicer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OrgaNicer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9713E8820C596680074F232 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C9713E8D20C596680074F232 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -246,8 +248,9 @@
 		C96993162105038300922177 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				C9699317210503AA00922177 /* TaskCategorySettingsViewController.swift */,
-				C90F49D9210615E7006DA22A /* TaskSettingsViewController.swift */,
+				C9699317210503AA00922177 /* TaskCategorySettingsTableViewController.swift */,
+				C90F49D9210615E7006DA22A /* TaskSettingsTableViewController.swift */,
+				C90749B62145A1D3000D26DB /* SettingsTableViewController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -702,6 +705,7 @@
 				C998040C212831E10010FFD4 /* OverlayDecisionView.swift in Sources */,
 				C938A9A020CB193B006E76E7 /* TaskConsecutiveList.swift in Sources */,
 				C938A9A520CB1CC9006E76E7 /* ConsecutiveListView.swift in Sources */,
+				C90749B72145A1D3000D26DB /* SettingsTableViewController.swift in Sources */,
 				C9713F0720C5CEE30074F232 /* TaskTableNavigationController.swift in Sources */,
 				C9713F0420C597810074F232 /* SelectorCollectionViewCell.swift in Sources */,
 				C9713F0220C597810074F232 /* SelectorCollectionViewLayoutAttributes.swift in Sources */,
@@ -710,8 +714,8 @@
 				C9BAF3AC2131330800375DD0 /* CheckListViewLine.swift in Sources */,
 				C9713F0320C597810074F232 /* SelectorCollectionViewLayout.swift in Sources */,
 				C998040F21297BD20010FFD4 /* TaskTableDisplayable.swift in Sources */,
-				C90F49DA210615E7006DA22A /* TaskSettingsViewController.swift in Sources */,
-				C9699318210503AA00922177 /* TaskCategorySettingsViewController.swift in Sources */,
+				C90F49DA210615E7006DA22A /* TaskSettingsTableViewController.swift in Sources */,
+				C9699318210503AA00922177 /* TaskCategorySettingsTableViewController.swift in Sources */,
 				C9253551213AAC6900FB9F92 /* Settings.swift in Sources */,
 				C97428F321398E5800727470 /* SideMenuButton.swift in Sources */,
 				C93758A12118C47500B986D3 /* AlarmManager.swift in Sources */,

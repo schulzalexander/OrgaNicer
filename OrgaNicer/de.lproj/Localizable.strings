@@ -19,6 +19,9 @@
 "Done" = "Erledigt";
 "Delete" = "Löschen";
 "Oops" = "Ups";
+"Attention" = "Achtung";
+"Send" = "Senden";
+"Create" = "Erstellen";
 
 // TableTabBar
 "TableTabBarCustomOrder" = "Eigene Reihenfolge";
@@ -59,3 +62,25 @@
 // Decision Overlay
 "Checklist" = "Checkliste";
 "FollowUp" = "Nächster Schritt";
+
+// Settings
+"Reset" = "Zurücksetzen";
+"ContentResetAlertMessage" = "Alle Daten werden gelöscht und können nicht wiederhergestellt werden!";
+"AlarmResetAlertMessage" = "Alle Erinnerungen löschen?";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
