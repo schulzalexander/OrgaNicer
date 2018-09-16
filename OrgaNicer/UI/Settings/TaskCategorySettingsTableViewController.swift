@@ -38,7 +38,8 @@ class TaskCategorySettingsTableViewController: UITableViewController {
 	
 	//MARK: TableView Delegate
 	override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-		cell.contentView.backgroundColor = Theme.settingsTableViewCellBackgroundColor
+		cell.selectionStyle = .none
+		cell.backgroundColor = Theme.settingsTableViewCellBackgroundColor
 	}
 	
 	@IBAction func didSelectTaskOrder(_ sender: UISegmentedControl) {
@@ -154,7 +155,7 @@ extension TaskCategorySettingsTableViewController: UITextFieldDelegate {
 extension TaskCategorySettingsTableViewController: ThemeDelegate {
 	
 	func updateAppearance() {
-		tableView.backgroundColor = Theme.settingsTableViewBackgroundColor
+		tableView.backgroundColor = Theme.settingsTableViewCellBackgroundColor
 		tableView.separatorColor = Theme.settingsTableViewSeperatorColor
 	}
 	

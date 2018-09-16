@@ -60,7 +60,7 @@ class Theme {
 			case .light:
 				return [UIColor.gray.cgColor,UIColor.white.cgColor]
 			case .dark:
-				return [UIColor.lightGray.cgColor,UIColor.black.cgColor]
+				return [UIColor.black.cgColor, UIColor.lightGray.cgColor]
 			}
 		}
 	}
@@ -137,9 +137,9 @@ class Theme {
 		get {
 			switch Settings.shared.selectedTheme {
 			case .light:
-				return nil
+				return UIColor.white
 			case .dark:
-				return UIColor.lightGray.withAlphaComponent(0.4)
+				return UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0)//UIColor.lightGray.withAlphaComponent(0.4)
 			}
 		}
 	}

@@ -342,7 +342,8 @@ class TaskSettingsTableViewController: UITableViewController {
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = super.tableView(tableView, cellForRowAt: indexPath)
-		cell.contentView.backgroundColor = Theme.settingsTableViewCellBackgroundColor
+		cell.selectionStyle = .none
+		cell.backgroundColor = Theme.settingsTableViewCellBackgroundColor
 		return cell
 	}
 	
@@ -534,7 +535,7 @@ extension TaskSettingsTableViewController: UIPickerViewDelegate, UIPickerViewDat
 extension TaskSettingsTableViewController: ThemeDelegate {
 	
 	func updateAppearance() {
-		tableView.backgroundColor = Theme.settingsTableViewBackgroundColor
+		tableView.backgroundColor = Theme.settingsTableViewCellBackgroundColor
 		tableView.separatorColor = Theme.settingsTableViewSeperatorColor
 	}
 	

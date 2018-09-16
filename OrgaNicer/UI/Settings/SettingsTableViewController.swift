@@ -67,7 +67,7 @@ class SettingsTableViewController: UITableViewController {
 	
 	override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
 		cell.selectionStyle = .none
-		cell.contentView.backgroundColor = Theme.settingsTableViewCellBackgroundColor
+		cell.backgroundColor = Theme.settingsTableViewCellBackgroundColor
 	}
 	
 	//MARK: Content Reset
