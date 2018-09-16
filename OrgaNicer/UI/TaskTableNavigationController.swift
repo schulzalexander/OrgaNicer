@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TaskTableNavigationController: UINavigationController {
+class TaskTableNavigationController: UINavigationController, ThemeDelegate {
 
 	//MARK: Properties
 	var addButton: UIButton!
@@ -24,6 +24,11 @@ class TaskTableNavigationController: UINavigationController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+	
+	// Called on Theme change
+	func updateAppearance() {
+		self.navigationBar.barTintColor = Theme.navigationBarTintColor
+	}
 	
 	private func setupSideMenu() {
 		sideMenu = SideMenu(superview: view)

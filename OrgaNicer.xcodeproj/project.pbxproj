@@ -59,6 +59,7 @@
 		C9C3D71820CC66C900C881D3 /* SelectorCollectionViewCellAdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C3D71720CC66C900C881D3 /* SelectorCollectionViewCellAdd.swift */; };
 		C9C3D71D20CC6BCE00C881D3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C9C3D71F20CC6BCE00C881D3 /* Localizable.strings */; };
 		C9D5C28B2103400A00AAE177 /* TableTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D5C28A2103400A00AAE177 /* TableTabBar.swift */; };
+		C9FD8CC7214E4D9B00FF5655 /* Themes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FD8CC6214E4D9B00FF5655 /* Themes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -146,6 +147,7 @@
 		C9C3D72120CC6CDE00C881D3 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		C9C3D72220CC6CDE00C881D3 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C9D5C28A2103400A00AAE177 /* TableTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableTabBar.swift; sourceTree = "<group>"; };
+		C9FD8CC6214E4D9B00FF5655 /* Themes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Themes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -319,6 +321,7 @@
 				C9713EDF20C597810074F232 /* Utils.swift */,
 				C93758A02118C47500B986D3 /* AlarmManager.swift */,
 				C9253550213AAC6900FB9F92 /* Settings.swift */,
+				C9FD8CC6214E4D9B00FF5655 /* Themes.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -704,6 +707,7 @@
 				C9BAF3AE213134A100375DD0 /* Checkbox.swift in Sources */,
 				C998040C212831E10010FFD4 /* OverlayDecisionView.swift in Sources */,
 				C938A9A020CB193B006E76E7 /* TaskConsecutiveList.swift in Sources */,
+				C9FD8CC7214E4D9B00FF5655 /* Themes.swift in Sources */,
 				C938A9A520CB1CC9006E76E7 /* ConsecutiveListView.swift in Sources */,
 				C90749B72145A1D3000D26DB /* SettingsTableViewController.swift in Sources */,
 				C9713F0720C5CEE30074F232 /* TaskTableNavigationController.swift in Sources */,

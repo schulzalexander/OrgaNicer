@@ -80,7 +80,7 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 				self.setTaskCategory(category: category)
 			}
 		}
-		setupTransparentGradientBackground()
+		setupGradientBackground()
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -95,7 +95,20 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 	
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
-		if currList != nil && currList!.count() > 0 {
+		guard currList != nil else {
+			return
+		}
+		let taskCount: Int! // Count for current table content is different depending on which (done/undone/all) tasks are presented
+		if currList!.settings.seperateByTaskStatus {
+			if currList!.settings.selectedTaskStatusTab == .done {
+				taskCount = currList!.countDone()
+			} else {
+				taskCount = currList!.countUndone()
+			}
+		} else {
+			taskCount = currList!.count()
+		}
+		if taskCount > 0 {
 			tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
 		}
 	}
@@ -338,8 +351,8 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 		self.present(viewController, animated: true, completion: nil)
 	}
 	
-	private func setupTransparentGradientBackground() {
-		let colours:[CGColor] = [UIColor.lightGray.withAlphaComponent(0.1).cgColor, UIColor.white.cgColor]
+	private func setupGradientBackground() {
+		let colours:[CGColor] = Theme.mainBackgroundGradientColors
 		let locations:[NSNumber] = [0, 0.6]
 		
 		let gradientLayer = CAGradientLayer()
@@ -554,6 +567,14 @@ extension TaskTableViewController: UIGestureRecognizerDelegate {
 	
 }
 
+extension TaskTableViewController: ThemeDelegate {
+	
+	func updateAppearance() {
+		categorySelector.reloadData()
+		setupGradientBackground()
+	}
+	
+}
 
 
 

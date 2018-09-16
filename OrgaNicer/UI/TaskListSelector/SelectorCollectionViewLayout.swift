@@ -67,7 +67,6 @@ class SelectorCollectionViewLayout: UICollectionViewLayout {
 			attributesList = (startIndex...endIndex).map { (i) -> SelectorCollectionViewLayoutAttributes in
 				let attributes = SelectorCollectionViewLayoutAttributes(forCellWith: IndexPath(item: i, section: 0))
 				attributes.size = (i == endIndex && isFullIndexRange) ? self.addListSize : self.itemSize
-				print("index \(i), size \(attributes.size)")
 				attributes.center = CGPoint(x: centerX, y: self.collectionView!.bounds.midY)
 				attributes.angle = self.angle + (self.anglePerItem * CGFloat(i))
 				attributes.anchorPoint = CGPoint(x: 0.5, y: anchorPointY)

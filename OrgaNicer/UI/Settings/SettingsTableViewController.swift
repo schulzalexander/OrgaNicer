@@ -11,6 +11,8 @@ import UIKit
 class SettingsTableViewController: UITableViewController {
 
 	//MARK: Outlets
+	@IBOutlet weak var themeLightCheckmarkLable: UILabel!
+	@IBOutlet weak var themeDarkCheckmarkLable: UILabel!
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,11 +21,37 @@ class SettingsTableViewController: UITableViewController {
 			self.navigationItem.largeTitleDisplayMode = .never
 		}
 		
+		themeDarkCheckmarkLable.isHidden = !(Settings.shared.selectedTheme == .dark)
+		themeLightCheckmarkLable.isHidden = !(Settings.shared.selectedTheme == .light)
     }
 	
 	//MARK: UITableViewDelegate
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		if indexPath.section == 0 {
+			// Themes
+			if indexPath.row == 0 {
+				// Light
+				Settings.shared.selectedTheme = .light
+			}
+			if indexPath.row == 1 {
+				// Dark
+				Settings.shared.selectedTheme = .dark
+			}
+			SettingsArchive.save()
+			
+			themeDarkCheckmarkLable.isHidden = !(Settings.shared.selectedTheme == .dark)
+			themeLightCheckmarkLable.isHidden = !(Settings.shared.selectedTheme == .light)
+			
+			self.tableView.selectRow(at: nil, animated: true, scrollPosition: .none)
+			navigationController?.viewControllers.forEach({ (viewController) in
+				guard let themeDelegate = viewController as? ThemeDelegate else {
+					return
+				}
+				themeDelegate.updateAppearance()
+			})
+			(navigationController as? ThemeDelegate)?.updateAppearance()
+		}
+		if indexPath.section == 1 {
 			// Reset
 			if indexPath.row == 0 {
 				// Alarm Reset
