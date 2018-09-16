@@ -234,7 +234,7 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 	private func setupBackgroundView() {
 		self.contentView.layer.cornerRadius = 20
 		self.contentView.layer.masksToBounds = false
-		self.contentView.layer.shadowColor = UIColor.gray.cgColor
+		self.contentView.layer.shadowColor = Theme.taskCellShadowColor
 		self.contentView.layer.shadowRadius = 3.0
 		self.contentView.layer.shadowOffset = CGSize(width: 0, height: 2)
 		self.contentView.layer.shadowOpacity = 1.0
@@ -265,7 +265,7 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 	private func addSeperator() {
 		let rect = getSeperatorFrame()
 		let view = UIView(frame: rect)
-		view.backgroundColor = UIColor.white
+		view.backgroundColor = Theme.taskCellSeperatorColor
 		self.addSubview(view)
 		self.seperator = view
 	}

@@ -39,7 +39,7 @@ class SelectorCollectionView: UICollectionView {
 	}
 	
 	private func setupGradientBackground(frame: CGRect) -> CAGradientLayer {
-		let colours:[CGColor] = [UIColor.gray.cgColor,UIColor.white.cgColor]
+		let colours:[CGColor] = Theme.categoryTrapezGradientColors
 		let locations:[NSNumber] = [0, 1]
 		let gradientLayer = CAGradientLayer()
 		
@@ -59,7 +59,6 @@ class SelectorCollectionView: UICollectionView {
 		
 		shape.opacity = 0.9
 		shape.lineWidth = 2
-		//shape.lineJoin = CAShapeLayerLineJoin.miter//CAShapeLayerLineJoin.miter
 		shape.backgroundColor = UIColor.clear.cgColor
 		
 		let path = UIBezierPath()
@@ -77,4 +76,13 @@ class SelectorCollectionView: UICollectionView {
 		self.backgroundView = backgrdView
 	}
 
+}
+
+extension SelectorCollectionView: ThemeDelegate {
+	
+	func updateAppearance() {
+		setupTrapez()
+		reloadData()
+	}
+	
 }

@@ -570,8 +570,9 @@ extension TaskTableViewController: UIGestureRecognizerDelegate {
 extension TaskTableViewController: ThemeDelegate {
 	
 	func updateAppearance() {
-		categorySelector.reloadData()
 		setupGradientBackground()
+		categorySelector.updateAppearance()
+		tableTabBar.updateAppearance()
 	}
 	
 }

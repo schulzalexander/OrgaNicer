@@ -14,17 +14,20 @@ enum Themes: Int {
 }
 
 class Theme {
+	
+	// MARK: Navigation Controller
 	static var navigationBarTintColor: UIColor? {
 		get {
 			switch Settings.shared.selectedTheme {
 			case .light:
 				return nil
 			case .dark:
-				return UIColor.gray
+				return UIColor.darkGray
 			}
 		}
 	}
 	
+	//MARK: Category Selector
 	static var categoryCellBackgroundColor: CGColor {
 		get {
 			switch Settings.shared.selectedTheme {
@@ -36,6 +39,29 @@ class Theme {
 		}
 	}
 	
+	static var progressbarColor: CGColor {
+		get {
+			switch Settings.shared.selectedTheme {
+			case .light:
+				return UIColor(red: 0.349, green: 0.9176, blue: 0, alpha: 0.7).cgColor
+			case .dark:
+				return UIColor(red: 0.3529, green: 0.9373, blue: 0.2902, alpha: 1.0).cgColor
+			}
+		}
+	}
+	
+	static var categoryTrapezGradientColors: [CGColor] {
+		get {
+			switch Settings.shared.selectedTheme {
+			case .light:
+				return [UIColor.gray.cgColor,UIColor.white.cgColor]
+			case .dark:
+				return [UIColor.lightGray.cgColor,UIColor.black.cgColor]
+			}
+		}
+	}
+	
+	//MARK: TaskTable
 	static var mainBackgroundGradientColors: [CGColor] {
 		get {
 			switch Settings.shared.selectedTheme {
@@ -47,17 +73,51 @@ class Theme {
 		}
 	}
 	
-	static var progressbarColor: CGColor {
+	static var tableTabBarBackgroundColor: UIColor {
 		get {
 			switch Settings.shared.selectedTheme {
 			case .light:
-				return UIColor(red: 0.349, green: 0.9176, blue: 0, alpha: 0.7).cgColor
+				return .white
 			case .dark:
-				return UIColor(red: 0, green: 0.6784, blue: 0.4078, alpha: 1.0).cgColor
+				return UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 1.0)
 			}
 		}
 	}
 	
+	static var tableTabBarFontColor: UIColor {
+		get {
+			switch Settings.shared.selectedTheme {
+			case .light:
+				return .lightGray
+			case .dark:
+				return .white
+			}
+		}
+	}
+	
+	static var taskCellSeperatorColor: UIColor {
+		get {
+			switch Settings.shared.selectedTheme {
+			case .light:
+				return .white
+			case .dark:
+				return .black
+			}
+		}
+	}
+	
+	static var taskCellShadowColor: CGColor {
+		get {
+			switch Settings.shared.selectedTheme {
+			case .light:
+				return UIColor.gray.cgColor
+			case .dark:
+				return UIColor.black.cgColor
+			}
+		}
+	}
+	
+	//MARK: Settings
 	static var settingsBackgroundColor: CGColor {
 		get {
 			switch Settings.shared.selectedTheme {

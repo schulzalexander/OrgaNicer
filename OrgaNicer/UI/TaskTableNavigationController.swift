@@ -17,6 +17,7 @@ class TaskTableNavigationController: UINavigationController, ThemeDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+		updateAppearance()
 		setupSideMenu()
     }
 

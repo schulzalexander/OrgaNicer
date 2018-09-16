@@ -12,7 +12,6 @@ import UIKit
 class TableTabBar: UIView {
 	
 	//MARK: Constants
-	let titleColor = UIColor.lightGray
 	let highlighterHeight: CGFloat = 3
 	let highlighterWidthPerc: CGFloat = 0.6
 	
@@ -25,7 +24,7 @@ class TableTabBar: UIView {
 	override init(frame: CGRect) {
 		super.init(frame: frame)
 		
-		self.backgroundColor = UIColor.white
+		self.backgroundColor = Theme.tableTabBarBackgroundColor
 		self.layer.opacity = 0.9
 	}
 	
@@ -38,7 +37,7 @@ class TableTabBar: UIView {
 		button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
 		button.setTitle(title, for: .normal)
 		button.backgroundColor = UIColor.clear
-		button.setTitleColor(titleColor, for: .normal)
+		button.setTitleColor(Theme.tableTabBarFontColor, for: .normal)
 		button.tag = self.tabs.count
 		button.addTarget(self, action: #selector(TableTabBar.onTabPressed(_:)), for: .touchUpInside)
 		
@@ -92,7 +91,7 @@ class TableTabBar: UIView {
 			return
 		}
 		highlighter = UIView(frame: getHighlighterRectForIndex(index: 0))
-		highlighter.backgroundColor = titleColor
+		highlighter.backgroundColor = Theme.tableTabBarFontColor
 		highlighter.layer.cornerRadius = highlighterHeight / 2
 		self.addSubview(highlighter)
 		self.sendSubview(toBack: highlighter)
@@ -108,7 +107,17 @@ class TableTabBar: UIView {
 	}
 }
 
-
+extension TableTabBar: ThemeDelegate {
+	
+	func updateAppearance() {
+		self.backgroundColor = Theme.tableTabBarBackgroundColor
+		tabs.forEach { (button) in
+			button.setTitleColor(Theme.tableTabBarFontColor, for: .normal)
+		}
+		highlighter.backgroundColor = Theme.tableTabBarFontColor
+	}
+	
+}
 
 
 
