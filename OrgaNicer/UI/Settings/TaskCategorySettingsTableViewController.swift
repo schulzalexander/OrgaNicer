@@ -32,7 +32,14 @@ class TaskCategorySettingsTableViewController: UITableViewController {
 		self.tableView.estimatedRowHeight = 0 // Without this, tableviews content size will be off
 		self.tableView.sizeToFit()
 		self.updatePopoverSize()
+		
+		self.updateAppearance()
     }
+	
+	//MARK: TableView Delegate
+	override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+		cell.contentView.backgroundColor = Theme.settingsTableViewCellBackgroundColor
+	}
 	
 	@IBAction func didSelectTaskOrder(_ sender: UISegmentedControl) {
 		guard let taskTable = self.popoverPresentationController?.delegate as? TaskTableViewController else {
@@ -143,3 +150,17 @@ extension TaskCategorySettingsTableViewController: UITextFieldDelegate {
 		return true
 	}
 }
+
+extension TaskCategorySettingsTableViewController: ThemeDelegate {
+	
+	func updateAppearance() {
+		tableView.backgroundColor = Theme.settingsTableViewBackgroundColor
+		tableView.separatorColor = Theme.settingsTableViewSeperatorColor
+	}
+	
+}
+
+
+
+
+

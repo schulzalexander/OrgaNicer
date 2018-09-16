@@ -13,6 +13,10 @@ enum Themes: Int {
 	case light, dark
 }
 
+protocol ThemeDelegate {
+	func updateAppearance()
+}
+
 class Theme {
 	
 	// MARK: Navigation Controller
@@ -118,18 +122,55 @@ class Theme {
 	}
 	
 	//MARK: Settings
-	static var settingsBackgroundColor: CGColor {
+	static var settingsTableViewBackgroundColor: UIColor? {
 		get {
 			switch Settings.shared.selectedTheme {
 			case .light:
-				return UIColor(red: 0.349, green: 0.9176, blue: 0, alpha: 0.7).cgColor
+				return UIColor(red: 0.937255, green: 0.937255, blue: 0.956863, alpha: 1)
 			case .dark:
-				return UIColor(red: 0, green: 0.6784, blue: 0.4078, alpha: 1.0).cgColor
+				return UIColor.lightGray
 			}
 		}
 	}
+	
+	static var settingsTableViewCellBackgroundColor: UIColor? {
+		get {
+			switch Settings.shared.selectedTheme {
+			case .light:
+				return nil
+			case .dark:
+				return UIColor.lightGray.withAlphaComponent(0.4)
+			}
+		}
+	}
+	
+	static var settingsTableViewSeperatorColor: UIColor? {
+		get {
+			switch Settings.shared.selectedTheme {
+			case .light:
+				return nil
+			case .dark:
+				return UIColor.black
+			}
+		}
+	}
+	
 }
 
-protocol ThemeDelegate {
-	func updateAppearance()
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

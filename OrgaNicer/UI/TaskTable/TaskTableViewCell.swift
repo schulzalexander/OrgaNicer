@@ -238,9 +238,7 @@ class TaskTableViewCell: UITableViewCell, UITextFieldDelegate {
 		self.contentView.layer.shadowRadius = 3.0
 		self.contentView.layer.shadowOffset = CGSize(width: 0, height: 2)
 		self.contentView.layer.shadowOpacity = 1.0
-		
 		self.contentView.translatesAutoresizingMaskIntoConstraints = false
-		
 		self.contentView.topAnchor.constraint(equalTo: self.topAnchor, constant: TaskTableViewCell.PADDING_Y).isActive = true
 		self.contentView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -1 * TaskTableViewCell.PADDING_Y).isActive = true
 		self.contentView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: TaskTableViewCell.PADDING_X).isActive = true

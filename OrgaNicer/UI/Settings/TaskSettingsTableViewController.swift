@@ -75,6 +75,8 @@ class TaskSettingsTableViewController: UITableViewController {
 		} else {
 			self.reminderDropdownArrow.textColor = UIColor.lightGray
 		}
+		
+		updateAppearance()
 	}
 	
 	
@@ -340,7 +342,7 @@ class TaskSettingsTableViewController: UITableViewController {
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = super.tableView(tableView, cellForRowAt: indexPath)
-		cell.selectionStyle = .none
+		cell.contentView.backgroundColor = Theme.settingsTableViewCellBackgroundColor
 		return cell
 	}
 	
@@ -528,4 +530,28 @@ extension TaskSettingsTableViewController: UIPickerViewDelegate, UIPickerViewDat
 	}
 	
 }
+
+extension TaskSettingsTableViewController: ThemeDelegate {
+	
+	func updateAppearance() {
+		tableView.backgroundColor = Theme.settingsTableViewBackgroundColor
+		tableView.separatorColor = Theme.settingsTableViewSeperatorColor
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

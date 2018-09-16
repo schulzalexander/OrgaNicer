@@ -23,6 +23,8 @@ class SettingsTableViewController: UITableViewController {
 		
 		themeDarkCheckmarkLable.isHidden = !(Settings.shared.selectedTheme == .dark)
 		themeLightCheckmarkLable.isHidden = !(Settings.shared.selectedTheme == .light)
+		
+		updateAppearance()
     }
 	
 	//MARK: UITableViewDelegate
@@ -42,7 +44,6 @@ class SettingsTableViewController: UITableViewController {
 			themeDarkCheckmarkLable.isHidden = !(Settings.shared.selectedTheme == .dark)
 			themeLightCheckmarkLable.isHidden = !(Settings.shared.selectedTheme == .light)
 			
-			self.tableView.selectRow(at: nil, animated: true, scrollPosition: .none)
 			navigationController?.viewControllers.forEach({ (viewController) in
 				guard let themeDelegate = viewController as? ThemeDelegate else {
 					return
@@ -64,6 +65,11 @@ class SettingsTableViewController: UITableViewController {
 		}
 	}
 	
+	override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+		cell.selectionStyle = .none
+		cell.contentView.backgroundColor = Theme.settingsTableViewCellBackgroundColor
+	}
+	
 	//MARK: Content Reset
 	
 	private func resetAlarms() {
@@ -76,11 +82,8 @@ class SettingsTableViewController: UITableViewController {
 					TaskArchive.saveTask(task: mainTask)
 				}
 			})
-			self.tableView.selectRow(at: nil, animated: true, scrollPosition: .none)
 		}
-		let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel) { (action) in
-			self.tableView.selectRow(at: nil, animated: true, scrollPosition: .none)
-		}
+		let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
 		alertController.addAction(reset)
 		alertController.addAction(cancel)
 		present(alertController, animated: true, completion: nil)
@@ -102,12 +105,26 @@ class SettingsTableViewController: UITableViewController {
 			taskTable.navigationItem.title = nil
 			self.navigationController?.popToRootViewController(animated: true)
 		}
-		let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel) { (action) in
-			self.tableView.selectRow(at: nil, animated: true, scrollPosition: .none)
-		}
+		let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
 		alertController.addAction(reset)
 		alertController.addAction(cancel)
 		present(alertController, animated: true, completion: nil)
 	}
 	
 }
+
+extension SettingsTableViewController: ThemeDelegate {
+	
+	func updateAppearance() {
+		tableView.backgroundColor = Theme.settingsTableViewBackgroundColor
+		tableView.separatorColor = Theme.settingsTableViewSeperatorColor
+		tableView.reloadData()
+	}
+	
+}
+
+
+
+
+
+

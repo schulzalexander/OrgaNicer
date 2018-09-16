@@ -416,6 +416,7 @@ extension TaskTableViewController: UITableViewDelegate, UITableViewDataSource {
 		let recognizer = UITapGestureRecognizer(target: self, action: #selector(TaskTableViewController.didTapOnTaskCell(_:)))
 		cell.addGestureRecognizer(recognizer)
 		cell.backgroundColor = UIColor.clear
+		cell.seperator.backgroundColor = Theme.taskCellSeperatorColor
 		return cell
 	}
 	
@@ -571,6 +572,7 @@ extension TaskTableViewController: ThemeDelegate {
 	
 	func updateAppearance() {
 		setupGradientBackground()
+		tableView.reloadData()
 		categorySelector.updateAppearance()
 		tableTabBar.updateAppearance()
 	}

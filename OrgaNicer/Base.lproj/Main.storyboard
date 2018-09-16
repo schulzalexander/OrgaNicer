@@ -594,7 +594,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Settings" id="kOF-lK-Hgn"/>
                     <connections>
-                        <outlet property="themeDarkCheckmarkLable" destination="PtF-6R-dqy" id="GJB-Xp-Xif"/>
+                        <outlet property="themeDarkCheckmarkLable" destination="PtF-6R-dqy" id="ADK-N8-m5M"/>
                         <outlet property="themeLightCheckmarkLable" destination="mtr-a8-mWL" id="BWl-iT-bQj"/>
                     </connections>
                 </tableViewController>
