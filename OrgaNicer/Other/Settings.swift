@@ -13,23 +13,27 @@ class Settings: NSObject, NSCoding {
 	//MARK: Properties
 	var feedbackSendingDates: [Date]
 	var selectedTheme: Themes
+	var firstAppStart: Bool
 	
 	static var shared = Settings()
 	
 	struct PropertyKeys {
 		static let feedbackSendingDates = "feedbackSendingDates"
 		static let selectedThemes = "selectedThemes"
+		static let firstAppStart = "firstAppStart"
 	}
 	
 	private override init() {
 		feedbackSendingDates = [Date]()
 		selectedTheme = .light
+		firstAppStart = true
 		super.init()
 	}
 	
 	func encode(with aCoder: NSCoder) {
 		aCoder.encode(feedbackSendingDates, forKey: PropertyKeys.feedbackSendingDates)
 		aCoder.encode(selectedTheme.rawValue, forKey: PropertyKeys.selectedThemes)
+		aCoder.encode(firstAppStart, forKey: PropertyKeys.firstAppStart)
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
@@ -39,6 +43,7 @@ class Settings: NSObject, NSCoding {
 		}
 		self.feedbackSendingDates = feedbackSendingDates
 		self.selectedTheme = selectedTheme
+		self.firstAppStart = aDecoder.decodeObject(forKey: PropertyKeys.firstAppStart) as? Bool ?? true
 	}
 	
 	

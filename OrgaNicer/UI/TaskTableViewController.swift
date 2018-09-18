@@ -81,6 +81,10 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 			}
 		}
 		setupGradientBackground()
+		
+		if Settings.shared.firstAppStart {
+			showTutorial()
+		}
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -365,6 +369,13 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 		let view = UIView(frame: self.view.bounds)
 		view.layer.addSublayer(gradientLayer)
 		self.tableView.backgroundView = view
+	}
+	
+	private func showTutorial() {
+		guard let tutorial = storyboard?.instantiateViewController(withIdentifier: "TutorialPageViewController") as? TutorialPageViewController else {
+			fatalError("Failed to start tutorial on first app start!")
+		}
+		present(tutorial, animated: true, completion: nil)
 	}
 	
 }

@@ -63,6 +63,13 @@ class SettingsTableViewController: UITableViewController {
 				resetContent()
 			}
 		}
+		if indexPath.section == 2 {
+			// Replay Tutorial
+			if indexPath.row == 0 {
+				// Alarm Reset
+				replayTutorial()
+			}
+		}
 	}
 	
 	override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -109,6 +116,10 @@ class SettingsTableViewController: UITableViewController {
 		alertController.addAction(reset)
 		alertController.addAction(cancel)
 		present(alertController, animated: true, completion: nil)
+	}
+	
+	private func replayTutorial() {
+		
 	}
 	
 }

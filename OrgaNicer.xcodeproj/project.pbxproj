@@ -22,6 +22,9 @@
 		C938A9A520CB1CC9006E76E7 /* ConsecutiveListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C938A9A420CB1CC9006E76E7 /* ConsecutiveListView.swift */; };
 		C93F4DD72132BF6100AD5DBD /* ConsecutiveListViewLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93F4DD62132BF6100AD5DBD /* ConsecutiveListViewLine.swift */; };
 		C943FA6E21241E2E001F6A33 /* TaskCategorySettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C943FA6D21241E2E001F6A33 /* TaskCategorySettings.swift */; };
+		C948D6A02150DD5600FAE27E /* TutorialPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C948D69F2150DD5600FAE27E /* TutorialPageViewController.swift */; };
+		C948D6A22150E02200FAE27E /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C948D6A12150E02200FAE27E /* TutorialViewController.swift */; };
+		C948D6A42151041200FAE27E /* TutorialPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C948D6A32151041200FAE27E /* TutorialPage.swift */; };
 		C949FBC321479EC9002F0238 /* ProgressbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C949FBC221479EC9002F0238 /* ProgressbarView.swift */; };
 		C949FBC52147A1CA002F0238 /* PriorityGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C949FBC42147A1CA002F0238 /* PriorityGradientView.swift */; };
 		C958386F20FCED0F00E355C7 /* SelectorCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C958386E20FCED0F00E355C7 /* SelectorCollectionView.swift */; };
@@ -102,6 +105,9 @@
 		C938A9A420CB1CC9006E76E7 /* ConsecutiveListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsecutiveListView.swift; sourceTree = "<group>"; };
 		C93F4DD62132BF6100AD5DBD /* ConsecutiveListViewLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsecutiveListViewLine.swift; sourceTree = "<group>"; };
 		C943FA6D21241E2E001F6A33 /* TaskCategorySettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCategorySettings.swift; sourceTree = "<group>"; };
+		C948D69F2150DD5600FAE27E /* TutorialPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialPageViewController.swift; sourceTree = "<group>"; };
+		C948D6A12150E02200FAE27E /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
+		C948D6A32151041200FAE27E /* TutorialPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialPage.swift; sourceTree = "<group>"; };
 		C949FBC221479EC9002F0238 /* ProgressbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressbarView.swift; sourceTree = "<group>"; };
 		C949FBC42147A1CA002F0238 /* PriorityGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityGradientView.swift; sourceTree = "<group>"; };
 		C958386E20FCED0F00E355C7 /* SelectorCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectorCollectionView.swift; sourceTree = "<group>"; };
@@ -236,6 +242,16 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		C948D69E2150DD3200FAE27E /* Tutorial */ = {
+			isa = PBXGroup;
+			children = (
+				C948D69F2150DD5600FAE27E /* TutorialPageViewController.swift */,
+				C948D6A12150E02200FAE27E /* TutorialViewController.swift */,
+				C948D6A32151041200FAE27E /* TutorialPage.swift */,
+			);
+			path = Tutorial;
+			sourceTree = "<group>";
+		};
 		C949FBC62147A1DD002F0238 /* SelectorCollectionViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -355,6 +371,7 @@
 		C9713EEA20C597810074F232 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				C948D69E2150DD3200FAE27E /* Tutorial */,
 				C97428F72139BCFE00727470 /* Feedback */,
 				C97428F42139A25D00727470 /* PrivacyPolicy */,
 				C97428EF21398E3D00727470 /* SideMenu */,
@@ -701,6 +718,7 @@
 				C9713E8920C596680074F232 /* AppDelegate.swift in Sources */,
 				C9713EFD20C597810074F232 /* TaskArchive.swift in Sources */,
 				C96993152104776200922177 /* SettingsArchive.swift in Sources */,
+				C948D6A02150DD5600FAE27E /* TutorialPageViewController.swift in Sources */,
 				C9C3D71820CC66C900C881D3 /* SelectorCollectionViewCellAdd.swift in Sources */,
 				C938A9A320CB1CAB006E76E7 /* CheckListView.swift in Sources */,
 				C9713EF720C597810074F232 /* TaskCategoryManager.swift in Sources */,
@@ -718,7 +736,9 @@
 				C9BAF3AC2131330800375DD0 /* CheckListViewLine.swift in Sources */,
 				C9713F0320C597810074F232 /* SelectorCollectionViewLayout.swift in Sources */,
 				C998040F21297BD20010FFD4 /* TaskTableDisplayable.swift in Sources */,
+				C948D6A42151041200FAE27E /* TutorialPage.swift in Sources */,
 				C90F49DA210615E7006DA22A /* TaskSettingsTableViewController.swift in Sources */,
+				C948D6A22150E02200FAE27E /* TutorialViewController.swift in Sources */,
 				C9699318210503AA00922177 /* TaskCategorySettingsTableViewController.swift in Sources */,
 				C9253551213AAC6900FB9F92 /* Settings.swift in Sources */,
 				C97428F321398E5800727470 /* SideMenuButton.swift in Sources */,
