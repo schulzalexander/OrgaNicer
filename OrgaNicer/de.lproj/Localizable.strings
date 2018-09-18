@@ -68,7 +68,15 @@
 "ContentResetAlertMessage" = "Alle Daten werden gelöscht und können nicht wiederhergestellt werden!";
 "AlarmResetAlertMessage" = "Alle Erinnerungen löschen?";
 
-
+// Tutorial
+"TutorialAddCategoryTitle" = "Neue Liste erstellen";
+"TutorialAddCategoryExplanation" = "Drücke auf das \"Neue Liste\" Icon am unteren Ende des Bildschirms, um eine neue Liste zu erstellen.";
+"TutorialAddTaskTitle" = "Task hinzufügen";
+"TutorialAddTaskExplanation" = "Berühre das \"+\"-Symbol auf der rechten Seite, um der aktuellen Liste einen neuen Task hinzuzufügen.";
+"TutorialTaskSettingsTitle" = "Task Einstellungen";
+"TutorialTaskSettingsExplanation" = "Per Tap auf einen Task gelangst du in dessen Einstellungen, wo du z.B. die Deadline und Erinnerungen bearbeiten kannst.";
+"TutorialCategorySettingsTitle" = "Listen Einstellungen";
+"TutorialCategorySettingsExplanation" = "Swipe eine Liste nach oben, um deren Einstellungen zu öffnen.";
 
 
 

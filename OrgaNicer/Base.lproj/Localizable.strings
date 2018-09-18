@@ -67,6 +67,15 @@
 "ContentResetAlertMessage" = "All content will be deleted and cannot be restored!";
 "AlarmResetAlertMessage" = "Delete all reminders?";
 
+// Tutorial
+"TutorialAddCategoryTitle" = "Create a new List";
+"TutorialAddCategoryExplanation" = "Tap the \"New List\" icon in the bottom row to create a new list.";
+"TutorialAddTaskTitle" = "Add a Task";
+"TutorialAddTaskExplanation" = "Tap the \"+\"-symbol on the right to add a new task to the current list.";
+"TutorialTaskSettingsTitle" = "Task Settings";
+"TutorialTaskSettingsExplanation" = "Tap the cell of a task to open its settings, where you can adjust deadline and reminders.";
+"TutorialCategorySettingsTitle" = "List Settings";
+"TutorialCategorySettingsExplanation" = "Swipe up on a list in order to open the list settings.";
 
 
 

@@ -31,26 +31,20 @@ class TutorialPageViewController: UIPageViewController {
         dataSource = self
 		
 		let contents = [
-			TutorialPage(explanation: "Test explanation blablablablbalba", image: UIImage(named: "TaskListBackground") ?? UIImage()),
-			TutorialPage(explanation: "Test explanation blablablab igu iu iug iug iug iugiugiug iug iug iug iug iu giuh oioihoihoih oih oih lbalba", image: UIImage(named: "TaskListBackground") ?? UIImage()),
-			TutorialPage(explanation: "Test explanation blablablablbalba", image: UIImage(named: "TaskListBackground") ?? UIImage())
+			TutorialPage(title: NSLocalizedString("TutorialAddCategoryTitle", comment: ""), explanation: NSLocalizedString("TutorialAddCategoryExplanation", comment: ""), image: UIImage(named: "TutorialAddCategory") ?? UIImage()),
+			TutorialPage(title: NSLocalizedString("TutorialAddTaskTitle", comment: ""), explanation: NSLocalizedString("TutorialAddTaskExplanation", comment: ""), image: UIImage(named: "TutorialAddTask") ?? UIImage()),
+			TutorialPage(title: NSLocalizedString("TutorialTaskSettingsTitle", comment: ""), explanation: NSLocalizedString("TutorialTaskSettingsExplanation", comment: ""), image: UIImage(named: "TutorialTaskSettings") ?? UIImage()),
+			TutorialPage(title: NSLocalizedString("TutorialCategorySettingsTitle", comment: ""), explanation: NSLocalizedString("TutorialCategorySettingsExplanation", comment: ""), image: UIImage(named: "TutorialCategorySettings") ?? UIImage())
 		]
 		controllers = [UIViewController]()
 		for content in contents {
-//			guard let nextViewController = self.storyboard?.instantiateViewController(withIdentifier: "TutorialViewController\(i)") else {
-//				fatalError("Error while instantiating tutorial view controller!")
-//			}
 			let newController = TutorialViewController(content: content)
 			controllers.append(newController)
 		}
-		
 		setViewControllers([controllers[0]], direction: .forward, animated: true, completion: nil)
-		layoutContinueButton()
 
 		setupDotAppearance()
-		if !Settings.shared.firstAppStart {
-			setupCancelButton()
-		}
+		setupCancelButton()
     }
 
 	
@@ -77,21 +71,9 @@ class TutorialPageViewController: UIPageViewController {
 	}
 	
 	@objc private func cancel() {
-		dismiss(animated: true, completion: nil)
-	}
-	
-	private func layoutContinueButton() {
-		let width: CGFloat = 0.4 * UIScreen.main.bounds.width
-		let height: CGFloat = 40
-		let frame = CGRect(x: (UIScreen.main.bounds.width - width) / 2, y: UIScreen.main.bounds.height - 100, width: width, height: height)
-		let button = UIButton(frame: frame)
-		button.setTitle("Continue", for: .normal)
-		button.backgroundColor = UIColor(red: 1, green: 0.7882, blue: 0.4, alpha: 1.0)
-		button.layer.cornerRadius = button.frame.height / 2
-		button.addTarget(self, action: #selector(cancel), for: .touchUpInside)
-		
-		if let last = controllers.last {
-			last.view.addSubview(button)
+		dismiss(animated: true) {
+			Settings.shared.firstAppStart = false
+			SettingsArchive.save()
 		}
 	}
 

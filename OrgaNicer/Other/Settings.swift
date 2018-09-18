@@ -43,7 +43,7 @@ class Settings: NSObject, NSCoding {
 		}
 		self.feedbackSendingDates = feedbackSendingDates
 		self.selectedTheme = selectedTheme
-		self.firstAppStart = aDecoder.decodeObject(forKey: PropertyKeys.firstAppStart) as? Bool ?? true
+		self.firstAppStart = aDecoder.decodeBool(forKey: PropertyKeys.firstAppStart)
 	}
 	
 	
