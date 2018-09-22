@@ -13,9 +13,9 @@ class AlarmManager {
 	
 	static func addAlarm(task: Task, alarm: Alarm) {
 		let content = UNMutableNotificationContent()
-		content.body = task.title
-		content.title = TaskCategoryManager.shared.getTaskCategory(id: alarm.category ?? "")?.title
+		content.body = TaskCategoryManager.shared.getTaskCategory(id: alarm.category ?? "")?.title
 			?? NSLocalizedString("TodoReminder", comment: "")
+		content.title = task.title
 		content.sound = alarm.sound ? UNNotificationSound.default() : nil
 		
 		var attributes: Set<Calendar.Component> = [.hour, .minute]
@@ -37,7 +37,7 @@ class AlarmManager {
 	}
 	
 	static func removeAlarm(id: String) {
-		UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: [id])
+		UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [id])
 	}
 	
 	static func removeAllAlarms() {

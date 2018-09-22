@@ -89,6 +89,7 @@ class SettingsTableViewController: UITableViewController {
 					TaskArchive.saveTask(task: mainTask)
 				}
 			})
+			self.navigationController?.popToRootViewController(animated: true)
 		}
 		let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
 		alertController.addAction(reset)
