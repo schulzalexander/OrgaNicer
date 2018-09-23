@@ -74,21 +74,5 @@ class TaskTableNavigationController: UINavigationController, ThemeDelegate {
 		}
 		sideMenu.addButton(button: priPolButton, alwaysOn: false)
 	}
-	
-	@objc private func buttonTouchDown(_ sender: UIButton) {
-		sender.layer.shadowColor = UIColor.clear.cgColor
-	}
-	
-	@objc private func buttonTouchUpOutside(_ sender: UIButton) {
-		addButton.layer.shadowColor = UIColor.black.cgColor
-	}
-	
-	@objc private func buttonTouchUpInside(_ sender: UIButton) {
-		guard let taskTable = self.viewControllers.first as? TaskTableViewController else {
-			return
-		}
-		addButton.layer.shadowColor = UIColor.black.cgColor
-		taskTable.newTask()
-	}
 
 }
