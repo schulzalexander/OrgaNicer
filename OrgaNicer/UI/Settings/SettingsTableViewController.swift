@@ -13,6 +13,8 @@ class SettingsTableViewController: UITableViewController {
 	//MARK: Outlets
 	@IBOutlet weak var themeLightCheckmarkLable: UILabel!
 	@IBOutlet weak var themeDarkCheckmarkLable: UILabel!
+	@IBOutlet weak var darkThemeIndicator: UIView!
+	@IBOutlet weak var lightThemeIndicator: UIView!
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +25,7 @@ class SettingsTableViewController: UITableViewController {
 		
 		themeDarkCheckmarkLable.isHidden = !(Settings.shared.selectedTheme == .dark)
 		themeLightCheckmarkLable.isHidden = !(Settings.shared.selectedTheme == .light)
+		setupThemeIndicators()
 		
 		updateAppearance()
     }
@@ -65,6 +68,15 @@ class SettingsTableViewController: UITableViewController {
 		}
 		if indexPath.section == 2 {
 			// Replay Tutorial implemented in storyboard
+			if indexPath.row == 0 {
+				guard self.storyboard != nil else {
+					return
+				}
+				let viewController = self.storyboard!.instantiateViewController(withIdentifier: "TutorialPageViewController")
+				DispatchQueue.main.async {
+					self.present(viewController, animated: true, completion: nil)
+				}
+			}
 			
 			// Rate app
 			if indexPath.row == 1 {
@@ -77,6 +89,17 @@ class SettingsTableViewController: UITableViewController {
 	override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
 		cell.selectionStyle = .none
 		cell.backgroundColor = Theme.settingsTableViewCellBackgroundColor
+	}
+	
+	//MARK: Themes
+	
+	private func setupThemeIndicators() {
+		for view: UIView in [lightThemeIndicator, darkThemeIndicator] {
+			view.layer.cornerRadius = view.frame.width / 2
+			view.layer.borderColor = UIColor.lightGray.cgColor
+			view.layer.borderWidth = 1.0
+			view.clipsToBounds = true
+		}
 	}
 	
 	//MARK: Content Reset
