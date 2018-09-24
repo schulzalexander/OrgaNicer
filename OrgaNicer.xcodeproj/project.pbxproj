@@ -58,10 +58,10 @@
 		C998040F21297BD20010FFD4 /* TaskTableDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C998040E21297BD20010FFD4 /* TaskTableDisplayable.swift */; };
 		C9BAF3AC2131330800375DD0 /* CheckListViewLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BAF3AB2131330800375DD0 /* CheckListViewLine.swift */; };
 		C9BAF3AE213134A100375DD0 /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BAF3AD213134A100375DD0 /* Checkbox.swift */; };
-		C9BD5FAD213DCC2E0049C5AB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C9BD5FAC213DCC2D0049C5AB /* GoogleService-Info.plist */; };
 		C9C3D71820CC66C900C881D3 /* SelectorCollectionViewCellAdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C3D71720CC66C900C881D3 /* SelectorCollectionViewCellAdd.swift */; };
 		C9C3D71D20CC6BCE00C881D3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C9C3D71F20CC6BCE00C881D3 /* Localizable.strings */; };
 		C9D5C28B2103400A00AAE177 /* TableTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D5C28A2103400A00AAE177 /* TableTabBar.swift */; };
+		C9FA49972158CA0500B64852 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C9FA49962158CA0500B64852 /* GoogleService-Info.plist */; };
 		C9FD8CC7214E4D9B00FF5655 /* Themes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FD8CC6214E4D9B00FF5655 /* Themes.swift */; };
 /* End PBXBuildFile section */
 
@@ -147,12 +147,12 @@
 		C998040E21297BD20010FFD4 /* TaskTableDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableDisplayable.swift; sourceTree = "<group>"; };
 		C9BAF3AB2131330800375DD0 /* CheckListViewLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckListViewLine.swift; sourceTree = "<group>"; };
 		C9BAF3AD213134A100375DD0 /* Checkbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
-		C9BD5FAC213DCC2D0049C5AB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C9C3D71720CC66C900C881D3 /* SelectorCollectionViewCellAdd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectorCollectionViewCellAdd.swift; sourceTree = "<group>"; };
 		C9C3D72020CC6CDE00C881D3 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
 		C9C3D72120CC6CDE00C881D3 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		C9C3D72220CC6CDE00C881D3 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C9D5C28A2103400A00AAE177 /* TableTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableTabBar.swift; sourceTree = "<group>"; };
+		C9FA49962158CA0500B64852 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C9FD8CC6214E4D9B00FF5655 /* Themes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Themes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -307,7 +307,7 @@
 				C9713E8C20C596680074F232 /* Main.storyboard */,
 				C9713E9120C596690074F232 /* LaunchScreen.storyboard */,
 				C9713E9420C596690074F232 /* Info.plist */,
-				C9BD5FAC213DCC2D0049C5AB /* GoogleService-Info.plist */,
+				C9FA49962158CA0500B64852 /* GoogleService-Info.plist */,
 				C9C3D71F20CC6BCE00C881D3 /* Localizable.strings */,
 			);
 			path = OrgaNicer;
@@ -578,7 +578,7 @@
 			files = (
 				C9713E9320C596690074F232 /* LaunchScreen.storyboard in Resources */,
 				C9C3D71D20CC6BCE00C881D3 /* Localizable.strings in Resources */,
-				C9BD5FAD213DCC2E0049C5AB /* GoogleService-Info.plist in Resources */,
+				C9FA49972158CA0500B64852 /* GoogleService-Info.plist in Resources */,
 				C9713E9020C596690074F232 /* Assets.xcassets in Resources */,
 				C9713E8E20C596680074F232 /* Main.storyboard in Resources */,
 			);

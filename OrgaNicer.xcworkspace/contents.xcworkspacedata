@@ -2,12 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/alexanderschulz/Developer/iOS/TaskMaster/OrgaNicer/OrgaNicer.xcodeproj">
+      location = "group:OrgaNicer.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:OrgaNicer.xcodeproj">
    </FileRef>
 </Workspace>
