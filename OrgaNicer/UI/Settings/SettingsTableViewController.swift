@@ -64,11 +64,13 @@ class SettingsTableViewController: UITableViewController {
 			}
 		}
 		if indexPath.section == 2 {
-			// Replay Tutorial
-			if indexPath.row == 0 {
-				// Alarm Reset
-				replayTutorial()
+			// Replay Tutorial implemented in storyboard
+			
+			// Rate app
+			if indexPath.row == 1 {
+				rateApp()
 			}
+			
 		}
 	}
 	
@@ -119,9 +121,16 @@ class SettingsTableViewController: UITableViewController {
 		present(alertController, animated: true, completion: nil)
 	}
 	
-	private func replayTutorial() {
-		
+	//MARK: Other section
+	
+	private func rateApp() {
+		guard let url = URL(string: "itms-apps://itunes.apple.com/us/app/apple-store/id1435006104?mt=8"),
+			UIApplication.shared.canOpenURL(url) else {
+			return
+		}
+		UIApplication.shared.open(url, options: [:], completionHandler: nil)
 	}
+	
 	
 }
 
