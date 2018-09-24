@@ -269,7 +269,9 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 		popover?.sourceRect = CGRect(x: view.center.x, y: view.center.y, width: 0, height: 0)
 		popover?.permittedArrowDirections = .init(rawValue: 0)
 		
-		self.present(viewController, animated: true, completion: nil)
+		DispatchQueue.main.async {
+			self.present(viewController, animated: true, completion: nil)
+		}
 	}
 	
 	func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {

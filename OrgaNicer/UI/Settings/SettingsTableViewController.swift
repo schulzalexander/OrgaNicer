@@ -96,7 +96,9 @@ class SettingsTableViewController: UITableViewController {
 		let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
 		alertController.addAction(reset)
 		alertController.addAction(cancel)
-		present(alertController, animated: true, completion: nil)
+		DispatchQueue.main.async {
+			self.present(alertController, animated: true, completion: nil)
+		}
 	}
 	
 	private func resetContent() {
@@ -118,7 +120,9 @@ class SettingsTableViewController: UITableViewController {
 		let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
 		alertController.addAction(reset)
 		alertController.addAction(cancel)
-		present(alertController, animated: true, completion: nil)
+		DispatchQueue.main.async {
+			self.present(alertController, animated: true, completion: nil)
+		}
 	}
 	
 	//MARK: Other section
