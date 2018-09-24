@@ -35,6 +35,7 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 	@IBOutlet weak var categorySelector: SelectorCollectionView!
 	
 	var longPressRecognizer: UILongPressGestureRecognizer! // Will notify the user that reordering is disabled when table has fixed ordering
+	var gradientBackgroundView: UIView?
 	
 	//MARK: Main View Events
 	override func viewDidLoad() {
@@ -368,9 +369,14 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 		gradientLayer.endPoint = CGPoint(x: 1, y: 1)
 		gradientLayer.frame = UIScreen.main.bounds
 		
-		let view = UIView(frame: UIScreen.main.bounds)
-		view.layer.addSublayer(gradientLayer)
-		self.view.insertSubview(view, belowSubview: tableView)
+		// Depending on whether the gradient layer was set before, either create a new one or edit the existing
+		if gradientBackgroundView == nil {
+			gradientBackgroundView = UIView(frame: UIScreen.main.bounds)
+			self.view.insertSubview(gradientBackgroundView!, belowSubview: tableView)
+		} else {
+			gradientBackgroundView!.layer.sublayers?.removeAll()
+		}
+		gradientBackgroundView!.layer.addSublayer(gradientLayer)
 	}
 	
 	private func showTutorial() {

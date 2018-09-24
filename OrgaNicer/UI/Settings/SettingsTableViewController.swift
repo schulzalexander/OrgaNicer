@@ -67,7 +67,7 @@ class SettingsTableViewController: UITableViewController {
 			}
 		}
 		if indexPath.section == 2 {
-			// Replay Tutorial implemented in storyboard
+			// Replay Tutorial
 			if indexPath.row == 0 {
 				guard self.storyboard != nil else {
 					return
@@ -78,7 +78,7 @@ class SettingsTableViewController: UITableViewController {
 				}
 			}
 			
-			// Rate app
+			// Rate App
 			if indexPath.row == 1 {
 				rateApp()
 			}
