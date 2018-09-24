@@ -364,11 +364,11 @@ class TaskTableViewController: UIViewController, UIPopoverPresentationController
 		gradientLayer.locations = locations
 		gradientLayer.startPoint = CGPoint(x: 0, y: 0)
 		gradientLayer.endPoint = CGPoint(x: 1, y: 1)
-		gradientLayer.frame = self.view.bounds
+		gradientLayer.frame = UIScreen.main.bounds
 		
-		let view = UIView(frame: self.view.bounds)
+		let view = UIView(frame: UIScreen.main.bounds)
 		view.layer.addSublayer(gradientLayer)
-		self.tableView.backgroundView = view
+		self.view.insertSubview(view, belowSubview: tableView)
 	}
 	
 	private func showTutorial() {
